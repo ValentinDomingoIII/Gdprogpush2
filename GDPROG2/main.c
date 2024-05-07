@@ -1,7 +1,7 @@
 #include <stdio.h>
 
-main()
+int main()
 {
     printf("bye world");
-    //commment change
+    printf("\n change");
 }
