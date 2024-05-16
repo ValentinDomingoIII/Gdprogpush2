@@ -1,11 +1,5 @@
 #include "title.h"
 
-
-
-/* * * * * * * * * * * * * * * * * * * * * * * * * *
- *               THE BASIC GAME LOOP               *
- * * * * * * * * * * * * * * * * * * * * * * * * * */
-
 void runTitle() {
 	int nInput = -1;
 
@@ -16,26 +10,27 @@ void runTitle() {
 	} while(nInput != 0);
 }
 
-void displayTitle() 
-{
+void displayTitle() {
     printf("\n");
-printf("\t╔════════════════════╗\n");
-printf("\t│        MENU        │\n");
-printf("\t╚════════════════════╝\n");
-printf("\n");
-printf("\t[1] Yey\n");
-printf("\t[0] Ney\n");
-
+    printf("\t╔════════════════════╗ \n");
+    printf("\t│        MENU        │ \n");
+    printf("\t╚════════════════════╝ \n");
+	printf("\t   [1] New Game\n");
+	printf("\t   [2] Settings\n");
+	printf("\t   [0] Exit");
+    printf("\n");
+    printf("\t[INPUT] : ");
 }
-
 
 void processTitleInput(int nInput) {
-	switch(nInput) 
-    {
-        case 1:
-            runcharacterCreation();
-            break;
-    }
+	switch(nInput) {
+		case 1:
+		// OPEN
+		runCharacterCreation();
+		break;
+
+		case 2:
+		runSettings();
+		break;
+	}
 }
-
-

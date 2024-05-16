@@ -1,13 +1,11 @@
 #include "stdio.h"
 #include "stdlib.h"
 
-
 #include "title.c"
-#include "characterCreation.c"
+#include "character_creation.c"
+#include "settings.c"
 
-
-int main()
-{
-       runTitle();
-       return 0;
+int main() {
+    runTitle();
+    return 0;
 }
