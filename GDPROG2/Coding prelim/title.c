@@ -17,6 +17,7 @@ void displayTitle() {
     printf("\t╚════════════════════╝ \n");
 	printf("\t   [1] New Game\n");
 	printf("\t   [2] Settings\n");
+	printf("\t   [3] Area\n");
 	printf("\t   [0] Exit");
     printf("\n");
     printf("\t[INPUT] : ");
@@ -31,6 +32,10 @@ void processTitleInput(int nInput) {
 
 		case 2:
 		runSettings();
+		break;
+
+		case 3:
+		runArea();
 		break;
 	}
 }

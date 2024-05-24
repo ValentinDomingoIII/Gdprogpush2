@@ -6,4 +6,4 @@ void runTitle();
 
 void displayTitle();
 
-void processTitleInput(int nInput);
+void processTitleInput(int nInput); 
