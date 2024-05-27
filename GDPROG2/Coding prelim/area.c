@@ -52,26 +52,45 @@ void displayArea() {
 void displayAreaBoard(int *arr, int box, int position, int enemy) 
 { 
     int i;
+    
+    // Print top part of all boxes
     for (i = 0; i < box; i++) {
         if (i == position) {
             printf("\033[0;35m"); // Set color to violet
-            printf("┌───┐\n");
-            printf("│ %d │\n", arr[i]); // Display player position
-            printf("└───┘\n");
-            printf("\033[0m"); // Reset color
         } else if (i == enemy) {
             printf("\033[0;31m"); // Set color to red for enemy
-            printf("┌───┐\n");
-            printf("│ %d │\n", arr[i]); // Display enemy position
-            printf("└───┘\n");
-            printf("\033[0m"); // Reset color
-        } else {
-            printf("┌───┐\n");
-            printf("│ %d │\n", arr[i]);
-            printf("└───┘\n");
         }
+        printf("┌───┐ ");
+        printf("\033[0m"); // Reset color
     }
+    printf("\n");
+    
+    // Print middle part of all boxes
+    for (i = 0; i < box; i++) {
+        if (i == position) {
+            printf("\033[0;35m"); // Set color to violet
+        } else if (i == enemy) {
+            printf("\033[0;31m"); // Set color to red for enemy
+        }
+        printf("│ %d │ ", arr[i]);
+        printf("\033[0m"); // Reset color
+    }
+    printf("\n");
+    
+    // Print bottom part of all boxes
+    for (i = 0; i < box; i++) {
+        if (i == position || i == enemy) {
+            printf("\033[0;35m"); // Set color to violet
+            if (i == enemy) {
+                printf("\033[0;31m"); // Set color to red for enemy
+            }
+        }
+        printf("└───┘ ");
+        printf("\033[0m"); // Reset color
+    }
+    printf("\n");
 }
+
 
 void processAreaInput(char nInput, int *position, int box) {
     printf("\t[INPUT] : %c\n", nInput);
