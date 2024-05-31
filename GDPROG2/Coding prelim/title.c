@@ -26,7 +26,7 @@ void displayTitle() {
 void processTitleInput(int nInput) {
 	switch(nInput) {
 		case 1:
-		// OPEN
+		// OPEND
 		runCharacterCreation();
 		break;
 
