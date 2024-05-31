@@ -67,7 +67,7 @@ void displayAreaBoard(char *arr, int nPosition) {
             printf("\t╔═══╗ ");
             printf("\033[0m"); // Reset color
         } else if (i == 3) { // Item at box 4
-            printf("\t┌───┐ ");
+            printf("\t┌┬┬┬┐ ");
         } else if (i == 5) { // Enemy at box 6
             printf("\t┌───┐ ");
         } else {
@@ -83,7 +83,7 @@ void displayAreaBoard(char *arr, int nPosition) {
             printf("\t║ ■ ║");
             printf("\033[0m"); // Reset color
         } else if (i == 3) { // Item at box 4
-            printf("\t│ I │");
+            printf("\t│││││");
         } else if (i == 5) { // Enemy at box 6
             printf("\t│ E │");
         } else {
@@ -99,7 +99,7 @@ void displayAreaBoard(char *arr, int nPosition) {
             printf("\t╚═══╝ ");
             printf("\033[0m"); // Reset color
         } else if (i == 3) { // Item at box 4
-            printf("\t└───┘ ");
+            printf("\t└┴┴┴┘ ");
         } else if (i == 5) { // Enemy at box 6
             printf("\t└───┘ ");
         } else {
