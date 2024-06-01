@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "inventory.c" // Include the inventory header file
+#include "enemy.c."
 
 #define MAX_BOXES 7
 #define INVENTORY_SIZE 10
@@ -8,7 +9,7 @@
 void runArea();
 void displayArea();
 void displayAreaBoard(char *arr, int nPosition);
-void processAreaInput(char cInput, int *nPosition, int *inventory, int *inventorySize);
+void processAreaInput(char cInput, int *nPosition, int *inventory, int *inventorySize, int *lives);
 
 int main() {
     runArea();
@@ -22,7 +23,7 @@ void runArea() {
     int inventory[INVENTORY_SIZE] = {0}; // Initialize inventory
     int inventorySize = 0; // Current inventory size
     int i;
-
+    int lives=3;
     // Initialize the array
     for (i = 0; i < MAX_BOXES; i++) {
         arr[i] = ' ';
@@ -42,9 +43,13 @@ void runArea() {
         scanf(" %c", &cInput); // Space before %c to consume any newline character
 
         // Process input to update the player's position and interact with items
-        processAreaInput(cInput, &nPosition, inventory, &inventorySize);
+        processAreaInput(cInput, &nPosition, inventory, &inventorySize,&lives);
 
-    } while (cInput != '0');
+    } while (cInput != '0' && lives>0 );
+            if(lives<=0)
+            {
+                displayGameover();
+            }
 }
 
 void displayArea() {
@@ -109,7 +114,7 @@ void displayAreaBoard(char *arr, int nPosition) {
     printf("\n");
 }
 
-void processAreaInput(char cInput, int *nPosition, int *inventory, int *inventorySize) {
+void processAreaInput(char cInput, int *nPosition, int *inventory, int *inventorySize, int *lives) {
     switch (cInput) {
         case 'a':
             if (*nPosition > 0) {
@@ -126,7 +131,14 @@ void processAreaInput(char cInput, int *nPosition, int *inventory, int *inventor
                 inventory[*inventorySize] = 3; // Add item 3 to inventory
                 (*inventorySize)++;
                 displayItem();
+                break;
             }
+            
+                if(*nPosition == 5)
+                {
+                    (*lives)--;
+                    displayEnemy();
+                }
             break;
         case 'i':
             runInventory(inventory, *inventorySize);
