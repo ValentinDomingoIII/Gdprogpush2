@@ -89,7 +89,7 @@ void displayAreaBoard(char *arr, int nPosition) {
             printf("\033[0m"); // Reset color
         } else if (i == 3) { // Item at box 4
             printf("\t│││││");
-        } else if (i == 5) { // Enemy at box 6
+        } else if (i == 5) { // Enemy at box 
             printf("\t│ E │");
         } else {
             printf("\t│ %c │", arr[i]);
