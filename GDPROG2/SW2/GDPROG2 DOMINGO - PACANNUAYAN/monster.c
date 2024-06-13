@@ -1,9 +1,12 @@
 #include "monster.h"
+#include "inventory.h"
 
 void displayGhost(){
-    printf("► SHOP ────────────\n");
+    printf("► SHOP ────────────\n"); 
     printf("\t┌═══════┐\n");
+    printf("\x1b[42m");
     printf("\t├───────┤\n");
+     printf("\x1b[0m");
     printf("\t│ GHOST │\n");
     printf("\t├───────┤\n");
     printf("\t└═╤═══╤═┘\n");

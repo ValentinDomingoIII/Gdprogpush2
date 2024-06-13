@@ -3,6 +3,8 @@
 
 #include "shop.c"
 #include "monster.c"
+#include "inventory.c"
+
 
 int main(){
 
