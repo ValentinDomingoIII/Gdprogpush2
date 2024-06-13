@@ -10,12 +10,20 @@ void displayGhostItem() {
     do{
         printf("\n   ► ITEM ────────────\n\n");
         printf("      ┌── GHOST ──┐\n"); //6 SPACES
-        printf("      │\n");
+        printf("      │");
         ghostFG();
-        print(" ╔═══════╗ ");
+        printf(" ╔═══════╗ ");
         reset();
         printf("│\n");
-        printf("      │ ║ ▄███▄ ║ │\n");
+        printf("      │");
+        ghostFG();
+        printf(" ║");
+        reset();
+        printf(" ▄███▄");
+        ghostFG();
+        printf(" ║");
+        reset();
+        printf(" │\n");
         printf("\t│ ║ █ █ █ ║ │\n");
         printf("\t│ ║ █▀█▀█ ║ │\n");
         printf("\t│ ╚═══════╝ │\n");
