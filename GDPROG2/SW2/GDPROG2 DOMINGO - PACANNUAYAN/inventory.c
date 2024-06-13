@@ -1,10 +1,30 @@
+#include "stdio.h"
+
 #include "inventory.h"
 #include "monster.h"
 #include "shop.h"
-#include <stdio.h>
 
 void displayGhostItem() {
-    printf("you got GHOST!!\n");
+    char cInput;
+
+    do{
+        printf("\n   ► ITEM ────────────\n\n");
+        printf("      ┌── GHOST ──┐\n"); //6 SPACES
+        printf("      │\n");
+        ghostFG();
+        print(" ╔═══════╗ ");
+        reset();
+        printf("│\n");
+        printf("      │ ║ ▄███▄ ║ │\n");
+        printf("\t│ ║ █ █ █ ║ │\n");
+        printf("\t│ ║ █▀█▀█ ║ │\n");
+        printf("\t│ ╚═══════╝ │\n");
+        printf("\t└───────────┘\n\n\n");
+        printf("   ───────────────────\n");
+        printf("   [INPUT]  : ");
+        scanf(" %c", &cInput);
+
+    }while(cInput != 'Q');
 }
 
 void displayAlienItem() {
@@ -21,7 +41,8 @@ void displayInventory(int items[row][col], int selectedRow, int selectedCol) {
         for (int j = 0; j < col; j++) {
             if (i == selectedRow && j == selectedCol) {
                 printf("╔═══╗ ");
-            } else {
+            } 
+            else {
                 printf("║ %d ║ ", items[i][j]);
             }
         }
@@ -42,7 +63,7 @@ void navigateInventory(int items[row][col]) {
     printf("Use W/A/S/D to navigate and X to delete. Press Q to exit.\n");
 
     while (1) {
-       displayInventory(items, selectedRow, selectedCol);
+        displayInventory(items, selectedRow, selectedCol);
         printf("Selected: [%d][%d]\n", selectedRow, selectedCol);
         scanf(" %c", &cInput);
 

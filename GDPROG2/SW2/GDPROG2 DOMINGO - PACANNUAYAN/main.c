@@ -4,6 +4,7 @@
 #include "shop.c"
 #include "monster.c"
 #include "inventory.c"
+#include "color.c"
 
 
 int main(){
