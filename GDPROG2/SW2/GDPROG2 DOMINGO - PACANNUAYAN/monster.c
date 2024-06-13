@@ -91,3 +91,180 @@ void displaySquid(){
     printf("   ───────╨───╨───────\n");
     printf("   [INPUT]  : ");
 }
+
+void displayGhostItem() {
+    char cInput;
+
+    do{
+        printf("\n   ► ITEM ────────────\n\n");
+        printf("      ┌── GHOST ──┐\n"); //6 SPACES
+        printf("      │");
+        ghostFG();
+        printf(" ╔═══════╗ ");
+        reset();
+        printf("│\n");
+        printf("      │");
+        ghostFG();
+        printf(" ║");
+        reset();
+        printf(" ▄███▄");
+        ghostFG();
+        printf(" ║");
+        reset();
+        printf(" │\n");
+        printf("      │");
+        ghostFG();
+        printf(" ║");
+        reset();
+        printf(" █");
+        ghostFG();
+        printf("█");
+        reset();
+        printf("█");
+        ghostFG();
+        printf("█");
+        reset();
+        printf("█");
+        ghostFG();
+        printf(" ║");
+        reset();
+        printf(" │\n");
+        printf("      │");
+        ghostFG();
+        printf(" ║");
+        reset();
+        printf(" █▀█▀█");
+        ghostFG();
+        printf(" ║");
+        reset();
+        printf(" │\n");
+        printf("      │");
+        ghostFG();
+        printf(" ╚═══════╝");
+        reset();
+        printf(" │\n");
+        printf("      └───────────┘\n\n\n");
+        printf("   ───────────────────\n");
+        printf("   [INPUT]  : ");
+        scanf(" %c", &cInput);
+
+    }while(cInput != 'Q');
+}
+
+void displayAlienItem() {
+    char cInput;
+
+    do{
+        printf("\n   ► ITEM ────────────\n\n");
+        printf("      ┌── ALIEN ──┐\n"); //6 SPACES
+        printf("      │");
+        alienFG();
+        printf(" ╔═══════╗ ");
+        reset();
+        printf("│\n");
+        printf("      │");
+        alienFG();
+        printf(" ║");
+        reset();
+        printf(" ▀▄▄▄▀"); //│ ║ ▀▄▄▄▀ ║ │  │ ║  ▄█▄  ║ │
+        alienFG();        //│ ║▄█ █ █▄║ │  │ ║▄█ █ █▄║ │
+        printf(" ║");     //│ ║ █▀▀▀█ ║ │  │ ║ ▄▀▀▀▄ ║ │
+        reset();
+        printf(" │\n");
+        printf("      │");
+        alienFG();
+        printf(" ║");
+        reset();
+        printf("▄█");
+        alienFG();
+        printf("█");
+        reset();
+        printf("█");
+        alienFG();
+        printf("█");
+        reset();
+        printf("█▄");
+        alienFG();
+        printf("║");
+        reset();
+        printf(" │\n");
+        printf("      │");
+        alienFG();
+        printf(" ║");
+        reset();
+        printf(" █▀▀▀█");
+        alienFG();
+        printf(" ║");
+        reset();
+        printf(" │\n");
+        printf("      │");
+        alienFG();
+        printf(" ╚═══════╝");
+        reset();
+        printf(" │\n");
+        printf("      └───────────┘\n\n\n");
+        printf("   ───────────────────\n");
+        printf("   [INPUT]  : ");
+        scanf(" %c", &cInput);
+
+    }while(cInput != 'Q');
+}
+
+void displaySquidItem() {
+    char cInput;
+
+    do{
+        printf("\n   ► ITEM ────────────\n\n");
+        printf("      ┌── SQUID ──┐\n"); //6 SPACES
+        printf("      │");
+        squidFG();
+        printf(" ╔═══════╗ ");
+        reset();
+        printf("│\n");
+        printf("      │");
+        squidFG();
+        printf(" ║");
+        reset();
+        printf("  ▄█▄ ");
+        squidFG();
+        printf(" ║");
+        reset();
+        printf(" │\n");
+        printf("      │");
+        squidFG();
+        printf(" ║");
+        reset();
+        printf("▄█");
+        squidFG();
+        printf("█");
+        reset();
+        printf("█");
+        squidFG();
+        printf("█");
+        reset();
+        printf("█▄");
+        squidFG();
+        printf("║");
+        reset();
+        printf(" │\n");
+        printf("      │");
+        squidFG();
+        printf(" ║");
+        reset();
+        printf(" ▄▀▀▀▄");
+        squidFG();
+        printf(" ║");
+        reset();
+        printf(" │\n");
+        printf("      │");
+        squidFG();
+        printf(" ╚═══════╝");
+        reset();
+        printf(" │\n");
+        printf("      └───────────┘\n\n\n");
+        printf("   ───────────────────\n");
+        printf("   [INPUT]  : ");
+        scanf(" %c", &cInput);
+
+    }while(cInput != 'Q');
+}

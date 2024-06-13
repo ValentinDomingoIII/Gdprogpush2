@@ -1,71 +1,6 @@
-#include "stdio.h"
-
 #include "inventory.h"
 #include "monster.h"
 #include "shop.h"
-
-void displayGhostItem() {
-    char cInput;
-
-    do{
-        printf("\n   ► ITEM ────────────\n\n");
-        printf("      ┌── GHOST ──┐\n"); //6 SPACES
-        printf("      │");
-        ghostFG();
-        printf(" ╔═══════╗ ");
-        reset();
-        printf("│\n");
-        printf("      │");
-        ghostFG();
-        printf(" ║");
-        reset();
-        printf(" ▄███▄");
-        ghostFG();
-        printf(" ║");
-        reset();
-        printf(" │\n");
-        printf("      │");
-        ghostFG();
-        printf(" ║");
-        reset();
-        printf(" █");
-        ghostFG();
-        printf("█");
-        reset();
-        printf("█");
-        ghostFG();
-        printf("█");
-        reset();
-        printf("█");
-        ghostFG();
-        printf(" ║");
-        reset();
-        printf(" │\n");
-        printf("      │");
-        ghostFG();
-        printf(" ║");
-        reset();
-        printf(" █▀█▀█");
-        ghostFG();
-        printf(" ║");
-        reset();
-        printf(" │\n");
-        printf("      │ ╚═══════╝ │\n");
-        printf("      └───────────┘\n\n\n");
-        printf("   ───────────────────\n");
-        printf("   [INPUT]  : ");
-        scanf(" %c", &cInput);
-
-    }while(cInput != 'Q');
-}
-
-void displayAlienItem() {
-    printf("you got ALIEN!!\n");
-}
-
-void displaySquidItem() {
-    printf("you got SQUID!!\n");
-}
 
 void displayInventory(int items[row][col], int selectedRow, int selectedCol) {
     printf("Inventory:\n");
@@ -73,24 +8,46 @@ void displayInventory(int items[row][col], int selectedRow, int selectedCol) {
         for (int j = 0; j < col; j++) {
             if (i == selectedRow && j == selectedCol) {
                 printf("╔═══╗ ");
-            } 
-            else {
-                printf("║ %d ║ ", items[i][j]);
+            } else {
+                
+                printf("┌───┐ ");
+                
             }
         }
         printf("\n");
-        if (i < row - 1) {
-            printf("╚═══╝ ");
+
+        for (int j = 0; j < col; j++) {
+            if (i == selectedRow && j == selectedCol) {
+                printf("║ ");
+                
+                printf("%d", items[i][j]);
+                
+                printf(" ║ ");
+            } else {
+                
+                printf("│ %d │ ", items[i][j]);
+                
+            }
         }
+        printf("\n");
+
+        for (int j = 0; j < col; j++) {
+            if (i == selectedRow && j == selectedCol) {
+                printf("╚═══╝ ");
+            } else {
+                
+                printf("└───┘ ");
+                
+            }
+        }
+        printf("\n");
     }
 }
 
-
 void navigateInventory(int items[row][col]) {
-    //important CANNOT ERASE THE SAME PLACE;
     int selectedRow = 0, selectedCol = 0;
     char cInput;
-    int i,j;
+    int i, j;
     int startCol = 0;
     printf("Use W/A/S/D to navigate and X to delete. Press Q to exit.\n");
 
@@ -101,46 +58,38 @@ void navigateInventory(int items[row][col]) {
 
         if (cInput == 'Q') break;
 
-        switch (cInput) {
-            case 'W':
-                if (selectedRow > 0) {
-                    selectedRow--;
-                }
-                break;
-            case 'S':
-                if (selectedRow < row - 1) {
-                    selectedRow++;
-                }
-                break;
-            case 'A':
-                if (selectedCol > 0) {
-                    selectedCol--;
-                }
-                break;
-            case 'D':
-                if (selectedCol < col - 1) {
-                    selectedCol++;
-                }
-                break;
-            case 'X':
-                if (items[selectedRow][selectedCol] != 0) {
-                    
-                    if (selectedRow == selectedRow) {
-                        startCol = selectedCol;
-                    }
+        if (cInput == 'W') {
+            if (selectedRow > 0) {
+                selectedRow--;
+            }
+        } else if (cInput == 'S') {
+            if (selectedRow < row - 1) {
+                selectedRow++;
+            }
+        } else if (cInput == 'A') {
+            if (selectedCol > 0) {
+                selectedCol--;
+            }
+        } else if (cInput == 'D') {
+            if (selectedCol < col - 1) {
+                selectedCol++;
+            }
+        } else if (cInput == 'X') {
+            if (items[selectedRow][selectedCol] != 0) {
+                startCol = selectedCol;
 
-                    for ( i = selectedRow; i < row; i++) {
-                        for ( j = startCol; j < col - 1; j++) {
-                            items[i][j] = items[i][j + 1];
-                        }
-                        if (i < row - 1) {
-                            items[i][col - 1] = items[i + 1][0];
-                        } else {
-                            items[i][col - 1] = 0;
-                        }
+                for (i = selectedRow; i < row; i++) {
+                    for (j = startCol; j < col - 1; j++) {
+                        items[i][j] = items[i][j + 1];
+                    }
+                    if (i < row - 1) {
+                        items[i][col - 1] = items[i + 1][0];
+                    } else {
+                        items[i][col - 1] = 0;
                     }
                 }
-                break;
+            }
         }
     }
 }
+
