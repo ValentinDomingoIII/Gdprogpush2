@@ -147,6 +147,7 @@ void displayGhostItem() {
         printf("   ───────────────────\n");
         printf("   [INPUT]  : ");
         scanf(" %c", &cInput);
+        printf("\n");
 
     }while(cInput != 'Q');
 }
@@ -206,6 +207,7 @@ void displayAlienItem() {
         printf("   ───────────────────\n");
         printf("   [INPUT]  : ");
         scanf(" %c", &cInput);
+        printf("\n");
 
     }while(cInput != 'Q');
 }
@@ -265,6 +267,7 @@ void displaySquidItem() {
         printf("   ───────────────────\n");
         printf("   [INPUT]  : ");
         scanf(" %c", &cInput);
+        printf("\n");
 
     }while(cInput != 'Q');
 }

@@ -3,45 +3,39 @@
 #include "shop.h"
 
 void displayInventory(int items[row][col], int selectedRow, int selectedCol) {
-    printf("Inventory:\n");
+    printf("   ► INVENTORY ───────\n\n     ");
     for (int i = 0; i < row; i++) {
         for (int j = 0; j < col; j++) {
             if (i == selectedRow && j == selectedCol) {
-                printf("╔═══╗ ");
+                processSelectBoxColor1(items,i,j);
             } else {
-                
-                printf("┌───┐ ");
-                
+                processNormBoxColor1(items,i,j);
             }
         }
-        printf("\n");
+        printf("\n     ");
+
+        for (int j = 0; j < col; j++) {
+            if (i == selectedRow && j == selectedCol) 
+                processSelectBoxColor2(items,i,j);
+            else {
+                processNormBoxColor2(items,i,j);
+            }
+        }
+        printf("\n     ");
 
         for (int j = 0; j < col; j++) {
             if (i == selectedRow && j == selectedCol) {
-                printf("║ ");
-                
-                printf("%d", items[i][j]);
-                
-                printf(" ║ ");
+                processSelectBoxColor3(items,i,j);
             } else {
-                
-                printf("│ %d │ ", items[i][j]);
-                
+                processNormBoxColor3(items,i,j);
             }
         }
-        printf("\n");
-
-        for (int j = 0; j < col; j++) {
-            if (i == selectedRow && j == selectedCol) {
-                printf("╚═══╝ ");
-            } else {
-                
-                printf("└───┘ ");
-                
-            }
-        }
-        printf("\n");
+        
+        printf("\n     ");
     }
+
+    printf("\n   ───────────────────\n");
+    printf("   [INPUT]  : ");
 }
 
 void navigateInventory(int items[row][col]) {
@@ -49,12 +43,14 @@ void navigateInventory(int items[row][col]) {
     char cInput;
     int i, j;
     int startCol = 0;
-    printf("Use W/A/S/D to navigate and X to delete. Press Q to exit.\n");
+    //printf("Use W/A/S/D to navigate and X to delete. Press Q to exit.\n");
+    printf("\n");
 
     while (1) {
         displayInventory(items, selectedRow, selectedCol);
-        printf("Selected: [%d][%d]\n", selectedRow, selectedCol);
+        //printf("Selected: [%d][%d]\n", selectedRow, selectedCol);
         scanf(" %c", &cInput);
+        printf("\n");
 
         if (cInput == 'Q') break;
 
@@ -93,3 +89,122 @@ void navigateInventory(int items[row][col]) {
     }
 }
 
+void processSelectBoxColor1(int* pItems, int nX, int nY){ 
+    if(*((pItems + nX * row) + nY) == 0)
+        printf("╔═══╗ ");
+        else if(*((pItems + nX * row) + nY) == 1){
+                ghostFG();
+                printf("╔═══╗ ");
+                reset();
+        }
+            else if(*((pItems + nX * row) + nY) == 2){
+                alienFG();
+                printf("╔═══╗ ");
+                reset();
+            }
+                else if(*((pItems + nX * row) + nY) == 3){
+                    squidFG();
+                    printf("╔═══╗ ");
+                    reset();
+                }
+}
+
+void processSelectBoxColor2(int* pItems, int nX, int nY){ 
+    if(*((pItems + nX * row) + nY) == 0)
+        printf("║   ║ ");
+        else if(*((pItems + nX * row) + nY) == 1){
+                ghostFG();
+                printf("║█▀█║ ");
+                reset();
+        }
+            else if(*((pItems + nX * row) + nY) == 2){
+                alienFG();
+                printf("║▀▄▀║ ");
+                reset();
+            }
+                else if(*((pItems + nX * row) + nY) == 3){
+                    squidFG();
+                    printf("║▄█▄║ ");
+                    reset();
+                }
+}
+
+void processSelectBoxColor3(int* pItems, int nX, int nY){ 
+    if(*((pItems + nX * row) + nY) == 0)
+        printf("╚═══╝ ");
+        else if(*((pItems + nX * row) + nY) == 1){
+                ghostFG();
+                printf("╚═══╝ ");
+                reset();
+        }
+            else if(*((pItems + nX * row) + nY) == 2){
+                alienFG();
+                printf("╚═══╝ ");
+                reset();
+            }
+                else if(*((pItems + nX * row) + nY) == 3){
+                    squidFG();
+                    printf("╚═══╝ ");
+                    reset();
+                }
+}
+
+void processNormBoxColor1(int* pItems, int nX, int nY){ 
+    if(*((pItems + nX * row) + nY) == 0)
+        printf("┌───┐ ");
+        else if(*((pItems + nX * row) + nY) == 1){
+                ghostFG();
+                printf("┌───┐ ");
+                reset();
+        }
+            else if(*((pItems + nX * row) + nY) == 2){
+                alienFG();
+                printf("┌───┐ ");
+                reset();
+            }
+                else if(*((pItems + nX * row) + nY) == 3){
+                    squidFG();
+                    printf("┌───┐ ");
+                    reset();
+                }
+}
+
+void processNormBoxColor2(int* pItems, int nX, int nY){ 
+    if(*((pItems + nX * row) + nY) == 0)
+        printf("│   │ ");
+        else if(*((pItems + nX * row) + nY) == 1){
+                ghostFG();
+                printf("│█▀█│ ");
+                reset();
+        }
+            else if(*((pItems + nX * row) + nY) == 2){
+                alienFG();
+                printf("│▀▄▀│ ");
+                reset();
+            }
+                else if(*((pItems + nX * row) + nY) == 3){
+                    squidFG();
+                    printf("│▄█▄│ ");
+                    reset();
+                }
+}
+
+void processNormBoxColor3(int* pItems, int nX, int nY){ 
+    if(*((pItems + nX * row) + nY) == 0)
+        printf("└───┘ ");
+        else if(*((pItems + nX * row) + nY) == 1){
+                ghostFG();
+                printf("└───┘ ");
+                reset();
+        }
+            else if(*((pItems + nX * row) + nY) == 2){
+                alienFG();
+                printf("└───┘ ");
+                reset();
+            }
+                else if(*((pItems + nX * row) + nY) == 3){
+                    squidFG();
+                    printf("└───┘ ");
+                    reset();
+                }
+}

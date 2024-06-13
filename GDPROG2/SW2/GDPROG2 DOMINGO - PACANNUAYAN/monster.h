@@ -5,3 +5,4 @@ void displayAlien();
 void displaySquid();
 void displayGhostItem();
 void displayAlienItem();
+void displaySquidItem();
