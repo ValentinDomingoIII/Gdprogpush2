@@ -3,13 +3,13 @@
 #include "shop.h"
 
 void displayInventory(int aItems[row][col], int nSelectedRow, int nSelectedCol) {
-    printf("   ► INVENTORY ───────\n\n     ");
+    printf("   ► DELETE ──────────\n\n     ");
     for (int i = 0; i < row; i++) {
         for (int j = 0; j < col; j++) {
             if (i == nSelectedRow && j == nSelectedCol) {
                 processSelectBoxColor1(aItems,i,j);
             } else {
-                processNormBoxColor1(aItems,i,j);
+                processDelBox1(aItems,i,j);
             }
         }
         printf("\n     ");
@@ -18,7 +18,7 @@ void displayInventory(int aItems[row][col], int nSelectedRow, int nSelectedCol) 
             if (i == nSelectedRow && j == nSelectedCol) 
                 processSelectBoxColor2(aItems,i,j);
             else {
-                processNormBoxColor2(aItems,i,j);
+                processDelBox2(aItems,i,j);
             }
         }
         printf("\n     ");
@@ -27,7 +27,7 @@ void displayInventory(int aItems[row][col], int nSelectedRow, int nSelectedCol) 
             if (i == nSelectedRow && j == nSelectedCol) {
                 processSelectBoxColor3(aItems,i,j);
             } else {
-                processNormBoxColor3(aItems,i,j);
+                processDelBox3(aItems,i,j);
             }
         }
         
@@ -37,6 +37,44 @@ void displayInventory(int aItems[row][col], int nSelectedRow, int nSelectedCol) 
     printf("\n   ───────────────────\n");
     printf("   [INPUT]  : ");
 }
+
+void displayNormInventory(int aItems[row][col]){
+    char cInput;
+
+    printf("\n");
+    do{
+        cInput = ' ';
+        printf("   ► INVENTORY ───────\n\n     ");
+
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
+                processNormBoxColor1(aItems,i,j);
+            }
+            printf("\n     ");
+
+            for (int j = 0; j < col; j++) {
+                processNormBoxColor2(aItems,i,j);
+            }
+            printf("\n     ");
+
+            for (int j = 0; j < col; j++) {
+                processNormBoxColor3(aItems,i,j);
+            }
+            printf("\n     ");
+        }
+
+        printf("\n   ───────────────────\n");
+        printf("   [INPUT]  : ");
+        scanf(" %c",&cInput);
+        printf("\n");
+
+    }while(cInput != 'Q' && cInput != 'D');
+
+    if(cInput == 'D')
+        navigateInventory(aItems);
+   
+}
+
 
 void navigateInventory(int aItems[row][col]) {
     int nSelectedRow = 0, nSelectedCol = 0;
@@ -52,7 +90,10 @@ void navigateInventory(int aItems[row][col]) {
         scanf(" %c", &cInput);
         printf("\n");
 
-        if (cInput == 'Q') break;
+        if (cInput == 'Q'){
+            displayNormInventory(aItems);
+            break;
+        }
 
         if (cInput == 'W') {
             if (nSelectedRow > 0) {
@@ -208,3 +249,27 @@ void processNormBoxColor3(int* pItems, int nX, int nY){
                     reset();
                 }
 }
+
+void processDelBox1(int* pItems, int nX, int nY){ 
+        printf("┌───┐ ");
+}
+
+void processDelBox2(int* pItems, int nX, int nY){ 
+    if(*((pItems + nX * row) + nY) == 0)
+        printf("│   │ ");
+        else if(*((pItems + nX * row) + nY) == 1){              
+                printf("│█▀█│ ");              
+        }
+            else if(*((pItems + nX * row) + nY) == 2){          
+                printf("│▀▄▀│ ");
+            }
+                else if(*((pItems + nX * row) + nY) == 3){
+                    printf("│▄█▄│ ");
+                }
+}
+
+void processDelBox3(int* pItems, int nX, int nY){ 
+        printf("└───┘ ");
+}
+
+

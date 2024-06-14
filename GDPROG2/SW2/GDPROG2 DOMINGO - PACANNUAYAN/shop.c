@@ -93,7 +93,7 @@ void processShop(int* pShop, char cInput, int* nKey, int aItems[row][col]){
             break;
 
         case 'I':
-            navigateInventory(aItems);
+            displayNormInventory(aItems);
             break;
     
     }
