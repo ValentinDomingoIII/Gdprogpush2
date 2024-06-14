@@ -10,14 +10,14 @@ void runShop(){
     char cInput;
     int aShop[3] = {1,0,0};
     int nKey = 1;
-    int items[row][col];
+    int aItems[row][col];
     
     int i=0,j=0;
     for(i=0;i<3;i++)
     {
         for(j=0;j<3;j++)
         {
-        items[i][j]=0;
+        aItems[i][j]=0;
         }
     }
 
@@ -25,7 +25,7 @@ void runShop(){
 
     do{
         scanf(" %c", &cInput);
-        processShop(aShop,cInput,&nKey,items);
+        processShop(aShop,cInput,&nKey,aItems);
         processDisplay(&nKey);
 
     }while(cInput != 'Q');
@@ -34,7 +34,7 @@ void runShop(){
 
 
 
-void processShop(int* pShop, char cInput, int* nKey, int items[row][col]){
+void processShop(int* pShop, char cInput, int* nKey, int aItems[row][col]){
     int i,j;
     switch(cInput){
         case 'A':
@@ -56,8 +56,8 @@ void processShop(int* pShop, char cInput, int* nKey, int items[row][col]){
             if(*nKey==1){
                 for(i=0;i<row;i++){
                     for(j=0;j<col;j++){
-                        if (items[i][j]==0){
-                            items[i][j]=1;
+                        if (aItems[i][j]==0){
+                            aItems[i][j]=1;
                             displayGhostItem();
                             return;
                         }            
@@ -68,8 +68,8 @@ void processShop(int* pShop, char cInput, int* nKey, int items[row][col]){
             else if(*nKey==2){
                 for(i=0;i<row;i++){
                     for(j=0;j<col;j++){
-                        if (items[i][j]==0){
-                            items[i][j]=2;
+                        if (aItems[i][j]==0){
+                            aItems[i][j]=2;
                             displayAlienItem();
                             return;
                         }
@@ -81,8 +81,8 @@ void processShop(int* pShop, char cInput, int* nKey, int items[row][col]){
             else if(*nKey==3){
                 for(i=0;i<row;i++){
                     for(j=0;j<col;j++){
-                        if (items[i][j]==0){
-                            items[i][j]=3;
+                        if (aItems[i][j]==0){
+                            aItems[i][j]=3;
                             displaySquidItem();
                             return;
                         }
@@ -93,7 +93,7 @@ void processShop(int* pShop, char cInput, int* nKey, int items[row][col]){
             break;
 
         case 'I':
-            navigateInventory(items);
+            navigateInventory(aItems);
             break;
     
     }
