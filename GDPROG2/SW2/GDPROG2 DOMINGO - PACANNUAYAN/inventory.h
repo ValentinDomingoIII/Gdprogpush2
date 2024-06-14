@@ -6,7 +6,7 @@
 void displayGhostItem();
 void displayAlienItem();
 void displaySquidItem();
-void displayInventory(int aItems[row][col], int selectedRow, int selectedCol);
+void displayInventory(int aItems[row][col], int nSelectedRow, int nSelectedCol);
 void navigateInventory(int aItems[row][col]);
 void processSelectBoxColor1(int* pItems, int nX, int nY);
 void processSelectBoxColor2(int* pItems, int nX, int nY);

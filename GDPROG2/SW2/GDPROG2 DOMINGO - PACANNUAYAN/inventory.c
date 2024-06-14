@@ -2,19 +2,11 @@
 #include "monster.h"
 #include "shop.h"
 
-<<<<<<< Updated upstream
 void displayInventory(int aItems[row][col], int nSelectedRow, int nSelectedCol) {
     printf("   ► INVENTORY ───────\n\n     ");
     for (int i = 0; i < row; i++) {
         for (int j = 0; j < col; j++) {
             if (i == nSelectedRow && j == nSelectedCol) {
-=======
-void displayInventory(int aItems[row][col], int selectedRow, int selectedCol) {
-    printf("   ► INVENTORY ───────\n\n     ");
-    for (int i = 0; i < row; i++) {
-        for (int j = 0; j < col; j++) {
-            if (i == selectedRow && j == selectedCol) {
->>>>>>> Stashed changes
                 processSelectBoxColor1(aItems,i,j);
             } else {
                 processNormBoxColor1(aItems,i,j);
@@ -23,11 +15,7 @@ void displayInventory(int aItems[row][col], int selectedRow, int selectedCol) {
         printf("\n     ");
 
         for (int j = 0; j < col; j++) {
-<<<<<<< Updated upstream
             if (i == nSelectedRow && j == nSelectedCol) 
-=======
-            if (i == selectedRow && j == selectedCol) 
->>>>>>> Stashed changes
                 processSelectBoxColor2(aItems,i,j);
             else {
                 processNormBoxColor2(aItems,i,j);
@@ -36,11 +24,7 @@ void displayInventory(int aItems[row][col], int selectedRow, int selectedCol) {
         printf("\n     ");
 
         for (int j = 0; j < col; j++) {
-<<<<<<< Updated upstream
             if (i == nSelectedRow && j == nSelectedCol) {
-=======
-            if (i == selectedRow && j == selectedCol) {
->>>>>>> Stashed changes
                 processSelectBoxColor3(aItems,i,j);
             } else {
                 processNormBoxColor3(aItems,i,j);
@@ -55,11 +39,7 @@ void displayInventory(int aItems[row][col], int selectedRow, int selectedCol) {
 }
 
 void navigateInventory(int aItems[row][col]) {
-<<<<<<< Updated upstream
     int nSelectedRow = 0, nSelectedCol = 0;
-=======
-    int selectedRow = 0, selectedCol = 0;
->>>>>>> Stashed changes
     char cInput;
     int i, j;
     int startCol = 0;
@@ -67,11 +47,7 @@ void navigateInventory(int aItems[row][col]) {
     printf("\n");
 
     while (1) {
-<<<<<<< Updated upstream
         displayInventory(aItems, nSelectedRow, nSelectedCol);
-=======
-        displayInventory(aItems, selectedRow, selectedCol);
->>>>>>> Stashed changes
         //printf("Selected: [%d][%d]\n", selectedRow, selectedCol);
         scanf(" %c", &cInput);
         printf("\n");
@@ -95,13 +71,8 @@ void navigateInventory(int aItems[row][col]) {
                 nSelectedCol++;
             }
         } else if (cInput == 'E') {
-<<<<<<< Updated upstream
             if (aItems[nSelectedRow][nSelectedCol] != 0) {
                 startCol = nSelectedCol;
-=======
-            if (aItems[selectedRow][selectedCol] != 0) {
-                startCol = selectedCol;
->>>>>>> Stashed changes
 
                 for (i = nSelectedRow; i < row; i++) {
                     for (j = startCol; j < col - 1; j++) {
