@@ -2,32 +2,32 @@
 #include "monster.h"
 #include "shop.h"
 
-void displayInventory(int items[row][col], int selectedRow, int selectedCol) {
+void displayInventory(int aItems[row][col], int nSelectedRow, int nSelectedCol) {
     printf("   ► INVENTORY ───────\n\n     ");
     for (int i = 0; i < row; i++) {
         for (int j = 0; j < col; j++) {
-            if (i == selectedRow && j == selectedCol) {
-                processSelectBoxColor1(items,i,j);
+            if (i == nSelectedRow && j == nSelectedCol) {
+                processSelectBoxColor1(aItems,i,j);
             } else {
-                processNormBoxColor1(items,i,j);
+                processNormBoxColor1(aItems,i,j);
             }
         }
         printf("\n     ");
 
         for (int j = 0; j < col; j++) {
-            if (i == selectedRow && j == selectedCol) 
-                processSelectBoxColor2(items,i,j);
+            if (i == nSelectedRow && j == nSelectedCol) 
+                processSelectBoxColor2(aItems,i,j);
             else {
-                processNormBoxColor2(items,i,j);
+                processNormBoxColor2(aItems,i,j);
             }
         }
         printf("\n     ");
 
         for (int j = 0; j < col; j++) {
-            if (i == selectedRow && j == selectedCol) {
-                processSelectBoxColor3(items,i,j);
+            if (i == nSelectedRow && j == nSelectedCol) {
+                processSelectBoxColor3(aItems,i,j);
             } else {
-                processNormBoxColor3(items,i,j);
+                processNormBoxColor3(aItems,i,j);
             }
         }
         
@@ -38,8 +38,8 @@ void displayInventory(int items[row][col], int selectedRow, int selectedCol) {
     printf("   [INPUT]  : ");
 }
 
-void navigateInventory(int items[row][col]) {
-    int selectedRow = 0, selectedCol = 0;
+void navigateInventory(int aItems[row][col]) {
+    int nSelectedRow = 0, nSelectedCol = 0;
     char cInput;
     int i, j;
     int startCol = 0;
@@ -47,7 +47,7 @@ void navigateInventory(int items[row][col]) {
     printf("\n");
 
     while (1) {
-        displayInventory(items, selectedRow, selectedCol);
+        displayInventory(aItems, nSelectedRow, nSelectedCol);
         //printf("Selected: [%d][%d]\n", selectedRow, selectedCol);
         scanf(" %c", &cInput);
         printf("\n");
@@ -55,33 +55,33 @@ void navigateInventory(int items[row][col]) {
         if (cInput == 'Q') break;
 
         if (cInput == 'W') {
-            if (selectedRow > 0) {
-                selectedRow--;
+            if (nSelectedRow > 0) {
+                nSelectedRow--;
             }
         } else if (cInput == 'S') {
-            if (selectedRow < row - 1) {
-                selectedRow++;
+            if (nSelectedRow < row - 1) {
+                nSelectedRow++;
             }
         } else if (cInput == 'A') {
-            if (selectedCol > 0) {
-                selectedCol--;
+            if (nSelectedCol > 0) {
+                nSelectedCol--;
             }
         } else if (cInput == 'D') {
-            if (selectedCol < col - 1) {
-                selectedCol++;
+            if (nSelectedCol < col - 1) {
+                nSelectedCol++;
             }
-        } else if (cInput == 'X') {
-            if (items[selectedRow][selectedCol] != 0) {
-                startCol = selectedCol;
+        } else if (cInput == 'E') {
+            if (aItems[nSelectedRow][nSelectedCol] != 0) {
+                startCol = nSelectedCol;
 
-                for (i = selectedRow; i < row; i++) {
+                for (i = nSelectedRow; i < row; i++) {
                     for (j = startCol; j < col - 1; j++) {
-                        items[i][j] = items[i][j + 1];
+                        aItems[i][j] = aItems[i][j + 1];
                     }
                     if (i < row - 1) {
-                        items[i][col - 1] = items[i + 1][0];
+                        aItems[i][col - 1] = aItems[i + 1][0];
                     } else {
-                        items[i][col - 1] = 0;
+                        aItems[i][col - 1] = 0;
                     }
                 }
             }
