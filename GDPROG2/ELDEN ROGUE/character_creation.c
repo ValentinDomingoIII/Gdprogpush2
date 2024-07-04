@@ -1,6 +1,7 @@
 #include "character_creation.h"
 #include "title.h"
-
+#include "stdio.h"
+#include "string.h"
 void runCharCreation(Player* player) {
     int choice = 0;
     printf("Character Creation\n");
@@ -74,12 +75,12 @@ void setJobClass(Player* player, int jobClass) {
         case 1:
             strcpy(player->jobName, "Vagabond");
             player->level = 1;
-            player->stats.health = 100;
-            player->stats.endurance = 50;
-            player->stats.dexterity = 30;
-            player->stats.strength = 70;
-            player->stats.intelligence = 20;
-            player->stats.faith = 15;
+            player->stats.health = 15;
+            player->stats.endurance = 11;
+            player->stats.dexterity = 13;
+            player->stats.strength = 14;
+            player->stats.intelligence = 9;
+            player->stats.faith = 9;
             break;
         case 2:
             strcpy(player->jobName, "Samurai");
