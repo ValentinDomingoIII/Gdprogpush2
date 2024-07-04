@@ -139,8 +139,16 @@ void setJobClass(Player* player, int jobClass) {
 
 void displayCurrentCharacter(Player* player) {
     printf("Current Character Details:\n");
-    printf("Name: %s\n", player->name[0] ? player->name : "Not Set");
-    printf("Job Class: %s\n", player->jobName[0] ? player->jobName : "Not Set");
+    if (strlen(player->name) == 0) {
+        printf("Name: Not Set\n");
+    } else {
+        printf("Name: %s\n", player->name);
+    }
+    if (strlen(player->jobName) == 0) {
+        printf("Job Class: Not Set\n");
+    } else {
+        printf("Job Class: %s\n", player->jobName);
+    }
     printf("Level: %d\n", player->level);
     printf("Health: %d\n", player->stats.health);
     printf("Endurance: %d\n", player->stats.endurance);
