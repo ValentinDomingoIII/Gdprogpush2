@@ -1,13 +1,9 @@
-#include "stdio.h"
-
 #include "title.c"
 #include "character_creation.c"
-#include "continue.c"
 
-int main(){
-    
-    system("chcp 65001");
-    runTitle();
-
+int main() {
+   // system("chcp 65001");
+    Player player;
+    runTitle(&player);
     return 0;
 }

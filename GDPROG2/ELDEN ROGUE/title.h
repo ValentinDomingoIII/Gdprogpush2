@@ -1,5 +1,7 @@
 #pragma once
 
-void runTitle();
+#include "character_creation.h"
+
+void runTitle(Player* player);
 void displayTitle();
-void processTitle(int* nInput);
+void processTitle(int* nInput, Player* player);

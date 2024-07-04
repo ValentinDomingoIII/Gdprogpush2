@@ -1,20 +1,18 @@
 #include "title.h"
 #include "character_creation.h"
-#include "continue.h"
 
-void runTitle(){
+void runTitle(Player* player) {
     int nInput = 0;
 
-    do{
-    printf("\n");
-    displayTitle();
-    scanf("%d", &nInput);
-    processTitle(&nInput);
-    }while(nInput != 0);
-
+    do {
+        printf("\n");
+        displayTitle();
+        scanf("%d", &nInput);
+        processTitle(&nInput, player);
+    } while (nInput != 0);
 }
 
-void displayTitle(){
+void displayTitle() {
     printf("\t╔═════════════════════╗\n");
     printf("\t│     ELDEN ROGUE     │\n");
     printf("\t╚═════════════════════╝\n");
@@ -24,16 +22,21 @@ void displayTitle(){
     printf("\n\t[INPUT]: ");
 }
 
-void processTitle(int* nInput){
-    switch(*nInput){
-        case 1: 
-            runCharCreation();
+void processTitle(int* nInput, Player* player) {
+    switch (*nInput) {
+        case 1:
+            runCharCreation(player);
             break;
         case 2:
-            runContinue();
+            
+            
             break;
-        case 0: 
+        case 0:
+            printf("Exiting...\n");
             *nInput = 0;
+            break;
+        default:
+            printf("Invalid choice. Please try again.\n");
             break;
     }
 }
