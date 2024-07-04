@@ -5,13 +5,14 @@ void runCharCreation(Player* player) {
     int choice = 0;
     printf("Character Creation\n");
     do {
-        printCharCreationScreen();
+        printCharCreationScreen(player);
         scanf("%d", &choice);
         processCharInputs(choice, player);
     } while (choice != 3 && choice != 4);
 }
 
-void printCharCreationScreen() {
+void printCharCreationScreen(Player* player) {
+    displayCurrentCharacter(player);
     printf("1. INPUT NAME\n");
     printf("2. INPUT JOB CLASS\n");
     printf("3. CONFIRM\n");
@@ -134,4 +135,18 @@ void setJobClass(Player* player, int jobClass) {
             printf("Invalid job class. Please try again.\n");
             break;
     }
+}
+
+void displayCurrentCharacter(Player* player) {
+    printf("Current Character Details:\n");
+    printf("Name: %s\n", player->name[0] ? player->name : "Not Set");
+    printf("Job Class: %s\n", player->jobName[0] ? player->jobName : "Not Set");
+    printf("Level: %d\n", player->level);
+    printf("Health: %d\n", player->stats.health);
+    printf("Endurance: %d\n", player->stats.endurance);
+    printf("Dexterity: %d\n", player->stats.dexterity);
+    printf("Strength: %d\n", player->stats.strength);
+    printf("Intelligence: %d\n", player->stats.intelligence);
+    printf("Faith: %d\n", player->stats.faith);
+    printf("\n");
 }
