@@ -23,3 +23,5 @@ int processCharInputs(int choice, Player* player);
 void runNameInput(Player* player);
 void runJobClassInput(Player* player);
 void setJobClass(Player* player, int jobClass);
+void savePlayerData(Player* player);
+void readPlayerData(Player* player);

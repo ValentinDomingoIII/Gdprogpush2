@@ -1,0 +1,9 @@
+Name: 1234567890qwertyuiop
+Job Class: Hero
+Level: 1
+Health: 14
+Endurance: 12
+Dexterity: 9
+Strength: 16
+Intelligence: 7
+Faith: 8

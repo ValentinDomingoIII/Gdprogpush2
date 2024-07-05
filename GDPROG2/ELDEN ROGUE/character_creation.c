@@ -10,6 +10,7 @@ void runCharCreation(Player* player) {
         scanf("%d", &choice);
         processCharInputs(choice, player);
     } while (choice != 3 && choice != 4);
+    savePlayerData(player);
 }
 
 void printCharCreationScreen(Player* player) {
@@ -39,6 +40,8 @@ int processCharInputs(int choice, Player* player) {
             printf("Strength: %d\n", player->stats.strength);
             printf("Intelligence: %d\n", player->stats.intelligence);
             printf("Faith: %d\n", player->stats.faith);
+
+
             break;
         case 4:
             printf("Exiting Character Creation...\n");
@@ -158,4 +161,43 @@ void displayCurrentCharacter(Player* player) {
     printf("Intelligence: %d\n", player->stats.intelligence);
     printf("Faith: %d\n", player->stats.faith);
     printf("\n");
+}
+
+
+void savePlayerData(Player* player) {
+    FILE *file = fopen("player_data.txt", "w");
+    if (file) {
+        fprintf(file, "Name: %s\n", player->name);
+        fprintf(file, "Job Class: %s\n", player->jobName);
+        fprintf(file, "Level: %d\n", player->level);
+        fprintf(file, "Health: %d\n", player->stats.health);
+        fprintf(file, "Endurance: %d\n", player->stats.endurance);
+        fprintf(file, "Dexterity: %d\n", player->stats.dexterity);
+        fprintf(file, "Strength: %d\n", player->stats.strength);
+        fprintf(file, "Intelligence: %d\n", player->stats.intelligence);
+        fprintf(file, "Faith: %d\n", player->stats.faith);
+        fclose(file);
+        printf("Player data saved to player_data.txt.\n");
+    } else {
+        printf("Error: Could not open file for writing.\n");
+    }
+}
+
+void readPlayerData(Player* player) {
+    FILE *file = fopen("player_data.txt", "r");
+    if (file) {
+        fscanf(file, "Name: %25[^\n]\n", player->name);
+        fscanf(file, "Job Class: %25[^\n]\n", player->jobName);
+        fscanf(file, "Level: %d\n", &player->level);
+        fscanf(file, "Health: %d\n", &player->stats.health);
+        fscanf(file, "Endurance: %d\n", &player->stats.endurance);
+        fscanf(file, "Dexterity: %d\n", &player->stats.dexterity);
+        fscanf(file, "Strength: %d\n", &player->stats.strength);
+        fscanf(file, "Intelligence: %d\n", &player->stats.intelligence);
+        fscanf(file, "Faith: %d\n", &player->stats.faith);
+        fclose(file);
+        printf("Player data loaded from player_data.txt.\n");
+    } else {
+        printf("Error: Could not open file for reading.\n");
+    }
 }

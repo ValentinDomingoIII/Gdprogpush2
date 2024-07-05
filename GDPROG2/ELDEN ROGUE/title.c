@@ -28,7 +28,9 @@ void processTitle(int* nInput, Player* player) {
             runCharCreation(player);
             break;
         case 2:
-            
+            readPlayerData(player);
+            displayCurrentCharacter(player);
+            break;
             
             break;
         case 0:
