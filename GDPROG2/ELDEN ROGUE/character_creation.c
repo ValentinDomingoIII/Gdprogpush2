@@ -1,7 +1,9 @@
 #include "character_creation.h"
 #include "title.h"
+
 #include "stdio.h"
 #include "string.h"
+
 void runCharCreation(Player* player) {
     int choice = 0;
     printf("Character Creation\n");
