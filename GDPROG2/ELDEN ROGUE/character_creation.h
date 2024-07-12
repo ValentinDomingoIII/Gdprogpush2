@@ -1,6 +1,6 @@
 #pragma once
 #define MAX_NAME 26
-
+#include "title.h"
 typedef struct {
     int health;
     int endurance;
@@ -22,6 +22,7 @@ void printCharCreationScreen();
 int processCharInputs(int choice, Player* player);
 void runNameInput(Player* player);
 void runJobClassInput(Player* player);
+void displayCurrentCharacter(Player* player);
 void setJobClass(Player* player, int jobClass);
 void savePlayerData(Player* player);
 void readPlayerData(Player* player);
