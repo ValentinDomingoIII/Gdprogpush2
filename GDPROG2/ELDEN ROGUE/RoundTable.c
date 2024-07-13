@@ -1,10 +1,16 @@
-runRoundTable(Player* player)
+
+
+void runRoundTable(Player* player)
 {
+    char cInput;
     printf("\nWELCOME\n");
     displayRoundTable(player);
+    scanf(" %c",&cInput);
+    
+    
 }
 
-displayRoundTable(Player* player)
+void displayRoundTable(Player* player)
 {
             printf("Name: %s\n", player->name);
             printf("Job Class: %s\n", player->jobName);
@@ -16,5 +22,8 @@ displayRoundTable(Player* player)
     printf("Shop\n");
     printf("Save\n");
     printf("Quit Game\n");
+
+    printf("INPUT:");
    
 }
+

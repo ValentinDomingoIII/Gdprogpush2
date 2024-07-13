@@ -1,6 +1,11 @@
 #pragma once
 #define MAX_NAME 26
 #include "title.h"
+#include "RoundTable.h"
+typedef struct {
+    char weapon[MAX_NAME];
+} Inv;
+
 typedef struct {
     int health;
     int endurance;
@@ -14,8 +19,12 @@ typedef struct {
     char name[MAX_NAME];
     char jobName[MAX_NAME];
     int level;
+    int runes;
+    int shards;
     Stats stats;
+    Inv weapon;
 } Player;
+
 
 void runCharCreation(Player* player);
 void printCharCreationScreen();

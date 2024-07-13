@@ -1,9 +1,9 @@
-Name: gjk
-Job Class: Warrior
+Name: dims
+Job Class: Hero
 Level: 1
-Health: 11
-Endurance: 11
-Dexterity: 16
-Strength: 10
-Intelligence: 10
+Health: 14
+Endurance: 12
+Dexterity: 9
+Strength: 16
+Intelligence: 7
 Faith: 8
