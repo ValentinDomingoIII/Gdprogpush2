@@ -30,6 +30,7 @@ void processTitle(int* nInput, Player* player) {
         case 2:
             readPlayerData(player);
             displayCurrentCharacter(player);
+            runRoundTable(player);
             break;
             
             break;

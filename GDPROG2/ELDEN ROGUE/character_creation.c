@@ -1,8 +1,6 @@
 #include "character_creation.h"
-#include "title.h"
-
+//annoying just to remove the error message
 #include "stdio.h"
-#include "string.h"
 
 void runCharCreation(Player* player) {
     int choice = 0;
@@ -13,6 +11,7 @@ void runCharCreation(Player* player) {
         processCharInputs(choice, player);
     } while (choice != 3 && choice != 4);
     savePlayerData(player);
+    runRoundTable(player);
 }
 
 void printCharCreationScreen(Player* player) {
@@ -43,6 +42,7 @@ int processCharInputs(int choice, Player* player) {
             printf("Intelligence: %d\n", player->stats.intelligence);
             printf("Faith: %d\n", player->stats.faith);
 
+            
 
             break;
         case 4:

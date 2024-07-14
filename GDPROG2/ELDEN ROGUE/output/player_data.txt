@@ -1,4 +1,4 @@
-Name: 1234567890qwertyuiop
+Name: dims
 Job Class: Hero
 Level: 1
 Health: 14
