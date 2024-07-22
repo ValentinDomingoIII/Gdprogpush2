@@ -10,13 +10,6 @@
 // DOOR TILE = 6
 // FAST TRAVEL = 8
 
-/*   TO-DO
-
-1. MAKE THE FUNCTIONS DYNAMIC
-2. MOVE aTemp TO STRUCTURES.H AND INITIALIZE FROM THE STRUCT
-
-*/
-
 void runStormveil(int* pFloor, int* pFlag, Stormveil* sArea, int nRow, int nColumn)
 {
      // Stormveil sFloor; 
