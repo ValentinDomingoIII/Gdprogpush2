@@ -1,11 +1,14 @@
 #include "stdio.h"
 #include "string.h"
+#include "windows.h"
+#include "time.h"
+
 #include "title.c"
 #include "character_creation.c"
 #include "area.c"
 #include "continue.c"
 #include "RoundTable.c"
-#include "windows.h"
+
 int main() {
 
     system("chcp 65001");
@@ -20,7 +23,7 @@ int main() {
             player.stats.intelligence = 0;
             player.stats.faith = 0;
     runTitle(&player);
-    // runStormveil();
+    // initializeStormveil();
     
     return 0;
 }
