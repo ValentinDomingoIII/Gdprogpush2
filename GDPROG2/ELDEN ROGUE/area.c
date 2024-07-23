@@ -173,7 +173,7 @@ void printFloor(int* pFloor, int nRow, int nColumn) // can be used for all
 void processInput(char cInput, int* pFloor, int nRow, int nColumn, int nFloorCount, int* pPlayerLocation, int* pRunes) // can be used for all
 {
      int nRandom;
-     srand(time(NULL));
+     // srand(time(NULL));
 
      for(int i = 0; i < nRow; i++){
           for(int j = 0; j < nColumn; j++){
