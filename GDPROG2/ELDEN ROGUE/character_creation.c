@@ -10,8 +10,19 @@ void runCharCreation(Player* player) {
         scanf("%d", &choice);
         processCharInputs(choice, player);
     } while (choice != 3 && choice != 4);
+    if (choice==3)
+    {
     savePlayerData(player);
     runRoundTable(player);
+    }
+
+    if (choice==4)
+    {
+        runTitle(player);
+    }
+    
+    
+   
 }
 
 void printCharCreationScreen(Player* player) {

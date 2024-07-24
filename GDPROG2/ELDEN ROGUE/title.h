@@ -2,6 +2,7 @@
 
 #include "character_creation.h"
 #include "RoundTable.h"
+#include "area.h"
 
 void runTitle(Player* player);
 void displayTitle();

@@ -2,6 +2,7 @@
 #define MAX_NAME 26
 #include "title.h"
 #include "RoundTable.h"
+#include "area.h"
 typedef struct {
     char weapon[MAX_NAME];
 } Inv;
@@ -18,7 +19,7 @@ typedef struct {
 typedef struct {
     char name[MAX_NAME];
     char jobName[MAX_NAME];
-    int level;
+    int level; 
     int runes;
     int shards;
     Stats stats;
