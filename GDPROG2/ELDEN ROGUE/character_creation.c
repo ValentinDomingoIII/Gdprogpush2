@@ -189,6 +189,7 @@ void savePlayerData(Player* player) {
         fprintf(file, "Strength: %d\n", player->stats.strength);
         fprintf(file, "Intelligence: %d\n", player->stats.intelligence);
         fprintf(file, "Faith: %d\n", player->stats.faith);
+        fprintf(file, "Runes: %d\n", player->runes);
         fclose(file);
         printf("Player data saved to player_data.txt.\n");
     } else {
@@ -208,6 +209,7 @@ void readPlayerData(Player* player) {
         fscanf(file, "Strength: %d\n", &player->stats.strength);
         fscanf(file, "Intelligence: %d\n", &player->stats.intelligence);
         fscanf(file, "Faith: %d\n", &player->stats.faith);
+        fscanf(file, "Runes: %d\n", &player->runes);
         fclose(file);
         printf("Player data loaded from player_data.txt.\n");
     } else {

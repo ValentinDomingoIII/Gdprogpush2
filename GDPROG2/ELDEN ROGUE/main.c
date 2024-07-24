@@ -23,6 +23,7 @@ int main() {
             player.stats.strength = 0;
             player.stats.intelligence = 0;
             player.stats.faith = 0;
+            //test runes
             player.runes=420;
     runTitle(&player);
     // initializeStormveil();

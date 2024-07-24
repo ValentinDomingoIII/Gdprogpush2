@@ -67,14 +67,14 @@ void processlevelup(Player* player)
     do
     {
         nRune=(player->level*100)/2;
-    printf("\n\t\tLEVEL UP\n\n");
-    printf("- Level up DEXTERITY \n");
-    printf("- Level up STRENGTH \n");
-    printf("- Level up INTELLIGENCE \n");
-    printf("- Level up FAITH \n");
+    printf("\nLEVEL UP\n\n");
+    printf("-> Level up DEXTERITY \n");
+    printf("-> Level up STRENGTH \n");
+    printf("-> Level up INTELLIGENCE \n");
+    printf("-> Level up FAITH \n");
 
     
-    printf("- BACK \n");
+    printf("-> BACK \n");
 
 
 printf("\nLevel up cost:%d\n",nRune);
@@ -146,10 +146,21 @@ void processInputs(Player* player, char cInput)
 {
     switch (cInput)
     {
+    case '1':
+    //add fast travel function
+    break;
     case '2':
         processlevelup(player);
         break;
-    
+    case '3':
+        //no inventory yet
+    break;
+    case '4':
+    //no shop yet
+    break;
+    case '5':
+    savePlayerData(player);
+    break;
     default:
         break;
     }
