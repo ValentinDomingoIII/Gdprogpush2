@@ -401,7 +401,7 @@ void areaSelect(char cAreaIndex, char cFastTravelTile, Player* pPlayer)
                floorPass(pPlayer, &sArea, aPlayerLocation);
             }
             else{
-               sArea.aBigArray[27][3] = 11;
+               sArea.aBigArray[24][3] = 11;
                int aPlayerLocation[5] = {0,0,0,0,1};
                floorPass(pPlayer, &sArea, aPlayerLocation);
             }
