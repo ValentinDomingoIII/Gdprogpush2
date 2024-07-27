@@ -243,7 +243,7 @@ void processFastTravel(Player* pPlayer)
                 break;
             
             case '5':
-                if(pPlayer->nShards.nStormveil == 1)
+                if(nTotalShards > 1 && pPlayer->nShards.nLeyndell == 1)
                     printf("[2]: Boss Area\n");
                 else{
                     printf("[LOCKED]: Boss Area\n");

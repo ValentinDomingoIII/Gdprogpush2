@@ -15,6 +15,7 @@
 // BOSS TILE = 4
 // DOOR TILE = 6
 // FAST TRAVEL = 8 Starting Area | 10 Boss Area
+// CREDITS TILE = 12
 
 void runArea(Area* pArea, Array sCoordinate, Player* pPlayer)
 {
@@ -282,6 +283,24 @@ void floorPass(Player* pPlayer, Area* pArea, int* pPlayerLocation)
                          case 7: 
                               runArea(pArea, pArea->a8, pPlayer);
                               break;
+                         case 8: 
+                              runArea(pArea, pArea->a9, pPlayer);
+                              break;
+                         case 9: 
+                              runArea(pArea, pArea->a10, pPlayer);
+                              break;
+                         case 10: 
+                              runArea(pArea, pArea->a11, pPlayer);
+                              break;
+                         case 11: 
+                              runArea(pArea, pArea->a12, pPlayer);
+                              break;
+                         case 12: 
+                              runArea(pArea, pArea->a13, pPlayer);
+                              break;
+                         case 13: 
+                              runArea(pArea, pArea->a14, pPlayer);
+                              break;
 
                     }
                }
@@ -446,6 +465,200 @@ void areaSelect(char cAreaIndex, char cFastTravelTile, Player* pPlayer)
                floorPass(pPlayer, &sArea, aPlayerLocation);
             }
           
+            break;
+          
+        case '4':
+            sArea.nAreaIndex = 4;
+            sArea.nFloorCount = 7;
+
+            int nVFirst[5][5] = VOLCANO_F1;
+            initializeArea(5,5,0,&sArea,(int *)nVFirst);
+            sArea.a1.nRowSize = 5;
+            sArea.a1.nColumnSize = 5;
+            sArea.a1.nRowOffset = 0;
+
+            int nVSecond[7][7] = VOLCANO_F2;
+            initializeArea(7,7,5,&sArea,(int *)nVSecond);
+            sArea.a2.nRowSize = 7;
+            sArea.a2.nColumnSize = 7;
+            sArea.a2.nRowOffset = 5;
+
+            int nVThird[5][5] = VOLCANO_F3;
+            initializeArea(5,5,12,&sArea,(int *)nVThird);
+            sArea.a3.nRowSize = 5;
+            sArea.a3.nColumnSize = 5;
+            sArea.a3.nRowOffset = 12;
+
+            int nVFourth[5][7] = VOLCANO_F4;
+            initializeArea(5,7,17,&sArea,(int *)nVFourth);
+            sArea.a4.nRowSize = 5;
+            sArea.a4.nColumnSize = 7;
+            sArea.a4.nRowOffset = 17;
+
+            int nVFifth[4][3] = VOLCANO_F5;
+            initializeArea(4,3,22,&sArea,(int *)nVFifth);
+            sArea.a5.nRowSize = 4;
+            sArea.a5.nColumnSize = 3;
+            sArea.a5.nRowOffset = 22;
+
+            int nVSixth[8][3] = VOLCANO_F6;
+            initializeArea(8,3,26,&sArea,(int *)nVSixth);
+            sArea.a6.nRowSize = 8;
+            sArea.a6.nColumnSize = 3;
+            sArea.a6.nRowOffset = 26;
+
+            int nVSeventh[7][5] = VOLCANO_F7;
+            initializeArea(7,5,34,&sArea,(int *)nVSeventh);
+            sArea.a7.nRowSize = 7;
+            sArea.a7.nColumnSize = 5;
+            sArea.a7.nRowOffset = 34;
+
+            if(cFastTravelTile == '1'){
+               sArea.aBigArray[4][2] = 9;
+               int aPlayerLocation[7] = {1,0,0,0,0,0,0};
+               floorPass(pPlayer, &sArea, aPlayerLocation);
+            }
+            else{
+               sArea.aBigArray[34][2] = 11;
+               int aPlayerLocation[7] = {0,0,0,0,0,0,1};
+               floorPass(pPlayer, &sArea, aPlayerLocation);
+            }
+
+            break;
+        
+        case '5':
+            sArea.nAreaIndex = 5;
+            sArea.nFloorCount = 14;
+
+            int nLFirst[4][3] = LEYNDELL_F1;
+            initializeArea(4,3,0,&sArea,(int *)nLFirst);
+            sArea.a1.nRowSize = 4;
+            sArea.a1.nColumnSize = 3;
+            sArea.a1.nRowOffset = 0;
+
+            int nLSecond[7][3] = LEYNDELL_F2;
+            initializeArea(7,3,4,&sArea,(int *)nLSecond);
+            sArea.a2.nRowSize = 7;
+            sArea.a2.nColumnSize = 3;
+            sArea.a2.nRowOffset = 4;
+
+            int nLThird[5][5] = LEYNDELL_F3;
+            initializeArea(5,5,11,&sArea,(int *)nLThird);
+            sArea.a3.nRowSize = 5;
+            sArea.a3.nColumnSize = 5;
+            sArea.a3.nRowOffset = 11;
+
+            int nLFourth[3][5] = LEYNDELL_F4;
+            initializeArea(3,5,16,&sArea,(int *)nLFourth);
+            sArea.a4.nRowSize = 3;
+            sArea.a4.nColumnSize = 5;
+            sArea.a4.nRowOffset = 16;
+
+            int nLFifth[3][3] = LEYNDELL_F5;
+            initializeArea(3,3,19,&sArea,(int *)nLFifth);
+            sArea.a5.nRowSize = 3;
+            sArea.a5.nColumnSize = 3;
+            sArea.a5.nRowOffset = 19;
+
+            int nLSixth[4][15] = LEYNDELL_F6;
+            initializeArea(4,15,22,&sArea,(int *)nLSixth);
+            sArea.a6.nRowSize = 4;
+            sArea.a6.nColumnSize = 15;
+            sArea.a6.nRowOffset = 22;
+
+            int nLSeventh[7][3] = LEYNDELL_F7;
+            initializeArea(7,3,26,&sArea,(int *)nLSeventh);
+            sArea.a7.nRowSize = 7;
+            sArea.a7.nColumnSize = 3;
+            sArea.a7.nRowOffset = 26;
+
+            int nLEighth[7][3] = LEYNDELL_F8;
+            initializeArea(7,3,33,&sArea,(int *)nLEighth);
+            sArea.a8.nRowSize = 7;
+            sArea.a8.nColumnSize = 3;
+            sArea.a8.nRowOffset = 33;
+
+            int nLNinth[7][3] = LEYNDELL_F9; //breaks here
+            initializeArea(7,3,40,&sArea,(int *)nLNinth);
+            sArea.a9.nRowSize = 7;
+            sArea.a9.nColumnSize = 3;
+            sArea.a9.nRowOffset = 40;
+
+            int nLTenth[4][15] = LEYNDELL_F10;
+            initializeArea(4,15,47,&sArea,(int *)nLTenth);
+            sArea.a10.nRowSize = 4;
+            sArea.a10.nColumnSize = 15;
+            sArea.a10.nRowOffset = 47;
+
+            int nLEleventh[13][13] = LEYNDELL_F11;
+            initializeArea(13,13,51,&sArea,(int *)nLEleventh);
+            sArea.a11.nRowSize = 13;
+            sArea.a11.nColumnSize = 13;
+            sArea.a11.nRowOffset = 51;
+
+            int nLTwelfth[3][3] = LEYNDELL_F12;
+            initializeArea(3,3,64,&sArea,(int *)nLTwelfth);
+            sArea.a12.nRowSize = 3;
+            sArea.a12.nColumnSize = 3;
+            sArea.a12.nRowOffset = 64;
+
+            int nLThirteenth[3][3] = LEYNDELL_F13;
+            initializeArea(3,3,67,&sArea,(int *)nLThirteenth);
+            sArea.a13.nRowSize = 3;
+            sArea.a13.nColumnSize = 3;
+            sArea.a13.nRowOffset = 67;
+
+            int nLFourteenth[7][5] = LEYNDELL_F14;
+            initializeArea(7,5,70,&sArea,(int *)nLFourteenth);
+            sArea.a14.nRowSize = 7;
+            sArea.a14.nColumnSize = 5;
+            sArea.a14.nRowOffset = 70;
+
+            if(cFastTravelTile == '1'){
+               sArea.aBigArray[3][1] = 9;
+               int aPlayerLocation[14] = {1,0,0,0,0,0,0,0,0,0,0,0,0,0};
+               floorPass(pPlayer, &sArea, aPlayerLocation);
+            }
+            else{
+               sArea.aBigArray[76][2] = 11;
+               int aPlayerLocation[14] = {0,0,0,0,0,0,0,0,0,0,0,0,0,1};
+               floorPass(pPlayer, &sArea, aPlayerLocation);
+            }
+
+            break;
+
+          case '6':
+            sArea.nAreaIndex = 6;
+            sArea.nFloorCount = 3;
+
+            int nEFirst[9][3] = ELDEN_F1;
+            initializeArea(9,3,0,&sArea,(int *)nEFirst);
+            sArea.a1.nRowSize = 9;
+            sArea.a1.nColumnSize = 3;
+            sArea.a1.nRowOffset = 0;
+
+            int nESecond[7][7] = ELDEN_F2;
+            initializeArea(7,7,9,&sArea,(int *)nESecond);
+            sArea.a2.nRowSize = 7;
+            sArea.a2.nColumnSize = 7;
+            sArea.a2.nRowOffset = 9;
+
+            int nEThird[9][3] = ELDEN_F3;
+            initializeArea(9,3,16,&sArea,(int *)nEThird);
+            sArea.a3.nRowSize = 9;
+            sArea.a3.nColumnSize = 3;
+            sArea.a3.nRowOffset = 16;
+
+            if(cFastTravelTile == '1'){
+               sArea.aBigArray[8][1] = 9;
+               int aPlayerLocation[3] = {1,0,0};
+               floorPass(pPlayer, &sArea, aPlayerLocation);
+            }
+          //   else{
+          //      sArea.aBigArray[14][2] = 11;
+          //      int aPlayerLocation[3] = {0,0,1};
+          //      floorPass(pPlayer, &sArea, aPlayerLocation);
+          //   }
             break;
 
     }
