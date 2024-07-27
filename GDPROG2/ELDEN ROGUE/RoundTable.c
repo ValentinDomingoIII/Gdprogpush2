@@ -1,5 +1,8 @@
 #include "character_creation.h"
+#include "RoundTable.h"
 #include "stdio.h"
+#include "area.h"
+#include "structures.h"
 
 void runRoundTable(Player* player)
 {
@@ -11,31 +14,23 @@ void runRoundTable(Player* player)
     scanf(" %c",&cInput);
     processInputs(player,cInput);
   } while (cInput!='6');
-  
-   
      
-
-
-   
-    
-    
 }
 
 void displayRoundTable(Player* player)
 {
-            printf("Name: %s\n", player->name);
-            printf("Job Class: %s\n", player->jobName);
-            printf("Level: %d\n", player->level);
+    printf("Name: %s\n", player->name);
+    printf("Job Class: %s\n", player->jobName);
+    printf("Level: %d\n", player->level);
 
-    printf("Fast travel\n");
-    printf("Level Up\n");
-    printf("Inventory\n");
-    printf("Shop\n");
-    printf("Save\n");
-    printf("Quit Game\n");
+    printf("[1] Fast travel\n");
+    printf("[2] Level Up\n");
+    printf("[3] Inventory\n");
+    printf("[4] Shop\n");
+    printf("[5] Save\n");
+    printf("[0] Quit Game\n");
 
     printf("INPUT:");
-   
 }
 
 
@@ -147,7 +142,8 @@ void processInputs(Player* player, char cInput)
     switch (cInput)
     {
     case '1':
-    //add fast travel function
+        processFastTravel(player);
+        break;
     break;
     case '2':
         processlevelup(player);
@@ -159,9 +155,110 @@ void processInputs(Player* player, char cInput)
     //no shop yet
     break;
     case '5':
-    savePlayerData(player);
-    break;
+        savePlayerData(player);
+        break;
     default:
         break;
     }
+}
+
+void processFastTravel(Player* pPlayer)
+{
+    char cAreaIndex;
+    char cFastTravel;
+    int nTotalShards;
+    int nFlag = 0;
+
+    nTotalShards = pPlayer->nShards.nStormveil + pPlayer->nShards.nRaya + pPlayer->nShards.nVolcano + pPlayer->nShards.nRedmane;
+
+    do {
+
+    printf("SELECT YOUR DESTINATION\n\n");
+    printf("[1]: [STORMVEIL CASTLE]\n");
+    printf("[2]: [RAYA LUCARIA]\n");
+    printf("[3]: [REDMANE CASTLE]\n");
+    printf("[4]: [VOLCANO MANOR]\n");
+
+    if(nTotalShards < 2)
+        printf("[LOCKED]: [LEYNDELL ROYAL CAPITAL]\n");
+    else
+        printf("[5]: [LEYNDELL ROYAL CAPITAL]\n");
+    
+    if(pPlayer->nShards.nLeyndell == 0)
+        printf("[LOCKED]: [ELDEN THRONE]\n");
+    else
+        printf("[6]: [ELDEN THRONE]\n");
+
+    printf("\n[INPUT]: ");
+    scanf(" %c", &cAreaIndex);
+
+    if(cAreaIndex == '5' && nTotalShards < 2)
+            cAreaIndex = '0';
+    
+    if(cAreaIndex == '6' && pPlayer->nShards.nLeyndell == 0)
+        cAreaIndex = '0';
+
+    } while (cAreaIndex != '1' && cAreaIndex != '2' && cAreaIndex != '3' && cAreaIndex != '4' && cAreaIndex != '5' && cAreaIndex != '6');
+
+    do {
+
+        printf("\nSELECT YOUR DESTINATION\n\n");
+        printf("[1]: Starting Area\n");
+
+        switch(cAreaIndex){
+            case '1':
+                if(pPlayer->nShards.nStormveil == 1)
+                    printf("[2]: Boss Area\n");
+                else{
+                    printf("[LOCKED]: Boss Area\n");
+                    nFlag = 1;
+                }
+                break;
+
+            case '2':
+                if(pPlayer->nShards.nRaya == 1)
+                    printf("[2]: Boss Area\n");
+                else{
+                    printf("[LOCKED]: Boss Area\n");
+                    nFlag = 1;
+                }
+                break;
+            
+            case '3':
+                if(pPlayer->nShards.nRedmane == 1)
+                    printf("[2]: Boss Area\n");
+                else{
+                    printf("[LOCKED]: Boss Area\n");
+                    nFlag = 1;
+                }
+                break;
+            
+            case '4':
+                if(pPlayer->nShards.nVolcano == 1)
+                    printf("[2]: Boss Area\n");
+                else{
+                    printf("[LOCKED]: Boss Area\n");
+                    nFlag = 1;
+                }
+                break;
+            
+            case '5':
+                if(pPlayer->nShards.nStormveil == 1)
+                    printf("[2]: Boss Area\n");
+                else{
+                    printf("[LOCKED]: Boss Area\n");
+                    nFlag = 1;
+                }
+                break;
+        }
+
+        printf("[INPUT]: ");
+        scanf(" %c", &cFastTravel);
+
+        if(nFlag == 1 && cFastTravel == '2')
+            cFastTravel = '0';
+
+    } while(cFastTravel != '1' && cFastTravel != '2');
+
+    areaSelect(cAreaIndex, cFastTravel, pPlayer);
 }

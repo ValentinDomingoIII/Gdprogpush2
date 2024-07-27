@@ -1,4 +1,10 @@
 #include "area.h"
+#include "combat.h"
+#include "RoundTable.h"
+#include "character_creation.h"
+#include "color.h"
+#include "string.h"
+
 #include "structures.h"
 #include "definitions.h"
 
@@ -8,160 +14,165 @@
 // SPAWN TILE = 2
 // BOSS TILE = 4
 // DOOR TILE = 6
-// FAST TRAVEL = 8
+// FAST TRAVEL = 8 Starting Area | 10 Boss Area
 
-void runStormveil(int* pFloor, int* pFlag, Stormveil* sArea, int nRow, int nColumn)
+void runArea(Area* pArea, Array sCoordinate, Player* pPlayer)
 {
-     // Stormveil sFloor; 
-     char cInput;
-     int nFloorCount = STORMVEIL_FLOOR_COUNT;
-     int nRunes; // this might be in a struct in the main file
+     char cInput; // this might be in a struct in the main file //it is
 
      do{
-
-     printFloor((int *)pFloor, nRow, nColumn);
-     printf("\n[RUNES]: %d\t[INPUT]: ", nRunes);
+     
+     // areaScreen(sArea->strAreaName);
+     printFloor(pArea, sCoordinate);
+     printf("\n[RUNES]: %d\t[INPUT]: ", pPlayer->runes);
      scanf(" %c", &cInput);
      printf("\n");
-     processInput(cInput, (int *)pFloor, nRow, nColumn, nFloorCount, sArea->aPlayerLocation, &nRunes); // could put FloorCount in the stormveil struct to save space
-
-
-     // printf("[RUNES]: %d\n", nRunes);
-     // for(int i = 0; i < nRow; i++){
-     //      printf("\n");
-     //      for(int j = 0; j < nColumn; j++){
-     //           printf("%d ", *((pFloor + i * nColumn) + j));
-     //      }
-     // }
-     // printf("\n");
+     processInput(cInput, pArea, sCoordinate, pPlayer); 
 
      } while(cInput != '0');
 
 }
 
-// void initializeFloor(int* pTemp, int nSize, Stormveil* sFloor, int nRow, int nColumn) 
-// {
+void areaScreen(char* strAreaName)
+{
+     printf("╔═");
+     for(int i = 0; i < strlen(strAreaName); i++)
+          printf("═");
+     printf("═╗");
+     printf("\n");
+     printf("║ ");
+     printf("%s", strAreaName);
+     printf(" ║");
+     printf("\n");
+     printf("╚═");
+     for(int i = 0; i < strlen(strAreaName); i++)
+          printf("═");
+     printf("═╝");
+     printf("\n");
+}
 
-//      int k = 0;
-//      // sFloor->aSpawnFloor[0][1] = 4;
-//      // printf("Inside the function: %d", sFloor->aSpawnFloor[0][1]);
-
-//      for (int i = 0; i < nRow; i++) {
-//           for (int j = 0; j < nColumn; j++, k++) {
-//                sFloor->aSpawnFloor[i][j] = pTemp[k];
-//           }
-//      }
-     
-// }
-
-void printFloor(int* pFloor, int nRow, int nColumn) // can be used for all
+void printFloor(Area* pArea, Array sCoordinate) // can be used for all
 {
 
-     for (int i = 0; i < nRow; i++){
-          for (int j = 0; j < nColumn; j++){
+     for (int i = sCoordinate.nRowOffset; i < sCoordinate.nRowSize + sCoordinate.nRowOffset; i++){
+          // tabRepeat(50);
+          
+          for (int j = 0; j < sCoordinate.nColumnSize; j++){
                
-               if(*((pFloor + i * nColumn) + j) == 0){
-                    printf("\x1b[38;5;8m");
+               if(pArea->aBigArray[i][j] == 0){
+                    grayText();
                     printf("┌───┐");
-                    printf("\x1b[0m");
+                    resetText();
                }
-               else if(*((pFloor + i * nColumn) + j) % 2 == 1){
-                    printf("\x1b[38;5;13m");
+               else if(pArea->aBigArray[i][j] % 2 == 1){
+                    pinkText();
                     printf("╔═══╗");
-                    printf("\x1b[0m");
+                    resetText();
                }
-                    else if(*((pFloor + i * nColumn) + j) == 2){
-                         printf("\x1b[38;5;33m");
+                    else if(pArea->aBigArray[i][j] == 2){
+                         blueText();
                          printf("┌───┐");
-                         printf("\x1b[0m");
+                         resetText();
                     }
-                         else if(*((pFloor + i * nColumn) + j) == 4){
-                              printf("\x1b[38;5;9m");
+                         else if(pArea->aBigArray[i][j] == 4){
+                              redText();
                               printf("┌───┐");
-                              printf("\x1b[0m");
+                              resetText();
                          }
-                              else if(*((pFloor + i * nColumn) + j) == 6){
-                                   printf("\x1b[38;5;220m");
+                              else if(pArea->aBigArray[i][j] == 6){
+                                   yellowText();
                                    printf("┌───┐");
-                                   printf("\x1b[0m");
+                                   resetText();
                               }
-                                   else if(*((pFloor + i * nColumn) + j) == 8){
-                                        printf("\x1b[38;5;34m");
+                                   else if(pArea->aBigArray[i][j] == 8 || pArea->aBigArray[i][j] == 10){
+                                        greenText();
                                         printf("┌───┐");
-                                        printf("\x1b[0m");
+                                        resetText();
                                    }
+                                        else if(pArea->aBigArray[i][j] == -1){
+                                             printf("     ");
+                                        }
+
           }
 
           printf("\n");
+          // tabRepeat(50);
 
-          for (int j = 0; j < nColumn; j++){
+          for (int j = 0; j < sCoordinate.nColumnSize; j++){
                
-               if(*((pFloor + i * nColumn) + j) == 0){
-                    printf("\x1b[38;5;8m");
+               if(pArea->aBigArray[i][j] == 0){
+                    grayText();
                     printf("│   │");
-                    printf("\x1b[0m");
+                    resetText();
                }
-               else if(*((pFloor + i * nColumn) + j) % 2 == 1){
-                    printf("\x1b[38;5;13m");
+               else if(pArea->aBigArray[i][j] % 2 == 1){
+                    pinkText();
                     printf("║   ║");
-                    printf("\x1b[0m");
+                    resetText();
                }
-                    else if(*((pFloor + i * nColumn) + j) == 2){
-                         printf("\x1b[38;5;33m");
+                    else if(pArea->aBigArray[i][j] == 2){
+                         blueText();
                          printf("│   │");
-                         printf("\x1b[0m");
+                         resetText();
                     }
-                         else if(*((pFloor + i * nColumn) + j) == 4){
-                                   printf("\x1b[38;5;9m");
+                         else if(pArea->aBigArray[i][j] == 4){
+                                   redText();
                                    printf("│   │");
-                                   printf("\x1b[0m");
+                                   resetText();
                          }
-                              else if(*((pFloor + i * nColumn) + j) == 6){
-                                   printf("\x1b[38;5;220m");
+                              else if(pArea->aBigArray[i][j] == 6){
+                                   yellowText();
                                    printf("│   │");
-                                   printf("\x1b[0m");
+                                   resetText();
                               }
-                                   else if(*((pFloor + i * nColumn) + j) == 8){
-                                        printf("\x1b[38;5;34m");
+                                   else if(pArea->aBigArray[i][j] == 8 || pArea->aBigArray[i][j] == 10){
+                                        greenText();
                                         printf("│   │");
-                                        printf("\x1b[0m");
+                                        resetText();
                                    }
+                                        else if(pArea->aBigArray[i][j] == -1){
+                                             printf("     ");
+                                        }
           }
 
           printf("\n");
+          // tabRepeat(50);
 
-          for (int j = 0; j < nColumn; j++){
+          for (int j = 0; j < sCoordinate.nColumnSize; j++){
                
-               if(*((pFloor + i * nColumn) + j) == 0){
-                    printf("\x1b[38;5;8m");
+               if(pArea->aBigArray[i][j] == 0){
+                    grayText();
                     printf("└───┘");
-                    printf("\x1b[0m");
+                    resetText();
                }
-               else if(*((pFloor + i * nColumn) + j) % 2 == 1){
-                    printf("\x1b[38;5;13m");
+               else if(pArea->aBigArray[i][j] % 2 == 1){
+                    pinkText();
                     printf("╚═══╝");
-                    printf("\x1b[0m");
+                    resetText();
                }
-                    else if(*((pFloor + i * nColumn) + j) == 2){
-                         printf("\x1b[38;5;33m");
+                    else if(pArea->aBigArray[i][j] == 2){
+                         blueText();
                          printf("└───┘");
-                         printf("\x1b[0m");
+                         resetText();
                     }
-                         else if(*((pFloor + i * nColumn) + j) == 4){
-                                   printf("\x1b[38;5;9m");
+                         else if(pArea->aBigArray[i][j] == 4){
+                                   redText();
                                    printf("└───┘");
-                                   printf("\x1b[0m");
+                                   resetText();
                          }
-                              else if(*((pFloor + i * nColumn) + j) == 6){
-                                   printf("\x1b[38;5;220m");
+                              else if(pArea->aBigArray[i][j] == 6){
+                                   yellowText();
                                    printf("└───┘");
-                                   printf("\x1b[0m");
+                                   resetText();
                               }
-                                   else if(*((pFloor + i * nColumn) + j) == 8){
-                                        printf("\x1b[38;5;34m");
+                                   else if(pArea->aBigArray[i][j] == 8 || pArea->aBigArray[i][j] == 10){
+                                        greenText();
                                         printf("└───┘");
-                                        printf("\x1b[0m");
+                                        resetText();
                                    }
+                                        else if(pArea->aBigArray[i][j] == -1){
+                                             printf("     ");
+                                        }
           }
 
           printf("\n");
@@ -170,64 +181,65 @@ void printFloor(int* pFloor, int nRow, int nColumn) // can be used for all
 
 }
 
-void processInput(char cInput, int* pFloor, int nRow, int nColumn, int nFloorCount, int* pPlayerLocation, int* pRunes) // can be used for all
+void processInput(char cInput, Area* pArea, Array sCoordinate, Player* pPlayer) // can be used for all
 {
      int nRandom;
-     // srand(time(NULL));
+     srand(time(NULL));
 
-     for(int i = 0; i < nRow; i++){
-          for(int j = 0; j < nColumn; j++){
-               if(*((pFloor + i * nColumn) + j) % 2 == 1){
+     for(int i = sCoordinate.nRowOffset; i < sCoordinate.nRowSize + sCoordinate.nRowOffset; i++){
+          for(int j = 0; j < sCoordinate.nColumnSize; j++){
+               if(pArea->aBigArray[i][j] % 2 == 1){
                     switch(cInput){
                          case 'W':
                          case 'w': 
                               if(i == 0)
                                    break;
-                              *((pFloor + i * nColumn) + j) -= 1;
+                              pArea->aBigArray[i][j]--;
                               i--;
-                              *((pFloor + i * nColumn) + j) += 1;
+                              pArea->aBigArray[i][j]++;
                               break;
 
                          case 'D':
                          case 'd':
-                              if(j == nColumn-1)
+                              if(j == sCoordinate.nColumnSize-1)
                                    break;
-                              *((pFloor + i * nColumn) + j) -= 1;
+                              pArea->aBigArray[i][j] -= 1;
                               j++;
-                              *((pFloor + i * nColumn) + j) += 1;
+                              pArea->aBigArray[i][j] += 1;
                               break;
                          case 'A':
                          case 'a':
                               if(j == 0)
                                    break;
-                              *((pFloor + i * nColumn) + j) -= 1;
+                              pArea->aBigArray[i][j] -= 1;
                               j--;
-                              *((pFloor + i * nColumn) + j) += 1;
+                              pArea->aBigArray[i][j] += 1;
                               break;
                          case 'S':
                          case 's':
-                              if(i == nRow-1)
+                              if(i == sCoordinate.nRowSize-1)
                                    break;
-                              *((pFloor + i * nColumn) + j) -= 1;
+                              pArea->aBigArray[i][j] -= 1;
                               i++;
-                              *((pFloor + i * nColumn) + j) += 1;
+                              pArea->aBigArray[i][j] += 1;
                               break;
                          case 'E': // make the door function // has to be linked lists 
                          case 'e':
-                              if(*((pFloor + i * nColumn) + j) == 1)
+                              if(pArea->aBigArray[i][j] == 1) // normal tile
                                    break;
-                              else if(*((pFloor + i * nColumn) + j) == 3){
+                              else if(pArea->aBigArray[i][j] == 3){ //spawn tile
                                    nRandom = (rand() % 4) + 1;
                                    printf("[nRandom]: %d\n", nRandom);
                                    if(nRandom == 1){
                                         nRandom = rand() % (150 - 50) + 50;
-                                        *pRunes = *pRunes + nRandom;
+                                        nRandom *= pArea->nAreaIndex;
+                                        pPlayer->runes = pPlayer->runes + nRandom;
                                         printf("You obtained [%d] Runes!\n", nRandom);
                                    } 
                                    else
-                                        printf("Enemy!\n");
+                                        runCombat(pPlayer);
 
-                                   *((pFloor + i * nColumn) + j) = 1;
+                                   pArea->aBigArray[i][j] = 1;
                               }
                               
 
@@ -238,30 +250,143 @@ void processInput(char cInput, int* pFloor, int nRow, int nColumn, int nFloorCou
 
 }
 
-void initializeStormveil()
+void floorPass(Player* pPlayer, Area* pArea, int* pPlayerLocation)
 {
-     Stormveil sArea = STORMVEIL_INITIALIZER;
-     int nFlag = 0;
      
      do{
 
-          for (int i = 0; i < STORMVEIL_FLOOR_COUNT; i++){
-               if(sArea.aPlayerLocation[i] == 1){
-                    if(i == 0){
-                         runStormveil((int *)sArea.aSpawnFloor, &nFlag, &sArea, 7, 3);
-                         break;
-                    }
-                    else if(i == 1){
-                         runStormveil((int *)sArea.aSecondFloor, &nFlag, &sArea, 7, 7);
-                         break;
-                    }
-                         else if(i == 2){
-                              runStormveil((int *)sArea.aBossFloor, &nFlag, &sArea, 7, 5);
+          for (int i = 0; i < pArea->nFloorCount; i++){
+               if(pPlayerLocation[i] == 1){
+                    switch(i){
+                         case 0:
+                              runArea(pArea, pArea->a1, pPlayer);
                               break;
-                         }
+                         case 1:
+                              runArea(pArea, pArea->a2, pPlayer);
+                              break;
+                         case 2:
+                              runArea(pArea, pArea->a3, pPlayer);
+                              break;
+                         case 3: 
+                              runArea(pArea, pArea->a4, pPlayer);
+                              break;
+                         case 4:
+                              runArea(pArea, pArea->a5, pPlayer);
+                              break;
+                         case 5: 
+                              runArea(pArea, pArea->a6, pPlayer);
+                              break;
+
+                    }
                }
           }
 
-     } while(nFlag != 1);
+     } while(pArea->nFlag != 1);
+}
+
+void initializeArea(int nRow, int nColumn, int nRowOffset, Area* pArea, int* pTemp)
+{
+    int k = 0;
+
+    for(int i = nRowOffset; i < nRow + nRowOffset; i++, k++){
+        for(int j = 0; j < nColumn; j++){
+            pArea->aBigArray[i][j] = *((pTemp + k * nColumn) + j);
+        }
+    }
+
+}
+
+void areaSelect(char cAreaIndex, char cFastTravelTile, Player* pPlayer)
+{
+     Area sArea;
+
+     switch(cAreaIndex){
+        case '1':
+            sArea.nAreaIndex = 1;
+            sArea.nFloorCount = 3;
+
+            int nSFirst[7][3] = STORMVEIL_F1;
+            initializeArea(7,3,0,&sArea,(int *)nSFirst);
+            sArea.a1.nRowSize = 7;
+            sArea.a1.nColumnSize = 3;
+            sArea.a1.nRowOffset = 0;
+
+            int nSSecond[7][7] = STORMVEIL_F2;
+            initializeArea(7,7,7,&sArea,(int *)nSSecond);
+            sArea.a2.nRowSize = 7;
+            sArea.a2.nColumnSize = 7;
+            sArea.a2.nRowOffset = 7;
+
+            int nSThird[7][5] = STORMVEIL_F3;
+            initializeArea(7,5,14,&sArea,(int *)nSThird);
+            sArea.a3.nRowSize = 7;
+            sArea.a3.nColumnSize = 5;
+            sArea.a3.nRowOffset = 14;
+
+            if(cFastTravelTile == '1'){
+               sArea.aBigArray[6][1] = 9;
+               int aPlayerLocation[3] = {1,0,0};
+               floorPass(pPlayer, &sArea, aPlayerLocation);
+            }
+            else{
+               sArea.aBigArray[14][2] = 11;
+               int aPlayerLocation[3] = {0,0,1};
+               floorPass(pPlayer, &sArea, aPlayerLocation);
+            }
+
+            break;
+
+        case '2':
+            sArea.nAreaIndex = 2;
+            sArea.nFloorCount = 5;
+
+            int nRFirst[5][5] = RAYA_LUCARIA_F1;
+            initializeArea(5,5,0,&sArea,(int *)nRFirst);
+            sArea.a1.nRowSize = 5;
+            sArea.a1.nColumnSize = 5;
+            sArea.a1.nRowOffset = 0;
+
+            int nRSecond[7][3] = RAYA_LUCARIA_F2;
+            initializeArea(7,3,5,&sArea,(int *)nRSecond);
+            sArea.a2.nRowSize = 7;
+            sArea.a2.nColumnSize = 3;
+            sArea.a2.nRowOffset = 5;
+
+            int nRThird[7][5] = RAYA_LUCARIA_F3;
+            initializeArea(7,5,12,&sArea,(int *)nRThird);
+            sArea.a3.nRowSize = 7;
+            sArea.a3.nColumnSize = 5;
+            sArea.a3.nRowOffset = 12;
+
+            int nRFourth[5][6] = RAYA_LUCARIA_F4;
+            initializeArea(5,6,19,&sArea,(int *)nRFourth);
+            sArea.a4.nRowSize = 5;
+            sArea.a4.nColumnSize = 6;
+            sArea.a4.nRowOffset = 19;
+
+            int nRFifth[8][7] = RAYA_LUCARIA_F5;
+            initializeArea(8,7,27,&sArea,(int *)nRFifth);
+            sArea.a5.nRowSize = 8;
+            sArea.a5.nColumnSize = 7;
+            sArea.a5.nRowOffset = 27;
+
+            if(cFastTravelTile == '1'){
+               sArea.aBigArray[4][2] = 9;
+               int aPlayerLocation[5] = {1,0,0,0,0};
+               floorPass(pPlayer, &sArea, aPlayerLocation);
+            }
+            else{
+               sArea.aBigArray[27][3] = 11;
+               int aPlayerLocation[5] = {0,0,0,0,1};
+               floorPass(pPlayer, &sArea, aPlayerLocation);
+            }
+
+            break;
+          
+        case '3':
+
+          break;
+
+    }
 
 }

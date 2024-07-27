@@ -1,9 +1,13 @@
 #pragma once
 
 #include "structures.h"
+#include "character_creation.h"
+#include "title.h"
 
-void runStormveil(int* pFloor, int* pFlag, Stormveil* sArea, int nRow, int nColumn);
-// void initializeFloor(int* pTemp, int nSize, Stormveil* sFloor, int nRow, int nColumn);
-void printFloor(int* pFloor, int nRow, int nColumn);
-void processInput(char cInput, int* pFloor, int nRow, int nColumn, int nFloorCount, int* pPlayerLocation, int* pRunes);
-void initializeStormveil();
+void runArea(Area* pArea, Array sCoordinate, Player* pPlayer);
+void areaScreen(char* strAreaName);
+void printFloor(Area* pArea, Array sCoordinate);
+void processInput(char cInput, Area* pArea, Array sCoordinate, Player* pPlayer);
+void floorPass(Player* pPlayer, Area* pArea, int* pPlayerLocation);
+void initializeArea(int nRow, int nColumn, int nRowOffset, Area* pArea, int* pTemp);
+void areaSelect(char cAreaIndex, char cFastTravelTile, Player* pPlayer);

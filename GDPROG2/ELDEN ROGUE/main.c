@@ -8,6 +8,8 @@
 #include "area.c"
 #include "continue.c"
 #include "RoundTable.c"
+#include "combat.c"
+#include "color.c"
 
 //commenty
 int main() {
@@ -25,8 +27,15 @@ int main() {
             player.stats.faith = 0;
             //test runes
             player.runes=420;
+            player.nShards.nStormveil = 0;
+            player.nShards.nRaya = 0;
+            player.nShards.nRedmane = 0;
+            player.nShards.nVolcano = 0;
+            player.nShards.nLeyndell = 0;
+            player.nShards.nElden = 0;
+            
     runTitle(&player);
-    // initializeStormveil();
+    
     
     return 0;
 }
