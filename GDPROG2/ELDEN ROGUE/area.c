@@ -18,7 +18,7 @@
 
 void runArea(Area* pArea, Array sCoordinate, Player* pPlayer)
 {
-     char cInput; // this might be in a struct in the main file //it is
+     char cInput; 
 
      do{
      
@@ -276,6 +276,12 @@ void floorPass(Player* pPlayer, Area* pArea, int* pPlayerLocation)
                          case 5: 
                               runArea(pArea, pArea->a6, pPlayer);
                               break;
+                         case 6: 
+                              runArea(pArea, pArea->a7, pPlayer);
+                              break;
+                         case 7: 
+                              runArea(pArea, pArea->a8, pPlayer);
+                              break;
 
                     }
                }
@@ -365,10 +371,10 @@ void areaSelect(char cAreaIndex, char cFastTravelTile, Player* pPlayer)
             sArea.a4.nRowOffset = 19;
 
             int nRFifth[8][7] = RAYA_LUCARIA_F5;
-            initializeArea(8,7,27,&sArea,(int *)nRFifth);
+            initializeArea(8,7,24,&sArea,(int *)nRFifth);
             sArea.a5.nRowSize = 8;
             sArea.a5.nColumnSize = 7;
-            sArea.a5.nRowOffset = 27;
+            sArea.a5.nRowOffset = 24;
 
             if(cFastTravelTile == '1'){
                sArea.aBigArray[4][2] = 9;
@@ -384,8 +390,63 @@ void areaSelect(char cAreaIndex, char cFastTravelTile, Player* pPlayer)
             break;
           
         case '3':
+            sArea.nAreaIndex = 3;
+            sArea.nFloorCount = 7;
 
-          break;
+            int nRMFirst[3][5] = REDMANE_F1;
+            initializeArea(3,5,0,&sArea,(int *)nRMFirst);
+            sArea.a1.nRowSize = 3;
+            sArea.a1.nColumnSize = 5;
+            sArea.a1.nRowOffset = 0;
+
+            int nRMSecond[3][7] = REDMANE_F2;
+            initializeArea(3,7,3,&sArea,(int *)nRMSecond);
+            sArea.a2.nRowSize = 3;
+            sArea.a2.nColumnSize = 7;
+            sArea.a2.nRowOffset = 3;
+
+            int nRMThird[5][5] = REDMANE_F3;
+            initializeArea(5,5,6,&sArea,(int *)nRMThird);
+            sArea.a3.nRowSize = 5;
+            sArea.a3.nColumnSize = 5;
+            sArea.a3.nRowOffset = 6;
+
+            int nRMFourth[5][7] = REDMANE_F4;
+            initializeArea(5,7,11,&sArea,(int *)nRMFourth);
+            sArea.a4.nRowSize = 5;
+            sArea.a4.nColumnSize = 7;
+            sArea.a4.nRowOffset = 11;
+
+            int nRMFifth[3][5] = REDMANE_F5;
+            initializeArea(3,5,16,&sArea,(int *)nRMFifth);
+            sArea.a5.nRowSize = 3;
+            sArea.a5.nColumnSize = 5;
+            sArea.a5.nRowOffset = 16;
+
+            int nRMSixth[9][4] = REDMANE_F6;
+            initializeArea(9,4,19,&sArea,(int *)nRMSixth);
+            sArea.a6.nRowSize = 9;
+            sArea.a6.nColumnSize = 4;
+            sArea.a6.nRowOffset = 19;
+
+            int nRMSeventh[5][7] = REDMANE_F7;
+            initializeArea(5,7,28,&sArea,(int *)nRMSeventh);
+            sArea.a7.nRowSize = 5;
+            sArea.a7.nColumnSize = 7;
+            sArea.a7.nRowOffset = 28;
+
+            if(cFastTravelTile == '1'){
+               sArea.aBigArray[1][0] = 9;
+               int aPlayerLocation[7] = {1,0,0,0,0,0,0};
+               floorPass(pPlayer, &sArea, aPlayerLocation);
+            }
+            else{
+               sArea.aBigArray[30][6] = 11;
+               int aPlayerLocation[7] = {0,0,0,0,0,0,1};
+               floorPass(pPlayer, &sArea, aPlayerLocation);
+            }
+          
+            break;
 
     }
 
