@@ -1,10 +1,10 @@
-Name: dims
-Job Class: Hero
-Level: 4
-Health: 14
-Endurance: 12
-Dexterity: 9
-Strength: 16
-Intelligence: 7
-Faith: 8
-Runes: 120
+Name: Tester
+Job Class: Vagabond
+Level: 1
+Health: 15
+Endurance: 11
+Dexterity: 13
+Strength: 14
+Intelligence: 9
+Faith: 9
+Runes: 420

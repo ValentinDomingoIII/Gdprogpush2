@@ -116,7 +116,10 @@ void processOption(char cInput, int* pPlayerOptions, int nSize, int* nTurn)
                     break;
                 case 'e':
                 case 'E':
+                printf("nothing");
 
+                default:
+                break;
 
             }
         }
