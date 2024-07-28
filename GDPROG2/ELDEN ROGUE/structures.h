@@ -47,7 +47,14 @@ typedef struct shards Shards;
 
 typedef struct {
     char weapon[MAX_NAME];
-} Inv;
+    int nHp;
+    int nDex;
+    int nInt;
+    int nEnd;
+    int nStr;
+    int nFth;
+
+} weapon;
 
 typedef struct {
     int health;
@@ -58,6 +65,10 @@ typedef struct {
     int faith;
 } Stats;
 
+typedef struct{
+   // weapon weapon[];
+    char cPotion;
+}Inv;
 typedef struct {
     char name[MAX_NAME];
     char jobName[MAX_NAME];
@@ -65,7 +76,7 @@ typedef struct {
     int runes;
     Shards nShards;
     Stats stats;
-    Inv weapon;
+    Inv items;
 } Player;
 
 

@@ -81,6 +81,7 @@ printf("\nINPUT:");
     {
     case '1':
         printf("\nLevel up Dexerity?");
+        printf("[1]Yes [2]No:");
         scanf(" %c",&cChoice2);
         if (cChoice2=='1')
         {
@@ -97,6 +98,7 @@ printf("\nINPUT:");
 
     case '2':
         printf("\nLevel up Strength?");
+        printf("[1]Yes [2]No:");
         scanf(" %c",&cChoice2);
          if (cChoice2=='1'){
         runemath(player);
@@ -108,6 +110,7 @@ printf("\nINPUT:");
     
     case '3':
         printf("\nLevel up Intelligence?");
+        printf("[1]Yes [2]No:");
         scanf(" %c",&cChoice2);
          if (cChoice2=='1')
          {
@@ -120,6 +123,7 @@ printf("\nINPUT:");
 
     case '4':
         printf("\nLevel up Faith?");
+        printf("[1]Yes [2]No:");
         scanf(" %c",&cChoice2);
          if (cChoice2=='1'){
         runemath(player);
