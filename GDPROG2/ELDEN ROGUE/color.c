@@ -34,10 +34,3 @@ void grayText()
 {
     printf("\x1b[38;5;8m");
 }
-
-void tabRepeat(int nX)
-{
-    for(int i = 0; i < nX; i++){
-        printf(" ");
-    }
-}

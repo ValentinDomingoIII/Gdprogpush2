@@ -30,7 +30,7 @@ void runArea(Area* pArea, Array sCoordinate, Player* pPlayer)
      printf("\n");
      processInput(cInput, pArea, sCoordinate, pPlayer); 
 
-     } while(cInput != '0');
+     } while(pArea->nFlag != 1);
 
 }
 
@@ -52,7 +52,7 @@ void areaScreen(char* strAreaName)
      printf("\n");
 }
 
-void printFloor(Area* pArea, Array sCoordinate) // can be used for all
+void printFloor(Area* pArea, Array sCoordinate) 
 {
 
      for (int i = sCoordinate.nRowOffset; i < sCoordinate.nRowSize + sCoordinate.nRowOffset; i++){
@@ -182,9 +182,10 @@ void printFloor(Area* pArea, Array sCoordinate) // can be used for all
 
 }
 
-void processInput(char cInput, Area* pArea, Array sCoordinate, Player* pPlayer) // can be used for all
+void processInput(char cInput, Area* pArea, Array sCoordinate, Player* pPlayer) 
 {
      int nRandom;
+     char cDoorInput;
      srand(time(NULL));
 
      for(int i = sCoordinate.nRowOffset; i < sCoordinate.nRowSize + sCoordinate.nRowOffset; i++){
@@ -224,24 +225,36 @@ void processInput(char cInput, Area* pArea, Array sCoordinate, Player* pPlayer) 
                               i++;
                               pArea->aBigArray[i][j] += 1;
                               break;
-                         case 'E': // make the door function // has to be linked lists 
+                         case 'E': 
                          case 'e':
                               if(pArea->aBigArray[i][j] == 1) // normal tile
                                    break;
                               else if(pArea->aBigArray[i][j] == 3){ //spawn tile
                                    nRandom = (rand() % 4) + 1;
                                    printf("[nRandom]: %d\n", nRandom);
-                                   if(nRandom == 1){
-                                        nRandom = rand() % (150 - 50) + 50;
-                                        nRandom *= pArea->nAreaIndex;
-                                        pPlayer->runes = pPlayer->runes + nRandom;
-                                        printf("You obtained [%d] Runes!\n", nRandom);
-                                   } 
-                                   else
-                                        runCombat(pPlayer);
-
+                                        if(nRandom == 1){
+                                             nRandom = rand() % (150 - 50) + 50;
+                                             nRandom *= pArea->nAreaIndex;
+                                             pPlayer->runes = pPlayer->runes + nRandom;
+                                             printf("You obtained [%d] Runes!\n", nRandom);
+                                        } 
+                                        else
+                                             // runCombat(pPlayer);
+                                             printf("Enemy!\n");
                                    pArea->aBigArray[i][j] = 1;
                               }
+                                   else if(pArea->aBigArray[i][j] == 9 || pArea->aBigArray[i][j] == 11){ // Door Tile
+                                        do {
+                                        printf("Return to Roundtable Hold?\n\n");
+                                        printf("[1] YES\n");
+                                        printf("[2] NO\n\n");
+                                        printf("[INPUT]: ");
+                                        scanf(" %c", &cDoorInput);
+                                        } while (cDoorInput != '1' && cDoorInput != '2');
+                                        if(cDoorInput == '1')
+                                             pArea->nFlag = 1;
+                                   }
+                                        
                               
 
                     }
@@ -396,7 +409,7 @@ void areaSelect(char cAreaIndex, char cFastTravelTile, Player* pPlayer)
             sArea.a5.nRowOffset = 24;
 
             if(cFastTravelTile == '1'){
-               sArea.aBigArray[4][2] = 9;
+               sArea.aBigArray[0][2] = 9;
                int aPlayerLocation[5] = {1,0,0,0,0};
                floorPass(pPlayer, &sArea, aPlayerLocation);
             }
