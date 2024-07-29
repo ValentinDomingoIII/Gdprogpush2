@@ -1,127 +1,105 @@
+#include "stddef.h"
+
 #include "combat.h"
 #include "color.h"
 
 #include "structures.h"
 #include "definitions.h"
 
-void runCombat(Player* pPlayer)
+void runCombat(Player* pPlayer, Area* pArea, int* pMaxHealth)
 {
-    int aPlayerOptions[3] = {1,0,0};
-    int nTurn = 0;
-    char cInput;
+    int nFlag = 0;
+    int nRandom;
+    Enemy sEnemy;
 
-    for(int nFlag = 0; nFlag != 1; nTurn++){
-        if(nTurn % 2 == 0){
-            printf("\nPlayer Turn\n");
-        }
+    srand(time(NULL));
+    nRandom = (rand() % 3) + 1;
+    initializeEnemy(&sEnemy, pArea, nRandom);
+
+    printf("[HEALTH]: %d", *pMaxHealth);
+    printf("\n\n");
+
+    printf("You have encountered [ENEMY TYPE %d]\n", nRandom);
+    printf("\n[ENEMY HEALTH]: %d", sEnemy.nHealth);
+    printf("\n[PHYS RES]: %.2f\n[SORC DEF]: %.2f\n[INCANT DEF]: %.2f",sEnemy.fPhysDef, sEnemy.fSorcDef, sEnemy.fIncantDef);
+    printf("\n");
+
+    for(int nTurn = 0; nFlag != 1; nTurn++){
+        if(nTurn % 2 == 0)
+            playerTurn(&nFlag, &sEnemy, pArea); 
         else 
             printf("\nEnemy Turn\n");
-
-        printOption(aPlayerOptions); // printCombatScreen(); 
-        scanf(" %c", &cInput);
-        processOption(cInput, aPlayerOptions, 3, &nTurn);
-
-        for(int i = 0; i < 3; i++){
-            printf("%d ", aPlayerOptions[i]);
-        }
-        if(cInput == '0')
-            nFlag = 1;
     }
 }
 
-void printCombatScreen(Player* pPlayer)
+void playerTurn(int* nFlag, Enemy* pEnemy, Area* pArea)
 {
+    char cInput;
+    int nDamage;
+    srand(time(NULL));
 
+    nDamage = (rand() % (pEnemy->nAttackUpper - pEnemy->nAttackLower) + pEnemy->nAttackLower) * pArea->nAreaIndex;
+    printf("\nPlayer Turn\n");
+    printf("\n[INCOMING ENEMY DAMAGE]: %d", nDamage);
+
+    do {
+        do {
+
+            printf("\n[1]: ATTACK\n");
+            printf("[2]: DODGE\n");
+            printf("[3]: POTION\n");
+            printf("\n[INPUT]: ");
+
+            scanf(" %c", &cInput);
+
+        } while(cInput != '1' && cInput != '2' && cInput != '3');
+
+        if(cInput == '1'){
+            do {
+                printf("\n[1]: PHYSICAL\n");
+                printf("[2]: SORCERY\n");
+                printf("[3]: INCANTATION\n");
+                printf("[0]: BACK\n");
+                printf("\n[INPUT]: ");
+
+                scanf(" %c", &cInput);
+            } while(cInput != '0' && cInput != '1' && cInput != '2' && cInput != '3');
+        }
+
+    } while(cInput == '0' || cInput == '3');
 }
 
-void printOption(int* pPlayerOptions)
+void initializeEnemy(Enemy* pEnemy, Area* pArea, int nRandom)
 {
+    // int nStat;
+    srand(time(NULL));
 
-    for(int i = 0; i < 3; i++){
-        if(pPlayerOptions[i] == 1){
-            printf("\x1b[38;5;34m");
-            printf("╔══════════════╗");
-            printf("\x1b[0m");
-        }
-        else if(pPlayerOptions[i] == 0)
-            printf("┌──────────────┐");
-    }
-
-    printf("\n");
-
-    for(int i = 0; i < 3; i++){
-        if(pPlayerOptions[i] == 1){
-            greenText();
-            printf("║");
-            assessOption(i);
-            printf("║");
-            resetText();
-        }
-        else if(pPlayerOptions[i] == 0){
-            printf("│");
-            assessOption(i);
-            printf("│");
-        }
-    }
-
-    printf("\n");
-
-    for(int i = 0; i < 3; i++){
-        if(pPlayerOptions[i] == 1){
-            printf("\x1b[38;5;34m");
-            printf("╚══════════════╝");
-            printf("\x1b[0m");
-        }
-        else if(pPlayerOptions[i] == 0)
-            printf("└──────────────┘");
-    }
-
-}
-
-void assessOption(int nX)
-{
-    if(nX == 0)
-        printf("    ATTACK    ");
-    else if(nX == 1)
-        printf("  DODGE ROLL  ");
-    else if(nX == 2)
-        printf(" DRINK POTION ");
-}
-
-void processOption(char cInput, int* pPlayerOptions, int nSize, int* nTurn)
-{
-    for(int i = 0; i < nSize; i++){
-        if(pPlayerOptions[i] == 1){
-            switch(cInput){
-                case 'a':
-                case 'A':
-                    if(i == 0)
-                        break;
-                    else{
-                        pPlayerOptions[i]--;
-                        pPlayerOptions[i-1]++;
-                        *nTurn -= 1;
-                    }
-                    break;
-                case 'd':
-                case 'D':
-                    if(i == 2)
-                        break;
-                    else{
-                        pPlayerOptions[i]--;
-                        i++;
-                        pPlayerOptions[i]++;
-                        *nTurn -= 1;
-                    }
-                    break;
-                case 'e':
-                case 'E':
-                printf("nothing");
-
-                default:
-                break;
-
-            }
-        }
+    switch(nRandom){ //attack is randomized within the range every turn //might make it in another function
+        case 1:
+            pEnemy->nHealth = (rand() % (30 - 20) + 20) * pArea->nAreaIndex; //rand() % (upper bound - lower bound) + lower bound
+            pEnemy->fPhysDef = 0.20;
+            pEnemy->fSorcDef = 0.15;
+            pEnemy->fIncantDef = 0.10;
+            pEnemy->nAttackUpper = 80;
+            pEnemy->nAttackLower = 70;
+            break;
+        case 2:
+            pEnemy->nHealth = (rand() % (35 - 25) + 25) * pArea->nAreaIndex;
+            pEnemy->fPhysDef = 0.50;
+            pEnemy->fSorcDef = 0.15;
+            pEnemy->fIncantDef = 0.20;
+            pEnemy->nAttackUpper = 120;
+            pEnemy->nAttackLower = 110;
+            break;
+        case 3:
+            pEnemy->nHealth = (rand() % (80 - 70) + 70) * pArea->nAreaIndex;
+            pEnemy->fPhysDef = 0.25;
+            pEnemy->fSorcDef = 0.25;
+            pEnemy->fIncantDef = 0.20;
+            pEnemy->nAttackUpper = 130;
+            pEnemy->nAttackLower = 120;
+            break;
     }
 }
+
+

@@ -1,5 +1,5 @@
 #pragma once
-#define MAX_NAME 26
+// #define MAX_NAME 26
 #include "title.h"
 #include "RoundTable.h"
 #include "area.h"

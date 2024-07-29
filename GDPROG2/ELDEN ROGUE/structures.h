@@ -79,11 +79,22 @@ typedef struct {
     int runes;
     Weapon *inventory;  // Dynamic array of weapons
     int inventorySize;  // Current number of weapons
-     int inventoryCapacity;  // Capacity of the inventory
+    int inventoryCapacity;  // Capacity of the inventory
     Shards nShards;
     Stats stats;
     
 } Player;
+
+struct enemy {
+    int nHealth;
+    int nAttackUpper;
+    int nAttackLower;
+    float fPhysDef;
+    float fSorcDef;
+    float fIncantDef;
+};
+
+typedef struct enemy Enemy;
 
 
 
