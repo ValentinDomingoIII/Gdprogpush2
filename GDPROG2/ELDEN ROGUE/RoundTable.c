@@ -145,7 +145,7 @@ printf("\nINPUT:");
 
 void BuySwords(Player* player)
 {
-    int choice;
+    char cChoice;
     int cost;
     Weapon weaponToBuy;
 
@@ -155,31 +155,47 @@ void BuySwords(Player* player)
     printf("2. Sword of Dexterity - HP: 8, DEX: 6, Cost: 80\n");
 
     printf("Enter the number of the sword you want to buy: ");
-    scanf("%d", &choice);
+    scanf("%d", &cChoice);
 
-    switch (choice) {
-        case 1:
-            weaponToBuy.nHp = 10;
-            weaponToBuy.nStr = 5;
-            weaponToBuy.nDex = 0;
-            weaponToBuy.nInt = 0;
-            weaponToBuy.nEnd = 0;
-            weaponToBuy.nFth = 0;
+    switch (cChoice) {
+        case '1':
+            weaponToBuy.nHp = 0;
+            weaponToBuy.nStr = 15;
+            weaponToBuy.nDex = 13;
+            weaponToBuy.nInt = 15;
+            weaponToBuy.nEnd = 15;
+            weaponToBuy.nFth = 15;
             weaponToBuy.nCost = 100;
-            strcpy(weaponToBuy.weapon, "Sword of Strength");
+            strcpy(weaponToBuy.weapon, "Short Sword");
             cost = 100;
             break;
-        case 2:
-            weaponToBuy.nHp = 8;
-            weaponToBuy.nStr = 0;
-            weaponToBuy.nDex = 6;
-            weaponToBuy.nInt = 0;
-            weaponToBuy.nEnd = 0;
-            weaponToBuy.nFth = 0;
-            weaponToBuy.nCost = 80;
-            strcpy(weaponToBuy.weapon, "Sword of Dexterity");
-            cost = 80;
+        case '2':
+            weaponToBuy.nHp = 10;
+            weaponToBuy.nStr = 35;
+            weaponToBuy.nDex = 18;
+            weaponToBuy.nInt = 35;
+            weaponToBuy.nEnd = 25;
+            weaponToBuy.nFth = 35;
+            weaponToBuy.nCost = 2000;
+            strcpy(weaponToBuy.weapon, "Roger's Raper");
+            cost = 2000;
             break;
+        
+        case '3':
+            weaponToBuy.nHp = 20;
+            weaponToBuy.nStr = 40;
+            weaponToBuy.nDex = 21;
+            weaponToBuy.nInt = 40;
+            weaponToBuy.nEnd = 35;
+            weaponToBuy.nFth = 40;
+            weaponToBuy.nCost = 4000;
+            strcpy(weaponToBuy.weapon, "Coded Sword");
+            cost = 4000;
+            break;
+
+        case '4':
+            
+
         default:
             printf("Invalid choice\n");
             return;
