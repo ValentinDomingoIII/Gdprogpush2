@@ -13,7 +13,7 @@ void runRoundTable(Player* player)
     displayRoundTable(player);
     scanf(" %c",&cInput);
     processInputs(player,cInput);
-  } while (cInput!='6');
+  } while (cInput!='0');
      
 }
 
@@ -81,6 +81,7 @@ printf("\nINPUT:");
     {
     case '1':
         printf("\nLevel up Dexerity?");
+        printf("[1]Yes [2]No:");
         scanf(" %c",&cChoice2);
         if (cChoice2=='1')
         {
@@ -97,6 +98,7 @@ printf("\nINPUT:");
 
     case '2':
         printf("\nLevel up Strength?");
+        printf("[1]Yes [2]No:");
         scanf(" %c",&cChoice2);
          if (cChoice2=='1'){
         runemath(player);
@@ -108,6 +110,7 @@ printf("\nINPUT:");
     
     case '3':
         printf("\nLevel up Intelligence?");
+        printf("[1]Yes [2]No:");
         scanf(" %c",&cChoice2);
          if (cChoice2=='1')
          {
@@ -120,6 +123,7 @@ printf("\nINPUT:");
 
     case '4':
         printf("\nLevel up Faith?");
+        printf("[1]Yes [2]No:");
         scanf(" %c",&cChoice2);
          if (cChoice2=='1'){
         runemath(player);
@@ -137,6 +141,104 @@ printf("\nINPUT:");
 
 }
 
+
+void BuySwords(Player* player)
+{
+   int choice;
+    int cost;
+    Weapon weaponToBuy;
+
+    // Display available swords
+    printf("\nAvailable Swords:\n");
+    printf("1. Sword of Strength - HP: 10, STR: 5, Cost: 100\n");
+    printf("2. Sword of Dexterity - HP: 8, DEX: 6, Cost: 80\n");
+
+    printf("Enter the number of the sword you want to buy: ");
+    scanf("%d", &choice);
+
+    switch (choice) {
+        case 1:
+            weaponToBuy.nHp = 10;
+            weaponToBuy.nStr = 5;
+            weaponToBuy.nDex = 0;
+            weaponToBuy.nInt = 0;
+            weaponToBuy.nEnd = 0;
+            weaponToBuy.nFth = 0;
+            weaponToBuy.nCost = 100;
+            snprintf(weaponToBuy.weapon, MAX_NAME, "Sword of Strength");
+            cost = 100;
+            break;
+        case 2:
+            weaponToBuy.nHp = 8;
+            weaponToBuy.nStr = 0;
+            weaponToBuy.nDex = 6;
+            weaponToBuy.nInt = 0;
+            weaponToBuy.nEnd = 0;
+            weaponToBuy.nFth = 0;
+            weaponToBuy.nCost = 80;
+            snprintf(weaponToBuy.weapon, MAX_NAME, "Sword of Dexterity");
+            cost = 80;
+            break;
+        default:
+            printf("Invalid choice\n");
+            return;
+    }
+
+    if (player->runes < cost) {
+        printf("Not enough runes to buy this weapon.\n");
+        return;
+    }
+
+    player->runes -= cost;
+
+    // Add the weapon to the inventory
+    if (player->inventorySize >= player->inventoryCapacity) {
+        // This assumes you want to manage capacity manually; otherwise, you can skip this
+        printf("Inventory full. Cannot add more weapons.\n");
+        return;
+    }
+
+    player->inventory[player->inventorySize++] = weaponToBuy;
+    printf("You have bought a %s\n", weaponToBuy.weapon);
+}
+
+
+void processShop(Player* player)
+{
+    char cChoice;
+    printf("\n\tSHOP\n");
+
+    printf("Category:\n");
+    printf("[1]Swords\n");
+    printf("[2]Katanas");
+    printf("[3]Whips\n");
+    printf("[4]GreatSwords\n");
+    printf("[5]Staves\n");
+    printf("[6]Seals\n");
+
+    switch (cChoice)
+    {
+    case '1':
+        BuySwords(player);
+        break;
+    case '2':
+    //    BuyKatanas(player);
+    case '3':
+     //   BuyWhips(player);
+    case '4':
+      //  BuyGreatSwords(player);
+    case '5':
+        //BuyStaves(player);
+    case '6':
+        //BuySeals(player);
+
+    default:
+        break;
+    }
+
+}
+
+
 void processInputs(Player* player, char cInput)
 {
     switch (cInput)
@@ -152,7 +254,7 @@ void processInputs(Player* player, char cInput)
         //no inventory yet
     break;
     case '4':
-    //no shop yet
+    processShop(player);
     break;
     case '5':
         savePlayerData(player);
