@@ -1,11 +1,12 @@
-Name: chungus
-Job Class: Astrologer
+Name: Val
+Job Class: Prophet
 Level: 1
-Health: 9
-Endurance: 9
-Dexterity: 12
-Strength: 8
-Intelligence: 16
-Faith: 7
+Health: 10
+Endurance: 8
+Dexterity: 10
+Strength: 11
+Intelligence: 7
+Faith: 16
 Runes: 420
-Shards:-1908409488
+Shards: 1,1,1,1,1,0
+Inventory:

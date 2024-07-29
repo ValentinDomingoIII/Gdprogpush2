@@ -22,6 +22,7 @@ void displayRoundTable(Player* player)
     printf("Name: %s\n", player->name);
     printf("Job Class: %s\n", player->jobName);
     printf("Level: %d\n", player->level);
+    printf("Runes:%d\n",player->runes);
 
     printf("[1] Fast travel\n");
     printf("[2] Level Up\n");
@@ -197,6 +198,48 @@ void BuySwords(Player* player)
     printf("You have bought a %s\n", weaponToBuy.weapon);
 }
 
+void sellEquipment(Player* player) {
+    int i;
+           printf("\nINVENTORY\n");
+        for (i = 0; i < player->inventorySize; i++) {
+            printf("[%d] %s - HP: %d, STR: %d, DEX: %d, INT: %d, END: %d, FTH: %d\n",
+                   i + 1, player->inventory[i].weapon, player->inventory[i].nHp,
+                   player->inventory[i].nStr, player->inventory[i].nDex, player->inventory[i].nInt,
+                   player->inventory[i].nEnd, player->inventory[i].nFth);
+        }
+
+    printf("\nSelect item to sell (1-%d, 0 to cancel): ", player->inventorySize);
+    int choice;
+    scanf("%d", &choice);
+
+    if (choice < 1 || choice > player->inventorySize) {
+        if (choice != 0) {
+            printf("Invalid choice.\n");
+        }
+        return;
+    }
+
+    // Adjust index for zero-based array
+    choice -= 1;
+    Weapon* w = &player->inventory[choice];
+    int sellPrice = w->nCost / 2;  // Selling price is half of the cost
+
+    printf("Selling %s for %d.\n", w->weapon, sellPrice);
+
+    // Increase player's currency
+    player->runes += sellPrice;
+
+    // Remove item from inventory
+    for (int i = choice; i < player->inventorySize - 1; i++) {
+        player->inventory[i] = player->inventory[i + 1];
+    }
+    player->inventorySize--;
+
+    // Optionally, you could shrink the inventory array if it's no longer needed
+    // player->inventory = realloc(player->inventory, player->inventorySize * sizeof(Weapon));
+
+    printf("Item sold.\n");
+}
 
 void processShop(Player* player)
 {
@@ -210,6 +253,7 @@ void processShop(Player* player)
     printf("[4]GreatSwords\n");
     printf("[5]Staves\n");
     printf("[6]Seals\n");
+    printf("[7]Sell");
 
     printf("INPUT:");
     scanf(" %c",&cChoice);
@@ -229,6 +273,9 @@ void processShop(Player* player)
         //BuyStaves(player);
     case '6':
         //BuySeals(player);
+    case '7':
+         sellEquipment(player);
+         break;
 
     default:
         break;
@@ -250,12 +297,12 @@ void processInventory(Player* player)
                    player->inventory[i].nStr, player->inventory[i].nDex, player->inventory[i].nInt,
                    player->inventory[i].nEnd, player->inventory[i].nFth);
         }
-        printf("[B] Back\n");
+        printf("[0] Back\n");
 
-        printf("Choose a weapon or press 'B' to go back: ");
+        printf("Choose a weapon or press '0' to go back: ");
         scanf(" %c", &cChoice);
 
-        if (cChoice == 'B' || cChoice == 'b') {
+        if (cChoice == '0') {
             return;
         }
 

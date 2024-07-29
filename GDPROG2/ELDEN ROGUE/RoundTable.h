@@ -9,6 +9,7 @@ void displayRoundTable(Player* player);
 int runemath(Player* player);
 void processlevelup(Player* player);
 void BuySwords(Player* player);
+void sellEquipment(Player* player);
 void processShop(Player* player);
 void processInventory(Player* player);
 void processInputs(Player* player, char cInput);
