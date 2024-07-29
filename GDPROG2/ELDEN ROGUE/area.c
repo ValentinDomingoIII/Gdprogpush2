@@ -383,6 +383,10 @@ void areaSelect(char cAreaIndex, char cFastTravelTile, Player* pPlayer)
             sArea.a3.nColumnSize = 5;
             sArea.a3.nRowOffset = 14;
 
+            strcpy(sArea.strEnemy1, "Godrick Soldier");
+            strcpy(sArea.strEnemy2, "Godrick Archer");
+            strcpy(sArea.strEnemy3, "Godrick Knight");
+
             if(cFastTravelTile == '1'){
                sArea.aBigArray[6][1] = 9; 
                int aPlayerLocation[3] = {1,0,0};
@@ -429,6 +433,10 @@ void areaSelect(char cAreaIndex, char cFastTravelTile, Player* pPlayer)
             sArea.a5.nRowSize = 8;
             sArea.a5.nColumnSize = 7;
             sArea.a5.nRowOffset = 24;
+
+            strcpy(sArea.strEnemy1, "Living Jar");
+            strcpy(sArea.strEnemy2, "Glintstone Sorcerer");
+            strcpy(sArea.strEnemy3, "Battlemage");
 
             if(cFastTravelTile == '1'){
                sArea.aBigArray[0][2] = 9;
@@ -489,6 +497,10 @@ void areaSelect(char cAreaIndex, char cFastTravelTile, Player* pPlayer)
             sArea.a7.nColumnSize = 7;
             sArea.a7.nRowOffset = 28;
 
+            strcpy(sArea.strEnemy1, "Radahn Soldier");
+            strcpy(sArea.strEnemy2, "Radahn Archer");
+            strcpy(sArea.strEnemy3, "Radahn Knight");
+
             if(cFastTravelTile == '1'){
                sArea.aBigArray[1][0] = 9;
                int aPlayerLocation[7] = {1,0,0,0,0,0,0};
@@ -547,6 +559,10 @@ void areaSelect(char cAreaIndex, char cFastTravelTile, Player* pPlayer)
             sArea.a7.nRowSize = 7;
             sArea.a7.nColumnSize = 5;
             sArea.a7.nRowOffset = 34;
+
+            strcpy(sArea.strEnemy1, "Man-Serpent");
+            strcpy(sArea.strEnemy2, "Mage-Serpent");
+            strcpy(sArea.strEnemy3, "Abductor Virgin");
 
             if(cFastTravelTile == '1'){
                sArea.aBigArray[4][2] = 9;
@@ -648,6 +664,10 @@ void areaSelect(char cAreaIndex, char cFastTravelTile, Player* pPlayer)
             sArea.a14.nRowSize = 7;
             sArea.a14.nColumnSize = 5;
             sArea.a14.nRowOffset = 70;
+
+            strcpy(sArea.strEnemy1, "Leyndell Soldier");
+            strcpy(sArea.strEnemy2, "Leyndell Archer");
+            strcpy(sArea.strEnemy3, "Leyndell Knight");
 
             if(cFastTravelTile == '1'){
                sArea.aBigArray[3][1] = 9;

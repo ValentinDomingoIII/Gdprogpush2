@@ -30,6 +30,9 @@ struct area {
     int nFloorCount;
     int nAreaIndex;
     int nFlag;
+    char strEnemy1[MAX_NAME];
+    char strEnemy2[MAX_NAME];
+    char strEnemy3[MAX_NAME];
 };
 
 typedef struct area Area;
@@ -86,6 +89,7 @@ typedef struct {
 } Player;
 
 struct enemy {
+    char strEnemyName[MAX_NAME];
     int nHealth;
     int nAttackUpper;
     int nAttackLower;

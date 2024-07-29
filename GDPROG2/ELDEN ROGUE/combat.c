@@ -19,7 +19,7 @@ void runCombat(Player* pPlayer, Area* pArea, int* pMaxHealth)
     printf("[HEALTH]: %d", *pMaxHealth);
     printf("\n\n");
 
-    printf("You have encountered [ENEMY TYPE %d]\n", nRandom);
+    printf("You have encountered [%s]\n", sEnemy.strEnemyName);
     printf("\n[ENEMY HEALTH]: %d", sEnemy.nHealth);
     printf("\n[PHYS RES]: %.2f\n[SORC DEF]: %.2f\n[INCANT DEF]: %.2f",sEnemy.fPhysDef, sEnemy.fSorcDef, sEnemy.fIncantDef);
     printf("\n");
@@ -82,6 +82,7 @@ void initializeEnemy(Enemy* pEnemy, Area* pArea, int nRandom)
             pEnemy->fIncantDef = 0.10;
             pEnemy->nAttackUpper = 80;
             pEnemy->nAttackLower = 70;
+            strcpy(pEnemy->strEnemyName, pArea->strEnemy1);
             break;
         case 2:
             pEnemy->nHealth = (rand() % (35 - 25) + 25) * pArea->nAreaIndex;
@@ -90,6 +91,7 @@ void initializeEnemy(Enemy* pEnemy, Area* pArea, int nRandom)
             pEnemy->fIncantDef = 0.20;
             pEnemy->nAttackUpper = 120;
             pEnemy->nAttackLower = 110;
+            strcpy(pEnemy->strEnemyName, pArea->strEnemy2);
             break;
         case 3:
             pEnemy->nHealth = (rand() % (80 - 70) + 70) * pArea->nAreaIndex;
@@ -98,8 +100,11 @@ void initializeEnemy(Enemy* pEnemy, Area* pArea, int nRandom)
             pEnemy->fIncantDef = 0.20;
             pEnemy->nAttackUpper = 130;
             pEnemy->nAttackLower = 120;
+            strcpy(pEnemy->strEnemyName, pArea->strEnemy3);
             break;
     }
 }
+
+// void
 
 
