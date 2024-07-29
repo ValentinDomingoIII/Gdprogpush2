@@ -53,8 +53,9 @@ typedef struct {
     int nEnd;
     int nStr;
     int nFth;
+    int nCost;
 
-} weapon;
+} Weapon;
 
 typedef struct {
     int health;
@@ -69,14 +70,19 @@ typedef struct{
    // weapon weapon[];
     char cPotion;
 }Inv;
+
+
 typedef struct {
     char name[MAX_NAME];
     char jobName[MAX_NAME];
     int level; 
     int runes;
+    Weapon *inventory;  // Dynamic array of weapons
+    int inventorySize;  // Current number of weapons
+     int inventoryCapacity;  // Capacity of the inventory
     Shards nShards;
     Stats stats;
-    Inv items;
+    
 } Player;
 
 
