@@ -144,7 +144,7 @@ printf("\nINPUT:");
 
 void BuySwords(Player* player)
 {
-   int choice;
+    int choice;
     int cost;
     Weapon weaponToBuy;
 
@@ -165,7 +165,7 @@ void BuySwords(Player* player)
             weaponToBuy.nEnd = 0;
             weaponToBuy.nFth = 0;
             weaponToBuy.nCost = 100;
-            snprintf(weaponToBuy.weapon, MAX_NAME, "Sword of Strength");
+            strcpy(weaponToBuy.weapon, "Sword of Strength");
             cost = 100;
             break;
         case 2:
@@ -176,7 +176,7 @@ void BuySwords(Player* player)
             weaponToBuy.nEnd = 0;
             weaponToBuy.nFth = 0;
             weaponToBuy.nCost = 80;
-            snprintf(weaponToBuy.weapon, MAX_NAME, "Sword of Dexterity");
+            strcpy(weaponToBuy.weapon, "Sword of Dexterity");
             cost = 80;
             break;
         default:
@@ -191,12 +191,7 @@ void BuySwords(Player* player)
 
     player->runes -= cost;
 
-    // Add the weapon to the inventory
-    if (player->inventorySize >= player->inventoryCapacity) {
-        // This assumes you want to manage capacity manually; otherwise, you can skip this
-        printf("Inventory full. Cannot add more weapons.\n");
-        return;
-    }
+
 
     player->inventory[player->inventorySize++] = weaponToBuy;
     printf("You have bought a %s\n", weaponToBuy.weapon);
@@ -210,11 +205,14 @@ void processShop(Player* player)
 
     printf("Category:\n");
     printf("[1]Swords\n");
-    printf("[2]Katanas");
+    printf("[2]Katanas\n");
     printf("[3]Whips\n");
     printf("[4]GreatSwords\n");
     printf("[5]Staves\n");
     printf("[6]Seals\n");
+
+    printf("INPUT:");
+    scanf(" %c",&cChoice);
 
     switch (cChoice)
     {
@@ -238,6 +236,38 @@ void processShop(Player* player)
 
 }
 
+void processInventory(Player* player)
+
+{
+    char cChoice;
+    int i;
+
+    do {
+        printf("\nINVENTORY\n");
+        for (i = 0; i < player->inventorySize; i++) {
+            printf("[%d] %s - HP: %d, STR: %d, DEX: %d, INT: %d, END: %d, FTH: %d\n",
+                   i + 1, player->inventory[i].weapon, player->inventory[i].nHp,
+                   player->inventory[i].nStr, player->inventory[i].nDex, player->inventory[i].nInt,
+                   player->inventory[i].nEnd, player->inventory[i].nFth);
+        }
+        printf("[B] Back\n");
+
+        printf("Choose a weapon or press 'B' to go back: ");
+        scanf(" %c", &cChoice);
+
+        if (cChoice == 'B' || cChoice == 'b') {
+            return;
+        }
+
+        int index = cChoice - '1';
+        if (index >= 0 && index < player->inventorySize) {
+            printf("You have selected %s\n", player->inventory[index].weapon);
+        } else {
+            printf("Invalid choice\n");
+        }
+    } while (1);
+    
+}
 
 void processInputs(Player* player, char cInput)
 {
@@ -251,7 +281,7 @@ void processInputs(Player* player, char cInput)
         processlevelup(player);
         break;
     case '3':
-        //no inventory yet
+        processInventory(player);
     break;
     case '4':
     processShop(player);

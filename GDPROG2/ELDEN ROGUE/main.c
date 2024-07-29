@@ -11,6 +11,15 @@
 #include "combat.c"
 #include "color.c"
 
+
+void resetInventory(Player* player) {
+    // Optionally reallocate to shrink the inventory capacity
+    player->inventoryCapacity = 1; // Reset to initial capacity
+    player->inventory = realloc(player->inventory, player->inventoryCapacity * sizeof(Weapon));
+    player->inventorySize = 0; // Reset inventory size to 0
+    printf("Inventory has been reset.\n");
+}
+
 //commenty
 int main() {
 
@@ -34,10 +43,11 @@ int main() {
             player.nShards.nLeyndell = 1;
             player.nShards.nElden = 0;
 
-             int initialCapacity = 10;  // initial capacity
+             int initialCapacity = 1;  // initial capacity
              player.inventory = malloc(initialCapacity * sizeof(Weapon));
+             resetInventory(&player);
     runTitle(&player);
-    
+      free(player.inventory);
     
     return 0;
 }

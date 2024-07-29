@@ -10,6 +10,7 @@ int runemath(Player* player);
 void processlevelup(Player* player);
 void BuySwords(Player* player);
 void processShop(Player* player);
+void processInventory(Player* player);
 void processInputs(Player* player, char cInput);
 void processFastTravel(Player* pPlayer);
 

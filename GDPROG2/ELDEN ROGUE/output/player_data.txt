@@ -1,10 +1,11 @@
-Name: Tester
-Job Class: Vagabond
+Name: chungus
+Job Class: Astrologer
 Level: 1
-Health: 15
-Endurance: 11
-Dexterity: 13
-Strength: 14
-Intelligence: 9
-Faith: 9
+Health: 9
+Endurance: 9
+Dexterity: 12
+Strength: 8
+Intelligence: 16
+Faith: 7
 Runes: 420
+Shards:-1908409488
