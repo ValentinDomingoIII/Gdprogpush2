@@ -32,18 +32,18 @@ void displayRoundTable(Player* player)
     printf("Intelligence: %d\n", player->stats.intelligence);
     printf("Faith: %d\n", player->stats.faith);
 
-//  if (player->equippedWeapon != NULL) {
-//         printf("\nEquipped Weapon: %s\n", player->equippedWeapon->weapon);
-//         printf("  HP: %d\n", player->equippedWeapon->nHp);
-//         printf("  STR: %d\n", player->equippedWeapon->nStr);
-//         printf("  DEX: %d\n", player->equippedWeapon->nDex);
-//         printf("  INT: %d\n", player->equippedWeapon->nInt);
-//         printf("  END: %d\n", player->equippedWeapon->nEnd);
-//         printf("  FTH: %d\n", player->equippedWeapon->nFth);
-//     } else {
-//         printf("\nNo weapon equipped.\n");
-//     }
 
+ if (player->equippedWeapon != NULL) {
+        printf("\nEquipped Weapon: %s\n", player->equippedWeapon->weapon);
+        printf("  HP: %d\n", player->equippedWeapon->nHp);
+        printf("  STR: %d\n", player->equippedWeapon->nStr);
+        printf("  DEX: %d\n", player->equippedWeapon->nDex);
+        printf("  INT: %d\n", player->equippedWeapon->nInt);
+        printf("  END: %d\n", player->equippedWeapon->nEnd);
+        printf("  FTH: %d\n", player->equippedWeapon->nFth);
+    } else {
+        printf("\nNo weapon equipped.\n");
+    }
  printf("===========================\n");
     printf("[1] Fast travel\n");
     printf("[2] Level Up\n");
@@ -91,7 +91,7 @@ void processlevelup(Player* player)
     printf("-> Level up FAITH \n");
 
     
-    printf("-> BACK \n");
+    printf("[0] BACK \n");
 
 
 printf("\nLevel up cost:%d\n",nRune);
@@ -173,9 +173,9 @@ void BuySwords(Player* player)
     // Display available swords
     printf("\nAvailable Swords:\n");
     printf("1. Short Sword - HP: 0, STR: 15, DEX:13, INT:15 END:15, FTH:15 Cost: 100\n");
-    printf("2. Roger's Rapier - HP: 10, STR: 35, DEX:18, INT:35, END:25, FTH:35 Cost: 100\n");
-    printf("3. Coded Sword - HP: 10, STR: 5, Cost: 100\n");
-    printf("4. Sword of Night And Flame - HP: 8, DEX: 6, Cost: 80\n");
+    printf("2. Roger's Raper - HP: 10, STR: 35, DEX:18, INT:35, END:25, FTH:35 Cost: 2000\n");
+    printf("3.Coded Sword - HP: 20, STR: 40, DEX:21, INT:40, END:35, FTH:40  Cost: 4000\n");
+    printf("4. Sword of Night And Flame - HP: 30, STR:55 DEX: 25, INT:55, END:45, FTH:55 Cost: 8000\n");
 
     printf("Enter the number of the sword you want to buy: ");
     scanf(" %c", &cChoice);
@@ -219,7 +219,7 @@ void BuySwords(Player* player)
         case '4':
             weaponToBuy.nHp = 30;
             weaponToBuy.nStr = 55;
-            weaponToBuy.nDex = 225;
+            weaponToBuy.nDex = 25;
             weaponToBuy.nInt = 55;
             weaponToBuy.nEnd = 45;
             weaponToBuy.nFth = 55;
@@ -301,7 +301,8 @@ void processShop(Player* player)
     printf("[4]GreatSwords\n");
     printf("[5]Staves\n");
     printf("[6]Seals\n");
-    printf("[7]Sell");
+    printf("[7]Sell\n");
+    printf("[0]Back\n");
 
     printf("INPUT:");
     scanf(" %c",&cChoice);
@@ -324,6 +325,7 @@ void processShop(Player* player)
     case '7':
          sellEquipment(player);
          break;
+    
 
     default:
         break;
@@ -354,10 +356,14 @@ void processInventory(Player* player)
             return;
         }
 
-       int index = cChoice - '1';
+      int index = cChoice - '1';
         if (index >= 0 && index < player->inventorySize) {
-            player->equippedWeapon = &player->inventory[index];
-            printf("You have equipped %s\n", player->equippedWeapon->weapon);
+            if (player->stats.dexterity >= player->inventory[index].nDex) {
+                player->equippedWeapon = &player->inventory[index];
+                printf("You have equipped %s\n", player->equippedWeapon->weapon);
+            } else {
+                printf("You do not have enough dexterity to equip %s\n", player->inventory[index].weapon);
+            }
         } else {
             printf("Invalid choice\n");
         }
@@ -401,7 +407,7 @@ void processFastTravel(Player* pPlayer)
 
     do {
 
-    printf("\nSELECT YOUR DESTINATION\n\n");
+    printf("SELECT YOUR DESTINATION\n\n");
     printf("[1]: [STORMVEIL CASTLE]\n");
     printf("[2]: [RAYA LUCARIA]\n");
     printf("[3]: [REDMANE CASTLE]\n");

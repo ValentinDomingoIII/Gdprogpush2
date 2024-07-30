@@ -36,7 +36,7 @@ int main() {
             player.stats.intelligence = 0;
             player.stats.faith = 0;
             //test runes
-            player.runes=420;
+            player.runes=8000;
             player.nShards.nStormveil = 0;
             player.nShards.nRaya = 0;
             player.nShards.nRedmane = 0;
