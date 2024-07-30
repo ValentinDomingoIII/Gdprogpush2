@@ -1,6 +1,6 @@
 #include "character_creation.h"
 //annoying just to remove the error message
-#include "stdio.h"
+//#include "stdio.h"
 
 void runCharCreation(Player* player) {
     int choice = 0;
