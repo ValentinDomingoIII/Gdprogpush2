@@ -5,6 +5,7 @@
         "string.h": "c",
         "roundtable.h": "c",
         "character_creation.h": "c",
-        "title.h": "c"
+        "title.h": "c",
+        "definitions.h": "c"
     }
 }

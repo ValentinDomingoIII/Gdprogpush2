@@ -20,6 +20,8 @@
 void runArea(Area* pArea, Array sCoordinate, Player* pPlayer, int nShard)
 {
      char cInput; 
+     int nMaxHealth = 100 * ((pPlayer->stats.health + pPlayer->inventory->nHp) / 2);
+     // printf("[%d]", nMaxHealth);
 
      do{
      
@@ -28,7 +30,7 @@ void runArea(Area* pArea, Array sCoordinate, Player* pPlayer, int nShard)
      printf("\n[RUNES]: %d\t[INPUT]: ", pPlayer->runes);
      scanf(" %c", &cInput);
      printf("\n");
-     processInput(cInput, pArea, sCoordinate, pPlayer, nShard); 
+     processInput(cInput, pArea, sCoordinate, pPlayer, nShard, &nMaxHealth); 
 
      } while(pArea->nFlag != 1);
 
@@ -182,7 +184,7 @@ void printFloor(Area* pArea, Array sCoordinate)
 
 }
 
-void processInput(char cInput, Area* pArea, Array sCoordinate, Player* pPlayer, int nShard) 
+void processInput(char cInput, Area* pArea, Array sCoordinate, Player* pPlayer, int nShard, int* pMaxHealth) 
 {
      int nRandom;
      char cDoorInput;
@@ -194,36 +196,52 @@ void processInput(char cInput, Area* pArea, Array sCoordinate, Player* pPlayer, 
                     switch(cInput){
                          case 'W':
                          case 'w': 
-                              if(i == 0)
+                              if(i == sCoordinate.nRowOffset)
                                    break;
-                              pArea->aBigArray[i][j]--;
-                              i--;
-                              pArea->aBigArray[i][j]++;
+                              else if(pArea->aBigArray[i-1][j] == -1)
+                                   break;
+                                   else{
+                                        pArea->aBigArray[i][j]--;
+                                        i--;
+                                        pArea->aBigArray[i][j]++;
+                                   }
                               break;
 
                          case 'D':
                          case 'd':
                               if(j == sCoordinate.nColumnSize-1)
                                    break;
-                              pArea->aBigArray[i][j] -= 1;
-                              j++;
-                              pArea->aBigArray[i][j] += 1;
+                              else if(pArea->aBigArray[i][j+1] == -1)
+                                   break;
+                                   else{
+                                        pArea->aBigArray[i][j] -= 1;
+                                        j++;
+                                        pArea->aBigArray[i][j] += 1;
+                                   }
                               break;
                          case 'A':
                          case 'a':
                               if(j == 0)
                                    break;
-                              pArea->aBigArray[i][j] -= 1;
-                              j--;
-                              pArea->aBigArray[i][j] += 1;
+                              else if(pArea->aBigArray[i][j-1] == -1)
+                                   break;
+                                   else{
+                                        pArea->aBigArray[i][j] -= 1;
+                                        j--;
+                                        pArea->aBigArray[i][j] += 1;
+                                   }
                               break;
                          case 'S':
                          case 's':
-                              if(i == sCoordinate.nRowSize-1)
+                              if(i == (sCoordinate.nRowSize + sCoordinate.nRowOffset)-1)
                                    break;
-                              pArea->aBigArray[i][j] -= 1;
-                              i++;
-                              pArea->aBigArray[i][j] += 1;
+                              else if(pArea->aBigArray[i+1][j] == -1)
+                                   break;
+                                   else{
+                                        pArea->aBigArray[i][j] -= 1;
+                                        i++;
+                                        pArea->aBigArray[i][j] += 1;
+                                   }
                               break;
                          case 'E': 
                          case 'e':
@@ -231,16 +249,16 @@ void processInput(char cInput, Area* pArea, Array sCoordinate, Player* pPlayer, 
                                    break;
                               else if(pArea->aBigArray[i][j] == 3){ //spawn tile
                                    nRandom = (rand() % 4) + 1;
-                                   printf("[nRandom]: %d\n", nRandom);
+                                   // printf("[nRandom]: %d\n", nRandom);
                                         if(nRandom == 1){
-                                             nRandom = rand() % (150 - 50) + 50;
+                                             nRandom = rand() % (150 - 50) + 50; 
                                              nRandom *= pArea->nAreaIndex;
                                              pPlayer->runes = pPlayer->runes + nRandom;
                                              printf("You obtained [%d] Runes!\n", nRandom);
                                         } 
                                         else
-                                             // runCombat(pPlayer);
-                                             printf("Enemy!\n");
+                                             runCombat(pPlayer, pArea, pMaxHealth);
+                                             // printf("Enemy!\n");
                                    pArea->aBigArray[i][j] = 1;
                               }
                                    else if(pArea->aBigArray[i][j] == 9 || pArea->aBigArray[i][j] == 11){ 
@@ -365,6 +383,10 @@ void areaSelect(char cAreaIndex, char cFastTravelTile, Player* pPlayer)
             sArea.a3.nColumnSize = 5;
             sArea.a3.nRowOffset = 14;
 
+            strcpy(sArea.strEnemy1, "Godrick Soldier");
+            strcpy(sArea.strEnemy2, "Godrick Archer");
+            strcpy(sArea.strEnemy3, "Godrick Knight");
+
             if(cFastTravelTile == '1'){
                sArea.aBigArray[6][1] = 9; 
                int aPlayerLocation[3] = {1,0,0};
@@ -411,6 +433,10 @@ void areaSelect(char cAreaIndex, char cFastTravelTile, Player* pPlayer)
             sArea.a5.nRowSize = 8;
             sArea.a5.nColumnSize = 7;
             sArea.a5.nRowOffset = 24;
+
+            strcpy(sArea.strEnemy1, "Living Jar");
+            strcpy(sArea.strEnemy2, "Glintstone Sorcerer");
+            strcpy(sArea.strEnemy3, "Battlemage");
 
             if(cFastTravelTile == '1'){
                sArea.aBigArray[0][2] = 9;
@@ -471,6 +497,10 @@ void areaSelect(char cAreaIndex, char cFastTravelTile, Player* pPlayer)
             sArea.a7.nColumnSize = 7;
             sArea.a7.nRowOffset = 28;
 
+            strcpy(sArea.strEnemy1, "Radahn Soldier");
+            strcpy(sArea.strEnemy2, "Radahn Archer");
+            strcpy(sArea.strEnemy3, "Radahn Knight");
+
             if(cFastTravelTile == '1'){
                sArea.aBigArray[1][0] = 9;
                int aPlayerLocation[7] = {1,0,0,0,0,0,0};
@@ -529,6 +559,10 @@ void areaSelect(char cAreaIndex, char cFastTravelTile, Player* pPlayer)
             sArea.a7.nRowSize = 7;
             sArea.a7.nColumnSize = 5;
             sArea.a7.nRowOffset = 34;
+
+            strcpy(sArea.strEnemy1, "Man-Serpent");
+            strcpy(sArea.strEnemy2, "Mage-Serpent");
+            strcpy(sArea.strEnemy3, "Abductor Virgin");
 
             if(cFastTravelTile == '1'){
                sArea.aBigArray[4][2] = 9;
@@ -630,6 +664,10 @@ void areaSelect(char cAreaIndex, char cFastTravelTile, Player* pPlayer)
             sArea.a14.nRowSize = 7;
             sArea.a14.nColumnSize = 5;
             sArea.a14.nRowOffset = 70;
+
+            strcpy(sArea.strEnemy1, "Leyndell Soldier");
+            strcpy(sArea.strEnemy2, "Leyndell Archer");
+            strcpy(sArea.strEnemy3, "Leyndell Knight");
 
             if(cFastTravelTile == '1'){
                sArea.aBigArray[3][1] = 9;
