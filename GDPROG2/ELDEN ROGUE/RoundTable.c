@@ -19,11 +19,32 @@ void runRoundTable(Player* player)
 
 void displayRoundTable(Player* player)
 {
-    printf("Name: %s\n", player->name);
-    printf("Job Class: %s\n", player->jobName);
+ printf("\n======= ROUND TABLE =======\n");
+    printf("Player: %s\n", player->name);
+    printf("Job: %s\n", player->jobName);
     printf("Level: %d\n", player->level);
-    printf("Runes:%d\n",player->runes);
+    printf("Runes: %d\n", player->runes);
+    printf("Stats:\n\n");
+    printf("Health: %d\n", player->stats.health);
+    printf("Endurance: %d\n", player->stats.endurance);
+    printf("Dexterity: %d\n", player->stats.dexterity);
+    printf("Strength: %d\n", player->stats.strength);
+    printf("Intelligence: %d\n", player->stats.intelligence);
+    printf("Faith: %d\n", player->stats.faith);
 
+
+ if (player->equippedWeapon != NULL) {
+        printf("\nEquipped Weapon: %s\n", player->equippedWeapon->weapon);
+        printf("  HP: %d\n", player->equippedWeapon->nHp);
+        printf("  STR: %d\n", player->equippedWeapon->nStr);
+        printf("  DEX: %d\n", player->equippedWeapon->nDex);
+        printf("  INT: %d\n", player->equippedWeapon->nInt);
+        printf("  END: %d\n", player->equippedWeapon->nEnd);
+        printf("  FTH: %d\n", player->equippedWeapon->nFth);
+    } else {
+        printf("\nNo weapon equipped.\n");
+    }
+ printf("===========================\n");
     printf("[1] Fast travel\n");
     printf("[2] Level Up\n");
     printf("[3] Inventory\n");
@@ -151,11 +172,13 @@ void BuySwords(Player* player)
 
     // Display available swords
     printf("\nAvailable Swords:\n");
-    printf("1. Sword of Strength - HP: 10, STR: 5, Cost: 100\n");
-    printf("2. Sword of Dexterity - HP: 8, DEX: 6, Cost: 80\n");
+    printf("1. Short Sword - HP: 0, STR: 15, DEX:13, INT:15 END:15, FTH:15 Cost: 100\n");
+    printf("2. Roger's Raper - HP: 10, STR: 35, DEX:18, INT:35, END:25, FTH:35 Cost: 100\n");
+    printf("3.Coded Sword - HP: 10, STR: 5, Cost: 100\n");
+    printf("4. Sword of Night And Flame - HP: 8, DEX: 6, Cost: 80\n");
 
     printf("Enter the number of the sword you want to buy: ");
-    scanf("%d", &cChoice);
+    scanf(" %c", &cChoice);
 
     switch (cChoice) {
         case '1':
@@ -194,7 +217,16 @@ void BuySwords(Player* player)
             break;
 
         case '4':
-            
+            weaponToBuy.nHp = 30;
+            weaponToBuy.nStr = 55;
+            weaponToBuy.nDex = 225;
+            weaponToBuy.nInt = 55;
+            weaponToBuy.nEnd = 45;
+            weaponToBuy.nFth = 55;
+            weaponToBuy.nCost = 8000;
+            strcpy(weaponToBuy.weapon, "Coded Sword");
+            cost = 8000;
+            break;
 
         default:
             printf("Invalid choice\n");
@@ -322,9 +354,10 @@ void processInventory(Player* player)
             return;
         }
 
-        int index = cChoice - '1';
+       int index = cChoice - '1';
         if (index >= 0 && index < player->inventorySize) {
-            printf("You have selected %s\n", player->inventory[index].weapon);
+            player->equippedWeapon = &player->inventory[index];
+            printf("You have equipped %s\n", player->equippedWeapon->weapon);
         } else {
             printf("Invalid choice\n");
         }

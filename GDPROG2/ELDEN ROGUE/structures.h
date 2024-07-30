@@ -30,9 +30,6 @@ struct area {
     int nFloorCount;
     int nAreaIndex;
     int nFlag;
-    char strEnemy1[MAX_NAME];
-    char strEnemy2[MAX_NAME];
-    char strEnemy3[MAX_NAME];
 };
 
 typedef struct area Area;
@@ -82,24 +79,12 @@ typedef struct {
     int runes;
     Weapon *inventory;  // Dynamic array of weapons
     int inventorySize;  // Current number of weapons
-    int inventoryCapacity;  // Capacity of the inventory
+     int inventoryCapacity;  // Capacity of the inventory
+       Weapon *equippedWeapon; // Pointer to the currently equipped weapon
     Shards nShards;
     Stats stats;
     
 } Player;
-
-struct enemy {
-    char strEnemyName[MAX_NAME];
-    int nHealth;
-    int nAttackUpper;
-    int nAttackLower;
-    float fPhysDef;
-    float fSorcDef;
-    float fIncantDef;
-    int nDamage;
-};
-
-typedef struct enemy Enemy;
 
 
 
