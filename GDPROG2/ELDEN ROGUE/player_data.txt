@@ -1,12 +1,12 @@
-Name: Nicolo
-Job Class: Astrologer
+Name: val
+Job Class: Samurai
 Level: 1
-Health: 9
-Endurance: 9
-Dexterity: 12
-Strength: 8
-Intelligence: 16
-Faith: 7
+Health: 12
+Endurance: 13
+Dexterity: 15
+Strength: 12
+Intelligence: 9
+Faith: 8
 Runes: 420
 Shards: 0,0,0,0,0,0
 Inventory:
