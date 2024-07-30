@@ -18,6 +18,7 @@ void runCombat(Player* pPlayer, Area* pArea, int* pMaxHealth)
 
     printf("[HEALTH]: %d", *pMaxHealth);
     printf("\n\n");
+    printf("[Weapon Stat]: %d\n", pPlayer->inventory->nStr);
 
     printf("You have encountered [%s]\n", sEnemy.strEnemyName);
     printf("\n[ENEMY HEALTH]: %d", sEnemy.nHealth);
@@ -26,21 +27,22 @@ void runCombat(Player* pPlayer, Area* pArea, int* pMaxHealth)
 
     for(int nTurn = 0; nFlag != 1; nTurn++){
         if(nTurn % 2 == 0)
-            playerTurn(&nFlag, &sEnemy, pArea); 
+            playerTurn(&nFlag, &sEnemy, pArea, pPlayer); 
         else 
             printf("\nEnemy Turn\n");
     }
 }
 
-void playerTurn(int* nFlag, Enemy* pEnemy, Area* pArea)
+void playerTurn(int* nFlag, Enemy* pEnemy, Area* pArea, Player* pPlayer)
 {
     char cInput;
-    int nDamage;
+    int nPlayerMove;
+
     srand(time(NULL));
 
-    nDamage = (rand() % (pEnemy->nAttackUpper - pEnemy->nAttackLower) + pEnemy->nAttackLower) * pArea->nAreaIndex;
+    pEnemy->nDamage = (rand() % (pEnemy->nAttackUpper - pEnemy->nAttackLower) + pEnemy->nAttackLower) * pArea->nAreaIndex;
     printf("\nPlayer Turn\n");
-    printf("\n[INCOMING ENEMY DAMAGE]: %d", nDamage);
+    printf("\n[INCOMING ENEMY DAMAGE]: %d", pEnemy->nDamage);
 
     do {
         do {
@@ -64,6 +66,10 @@ void playerTurn(int* nFlag, Enemy* pEnemy, Area* pArea)
 
                 scanf(" %c", &cInput);
             } while(cInput != '0' && cInput != '1' && cInput != '2' && cInput != '3');
+
+            nPlayerMove = processAttack(cInput, pPlayer, pEnemy);
+            pEnemy->nHealth -= nPlayerMove;
+            printf("\nYou dealt [%d] damage!\n", nPlayerMove);
         }
 
     } while(cInput == '0' || cInput == '3');
@@ -105,6 +111,19 @@ void initializeEnemy(Enemy* pEnemy, Area* pArea, int nRandom)
     }
 }
 
-// void
+int processAttack(char cInput, Player* pPlayer, Enemy* pEnemy)
+{
+    switch(cInput){
+        case '1':
+            return (pPlayer->stats.strength + pPlayer->inventory->nStr) * (1 - pEnemy->fPhysDef);
+            break;
+        case '2':
+            return (pPlayer->stats.intelligence + pPlayer->inventory->nInt) * (1 - pEnemy->fSorcDef);
+            break;
+        case '3':
+            return (pPlayer->stats.faith + pPlayer->inventory->nFth) * (1 - pEnemy->fIncantDef);
+            break;
+    }
+}
 
 

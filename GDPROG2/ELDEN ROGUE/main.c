@@ -36,11 +36,11 @@ int main() {
             player.stats.faith = 0;
             //test runes
             player.runes=420;
-            player.nShards.nStormveil = 1;
-            player.nShards.nRaya = 1;
-            player.nShards.nRedmane = 1;
-            player.nShards.nVolcano = 1;
-            player.nShards.nLeyndell = 1;
+            player.nShards.nStormveil = 0;
+            player.nShards.nRaya = 0;
+            player.nShards.nRedmane = 0;
+            player.nShards.nVolcano = 0;
+            player.nShards.nLeyndell = 0;
             player.nShards.nElden = 0;
 
              int initialCapacity = 1;  // initial capacity

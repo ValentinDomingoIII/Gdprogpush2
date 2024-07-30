@@ -96,6 +96,7 @@ struct enemy {
     float fPhysDef;
     float fSorcDef;
     float fIncantDef;
+    int nDamage;
 };
 
 typedef struct enemy Enemy;

@@ -7,7 +7,6 @@ Dexterity: 12
 Strength: 8
 Intelligence: 16
 Faith: 7
-Runes: 320
-Shards: 1,1,1,1,1,0
+Runes: 420
+Shards: 0,0,0,0,0,0
 Inventory:
-Sword of Strength,10,0,0,0,5,0,100
