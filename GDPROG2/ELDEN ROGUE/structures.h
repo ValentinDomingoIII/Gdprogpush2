@@ -13,6 +13,12 @@ typedef struct array Array;
 
 struct area {
     int aBigArray[100][21];
+    int nFloorCount;
+    int nAreaIndex;
+    int nFlag;
+    char strEnemy1[MAX_NAME];
+    char strEnemy2[MAX_NAME];
+    char strEnemy3[MAX_NAME];
     Array a1;
     Array a2;
     Array a3;
@@ -27,9 +33,6 @@ struct area {
     Array a12;
     Array a13;
     Array a14;
-    int nFloorCount;
-    int nAreaIndex;
-    int nFlag;
 };
 
 typedef struct area Area;
@@ -86,5 +89,16 @@ typedef struct {
     
 } Player;
 
+struct enemy {
+    char strEnemyName[MAX_NAME];
+    int nHealth;
+    int nAttackUpper;
+    int nAttackLower;
+    float fPhysDef;
+    float fSorcDef;
+    float fIncantDef;
+    int nDamage;
+};
 
+typedef struct enemy Enemy;
 
