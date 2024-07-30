@@ -1,4 +1,4 @@
-Name: Nicolo
+Name: N
 Job Class: Astrologer
 Level: 1
 Health: 9

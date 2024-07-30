@@ -32,18 +32,18 @@ void displayRoundTable(Player* player)
     printf("Intelligence: %d\n", player->stats.intelligence);
     printf("Faith: %d\n", player->stats.faith);
 
+//  if (player->equippedWeapon != NULL) {
+//         printf("\nEquipped Weapon: %s\n", player->equippedWeapon->weapon);
+//         printf("  HP: %d\n", player->equippedWeapon->nHp);
+//         printf("  STR: %d\n", player->equippedWeapon->nStr);
+//         printf("  DEX: %d\n", player->equippedWeapon->nDex);
+//         printf("  INT: %d\n", player->equippedWeapon->nInt);
+//         printf("  END: %d\n", player->equippedWeapon->nEnd);
+//         printf("  FTH: %d\n", player->equippedWeapon->nFth);
+//     } else {
+//         printf("\nNo weapon equipped.\n");
+//     }
 
- if (player->equippedWeapon != NULL) {
-        printf("\nEquipped Weapon: %s\n", player->equippedWeapon->weapon);
-        printf("  HP: %d\n", player->equippedWeapon->nHp);
-        printf("  STR: %d\n", player->equippedWeapon->nStr);
-        printf("  DEX: %d\n", player->equippedWeapon->nDex);
-        printf("  INT: %d\n", player->equippedWeapon->nInt);
-        printf("  END: %d\n", player->equippedWeapon->nEnd);
-        printf("  FTH: %d\n", player->equippedWeapon->nFth);
-    } else {
-        printf("\nNo weapon equipped.\n");
-    }
  printf("===========================\n");
     printf("[1] Fast travel\n");
     printf("[2] Level Up\n");
@@ -173,8 +173,8 @@ void BuySwords(Player* player)
     // Display available swords
     printf("\nAvailable Swords:\n");
     printf("1. Short Sword - HP: 0, STR: 15, DEX:13, INT:15 END:15, FTH:15 Cost: 100\n");
-    printf("2. Roger's Raper - HP: 10, STR: 35, DEX:18, INT:35, END:25, FTH:35 Cost: 100\n");
-    printf("3.Coded Sword - HP: 10, STR: 5, Cost: 100\n");
+    printf("2. Roger's Rapier - HP: 10, STR: 35, DEX:18, INT:35, END:25, FTH:35 Cost: 100\n");
+    printf("3. Coded Sword - HP: 10, STR: 5, Cost: 100\n");
     printf("4. Sword of Night And Flame - HP: 8, DEX: 6, Cost: 80\n");
 
     printf("Enter the number of the sword you want to buy: ");
@@ -401,7 +401,7 @@ void processFastTravel(Player* pPlayer)
 
     do {
 
-    printf("SELECT YOUR DESTINATION\n\n");
+    printf("\nSELECT YOUR DESTINATION\n\n");
     printf("[1]: [STORMVEIL CASTLE]\n");
     printf("[2]: [RAYA LUCARIA]\n");
     printf("[3]: [REDMANE CASTLE]\n");

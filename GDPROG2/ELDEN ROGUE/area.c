@@ -20,7 +20,7 @@
 void runArea(Area* pArea, Array sCoordinate, Player* pPlayer, int nShard)
 {
      char cInput; 
-     int nMaxHealth = 100 * ((pPlayer->stats.health + pPlayer->inventory->nHp) / 2);
+     int nMaxHealth = 100 * ((pPlayer->stats.health + pPlayer->equippedWeapon->nHp) / 2);
      // printf("[%d]", nMaxHealth);
 
      do{

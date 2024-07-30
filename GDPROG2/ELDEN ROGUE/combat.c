@@ -1,10 +1,4 @@
-#include "stddef.h"
-
 #include "combat.h"
-#include "color.h"
-
-#include "structures.h"
-#include "definitions.h"
 
 void runCombat(Player* pPlayer, Area* pArea, int* pMaxHealth)
 {

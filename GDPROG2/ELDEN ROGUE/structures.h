@@ -82,8 +82,8 @@ typedef struct {
     int runes;
     Weapon *inventory;  // Dynamic array of weapons
     int inventorySize;  // Current number of weapons
-     int inventoryCapacity;  // Capacity of the inventory
-       Weapon *equippedWeapon; // Pointer to the currently equipped weapon
+    int inventoryCapacity;  // Capacity of the inventory
+    Weapon *equippedWeapon; // Pointer to the currently equipped weapon
     Shards nShards;
     Stats stats;
     

@@ -2,6 +2,7 @@
 #include "string.h"
 #include "windows.h"
 #include "time.h"
+#include "stddef.h"
 
 #include "title.c"
 #include "character_creation.c"
