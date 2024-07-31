@@ -11,6 +11,7 @@
 #include "RoundTable.c"
 #include "combat.c"
 #include "color.c"
+#include "shop.c"
 
 
 void resetInventory(Player* player) {

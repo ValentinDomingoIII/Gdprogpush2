@@ -1,4 +1,4 @@
-Name: N
+Name: Nathan
 Job Class: Astrologer
 Level: 1
 Health: 9
@@ -7,6 +7,6 @@ Dexterity: 12
 Strength: 8
 Intelligence: 16
 Faith: 7
-Runes: 420
+Runes: 8000
 Shards: 0,0,0,0,0,0
 Inventory:
