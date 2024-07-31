@@ -1,14 +1,13 @@
 
 #include "round_table.h"
 
-
-
 void runRoundTable(Player* player)
 {
     char cInput;
     printf("\nWELCOME\n");
   do
   {
+    player->nPotions = 8;
     displayRoundTable(player);
     scanf(" %c",&cInput);
     processInputs(player,cInput);
