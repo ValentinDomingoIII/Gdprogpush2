@@ -5,7 +5,11 @@
 #include "title.h"
 #include "structures.h"
 
-void buyKatans(Player* player);
-void BuySwords(Player* player);
+void buySeals(Player* plyaer);
+void buyStaves(Player* player);
+void buyGreatSwords(Player* player);
+void buyWhips(Player* player);
+void buyKatanas(Player* player);
+void buySwords(Player* player);
 void sellEquipment(Player* player);
 void processShop(Player* player);

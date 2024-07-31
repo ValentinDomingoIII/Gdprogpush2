@@ -1,0 +1,13 @@
+Name: 
+Job Class: Samurai
+Level: 1
+Health: 12
+Endurance: 13
+Dexterity: 15
+Strength: 12
+Intelligence: 9
+Faith: 8
+Runes: 8000
+Shards: 0,0,0,0,0,0
+Inventory:
+Equipped Weapon: None
