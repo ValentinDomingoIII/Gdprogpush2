@@ -27,7 +27,7 @@ void runCombat(Player* pPlayer, Area* pArea, int* pMaxHealth, int nFloorType, in
 
     for(int nTurn = 0; sEnemy.nHealth != 0 && *pMaxHealth != 0; nTurn++){
         if(nTurn % 2 == 0)
-            playerTurn(&nDodge, &nPlayerMove, pMaxHealth, nFloorType, &sEnemy, pArea, pPlayer); 
+            playerTurn(&nTurn, &nDodge, &nPlayerMove, pMaxHealth, nFloorType, &sEnemy, pArea, pPlayer); 
         else 
             enemyTurn(nDodge, &nPlayerMove, pMaxHealth, sEnemy);
         
@@ -57,11 +57,12 @@ void runCombat(Player* pPlayer, Area* pArea, int* pMaxHealth, int nFloorType, in
             scanf(" %c", &cContinue);
             pPlayer->runes = 0;
             pArea->nFlag = 1;
+            pArea->nFlag2 = 1;
         }
     }
 }
 
-void playerTurn(int* pDodge, int* pPlayerMove, int* pMaxHealth, int nFloorType, Enemy* pEnemy, Area* pArea, Player* pPlayer)
+void playerTurn(int* pTurn, int* pDodge, int* pPlayerMove, int* pMaxHealth, int nFloorType, Enemy* pEnemy, Area* pArea, Player* pPlayer)
 {
     char cInput;
     int nTemp, nRandom, nMaxHealthLower, nMaxHealthUpper;
@@ -104,6 +105,11 @@ void playerTurn(int* pDodge, int* pPlayerMove, int* pMaxHealth, int nFloorType, 
 
                 scanf(" %c", &cInput);
             } while(cInput != '0' && cInput != '1' && cInput != '2' && cInput != '3');
+
+            if(cInput == '0'){
+                *pTurn -= 1;
+                break;
+            }
 
             *pPlayerMove = processAttack(cInput, pPlayer, pEnemy);
             pEnemy->nHealth -= *pPlayerMove;

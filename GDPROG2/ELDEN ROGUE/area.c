@@ -31,7 +31,7 @@ void runArea(Area* pArea, Array sCoordinate, Player* pPlayer, int* pShard)
      printf("\n");
      processInput(cInput, pArea, sCoordinate, pPlayer, pShard, &nMaxHealth); 
 
-     } while(pArea->nFlag != 1);
+     } while(pArea->nFlag2 != 1);
 
 }
 
@@ -278,8 +278,10 @@ void processInput(char cInput, Area* pArea, Array sCoordinate, Player* pPlayer, 
                                                        printf("[INPUT]: ");
                                                        scanf(" %c", &cDoorInput);
                                                   } while (cDoorInput != '1' && cDoorInput != '2');
-                                                  if(cDoorInput == '1')
+                                                  if(cDoorInput == '1'){
                                                        pArea->nFlag = 1;
+                                                       pArea->nFlag2 = 1;
+                                                  }
                                              }
                                    }
                                         
