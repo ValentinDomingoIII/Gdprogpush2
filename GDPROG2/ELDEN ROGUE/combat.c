@@ -2,7 +2,8 @@
 
 void runCombat(Player* pPlayer, Area* pArea, int* pMaxHealth)
 {
-    int nRandom, nPlayerMove, nReward;
+    char cContinue;
+    int nRandom, nPlayerMove, nReward, nDodge;
     Enemy sEnemy;
 
     srand(time(NULL));
@@ -20,9 +21,9 @@ void runCombat(Player* pPlayer, Area* pArea, int* pMaxHealth)
 
     for(int nTurn = 0; sEnemy.nHealth != 0 && *pMaxHealth != 0; nTurn++){
         if(nTurn % 2 == 0)
-            playerTurn(&nPlayerMove, pMaxHealth, &sEnemy, pArea, pPlayer); 
+            playerTurn(&nDodge, &nPlayerMove, pMaxHealth, &sEnemy, pArea, pPlayer); 
         else 
-            enemyTurn(&nPlayerMove, pMaxHealth);
+            enemyTurn(nDodge, &nPlayerMove, pMaxHealth, sEnemy);
         
         if(sEnemy.nHealth == 0){
             greenText();
@@ -30,21 +31,27 @@ void runCombat(Player* pPlayer, Area* pArea, int* pMaxHealth)
             resetText();
             printf("\n[RUNES EARNED]: %d\n", nReward);
             pPlayer->runes += nReward;
+            printf("\n[PRESS ANY KEY TO CONTINUE]");
+            scanf(" %c", &cContinue);
+
         }
         else if(*pMaxHealth == 0){
             redText();
             printf("\n[YOU DIED]\n");
             resetText();
+            printf("\n[PRESS ANY KEY TO CONTINUE]");
+            scanf(" %c", &cContinue);
             pPlayer->runes = 0;
             pArea->nFlag = 1;
         }
     }
 }
 
-void playerTurn(int* pPlayerMove, int* pMaxHealth, Enemy* pEnemy, Area* pArea, Player* pPlayer)
+void playerTurn(int* pDodge, int* pPlayerMove, int* pMaxHealth, Enemy* pEnemy, Area* pArea, Player* pPlayer)
 {
     char cInput;
-    int nTemp;
+    int nTemp, nRandom;
+    *pDodge = 0;
 
     srand(time(NULL));
 
@@ -54,6 +61,7 @@ void playerTurn(int* pPlayerMove, int* pMaxHealth, Enemy* pEnemy, Area* pArea, P
 
         printf("\nPlayer Turn\n");
         printf("[%s]: %d\n", pPlayer->name, *pMaxHealth);
+        printf("[POTIONS]: %d\n", pPlayer->nPotions);
         printf("[%s]: %d", pEnemy->strEnemyName, pEnemy->nHealth);
         printf("\n[INCOMING ENEMY DAMAGE]: %d", pEnemy->nDamage);
 
@@ -92,7 +100,15 @@ void playerTurn(int* pPlayerMove, int* pMaxHealth, Enemy* pEnemy, Area* pArea, P
         else if(cInput == '2'){
 
             nTemp = pPlayer->stats.endurance + pPlayer->equippedWeapon->nEnd;
-            *pPlayerMove = (20 + (nTemp / 2)) / 100;
+            nTemp = (20 + (nTemp / 2));
+            nRandom = (rand() % 100) + 1;
+            if(nRandom <= nTemp)
+                *pDodge = 1;
+            else
+                *pDodge = 2;
+            
+            // printf("nRandom: [%d]\nnTemp: [%d]", nRandom, nTemp);
+            printf("\n[%s] DODGED!\n", pPlayer->name);
             
         }
 
@@ -114,9 +130,22 @@ void playerTurn(int* pPlayerMove, int* pMaxHealth, Enemy* pEnemy, Area* pArea, P
     } while(cInput == '0' || cInput == '3');
 }
 
-void enemyTurn(int* pPlayerMove, int* pMaxHealth)
+void enemyTurn(int nDodge, int* pPlayerMove, int* pMaxHealth, Enemy sEnemy)
 {
-    printf("\nEnemy\n");
+    if(nDodge == 1)
+        printf("\n[%s] MISSED!\n", sEnemy.strEnemyName);
+    else if(nDodge == 2){
+        printf("DODGE FAILED\n\n[%s] DEALT\n[DAMAGE]: %d\n", sEnemy.strEnemyName, sEnemy.nDamage);
+        *pMaxHealth -= sEnemy.nDamage; 
+    }
+        else if(nDodge == 0){
+            printf("\n[%s] DEALT\n[DAMAGE]: %d\n", sEnemy.strEnemyName, sEnemy.nDamage);
+            *pMaxHealth -= sEnemy.nDamage; 
+        }
+    
+    if(*pMaxHealth < 0)
+            *pMaxHealth = 0;
+    
 }
 
 void initializeEnemy(Enemy* pEnemy, Area* pArea, int nRandom)
