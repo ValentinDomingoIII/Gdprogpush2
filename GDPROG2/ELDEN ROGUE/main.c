@@ -44,6 +44,7 @@ int main() {
             player.nShards.nVolcano = 0;
             player.nShards.nLeyndell = 0;
             player.nShards.nElden = 0;
+            player.equippedWeapon = NULL;  // Initialize equippedWeapon to NULL
 
              int initialCapacity = 1;  // initial capacity
              player.inventory = malloc(initialCapacity * sizeof(Weapon));

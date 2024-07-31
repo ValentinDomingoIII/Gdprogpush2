@@ -215,6 +215,23 @@ void savePlayerData(Player* player) {
                     w->nCost);
         }
 
+        // Save equipped weapon
+        if (player->equippedWeapon) {
+            fprintf(file, "Equipped Weapon: %s,%d,%d,%d,%d,%d,%d,%d\n",
+                    player->equippedWeapon->weapon,
+                    player->equippedWeapon->nHp,
+                    player->equippedWeapon->nDex,
+                    player->equippedWeapon->nInt,
+                    player->equippedWeapon->nEnd,
+                    player->equippedWeapon->nStr,
+                    player->equippedWeapon->nFth,
+                    player->equippedWeapon->nCost);
+        } else {
+            fprintf(file, "Equipped Weapon: None\n");
+        }
+
+
+
         fclose(file);
         printf("Player data saved to player_data.txt.\n");
     } else {
@@ -277,6 +294,25 @@ void readPlayerData(Player* player) {
 
             player->inventorySize++;
         }
+
+        // Load equipped weapon
+        fgets(line, sizeof(line), file);
+        if (strncmp(line, "Equipped Weapon: None", 21) != 0) {
+            player->equippedWeapon = malloc(sizeof(Weapon));
+            sscanf(line, "Equipped Weapon: %[^,],%d,%d,%d,%d,%d,%d,%d\n",
+                   player->equippedWeapon->weapon,
+                   &player->equippedWeapon->nHp,
+                   &player->equippedWeapon->nDex,
+                   &player->equippedWeapon->nInt,
+                   &player->equippedWeapon->nEnd,
+                   &player->equippedWeapon->nStr,
+                   &player->equippedWeapon->nFth,
+                   &player->equippedWeapon->nCost);
+        } else {
+            player->equippedWeapon = NULL;
+        }
+
+  
 
         fclose(file);
         printf("Player data loaded from player_data.txt.\n");
