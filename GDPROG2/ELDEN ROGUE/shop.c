@@ -320,10 +320,10 @@ void buyKatanas(Player* player)
 
     // Display available katanas
     printf("\nAvailable Katanas:\n");
-    printf("1. Uchigatana - HP: 20, END: 35, DEX:15, STR: 30, INT:0, FTH:0 Cost: 1875\n");
-    printf("2. Moonveil - HP: 30, END: 40, DEX:20, STR: 45, INT:0, FTH:0 Cost: 3750\n");
-    printf("3. Rivers of Blood - HP: 40, END: 45, DEX:25, STR: 60, INT:0, FTH:0 Cost: 7500\n");
-    printf("4. Sword of Night And Flame - HP: 50, END: 50, DEX: 30, STR:75, INT:0, FTH:0 Cost: 15000\n");
+    printf("1. Uchigatana - \x1b[38;5;82m HP: 20 \x1b[0m, END: 35, \x1b[38;5;124m DEX: 15 \x1b[0m, STR: 30, INT: 0, FTH: 0 Cost: 1875\n");
+    printf("2. Moonveil - \x1b[38;5;82m HP: 30 \x1b[0m, END: 40, \x1b[38;5;124m DEX: 20 \x1b[0m, STR: 45, INT: 0, FTH: 0 Cost: 3750\n");
+    printf("3. Rivers of Blood - \x1b[38;5;82m HP: 40 \x1b[0m, END: 45, \x1b[38;5;124m DEX: 25 \x1b[0m, STR: 60, INT: 0, FTH: 0 Cost: 7500\n");
+    printf("4. Sword of Night And Flame - \x1b[38;5;82m HP: 50 \x1b[0m, END: 50, \x1b[38;5;124m DEX: 30 \x1b[0m, STR: 75, INT: 0, FTH: 0 Cost: 15000\n");
 
     printf("Enter the number of the katana you want to buy: ");
     scanf(" %c", &cChoice);
@@ -392,6 +392,7 @@ void buyKatanas(Player* player)
     printf("You have bought a %s\n", weaponToBuy.weapon);
 }
 
+
 void buySwords(Player* player)
 {
     char cChoice;
@@ -400,10 +401,10 @@ void buySwords(Player* player)
 
     // Display available swords
     printf("\nAvailable Swords:\n");
-    printf("1. Short Sword - HP: 0, END: 15, DEX: 13, STR: 15, INT: 15, FTH: 15 Cost: 100\n");
-    printf("2. Roger's Raper - HP: 10, END: 25, DEX: 18, STR: 35, INT: 35, FTH: 35 Cost: 2000\n");
-    printf("3. Coded Sword - HP: 20, END: 35, DEX: 21, STR: 40, INT: 40, FTH: 40 Cost: 4000\n");
-    printf("4. Sword of Night And Flame - HP: 30, END: 45, DEX: 25, STR: 55, INT: 55, FTH: 55 Cost: 8000\n");
+    printf("1. Short Sword - HP: 0, END: 15, \x1b[38;5;124m DEX: 13 \x1b[0m, STR: 15, INT: 15, FTH: 15 Cost: 100\n");
+    printf("2. Roger's Raper - HP: 10, END: 25, \x1b[38;5;124m DEX: 18 \x1b[0m, STR: 35, INT: 35, FTH: 35 Cost: 2000\n");
+    printf("3. Coded Sword - HP: 20, END: 35, \x1b[38;5;124m DEX: 21 \x1b[0m, STR: 40, INT: 40, FTH: 40 Cost: 4000\n");
+    printf("4. Sword of Night And Flame - HP: 30, END: 45, \x1b[38;5;124m DEX: 25 \x1b[0m, STR: 55, INT: 55, FTH: 55 Cost: 8000\n");
 
     printf("Enter the number of the sword you want to buy: ");
     scanf(" %c", &cChoice);
@@ -544,8 +545,10 @@ void processShop(Player* player)
         break;
     case '5':
         buyStaves(player);
+        break;
     case '6':
         buySeals(player);
+        break;
     case '7':
          sellEquipment(player);
          break;
