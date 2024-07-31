@@ -1,7 +1,7 @@
 #pragma once
 // #define MAX_NAME 26
 #include "title.h"
-#include "RoundTable.h"
+#include "round_table.h"
 #include "area.h"
 // typedef struct {
 //     char weapon[MAX_NAME];

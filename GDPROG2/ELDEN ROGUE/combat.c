@@ -2,15 +2,14 @@
 
 void runCombat(Player* pPlayer, Area* pArea, int* pMaxHealth)
 {
-    int nFlag = 0;
-    int nRandom;
+    int nRandom, nPlayerMove, nReward;
     Enemy sEnemy;
 
     srand(time(NULL));
     nRandom = (rand() % 3) + 1;
     initializeEnemy(&sEnemy, pArea, nRandom);
+    nReward = sEnemy.nHealth * 2;
 
-    printf("[HEALTH]: %d", *pMaxHealth);
     printf("\n\n");
     printf("[Weapon Stat]: %d\n", pPlayer->inventory->nStr);
 
@@ -19,26 +18,45 @@ void runCombat(Player* pPlayer, Area* pArea, int* pMaxHealth)
     printf("\n[PHYS RES]: %.2f\n[SORC DEF]: %.2f\n[INCANT DEF]: %.2f",sEnemy.fPhysDef, sEnemy.fSorcDef, sEnemy.fIncantDef);
     printf("\n");
 
-    for(int nTurn = 0; nFlag != 1; nTurn++){
+    for(int nTurn = 0; sEnemy.nHealth != 0 && *pMaxHealth != 0; nTurn++){
         if(nTurn % 2 == 0)
-            playerTurn(&nFlag, &sEnemy, pArea, pPlayer); 
+            playerTurn(&nPlayerMove, pMaxHealth, &sEnemy, pArea, pPlayer); 
         else 
-            printf("\nEnemy Turn\n");
+            enemyTurn(&nPlayerMove, pMaxHealth);
+        
+        if(sEnemy.nHealth == 0){
+            greenText();
+            printf("\n[ENEMY FELLED]\n");
+            resetText();
+            printf("\n[RUNES EARNED]: %d\n", nReward);
+            pPlayer->runes += nReward;
+        }
+        else if(*pMaxHealth == 0){
+            redText();
+            printf("\n[YOU DIED]\n");
+            resetText();
+            pPlayer->runes = 0;
+            pArea->nFlag = 1;
+        }
     }
 }
 
-void playerTurn(int* nFlag, Enemy* pEnemy, Area* pArea, Player* pPlayer)
+void playerTurn(int* pPlayerMove, int* pMaxHealth, Enemy* pEnemy, Area* pArea, Player* pPlayer)
 {
     char cInput;
-    int nPlayerMove;
+    int nTemp;
 
     srand(time(NULL));
 
     pEnemy->nDamage = (rand() % (pEnemy->nAttackUpper - pEnemy->nAttackLower) + pEnemy->nAttackLower) * pArea->nAreaIndex;
-    printf("\nPlayer Turn\n");
-    printf("\n[INCOMING ENEMY DAMAGE]: %d", pEnemy->nDamage);
 
     do {
+
+        printf("\nPlayer Turn\n");
+        printf("[%s]: %d\n", pPlayer->name, *pMaxHealth);
+        printf("[%s]: %d", pEnemy->strEnemyName, pEnemy->nHealth);
+        printf("\n[INCOMING ENEMY DAMAGE]: %d", pEnemy->nDamage);
+
         do {
 
             printf("\n[1]: ATTACK\n");
@@ -51,6 +69,7 @@ void playerTurn(int* nFlag, Enemy* pEnemy, Area* pArea, Player* pPlayer)
         } while(cInput != '1' && cInput != '2' && cInput != '3');
 
         if(cInput == '1'){
+
             do {
                 printf("\n[1]: PHYSICAL\n");
                 printf("[2]: SORCERY\n");
@@ -61,12 +80,43 @@ void playerTurn(int* nFlag, Enemy* pEnemy, Area* pArea, Player* pPlayer)
                 scanf(" %c", &cInput);
             } while(cInput != '0' && cInput != '1' && cInput != '2' && cInput != '3');
 
-            nPlayerMove = processAttack(cInput, pPlayer, pEnemy);
-            pEnemy->nHealth -= nPlayerMove;
-            printf("\nYou dealt [%d] damage!\n", nPlayerMove);
+            *pPlayerMove = processAttack(cInput, pPlayer, pEnemy);
+            pEnemy->nHealth -= *pPlayerMove;
+
+            if(pEnemy->nHealth < 0)
+                pEnemy->nHealth = 0;
+
+            printf("\nYou dealt [%d] damage!\n", *pPlayerMove);
         }
 
+        else if(cInput == '2'){
+
+            nTemp = pPlayer->stats.endurance + pPlayer->equippedWeapon->nEnd;
+            *pPlayerMove = (20 + (nTemp / 2)) / 100;
+            
+        }
+
+            else if(cInput == '3'){
+
+                if(pPlayer->nPotions == 0){
+                    printf("\nNo potions left!\n");
+                    break;
+                }
+                else{
+
+                pPlayer->nPotions--;
+                //equation for potion
+
+                }
+
+            }
+
     } while(cInput == '0' || cInput == '3');
+}
+
+void enemyTurn(int* pPlayerMove, int* pMaxHealth)
+{
+    printf("\nEnemy\n");
 }
 
 void initializeEnemy(Enemy* pEnemy, Area* pArea, int nRandom)
@@ -116,6 +166,9 @@ int processAttack(char cInput, Player* pPlayer, Enemy* pEnemy)
             break;
         case '3':
             return (pPlayer->stats.faith + pPlayer->inventory->nFth) * (1 - pEnemy->fIncantDef);
+            break;
+        default:
+            return 0;
             break;
     }
 }

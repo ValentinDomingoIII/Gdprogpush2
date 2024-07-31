@@ -8,7 +8,7 @@
 #include "character_creation.c"
 #include "area.c"
 #include "continue.c"
-#include "RoundTable.c"
+#include "round_table.c"
 #include "combat.c"
 #include "color.c"
 
@@ -36,7 +36,7 @@ int main() {
             player.stats.intelligence = 0;
             player.stats.faith = 0;
             //test runes
-            player.runes=8000;
+            player.runes = 8000;
             player.nShards.nStormveil = 0;
             player.nShards.nRaya = 0;
             player.nShards.nRedmane = 0;
@@ -48,7 +48,7 @@ int main() {
              player.inventory = malloc(initialCapacity * sizeof(Weapon));
              resetInventory(&player);
     runTitle(&player);
-      free(player.inventory);
+    free(player.inventory);
     
     return 0;
 }

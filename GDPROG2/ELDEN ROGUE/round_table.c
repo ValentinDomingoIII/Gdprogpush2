@@ -1,5 +1,5 @@
 #include "character_creation.h"
-#include "RoundTable.h"
+#include "round_table.h"
 #include "stdio.h"
 #include "area.h"
 #include "structures.h"
@@ -10,6 +10,7 @@ void runRoundTable(Player* player)
     printf("\nWELCOME\n");
   do
   {
+    player->nPotions = 8;
     displayRoundTable(player);
     scanf(" %c",&cInput);
     processInputs(player,cInput);
@@ -19,7 +20,7 @@ void runRoundTable(Player* player)
 
 void displayRoundTable(Player* player)
 {
- printf("\n======= ROUND TABLE =======\n");
+    printf("\n======= ROUND TABLE =======\n");
     printf("Player: %s\n", player->name);
     printf("Job: %s\n", player->jobName);
     printf("Level: %d\n", player->level);
@@ -33,7 +34,7 @@ void displayRoundTable(Player* player)
     printf("Faith: %d\n", player->stats.faith);
 
 
- if (player->equippedWeapon != NULL) {
+    if (player->equippedWeapon != NULL) {
         printf("\nEquipped Weapon: %s\n", player->equippedWeapon->weapon);
         printf("  HP: %d\n", player->equippedWeapon->nHp);
         printf("  STR: %d\n", player->equippedWeapon->nStr);
@@ -41,10 +42,12 @@ void displayRoundTable(Player* player)
         printf("  INT: %d\n", player->equippedWeapon->nInt);
         printf("  END: %d\n", player->equippedWeapon->nEnd);
         printf("  FTH: %d\n", player->equippedWeapon->nFth);
-    } else {
+    } 
+    else {
         printf("\nNo weapon equipped.\n");
     }
- printf("===========================\n");
+
+    printf("===========================\n");
     printf("[1] Fast travel\n");
     printf("[2] Level Up\n");
     printf("[3] Inventory\n");
@@ -172,10 +175,10 @@ void BuySwords(Player* player)
 
     // Display available swords
     printf("\nAvailable Swords:\n");
-    printf("1. Short Sword - HP: 0, STR: 15, DEX:13, INT:15 END:15, FTH:15 Cost: 100\n");
-    printf("2. Roger's Raper - HP: 10, STR: 35, DEX:18, INT:35, END:25, FTH:35 Cost: 2000\n");
-    printf("3.Coded Sword - HP: 20, STR: 40, DEX:21, INT:40, END:35, FTH:40  Cost: 4000\n");
-    printf("4. Sword of Night And Flame - HP: 30, STR:55 DEX: 25, INT:55, END:45, FTH:55 Cost: 8000\n");
+    printf("1. Short Sword - HP: 0, STR: 15, DEX: 13, INT: 15 END: 15, FTH: 15 Cost: 100\n");
+    printf("2. Roger's Rapier - HP: 10, STR: 35, DEX: 18, INT: 35, END: 25, FTH: 35 Cost: 2000\n");
+    printf("3. Coded Sword - HP: 20, STR: 40, DEX: 21, INT: 40, END: 35, FTH: 40  Cost: 4000\n");
+    printf("4. Sword of Night And Flame - HP: 30, STR: 55 DEX: 25, INT: 55, END: 45, FTH: 55 Cost: 8000\n");
 
     printf("Enter the number of the sword you want to buy: ");
     scanf(" %c", &cChoice);
@@ -200,7 +203,7 @@ void BuySwords(Player* player)
             weaponToBuy.nEnd = 25;
             weaponToBuy.nFth = 35;
             weaponToBuy.nCost = 2000;
-            strcpy(weaponToBuy.weapon, "Roger's Raper");
+            strcpy(weaponToBuy.weapon, "Roger's Rapier");
             cost = 2000;
             break;
         
@@ -224,7 +227,7 @@ void BuySwords(Player* player)
             weaponToBuy.nEnd = 45;
             weaponToBuy.nFth = 55;
             weaponToBuy.nCost = 8000;
-            strcpy(weaponToBuy.weapon, "Coded Sword");
+            strcpy(weaponToBuy.weapon, "Sword of Night And Flame");
             cost = 8000;
             break;
 
@@ -295,14 +298,14 @@ void processShop(Player* player)
     printf("\n\tSHOP\n");
 
     printf("Category:\n");
-    printf("[1]Swords\n");
-    printf("[2]Katanas\n");
-    printf("[3]Whips\n");
-    printf("[4]GreatSwords\n");
-    printf("[5]Staves\n");
-    printf("[6]Seals\n");
-    printf("[7]Sell\n");
-    printf("[0]Back\n");
+    printf("[1]: Swords\n");
+    printf("[2]: Katanas\n");
+    printf("[3]: Whips\n");
+    printf("[4]: GreatSwords\n");
+    printf("[5]: Staves\n");
+    printf("[6]: Seals\n");
+    printf("[7]: Sell\n");
+    printf("[0]: Back\n");
 
     printf("INPUT:");
     scanf(" %c",&cChoice);
