@@ -1,6 +1,6 @@
 #include "area.h"
 #include "combat.h"
-#include "RoundTable.h"
+#include "round_table.h"
 #include "character_creation.h"
 #include "color.h"
 #include "string.h"
@@ -21,7 +21,7 @@ void runArea(Area* pArea, Array sCoordinate, Player* pPlayer, int nShard)
 {
      char cInput; 
      int nMaxHealth = 100 * ((pPlayer->stats.health + pPlayer->equippedWeapon->nHp) / 2);
-     // printf("[%d]", nMaxHealth);
+     printf("[%d]", pPlayer->equippedWeapon->nHp);
 
      do{
      

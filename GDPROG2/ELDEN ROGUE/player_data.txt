@@ -1,12 +1,13 @@
-Name: Nathan
-Job Class: Astrologer
+Name: Nicolo
+Job Class: Warrior
 Level: 1
-Health: 9
-Endurance: 9
-Dexterity: 12
-Strength: 8
-Intelligence: 16
-Faith: 7
-Runes: 8000
+Health: 11
+Endurance: 11
+Dexterity: 16
+Strength: 10
+Intelligence: 10
+Faith: 8
+Runes: 8016
 Shards: 0,0,0,0,0,0
 Inventory:
+Short Sword,0,13,15,15,15,15,100

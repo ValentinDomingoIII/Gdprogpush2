@@ -1,7 +1,7 @@
 #pragma once
 
 #include "character_creation.h"
-#include "RoundTable.h"
+#include "round_table.h"
 #include "area.h"
 #include "shop.h"
 

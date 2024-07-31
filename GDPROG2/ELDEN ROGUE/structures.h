@@ -2,8 +2,6 @@
 
 #include "definitions.h"
 
-typedef char AreaName[31]; // experimental
-
 struct array {
     int nRowSize, nColumnSize;
     int nRowOffset;
@@ -75,11 +73,12 @@ typedef struct{
 }Inv;
 
 
-typedef struct {
+struct player {
     char name[MAX_NAME];
     char jobName[MAX_NAME];
     int level; 
     int runes;
+    int nPotions;
     Weapon *inventory;  // Dynamic array of weapons
     int inventorySize;  // Current number of weapons
     int inventoryCapacity;  // Capacity of the inventory
@@ -87,7 +86,9 @@ typedef struct {
     Shards nShards;
     Stats stats;
     
-} Player;
+};
+
+typedef struct player Player;
 
 struct enemy {
     char strEnemyName[MAX_NAME];
