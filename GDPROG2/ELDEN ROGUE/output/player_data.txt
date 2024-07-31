@@ -1,4 +1,4 @@
-Name: test45
+Name: ok
 Job Class: Warrior
 Level: 1
 Health: 11

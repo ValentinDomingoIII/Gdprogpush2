@@ -1,5 +1,5 @@
 
-#include "RoundTable.h"
+#include "round_table.h"
 
 
 
@@ -32,7 +32,12 @@ void displayRoundTable(Player* player)
     printf("Faith: %d\n", player->stats.faith);
 
 
- if (player->equippedWeapon != NULL) {
+ 
+    
+     if (player->equippedWeapon != NULL)  {
+        printf("\nNo weapon equipped.\n");
+    }
+    else{
         printf("\nEquipped Weapon: %s\n", player->equippedWeapon->weapon);
         printf("  HP: %d\n", player->equippedWeapon->nHp);
         printf("  STR: %d\n", player->equippedWeapon->nStr);
@@ -40,9 +45,9 @@ void displayRoundTable(Player* player)
         printf("  INT: %d\n", player->equippedWeapon->nInt);
         printf("  END: %d\n", player->equippedWeapon->nEnd);
         printf("  FTH: %d\n", player->equippedWeapon->nFth);
-    } else {
-        printf("\nNo weapon equipped.\n");
     }
+
+
  printf("===========================\n");
     printf("[1] Fast travel\n");
     printf("[2] Level Up\n");
@@ -206,7 +211,7 @@ void processInputs(Player* player, char cInput)
     switch (cInput)
     {
     case '1':
-        processFastTravel(player);
+      //  processFastTravel(player);
         break;
     break;
     case '2':
@@ -226,7 +231,7 @@ void processInputs(Player* player, char cInput)
     }
 }
 
-void processFastTravel(Player* pPlayer)
+/*void processFastTravel(Player* pPlayer)
 {
     char cAreaIndex;
     char cFastTravel;
@@ -325,4 +330,4 @@ void processFastTravel(Player* pPlayer)
     } while(cFastTravel != '1' && cFastTravel != '2');
 
     areaSelect(cAreaIndex, cFastTravel, pPlayer);
-}
+}*/
