@@ -207,12 +207,17 @@ void processFastTravel(Player* pPlayer)
     char cAreaIndex;
     char cFastTravel;
     int nTotalShards;
-    int nFlag = 0;
+    int nFlag1 = 0;
+    int nFlag2, nFlag3;
 
     nTotalShards = pPlayer->nShards.nStormveil + pPlayer->nShards.nRaya + pPlayer->nShards.nVolcano + pPlayer->nShards.nRedmane;
 
     do {
 
+    do {
+    
+    nFlag2 = 0;
+    nFlag3 = 0;
     printf("SELECT YOUR DESTINATION\n\n");
     printf("[1]: [STORMVEIL CASTLE]\n");
     printf("[2]: [RAYA LUCARIA]\n");
@@ -229,18 +234,23 @@ void processFastTravel(Player* pPlayer)
     else
         printf("[6]: [ELDEN THRONE]\n");
 
+    printf("\n[0]: BACK\n");
+
     printf("\n[INPUT]: ");
     scanf(" %c", &cAreaIndex);
 
     if(cAreaIndex == '5' && nTotalShards < 2)
-            cAreaIndex = '0';
+        cAreaIndex = '7';
     
     if(cAreaIndex == '6' && pPlayer->nShards.nLeyndell == 0)
-        cAreaIndex = '0';
+        cAreaIndex = '7';
 
-    } while (cAreaIndex != '1' && cAreaIndex != '2' && cAreaIndex != '3' && cAreaIndex != '4' && cAreaIndex != '5' && cAreaIndex != '6');
+    if(cAreaIndex == '0')
+        nFlag2 = 1;
 
-    do {
+    } while (cAreaIndex != '0' && cAreaIndex != '1' && cAreaIndex != '2' && cAreaIndex != '3' && cAreaIndex != '4' && cAreaIndex != '5' && cAreaIndex != '6');
+
+    while(cFastTravel != '1' && cFastTravel != '2' && nFlag2 != 1 && nFlag3 != 1){
 
         printf("\nSELECT YOUR DESTINATION\n\n");
         printf("[1]: Starting Area\n");
@@ -251,7 +261,7 @@ void processFastTravel(Player* pPlayer)
                     printf("[2]: Boss Area\n");
                 else{
                     printf("[LOCKED]: Boss Area\n");
-                    nFlag = 1;
+                    nFlag1 = 1;
                 }
                 break;
 
@@ -260,7 +270,7 @@ void processFastTravel(Player* pPlayer)
                     printf("[2]: Boss Area\n");
                 else{
                     printf("[LOCKED]: Boss Area\n");
-                    nFlag = 1;
+                    nFlag1 = 1;
                 }
                 break;
             
@@ -269,7 +279,7 @@ void processFastTravel(Player* pPlayer)
                     printf("[2]: Boss Area\n");
                 else{
                     printf("[LOCKED]: Boss Area\n");
-                    nFlag = 1;
+                    nFlag1 = 1;
                 }
                 break;
             
@@ -278,7 +288,7 @@ void processFastTravel(Player* pPlayer)
                     printf("[2]: Boss Area\n");
                 else{
                     printf("[LOCKED]: Boss Area\n");
-                    nFlag = 1;
+                    nFlag1 = 1;
                 }
                 break;
             
@@ -287,18 +297,27 @@ void processFastTravel(Player* pPlayer)
                     printf("[2]: Boss Area\n");
                 else{
                     printf("[LOCKED]: Boss Area\n");
-                    nFlag = 1;
+                    nFlag1 = 1;
                 }
                 break;
         }
 
+        printf("\n[0]: BACK\n\n");
         printf("[INPUT]: ");
         scanf(" %c", &cFastTravel);
 
-        if(nFlag == 1 && cFastTravel == '2')
-            cFastTravel = '0';
+        if(nFlag1 == 1 && cFastTravel == '2')
+            cFastTravel = 'a';
 
-    } while(cFastTravel != '1' && cFastTravel != '2');
+        if(cFastTravel == '0'){
+            nFlag2 = 2;
+            nFlag3 = 1;
+        }
 
-    areaSelect(cAreaIndex, cFastTravel, pPlayer);
+    };
+
+    } while(nFlag2 != 0 && nFlag2 != 1);
+
+    if(nFlag2 == 0 && nFlag3 == 0)
+        areaSelect(cAreaIndex, cFastTravel, pPlayer);
 }

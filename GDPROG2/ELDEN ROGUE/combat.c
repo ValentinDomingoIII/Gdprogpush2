@@ -218,13 +218,13 @@ int processAttack(char cInput, Player* pPlayer, Enemy* pEnemy)
 {
     switch(cInput){
         case '1':
-            return (pPlayer->stats.strength + pPlayer->inventory->nStr) * (1 - pEnemy->fPhysDef);
+            return (pPlayer->stats.strength + pPlayer->equippedWeapon->nStr) * (1 - pEnemy->fPhysDef);
             break;
         case '2':
-            return (pPlayer->stats.intelligence + pPlayer->inventory->nInt) * (1 - pEnemy->fSorcDef);
+            return (pPlayer->stats.intelligence + pPlayer->equippedWeapon->nInt) * (1 - pEnemy->fSorcDef);
             break;
         case '3':
-            return (pPlayer->stats.faith + pPlayer->inventory->nFth) * (1 - pEnemy->fIncantDef);
+            return (pPlayer->stats.faith + pPlayer->equippedWeapon->nFth) * (1 - pEnemy->fIncantDef);
             break;
         default:
             return 0;
