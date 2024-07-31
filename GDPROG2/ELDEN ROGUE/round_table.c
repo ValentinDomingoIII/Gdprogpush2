@@ -211,7 +211,7 @@ void processInputs(Player* player, char cInput)
     switch (cInput)
     {
     case '1':
-      //  processFastTravel(player);
+        processFastTravel(player);
         break;
     break;
     case '2':
@@ -231,7 +231,7 @@ void processInputs(Player* player, char cInput)
     }
 }
 
-/*void processFastTravel(Player* pPlayer)
+void processFastTravel(Player* pPlayer)
 {
     char cAreaIndex;
     char cFastTravel;
@@ -330,4 +330,4 @@ void processInputs(Player* player, char cInput)
     } while(cFastTravel != '1' && cFastTravel != '2');
 
     areaSelect(cAreaIndex, cFastTravel, pPlayer);
-}*/
+}

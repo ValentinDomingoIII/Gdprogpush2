@@ -6,7 +6,7 @@
 
 #include "title.c"
 #include "character_creation.c"
-//#include "area.c"
+#include "area.c"
 #include "continue.c"
 #include "round_table.c"
 #include "combat.c"
