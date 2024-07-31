@@ -1,12 +1,12 @@
-Name: Val
-Job Class: Prophet
+Name: ok
+Job Class: Warrior
 Level: 1
-Health: 10
-Endurance: 8
-Dexterity: 10
-Strength: 11
-Intelligence: 7
-Faith: 16
-Runes: 420
-Shards: 1,1,1,1,1,0
+Health: 11
+Endurance: 11
+Dexterity: 16
+Strength: 10
+Intelligence: 10
+Faith: 8
+Runes: 8000
+Shards: 0,0,0,0,0,0
 Inventory:
