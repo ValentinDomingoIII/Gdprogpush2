@@ -17,11 +17,10 @@
 // FAST TRAVEL = 8 Starting Area | 10 Boss Area
 // CREDITS TILE = 12
 
-void runArea(Area* pArea, Array sCoordinate, Player* pPlayer, int nShard)
+void runArea(Area* pArea, Array sCoordinate, Player* pPlayer, int* pShard)
 {
      char cInput; 
      int nMaxHealth = 100 * ((pPlayer->stats.health + pPlayer->equippedWeapon->nHp) / 2);
-     printf("[%d]", pPlayer->equippedWeapon->nHp);
 
      do{
      
@@ -30,9 +29,9 @@ void runArea(Area* pArea, Array sCoordinate, Player* pPlayer, int nShard)
      printf("\n[RUNES]: %d\t[INPUT]: ", pPlayer->runes);
      scanf(" %c", &cInput);
      printf("\n");
-     processInput(cInput, pArea, sCoordinate, pPlayer, nShard, &nMaxHealth); 
+     processInput(cInput, pArea, sCoordinate, pPlayer, pShard, &nMaxHealth); 
 
-     } while(pArea->nFlag != 1);
+     } while(pArea->nFlag2 != 1);
 
 }
 
@@ -184,7 +183,7 @@ void printFloor(Area* pArea, Array sCoordinate)
 
 }
 
-void processInput(char cInput, Area* pArea, Array sCoordinate, Player* pPlayer, int nShard, int* pMaxHealth) 
+void processInput(char cInput, Area* pArea, Array sCoordinate, Player* pPlayer, int* pShard, int* pMaxHealth) 
 {
      int nRandom;
      char cDoorInput;
@@ -257,12 +256,19 @@ void processInput(char cInput, Area* pArea, Array sCoordinate, Player* pPlayer, 
                                              printf("You obtained [%d] Runes!\n", nRandom);
                                         } 
                                         else
-                                             runCombat(pPlayer, pArea, pMaxHealth);
-                                             // printf("Enemy!\n");
+                                             runCombat(pPlayer, pArea, pMaxHealth, 0, pShard);
                                    pArea->aBigArray[i][j] = 1;
                               }
+                                   else if(pArea->aBigArray[i][j] == 5){
+                                        runCombat(pPlayer, pArea, pMaxHealth, 1, pShard);
+                                        pArea->aBigArray[i][j] = 1;
+                                        if(pArea->nAreaIndex == 6)
+                                             runCombat(pPlayer, pArea, pMaxHealth, 2, pShard);
+                                        pArea->aBigArray[i][j] = 1;
+
+                                   }
                                    else if(pArea->aBigArray[i][j] == 9 || pArea->aBigArray[i][j] == 11){ 
-                                             if(pArea->aBigArray[i][j] == 11 && nShard != 1)
+                                             if(pArea->aBigArray[i][j] == 11 && *pShard != 1)
                                                   printf("Fast Travel Unavailable! You must have this area's shard.\n");
                                              else{
                                                   do {
@@ -272,8 +278,10 @@ void processInput(char cInput, Area* pArea, Array sCoordinate, Player* pPlayer, 
                                                        printf("[INPUT]: ");
                                                        scanf(" %c", &cDoorInput);
                                                   } while (cDoorInput != '1' && cDoorInput != '2');
-                                                  if(cDoorInput == '1')
+                                                  if(cDoorInput == '1'){
                                                        pArea->nFlag = 1;
+                                                       pArea->nFlag2 = 1;
+                                                  }
                                              }
                                    }
                                         
@@ -286,7 +294,7 @@ void processInput(char cInput, Area* pArea, Array sCoordinate, Player* pPlayer, 
 
 }
 
-void floorPass(Player* pPlayer, Area* pArea, int* pPlayerLocation, int nShard)
+void floorPass(Player* pPlayer, Area* pArea, int* pPlayerLocation, int* pShard)
 {
      
      do{
@@ -295,46 +303,46 @@ void floorPass(Player* pPlayer, Area* pArea, int* pPlayerLocation, int nShard)
                if(pPlayerLocation[i] == 1){
                     switch(i){
                          case 0:
-                              runArea(pArea, pArea->a1, pPlayer, nShard);
+                              runArea(pArea, pArea->a1, pPlayer, pShard);
                               break;
                          case 1:
-                              runArea(pArea, pArea->a2, pPlayer, nShard);
+                              runArea(pArea, pArea->a2, pPlayer, pShard);
                               break;
                          case 2:
-                              runArea(pArea, pArea->a3, pPlayer, nShard);
+                              runArea(pArea, pArea->a3, pPlayer, pShard);
                               break;
                          case 3: 
-                              runArea(pArea, pArea->a4, pPlayer, nShard);
+                              runArea(pArea, pArea->a4, pPlayer, pShard);
                               break;
                          case 4:
-                              runArea(pArea, pArea->a5, pPlayer, nShard);
+                              runArea(pArea, pArea->a5, pPlayer, pShard);
                               break;
                          case 5: 
-                              runArea(pArea, pArea->a6, pPlayer, nShard);
+                              runArea(pArea, pArea->a6, pPlayer, pShard);
                               break;
                          case 6: 
-                              runArea(pArea, pArea->a7, pPlayer, nShard);
+                              runArea(pArea, pArea->a7, pPlayer, pShard);
                               break;
                          case 7: 
-                              runArea(pArea, pArea->a8, pPlayer, nShard);
+                              runArea(pArea, pArea->a8, pPlayer, pShard);
                               break;
                          case 8: 
-                              runArea(pArea, pArea->a9, pPlayer, nShard);
+                              runArea(pArea, pArea->a9, pPlayer, pShard);
                               break;
                          case 9: 
-                              runArea(pArea, pArea->a10, pPlayer, nShard);
+                              runArea(pArea, pArea->a10, pPlayer, pShard);
                               break;
                          case 10: 
-                              runArea(pArea, pArea->a11, pPlayer, nShard);
+                              runArea(pArea, pArea->a11, pPlayer, pShard);
                               break;
                          case 11: 
-                              runArea(pArea, pArea->a12, pPlayer, nShard);
+                              runArea(pArea, pArea->a12, pPlayer, pShard);
                               break;
                          case 12: 
-                              runArea(pArea, pArea->a13, pPlayer, nShard);
+                              runArea(pArea, pArea->a13, pPlayer, pShard);
                               break;
                          case 13: 
-                              runArea(pArea, pArea->a14, pPlayer, nShard);
+                              runArea(pArea, pArea->a14, pPlayer, pShard);
                               break;
 
                     }
@@ -390,12 +398,12 @@ void areaSelect(char cAreaIndex, char cFastTravelTile, Player* pPlayer)
             if(cFastTravelTile == '1'){
                sArea.aBigArray[6][1] = 9; 
                int aPlayerLocation[3] = {1,0,0};
-               floorPass(pPlayer, &sArea, aPlayerLocation, pPlayer->nShards.nStormveil);
+               floorPass(pPlayer, &sArea, aPlayerLocation, &pPlayer->nShards.nStormveil);
             }
             else{
                sArea.aBigArray[14][2] = 11;
                int aPlayerLocation[3] = {0,0,1};
-               floorPass(pPlayer, &sArea, aPlayerLocation, pPlayer->nShards.nStormveil);
+               floorPass(pPlayer, &sArea, aPlayerLocation, &pPlayer->nShards.nStormveil);
             }
 
             break;
@@ -441,12 +449,12 @@ void areaSelect(char cAreaIndex, char cFastTravelTile, Player* pPlayer)
             if(cFastTravelTile == '1'){
                sArea.aBigArray[0][2] = 9;
                int aPlayerLocation[5] = {1,0,0,0,0};
-               floorPass(pPlayer, &sArea, aPlayerLocation, pPlayer->nShards.nRaya);
+               floorPass(pPlayer, &sArea, aPlayerLocation, &pPlayer->nShards.nRaya);
             }
             else{
                sArea.aBigArray[24][3] = 11;
                int aPlayerLocation[5] = {0,0,0,0,1};
-               floorPass(pPlayer, &sArea, aPlayerLocation, pPlayer->nShards.nRaya);
+               floorPass(pPlayer, &sArea, aPlayerLocation, &pPlayer->nShards.nRaya);
             }
 
             break;
@@ -504,12 +512,12 @@ void areaSelect(char cAreaIndex, char cFastTravelTile, Player* pPlayer)
             if(cFastTravelTile == '1'){
                sArea.aBigArray[1][0] = 9;
                int aPlayerLocation[7] = {1,0,0,0,0,0,0};
-               floorPass(pPlayer, &sArea, aPlayerLocation, pPlayer->nShards.nRedmane);
+               floorPass(pPlayer, &sArea, aPlayerLocation, &pPlayer->nShards.nRedmane);
             }
             else{
                sArea.aBigArray[30][6] = 11;
                int aPlayerLocation[7] = {0,0,0,0,0,0,1};
-               floorPass(pPlayer, &sArea, aPlayerLocation, pPlayer->nShards.nRedmane);
+               floorPass(pPlayer, &sArea, aPlayerLocation, &pPlayer->nShards.nRedmane);
             }
           
             break;
@@ -567,12 +575,12 @@ void areaSelect(char cAreaIndex, char cFastTravelTile, Player* pPlayer)
             if(cFastTravelTile == '1'){
                sArea.aBigArray[4][2] = 9;
                int aPlayerLocation[7] = {1,0,0,0,0,0,0};
-               floorPass(pPlayer, &sArea, aPlayerLocation, pPlayer->nShards.nVolcano);
+               floorPass(pPlayer, &sArea, aPlayerLocation, &pPlayer->nShards.nVolcano);
             }
             else{
                sArea.aBigArray[34][2] = 11;
                int aPlayerLocation[7] = {0,0,0,0,0,0,1};
-               floorPass(pPlayer, &sArea, aPlayerLocation, pPlayer->nShards.nVolcano);
+               floorPass(pPlayer, &sArea, aPlayerLocation, &pPlayer->nShards.nVolcano);
             }
 
             break;
@@ -672,12 +680,12 @@ void areaSelect(char cAreaIndex, char cFastTravelTile, Player* pPlayer)
             if(cFastTravelTile == '1'){
                sArea.aBigArray[3][1] = 9;
                int aPlayerLocation[14] = {1,0,0,0,0,0,0,0,0,0,0,0,0,0};
-               floorPass(pPlayer, &sArea, aPlayerLocation, pPlayer->nShards.nLeyndell);
+               floorPass(pPlayer, &sArea, aPlayerLocation, &pPlayer->nShards.nLeyndell);
             }
             else{
                sArea.aBigArray[76][2] = 11;
                int aPlayerLocation[14] = {0,0,0,0,0,0,0,0,0,0,0,0,0,1};
-               floorPass(pPlayer, &sArea, aPlayerLocation, pPlayer->nShards.nLeyndell);
+               floorPass(pPlayer, &sArea, aPlayerLocation, &pPlayer->nShards.nLeyndell);
             }
 
             break;
@@ -707,7 +715,7 @@ void areaSelect(char cAreaIndex, char cFastTravelTile, Player* pPlayer)
             if(cFastTravelTile == '1'){
                sArea.aBigArray[8][1] = 9;
                int aPlayerLocation[3] = {1,0,0};
-               floorPass(pPlayer, &sArea, aPlayerLocation, pPlayer->nShards.nElden);
+               floorPass(pPlayer, &sArea, aPlayerLocation, &pPlayer->nShards.nElden);
             }
           //   else{
           //      sArea.aBigArray[14][2] = 11;

@@ -14,6 +14,7 @@ struct area {
     int nFloorCount;
     int nAreaIndex;
     int nFlag;
+    int nFlag2;
     char strEnemy1[MAX_NAME];
     char strEnemy2[MAX_NAME];
     char strEnemy3[MAX_NAME];

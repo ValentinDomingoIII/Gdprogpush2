@@ -1,8 +1,10 @@
 #pragma once
+
 #include "structures.h"
 #include "character_creation.h"
 #include "title.h"
 #include "shop.h"
+#include "stddef.h"
 
 void runRoundTable(Player* player);
 void displayRoundTable(Player* player);
