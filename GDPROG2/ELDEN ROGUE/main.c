@@ -15,10 +15,15 @@
 #include "shop.c"
 #include "files.c"
 
+
+
+
+//commenty
 int main() {
 
     system("chcp 65001");
     initializePlayer();
+    
     
     return 0;
 }
