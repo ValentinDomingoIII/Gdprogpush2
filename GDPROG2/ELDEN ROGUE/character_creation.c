@@ -4,6 +4,8 @@
 
 void runCharCreation(Player* player) {
     char cChoice = 0;
+    int isConfirmed = 0; // Flag to check if character is confirmed
+    int exitCreation = 0; // Flag to check if we should exit the creation loop
     /*
 
 
@@ -22,28 +24,28 @@ void runCharCreation(Player* player) {
     printf("\t\n");
  
 
-   do {
+     while (!isConfirmed && !exitCreation) {
         printCharCreationScreen();
         scanf(" %c", &cChoice);
         processCharInputs(cChoice, player);
-        if (cChoice == 3 && (strlen(player->name) == 0 || strlen(player->jobName) == 0))
-         {
-            cChoice = -1; // Reset Choice to continue the loop
+
+        if (cChoice == '3') {
+            if (strlen(player->name) == 0 || strlen(player->jobName) == 0) {
+                printf("\n\t\t\t\t\t\t\tError: Name and Job Class must be set before confirming.\n");
+            } else {
+                isConfirmed = 1;
+            }
+        } else if (cChoice == '0') {
+            exitCreation = 1;
         }
-    } while (cChoice != '3' && cChoice != '0');
-    if (cChoice=='3')
-    {
-    savePlayerData(player);
-    runRoundTable(player);
     }
 
-    if (cChoice=='0')
-    {
+    if (isConfirmed) {
+        savePlayerData(player);
+        runRoundTable(player);
+    } else if (exitCreation) {
         runTitle(player);
     }
-    
-    
-   
 }
 
 void printCharCreationScreen() {
@@ -69,7 +71,7 @@ int processCharInputs(char cChoice, Player* player) {
             break;
         case '3':
             if (strlen(player->name) == 0 || strlen(player->jobName) == 0) {
-                printf("\n\t\t\t\t\t\t\tError: Name and Job Class must be set before confirming.\n");
+              
                 break;
             }
             printf("Character Created!\n");

@@ -4,7 +4,7 @@
 void runRoundTable(Player* player)
 {
     char cInput;
-    printf("\nWELCOME\n");
+   // printf("\nWELCOME\n");
   do
   {
     player->nPotions = 8;
@@ -17,18 +17,26 @@ void runRoundTable(Player* player)
 
 void displayRoundTable(Player* player)
 {
- printf("\n======= ROUND TABLE =======\n");
-    printf("Player: %s\n", player->name);
-    printf("Job: %s\n", player->jobName);
-    printf("Level: %d\n", player->level);
-    printf("Runes: %d\n", player->runes);
-    printf("Stats:\n\n");
-    printf("Health: %d\n", player->stats.health);
-    printf("Endurance: %d\n", player->stats.endurance);
-    printf("Dexterity: %d\n", player->stats.dexterity);
-    printf("Strength: %d\n", player->stats.strength);
-    printf("Intelligence: %d\n", player->stats.intelligence);
-    printf("Faith: %d\n", player->stats.faith);
+    printf("\n\x1b[48;5;242m ╔════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╗\x1b[0m \n");
+    printf(" \x1b[48;5;242m║   ▀██▀▀█▄    ▄▄█▀▀██   ▀██▀  ▀█▀ ▀█▄   ▀█▀ ▀██▀▀█▄   █▀▀██▀▀█     █     ▀██▀▀█▄   ▀██▀      ▀██▀▀▀▀█     ▀██▀  ▀██▀  ▄▄█▀▀██   ▀██▀      ▀██▀▀█▄   ║\x1b[0m \n");
+    printf(" \x1b[48;5;242m║    ██   ██  ▄█▀    ██   ██    █   █▀█   █   ██   ██     ██       ███     ██   ██   ██        ██  ▄        ██    ██  ▄█▀    ██   ██        ██   ██  ║\x1b[0m \n");
+    printf(" \x1b[48;5;242m║    ██▀▀█▀   ██      ██  ██    █   █ ▀█▄ █   ██    ██    ██      █  ██    ██▀▀▀█▄   ██        ██▀▀█        ██▀▀▀▀██  ██      ██  ██        ██    ██ ║\x1b[0m \n");
+    printf(" \x1b[48;5;242m║    ██   █▄  ▀█▄     ██  ██    █   █   ███   ██    ██    ██     ▄▀▀▀▀█▄   ██    ██  ██        ██           ██    ██  ▀█▄     ██  ██        ██    ██ ║\x1b[0m \n");
+    printf(" \x1b[48;5;242m║   ▄██▄  ▀█▀  ▀▀█▄▄▄█▀    ▀█▄▄▀   ▄█▄   ▀█  ▄██▄▄▄█▀    ▄██▄   ▄█▄  ▄██▄ ▄██▄▄▄█▀  ▄██▄▄▄▄▄█ ▄██▄▄▄▄▄█    ▄██▄  ▄██▄  ▀▀█▄▄▄█▀  ▄██▄▄▄▄▄█ ▄██▄▄▄█▀  ║\x1b[0m \n");
+    printf(" \x1b[48;5;242m╚════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╝\x1b[0m \n");
+
+                                                                                                                                  
+
+// printf("\n\n\t\t\t\t\t\t\t======= ROUND TABLE =======\n");
+    printf("\t\t\t\t\t\t\t Player: %s | %s\n", player->name,player->jobName);
+    printf("\t\t\t\t\t\t\t Level: %d\n", player->level);
+    printf("\t\t\t\t\t\t\t Runes: %d\n", player->runes);
+    printf("\t\t\t\t\t\t\t Stats:\n\n");
+    printf("\t\t\t\t\t Health: %d\t\t Strength: %d\n", player->stats.health,player->stats.strength);
+    printf("\t\t\t\t\t Endurance: %d\t\t Intelligence: %d\n", player->stats.endurance, player->stats.intelligence);
+    printf("\t\t\t\t\t Dexterity: %d\t\t Faith: %d\n", player->stats.dexterity,player->stats.faith);
+ 
+ 
 
 
  
