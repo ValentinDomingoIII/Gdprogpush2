@@ -4,19 +4,36 @@
 
 void runCharCreation(Player* player) {
     int choice = 0;
-    printf("Character Creation\n");
+    /*
+
+
+
+
+ 
+                                                                                                                                    
+                                                                                                                                    
+
+    */
+    printf("\t  ▄▄█▀▀▀▄█ ▀██                                ▄                        ▄▄█▀▀▀▄█                           ▄    ██                   \n");
+    printf("\t▄█▀     ▀   ██ ▄▄    ▄▄▄▄   ▄▄▄ ▄▄   ▄▄▄▄   ▄██▄    ▄▄▄▄  ▄▄▄ ▄▄     ▄█▀     ▀  ▄▄▄ ▄▄    ▄▄▄▄   ▄▄▄▄   ▄██▄  ▄▄▄    ▄▄▄   ▄▄ ▄▄▄   \n");
+    printf("\t██          ██▀ ██  ▀▀ ▄██   ██▀ ▀▀ ▀▀ ▄██   ██   ▄█▄▄▄██  ██▀ ▀▀    ██          ██▀ ▀▀ ▄█▄▄▄██ ▀▀ ▄██   ██    ██  ▄█  ▀█▄  ██  ██  \n");
+    printf("\t▀█▄      ▄  ██  ██  ▄█▀ ██   ██     ▄█▀ ██   ██   ██       ██        ▀█▄      ▄  ██     ██      ▄█▀ ██   ██    ██  ██   ██  ██  ██  \n");
+    printf("\t ▀▀█▄▄▄▄▀  ▄██▄ ██▄ ▀█▄▄▀█▀ ▄██▄    ▀█▄▄▀█▀  ▀█▄▀  ▀█▄▄▄▀ ▄██▄        ▀▀█▄▄▄▄▀  ▄██▄     ▀█▄▄▄▀ ▀█▄▄▀█▀  ▀█▄▀ ▄██▄  ▀█▄▄█▀ ▄██▄ ██▄ \n");
+    printf("\t\n");
+ 
+
     do {
-        printCharCreationScreen(player);
+        printCharCreationScreen();
         scanf("%d", &choice);
         processCharInputs(choice, player);
-    } while (choice != 3 && choice != 4);
+    } while (choice != 3 && choice != 0);
     if (choice==3)
     {
     savePlayerData(player);
     runRoundTable(player);
     }
 
-    if (choice==4)
+    if (choice==0)
     {
         runTitle(player);
     }
@@ -25,12 +42,15 @@ void runCharCreation(Player* player) {
    
 }
 
-void printCharCreationScreen(Player* player) {
-    displayCurrentCharacter(player);
-    printf("1. INPUT NAME\n");
-    printf("2. INPUT JOB CLASS\n");
-    printf("3. CONFIRM\n");
-    printf("4. BACK\n");
+void printCharCreationScreen() {
+  //  displayCurrentCharacter(player);
+    printf("\n\t\t\t\t\t\t\t[1] INPUT NAME\n");
+    printf("\t\t\t\t\t\t\t[2] INPUT JOB CLASS\n");
+    printf("\t\t\t\t\t\t\t[3] CONFIRM\n");
+    printf("\t\t\t\t\t\t\t[4] VIEW CURRENT CHARACTER\n");
+    printf("\t\t\t\t\t\t\t[0] BACK\n");
+
+    printf("\n\t\t\t\t\t\t\t[INPUT]:");
 }
 
 int processCharInputs(int choice, Player* player) {
@@ -57,6 +77,9 @@ int processCharInputs(int choice, Player* player) {
 
             break;
         case 4:
+            displayCurrentCharacter(player);
+            break;
+        case 0:
             printf("Exiting Character Creation...\n");
             break;
         default:
@@ -67,21 +90,29 @@ int processCharInputs(int choice, Player* player) {
 }
 
 void runNameInput(Player* player) {
-    printf("Name: ");
-    scanf(" %25[^\n]", player->name);
-    printf("\nName: %s\n", player->name);
+    char tempName[100]; // Temporary buffer to read input
+
+    printf("\t\t\t\t\t\t\t Name (max 25 characters): ");
+    scanf(" %99[^\n]", tempName); // Read input into the temporary buffer
+
+    // Manually copy up to 25 characters
+    int i;
+    for (i = 0; i < 25 && tempName[i] != '\0'; i++) {
+        player->name[i] = tempName[i];
+    }
+    player->name[i] = '\0'; // Ensure null-termination
+
+    printf("\n\t\t\t\t\t\t\t Name: %s\n", player->name);
 }
 
 void runJobClassInput(Player* player) {
     int jobClass;
-    printf("Select Job Class:\n");
-    printf("1. Vagabond\n");
-    printf("2. Samurai\n");
-    printf("3. Warrior\n");
-    printf("4. Hero\n");
-    printf("5. Astrologer\n");
-    printf("6. Prophet\n");
-    printf("Enter choice: ");
+    printf("\n\t\t\t\t\t\t\t Select Job Class:\n");
+    printf("\t\t\t\t\t\t [1] Vagabond\t[4] Hero\n");
+    printf("\t\t\t\t\t\t [2] Samurai\t[5] Astrologer\n");
+    printf("\t\t\t\t\t\t [3] Warrior\t[6] Prophet\n");
+  
+    printf("\t\t\t\t\t\t\tEnter choice: ");
     scanf("%d", &jobClass);
     setJobClass(player, jobClass);
 }
@@ -155,168 +186,24 @@ void setJobClass(Player* player, int jobClass) {
 }
 
 void displayCurrentCharacter(Player* player) {
-    printf("Current Character Details:\n");
+    printf("\t\t\t\t\t\t\t Current Character Details:\n");
     if (strlen(player->name) == 0) {
-        printf("Name: Not Set\n");
+        printf("\t\t\t\t\t\t\t Name: Not Set\n");
     } else {
-        printf("Name: %s\n", player->name);
+        printf("\t\t\t\t\t\t\t Name: %s\n", player->name);
     }
     if (strlen(player->jobName) == 0) {
-        printf("Job Class: Not Set\n");
+        printf("\t\t\t\t\t\t\t Job Class: Not Set\n");
     } else {
-        printf("Job Class: %s\n", player->jobName);
+        printf("\t\t\t\t\t\t\t Job Class: %s\n", player->jobName);
     }
-    printf("Level: %d\n", player->level);
-    printf("Health: %d\n", player->stats.health);
-    printf("Endurance: %d\n", player->stats.endurance);
-    printf("Dexterity: %d\n", player->stats.dexterity);
-    printf("Strength: %d\n", player->stats.strength);
-    printf("Intelligence: %d\n", player->stats.intelligence);
-    printf("Faith: %d\n", player->stats.faith);
+    printf("\t\t\t\t\t\t\t Level: %d\t Strength: %d\n", player->level, player->stats.strength);
+    printf("\t\t\t\t\t\t\t Health: %d\t Intelligence: %d\n", player->stats.health,player->stats.intelligence);
+    printf("\t\t\t\t\t\t\t Endurance: %d\t Faith: %d\n", player->stats.endurance,player->stats.faith);
+    printf("\t\t\t\t\t\t\t Dexterity: %d\n", player->stats.dexterity);
+
     printf("\n");
 }
 
 
-void savePlayerData(Player* player) {
-    FILE *file = fopen("player_data.txt", "w");
-    if (file) {
-        fprintf(file, "Name: %s\n", player->name);
-        fprintf(file, "Job Class: %s\n", player->jobName);
-        fprintf(file, "Level: %d\n", player->level);
-        fprintf(file, "Health: %d\n", player->stats.health);
-        fprintf(file, "Endurance: %d\n", player->stats.endurance);
-        fprintf(file, "Dexterity: %d\n", player->stats.dexterity);
-        fprintf(file, "Strength: %d\n", player->stats.strength);
-        fprintf(file, "Intelligence: %d\n", player->stats.intelligence);
-        fprintf(file, "Faith: %d\n", player->stats.faith);
-        fprintf(file, "Runes: %d\n", player->runes);
 
-        // Save shards
-        fprintf(file, "Shards: %d,%d,%d,%d,%d,%d\n",
-                player->nShards.nStormveil,
-                player->nShards.nRaya,
-                player->nShards.nRedmane,
-                player->nShards.nVolcano,
-                player->nShards.nLeyndell,
-                player->nShards.nElden);
-
-        // Save inventory
-        fprintf(file, "Inventory:\n");
-        for (int i = 0; i < player->inventorySize; i++) {
-            Weapon* w = &player->inventory[i];
-            fprintf(file, "%s,%d,%d,%d,%d,%d,%d,%d\n",
-                    w->weapon,
-                    w->nHp,
-                    w->nDex,
-                    w->nInt,
-                    w->nEnd,
-                    w->nStr,
-                    w->nFth,
-                    w->nCost);
-        }
-
-        // Save equipped weapon
-        if (player->equippedWeapon) {
-            fprintf(file, "Equipped Weapon: %s,%d,%d,%d,%d,%d,%d,%d\n",
-                    player->equippedWeapon->weapon,
-                    player->equippedWeapon->nHp,
-                    player->equippedWeapon->nDex,
-                    player->equippedWeapon->nInt,
-                    player->equippedWeapon->nEnd,
-                    player->equippedWeapon->nStr,
-                    player->equippedWeapon->nFth,
-                    player->equippedWeapon->nCost);
-        } else {
-            fprintf(file, "Equipped Weapon: None\n");
-        }
-
-
-
-        fclose(file);
-        printf("Player data saved to player_data.txt.\n");
-    } else {
-        printf("Error: Could not open file for writing.\n");
-    }
-}
-
-void readPlayerData(Player* player) {
-    FILE *file = fopen("player_data.txt", "r");
-    if (file) {
-        fscanf(file, "Name: %25[^\n]\n", player->name);
-        fscanf(file, "Job Class: %25[^\n]\n", player->jobName);
-        fscanf(file, "Level: %d\n", &player->level);
-        fscanf(file, "Health: %d\n", &player->stats.health);
-        fscanf(file, "Endurance: %d\n", &player->stats.endurance);
-        fscanf(file, "Dexterity: %d\n", &player->stats.dexterity);
-        fscanf(file, "Strength: %d\n", &player->stats.strength);
-        fscanf(file, "Intelligence: %d\n", &player->stats.intelligence);
-        fscanf(file, "Faith: %d\n", &player->stats.faith);
-        fscanf(file, "Runes: %d\n", &player->runes);
-
-        // Load shards
-        fscanf(file, "Shards: %d,%d,%d,%d,%d,%d\n",
-               &player->nShards.nStormveil,
-               &player->nShards.nRaya,
-               &player->nShards.nRedmane,
-               &player->nShards.nVolcano,
-               &player->nShards.nLeyndell,
-               &player->nShards.nElden);
-
-        // Load inventory
-        char line[256];
-        fgets(line, sizeof(line), file); // Skip "Inventory:" line
-        player->inventorySize = 0; // Reset inventory size
-
-        while (fgets(line, sizeof(line), file)) {
-            if (strcmp(line, "\n") == 0) break; // End of inventory section
-
-            if (player->inventorySize >= player->inventoryCapacity) {
-                // Increase capacity
-                player->inventoryCapacity *= 2;
-                player->inventory = realloc(player->inventory, player->inventoryCapacity * sizeof(Weapon));
-                if (player->inventory == NULL) {
-                    perror("Memory allocation failed");
-                    fclose(file);
-                    return;
-                }
-            }
-
-            Weapon* w = &player->inventory[player->inventorySize];
-            sscanf(line, "%[^,],%d,%d,%d,%d,%d,%d,%d",
-                   w->weapon,
-                   &w->nHp,
-                   &w->nDex,
-                   &w->nInt,
-                   &w->nEnd,
-                   &w->nStr,
-                   &w->nFth,
-                   &w->nCost);
-
-            player->inventorySize++;
-        }
-
-        // Load equipped weapon
-        fgets(line, sizeof(line), file);
-        if (strncmp(line, "Equipped Weapon: None", 21) != 0) {
-            player->equippedWeapon = malloc(sizeof(Weapon));
-            sscanf(line, "Equipped Weapon: %[^,],%d,%d,%d,%d,%d,%d,%d\n",
-                   player->equippedWeapon->weapon,
-                   &player->equippedWeapon->nHp,
-                   &player->equippedWeapon->nDex,
-                   &player->equippedWeapon->nInt,
-                   &player->equippedWeapon->nEnd,
-                   &player->equippedWeapon->nStr,
-                   &player->equippedWeapon->nFth,
-                   &player->equippedWeapon->nCost);
-        } else {
-            player->equippedWeapon = NULL;
-        }
-
-  
-
-        fclose(file);
-        printf("Player data loaded from player_data.txt.\n");
-    } else {
-        printf("Error: Could not open file for reading.\n");
-    }
-}

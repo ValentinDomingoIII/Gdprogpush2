@@ -5,6 +5,7 @@
 #include "title.h"
 #include "shop.h"
 #include "stddef.h"
+#include "files.h"
 
 void runRoundTable(Player* player);
 void displayRoundTable(Player* player);

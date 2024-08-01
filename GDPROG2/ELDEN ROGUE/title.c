@@ -24,10 +24,10 @@ printf("\t\x1b[48;5;0m\x1b[38;5;220m▄█████████████�
 printf("\t\x1b[48;5;0m                                                                                                                 \x1b[0m  \n");
  
 
-    printf("\n\t\t\t\t\t\t\t[1] START\n");
-    printf("\t\t\t\t\t\t\t[2] CONTINUE\n");
-    printf("\t\t\t\t\t\t\t[0] EXIT\n");
-    printf("\n\t\t\t\t\t\t\t[INPUT]: ");
+    printf("\n\t\t\t\t\t\t\t [1] START\n");
+    printf("\t\t\t\t\t\t\t [2] CONTINUE\n");
+    printf("\t\t\t\t\t\t\t [0] EXIT\n");
+    printf("\n\t\t\t\t\t\t\t [INPUT]: ");
 
                                                                                                                 
                                                                                                                 

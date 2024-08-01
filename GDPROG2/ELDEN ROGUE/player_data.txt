@@ -1,11 +1,11 @@
-Name: 
-Job Class: Samurai
+Name: Velvet
+Job Class: Warrior
 Level: 1
-Health: 12
-Endurance: 13
-Dexterity: 15
-Strength: 12
-Intelligence: 9
+Health: 11
+Endurance: 11
+Dexterity: 16
+Strength: 10
+Intelligence: 10
 Faith: 8
 Runes: 8000
 Shards: 0,0,0,0,0,0
