@@ -1,14 +1,13 @@
-Name: ok
-Job Class: Samurai
+Name: 
+Job Class: 
 Level: 1
-Health: 12
-Endurance: 13
-Dexterity: 15
-Strength: 12
-Intelligence: 9
-Faith: 8
-Runes: 7900
+Health: 0
+Endurance: 0
+Dexterity: 0
+Strength: 0
+Intelligence: 0
+Faith: 0
+Runes: 8000
 Shards: 0,0,0,0,0,0
 Inventory:
-Short Sword,0,13,15,15,15,15,100
-Equipped Weapon: Short Sword,0,13,15,15,15,15,100
+Equipped Weapon: None

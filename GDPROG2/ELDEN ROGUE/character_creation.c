@@ -3,13 +3,13 @@
 //#include "stdio.h"
 
 void runCharCreation(Player* player) {
-    int choice = 0;
+    char cChoice = 0;
     /*
 
 
 
 
- 
+                        BEEEG SPPAAACCCEE FOOORR NOOOO RREEEAAAASSOOOONN
                                                                                                                                     
                                                                                                                                     
 
@@ -22,18 +22,21 @@ void runCharCreation(Player* player) {
     printf("\t\n");
  
 
-    do {
+   do {
         printCharCreationScreen();
-        scanf("%d", &choice);
-        processCharInputs(choice, player);
-    } while (choice != 3 && choice != 0);
-    if (choice==3)
+        scanf(" %c", &cChoice);
+        processCharInputs(cChoice, player);
+        if (cChoice == 3 && (strlen(player->name) == 0 || strlen(player->jobName) == 0)) {
+            cChoice = -1; // Reset Choice to continue the loop
+        }
+    } while (cChoice != 3 && cChoice != 0);
+    if (cChoice==3)
     {
     savePlayerData(player);
     runRoundTable(player);
     }
 
-    if (choice==0)
+    if (cChoice==0)
     {
         runTitle(player);
     }
@@ -53,8 +56,8 @@ void printCharCreationScreen() {
     printf("\n\t\t\t\t\t\t\t[INPUT]:");
 }
 
-int processCharInputs(int choice, Player* player) {
-    switch (choice) {
+int processCharInputs(char cChoice, Player* player) {
+    switch (cChoice) {
         case 1:
             runNameInput(player);
             break;
@@ -62,6 +65,10 @@ int processCharInputs(int choice, Player* player) {
             runJobClassInput(player);
             break;
         case 3:
+            if (strlen(player->name) == 0 || strlen(player->jobName) == 0) {
+                printf("\n\t\t\t\t\t\t\tError: Name and Job Class must be set before confirming.\n");
+                break;
+            }
             printf("Character Created!\n");
             printf("Name: %s\n", player->name);
             printf("Job Class: %s\n", player->jobName);
@@ -74,7 +81,6 @@ int processCharInputs(int choice, Player* player) {
             printf("Faith: %d\n", player->stats.faith);
 
             
-
             break;
         case 4:
             displayCurrentCharacter(player);
@@ -83,24 +89,24 @@ int processCharInputs(int choice, Player* player) {
             printf("Exiting Character Creation...\n");
             break;
         default:
-            printf("Invalid choice. Please try again.\n");
+            printf("Invalid Choice. Please try again.\n");
             break;
     }
     return 0;
 }
 
 void runNameInput(Player* player) {
-    char tempName[100]; // Temporary buffer to read input
+    char cTempName[100]; // Temporary buffer to read input
 
-    printf("\t\t\t\t\t\t\t Name (max 25 characters): ");
-    scanf(" %99[^\n]", tempName); // Read input into the temporary buffer
+    printf("\t\t\t\t\t\t\tName (max 25 characters): ");
+    scanf(" %99[^\n]", cTempName); // Read input into the temporary buffer
 
     // Manually copy up to 25 characters
     int i;
-    for (i = 0; i < 25 && tempName[i] != '\0'; i++) {
-        player->name[i] = tempName[i];
+    for (i = 0; i < 25 && cTempName[i] != '\0'; i++) {
+        player->name[i] = cTempName[i];
     }
-    player->name[i] = '\0'; // Ensure null-termination
+    player->name[i] = '\0'; // null byte at the end
 
     printf("\n\t\t\t\t\t\t\t Name: %s\n", player->name);
 }
@@ -108,11 +114,11 @@ void runNameInput(Player* player) {
 void runJobClassInput(Player* player) {
     int jobClass;
     printf("\n\t\t\t\t\t\t\t Select Job Class:\n");
-    printf("\t\t\t\t\t\t [1] Vagabond\t[4] Hero\n");
-    printf("\t\t\t\t\t\t [2] Samurai\t[5] Astrologer\n");
-    printf("\t\t\t\t\t\t [3] Warrior\t[6] Prophet\n");
+    printf("\t\t\t\t\t\t [1] Vagabond\t\t[4] Hero\n");
+    printf("\t\t\t\t\t\t [2] Samurai\t\t[5] Astrologer\n");
+    printf("\t\t\t\t\t\t [3] Warrior\t\t[6] Prophet\n");
   
-    printf("\t\t\t\t\t\t\tEnter choice: ");
+    printf("\t\t\t\t\t\t\tEnter Choice: ");
     scanf("%d", &jobClass);
     setJobClass(player, jobClass);
 }
