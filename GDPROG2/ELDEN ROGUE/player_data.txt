@@ -1,0 +1,14 @@
+Name: test
+Job Class: Warrior
+Level: 1
+Health: 11
+Endurance: 11
+Dexterity: 16
+Strength: 10
+Intelligence: 10
+Faith: 8
+Runes: 5000
+Shards: 0,0,0,0,0,0
+Inventory:
+Claymore,15,9,0,10,20,0,3000
+Equipped Weapon: Claymore,15,9,0,10,20,0,3000
