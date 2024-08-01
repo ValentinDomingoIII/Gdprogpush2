@@ -7,4 +7,4 @@ void blueText();
 void yellowText();
 void pinkText();
 void grayText();
-void tabRepeat(int nX);
+void purpleText();

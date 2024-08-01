@@ -17,10 +17,9 @@
 // FAST TRAVEL = 8 Starting Area | 10 Boss Area
 // CREDITS TILE = 12
 
-void runArea(Area* pArea, Array sCoordinate, Player* pPlayer, int* pShard)
+void runArea(Area* pArea, Array sCoordinate, Player* pPlayer, int* pShard, int* pMaxHealth)
 {
      char cInput; 
-     int nMaxHealth = 100 * ((pPlayer->stats.health + pPlayer->equippedWeapon->nHp) / 2);
 
      do{
      
@@ -29,7 +28,15 @@ void runArea(Area* pArea, Array sCoordinate, Player* pPlayer, int* pShard)
      printf("\n[RUNES]: %d\t[INPUT]: ", pPlayer->runes);
      scanf(" %c", &cInput);
      printf("\n");
-     processInput(cInput, pArea, sCoordinate, pPlayer, pShard, &nMaxHealth); 
+     processInput(cInput, pArea, sCoordinate, pPlayer, pShard, pMaxHealth); 
+
+     // for(int i = sCoordinate.nRowOffset; i < sCoordinate.nRowSize + sCoordinate.nRowOffset; i++){
+     //      printf("\n");
+     //      for(int j = 0; j < sCoordinate.nColumnSize; j++){
+     //           printf("%d, ", pArea->aBigArray[i][j]);
+     //      }
+     //      printf("\n");
+     // }
 
      } while(pArea->nFlag2 != 1);
 
@@ -81,7 +88,7 @@ void printFloor(Area* pArea, Array sCoordinate)
                               printf("┌───┐");
                               resetText();
                          }
-                              else if(pArea->aBigArray[i][j] == 6){
+                              else if(pArea->aBigArray[i][j] == 6 || pArea->aBigArray[i][j] >= 50){
                                    yellowText();
                                    printf("┌───┐");
                                    resetText();
@@ -94,6 +101,11 @@ void printFloor(Area* pArea, Array sCoordinate)
                                         else if(pArea->aBigArray[i][j] == -1){
                                              printf("     ");
                                         }
+                                             else if(pArea->aBigArray[i][j] == 12){
+                                                  purpleText();
+                                                  printf("┌───┐");
+                                                  resetText();
+                                             }
 
           }
 
@@ -122,7 +134,7 @@ void printFloor(Area* pArea, Array sCoordinate)
                                    printf("│   │");
                                    resetText();
                          }
-                              else if(pArea->aBigArray[i][j] == 6){
+                              else if(pArea->aBigArray[i][j] == 6 || pArea->aBigArray[i][j] >= 50){
                                    yellowText();
                                    printf("│   │");
                                    resetText();
@@ -135,6 +147,11 @@ void printFloor(Area* pArea, Array sCoordinate)
                                         else if(pArea->aBigArray[i][j] == -1){
                                              printf("     ");
                                         }
+                                             else if(pArea->aBigArray[i][j] == 12){
+                                                  purpleText();
+                                                  printf("│   │");
+                                                  resetText();
+                                             }
           }
 
           printf("\n");
@@ -162,7 +179,7 @@ void printFloor(Area* pArea, Array sCoordinate)
                                    printf("└───┘");
                                    resetText();
                          }
-                              else if(pArea->aBigArray[i][j] == 6){
+                              else if(pArea->aBigArray[i][j] == 6 || pArea->aBigArray[i][j] >= 50){
                                    yellowText();
                                    printf("└───┘");
                                    resetText();
@@ -175,6 +192,11 @@ void printFloor(Area* pArea, Array sCoordinate)
                                         else if(pArea->aBigArray[i][j] == -1){
                                              printf("     ");
                                         }
+                                            else if(pArea->aBigArray[i][j] == 12){
+                                                  purpleText();
+                                                  printf("└───┘");
+                                                  resetText();
+                                             } 
           }
 
           printf("\n");
@@ -284,6 +306,18 @@ void processInput(char cInput, Area* pArea, Array sCoordinate, Player* pPlayer, 
                                                   }
                                              }
                                    }
+                                        else if(pArea->aBigArray[i][j] >= 50){
+                                             pArea->aBigArray[i][j] -= 1;
+                                             pPlayer->sLocation.nCurrentRow = i;
+                                             pPlayer->sLocation.nCurrentColumn = j;
+                                             pArea->nFlag2 = 1;
+                                        }
+                                             else if(pArea->aBigArray[i][j] == 13){
+                                                  if(pPlayer->nShards.nElden != 1)
+                                                       printf("\nYou must defeat the boss of this area to unlock the credits tile!\n");
+                                                  // else 
+                                                       //runCredits();
+                                             }
                                         
                               
 
@@ -294,62 +328,134 @@ void processInput(char cInput, Area* pArea, Array sCoordinate, Player* pPlayer, 
 
 }
 
-void floorPass(Player* pPlayer, Area* pArea, int* pPlayerLocation, int* pShard)
+void floorPass(Player* pPlayer, Area* pArea, int* pShard)
 {
+     int nValue;
+     int nMaxHealth = 100 * ((pPlayer->stats.health + pPlayer->equippedWeapon->nHp) / 2);
+
+     switch(pArea->nFloorChoice){
+          case 1:
+               nValue = 50;
+               break;
+          case 2:
+               if(pArea->nAreaIndex == 1)
+                    nValue = 54;
+               else if(pArea->nAreaIndex == 2)
+                    nValue = 58;
+                    else if(pArea->nAreaIndex == 3 || pArea->nAreaIndex == 4)
+                         nValue = 62;
+                         else if(pArea->nAreaIndex == 5)
+                              nValue = 76;
+               break;
+     }
      
-     do{
+     for(int i = 0; pArea->nFlag != 1; i++){
+          pArea->nFlag2 = 0; 
 
-          for (int i = 0; i < pArea->nFloorCount; i++){
-               if(pPlayerLocation[i] == 1){
-                    switch(i){
-                         case 0:
-                              runArea(pArea, pArea->a1, pPlayer, pShard);
-                              break;
-                         case 1:
-                              runArea(pArea, pArea->a2, pPlayer, pShard);
-                              break;
-                         case 2:
-                              runArea(pArea, pArea->a3, pPlayer, pShard);
-                              break;
-                         case 3: 
-                              runArea(pArea, pArea->a4, pPlayer, pShard);
-                              break;
-                         case 4:
-                              runArea(pArea, pArea->a5, pPlayer, pShard);
-                              break;
-                         case 5: 
-                              runArea(pArea, pArea->a6, pPlayer, pShard);
-                              break;
-                         case 6: 
-                              runArea(pArea, pArea->a7, pPlayer, pShard);
-                              break;
-                         case 7: 
-                              runArea(pArea, pArea->a8, pPlayer, pShard);
-                              break;
-                         case 8: 
-                              runArea(pArea, pArea->a9, pPlayer, pShard);
-                              break;
-                         case 9: 
-                              runArea(pArea, pArea->a10, pPlayer, pShard);
-                              break;
-                         case 10: 
-                              runArea(pArea, pArea->a11, pPlayer, pShard);
-                              break;
-                         case 11: 
-                              runArea(pArea, pArea->a12, pPlayer, pShard);
-                              break;
-                         case 12: 
-                              runArea(pArea, pArea->a13, pPlayer, pShard);
-                              break;
-                         case 13: 
-                              runArea(pArea, pArea->a14, pPlayer, pShard);
-                              break;
+          switch(nValue){
+               case 50: //floor 1
+                    if(i != 0)
+                         findDoor(pPlayer, pArea, pArea->a1, nValue);
+                    runArea(pArea, pArea->a1, pPlayer, pShard, &nMaxHealth);
+                    nValue = pArea->aBigArray[pPlayer->sLocation.nCurrentRow][pPlayer->sLocation.nCurrentColumn];
+                    pPlayer->sLocation.nPreviousFloor = 50;
+                    break;
+               case 52: //floor 2
+                    findDoor(pPlayer, pArea, pArea->a2, nValue);
+                    runArea(pArea, pArea->a2, pPlayer, pShard, &nMaxHealth);
+                    nValue = pArea->aBigArray[pPlayer->sLocation.nCurrentRow][pPlayer->sLocation.nCurrentColumn];
+                    pPlayer->sLocation.nPreviousFloor = 52;
+                    break;
+               case 54: //floor 3
+                    if(i != 0)
+                         findDoor(pPlayer, pArea, pArea->a3, nValue);
+                    runArea(pArea, pArea->a3, pPlayer, pShard, &nMaxHealth);
+                    nValue = pArea->aBigArray[pPlayer->sLocation.nCurrentRow][pPlayer->sLocation.nCurrentColumn];
+                    pPlayer->sLocation.nPreviousFloor = 54;
+                    break;
+               case 56: //floor 4
+                    findDoor(pPlayer, pArea, pArea->a4, nValue);
+                    runArea(pArea, pArea->a4, pPlayer, pShard, &nMaxHealth);
+                    nValue = pArea->aBigArray[pPlayer->sLocation.nCurrentRow][pPlayer->sLocation.nCurrentColumn];
+                    pPlayer->sLocation.nPreviousFloor = 56;
+                    break;
+               case 58: //floor 5
+                    if(i != 0)
+                         findDoor(pPlayer, pArea, pArea->a5, nValue);
+                    runArea(pArea, pArea->a5, pPlayer, pShard, &nMaxHealth);
+                    nValue = pArea->aBigArray[pPlayer->sLocation.nCurrentRow][pPlayer->sLocation.nCurrentColumn];
+                    pPlayer->sLocation.nPreviousFloor = 58;
+                    break;
+               case 60: //floor 6
+                    findDoor(pPlayer, pArea, pArea->a6, nValue);
+                    runArea(pArea, pArea->a6, pPlayer, pShard, &nMaxHealth);
+                    nValue = pArea->aBigArray[pPlayer->sLocation.nCurrentRow][pPlayer->sLocation.nCurrentColumn];
+                    pPlayer->sLocation.nPreviousFloor = 60;
+                    break;
+               case 62: //floor 7
+                    if(i != 0)
+                         findDoor(pPlayer, pArea, pArea->a7, nValue);
+                    runArea(pArea, pArea->a7, pPlayer, pShard, &nMaxHealth);
+                    nValue = pArea->aBigArray[pPlayer->sLocation.nCurrentRow][pPlayer->sLocation.nCurrentColumn];
+                    pPlayer->sLocation.nPreviousFloor = 62;
+                    break;
+               case 64: //floor 8
+                    findDoor(pPlayer, pArea, pArea->a8, nValue);
+                    runArea(pArea, pArea->a8, pPlayer, pShard, &nMaxHealth);
+                    nValue = pArea->aBigArray[pPlayer->sLocation.nCurrentRow][pPlayer->sLocation.nCurrentColumn];
+                    pPlayer->sLocation.nPreviousFloor = 64;
+                    break;
+               case 66: //floor 9
+                    findDoor(pPlayer, pArea, pArea->a9, nValue);
+                    runArea(pArea, pArea->a9, pPlayer, pShard, &nMaxHealth);
+                    nValue = pArea->aBigArray[pPlayer->sLocation.nCurrentRow][pPlayer->sLocation.nCurrentColumn];
+                    pPlayer->sLocation.nPreviousFloor = 66;
+                    break;
+               case 68: //floor 10
+                    findDoor(pPlayer, pArea, pArea->a10, nValue);
+                    runArea(pArea, pArea->a10, pPlayer, pShard, &nMaxHealth);
+                    nValue = pArea->aBigArray[pPlayer->sLocation.nCurrentRow][pPlayer->sLocation.nCurrentColumn];
+                    pPlayer->sLocation.nPreviousFloor = 68;
+                    break;
+               case 70: //floor 11
+                    findDoor(pPlayer, pArea, pArea->a11, nValue);
+                    runArea(pArea, pArea->a11, pPlayer, pShard, &nMaxHealth);
+                    nValue = pArea->aBigArray[pPlayer->sLocation.nCurrentRow][pPlayer->sLocation.nCurrentColumn];
+                    pPlayer->sLocation.nPreviousFloor = 70;
+                    break;
+               case 72: //floor 12
+                    findDoor(pPlayer, pArea, pArea->a12, nValue);
+                    runArea(pArea, pArea->a12, pPlayer, pShard, &nMaxHealth);
+                    nValue = pArea->aBigArray[pPlayer->sLocation.nCurrentRow][pPlayer->sLocation.nCurrentColumn];
+                    pPlayer->sLocation.nPreviousFloor = 72;
+                    break;
+               case 74: //floor 13
+                    findDoor(pPlayer, pArea, pArea->a13, nValue);
+                    runArea(pArea, pArea->a13, pPlayer, pShard, &nMaxHealth);
+                    nValue = pArea->aBigArray[pPlayer->sLocation.nCurrentRow][pPlayer->sLocation.nCurrentColumn];
+                    pPlayer->sLocation.nPreviousFloor = 74;
+                    break;
+               case 76: //floor 14
+                    if(i != 0)
+                         findDoor(pPlayer, pArea, pArea->a14, nValue);
+                    runArea(pArea, pArea->a14, pPlayer, pShard, &nMaxHealth);
+                    nValue = pArea->aBigArray[pPlayer->sLocation.nCurrentRow][pPlayer->sLocation.nCurrentColumn];
+                    pPlayer->sLocation.nPreviousFloor = 76;
+                    break;
+          }
+               
+     }
+}
 
-                    }
+void findDoor(Player* pPlayer, Area* pArea, Array sCoordinate, int nValue)
+{
+     for(int i = sCoordinate.nRowOffset; i < sCoordinate.nRowSize + sCoordinate.nRowOffset; i++){
+          for(int j = 0; j < sCoordinate.nColumnSize; j++){
+               if(pArea->aBigArray[i][j] == pPlayer->sLocation.nPreviousFloor){
+                    pArea->aBigArray[i][j] += 1;
                }
           }
-
-     } while(pArea->nFlag != 1);
+     }
 }
 
 void initializeArea(int nRow, int nColumn, int nRowOffset, Area* pArea, int* pTemp)
@@ -367,6 +473,7 @@ void initializeArea(int nRow, int nColumn, int nRowOffset, Area* pArea, int* pTe
 void areaSelect(char cAreaIndex, char cFastTravelTile, Player* pPlayer)
 {
      Area sArea;
+     sArea.nFlag = 0;
 
      switch(cAreaIndex){
         case '1':
@@ -397,13 +504,13 @@ void areaSelect(char cAreaIndex, char cFastTravelTile, Player* pPlayer)
 
             if(cFastTravelTile == '1'){
                sArea.aBigArray[6][1] = 9; 
-               int aPlayerLocation[3] = {1,0,0};
-               floorPass(pPlayer, &sArea, aPlayerLocation, &pPlayer->nShards.nStormveil);
+               sArea.nFloorChoice = 1;
+               floorPass(pPlayer, &sArea, &pPlayer->nShards.nStormveil);
             }
             else{
                sArea.aBigArray[14][2] = 11;
-               int aPlayerLocation[3] = {0,0,1};
-               floorPass(pPlayer, &sArea, aPlayerLocation, &pPlayer->nShards.nStormveil);
+               sArea.nFloorChoice = 2;
+               floorPass(pPlayer, &sArea, &pPlayer->nShards.nStormveil);
             }
 
             break;
@@ -448,13 +555,13 @@ void areaSelect(char cAreaIndex, char cFastTravelTile, Player* pPlayer)
 
             if(cFastTravelTile == '1'){
                sArea.aBigArray[0][2] = 9;
-               int aPlayerLocation[5] = {1,0,0,0,0};
-               floorPass(pPlayer, &sArea, aPlayerLocation, &pPlayer->nShards.nRaya);
+               sArea.nFloorChoice = 1;
+               floorPass(pPlayer, &sArea, &pPlayer->nShards.nRaya);
             }
             else{
                sArea.aBigArray[24][3] = 11;
-               int aPlayerLocation[5] = {0,0,0,0,1};
-               floorPass(pPlayer, &sArea, aPlayerLocation, &pPlayer->nShards.nRaya);
+               sArea.nFloorChoice = 2;
+               floorPass(pPlayer, &sArea, &pPlayer->nShards.nRaya);
             }
 
             break;
@@ -511,13 +618,13 @@ void areaSelect(char cAreaIndex, char cFastTravelTile, Player* pPlayer)
 
             if(cFastTravelTile == '1'){
                sArea.aBigArray[1][0] = 9;
-               int aPlayerLocation[7] = {1,0,0,0,0,0,0};
-               floorPass(pPlayer, &sArea, aPlayerLocation, &pPlayer->nShards.nRedmane);
+               sArea.nFloorChoice = 1;
+               floorPass(pPlayer, &sArea, &pPlayer->nShards.nRedmane);
             }
             else{
                sArea.aBigArray[30][6] = 11;
-               int aPlayerLocation[7] = {0,0,0,0,0,0,1};
-               floorPass(pPlayer, &sArea, aPlayerLocation, &pPlayer->nShards.nRedmane);
+               sArea.nFloorChoice = 2;
+               floorPass(pPlayer, &sArea, &pPlayer->nShards.nRedmane);
             }
           
             break;
@@ -574,13 +681,13 @@ void areaSelect(char cAreaIndex, char cFastTravelTile, Player* pPlayer)
 
             if(cFastTravelTile == '1'){
                sArea.aBigArray[4][2] = 9;
-               int aPlayerLocation[7] = {1,0,0,0,0,0,0};
-               floorPass(pPlayer, &sArea, aPlayerLocation, &pPlayer->nShards.nVolcano);
+               sArea.nFloorChoice = 1;
+               floorPass(pPlayer, &sArea, &pPlayer->nShards.nVolcano);
             }
             else{
                sArea.aBigArray[34][2] = 11;
-               int aPlayerLocation[7] = {0,0,0,0,0,0,1};
-               floorPass(pPlayer, &sArea, aPlayerLocation, &pPlayer->nShards.nVolcano);
+               sArea.nFloorChoice = 2;
+               floorPass(pPlayer, &sArea, &pPlayer->nShards.nVolcano);
             }
 
             break;
@@ -679,13 +786,13 @@ void areaSelect(char cAreaIndex, char cFastTravelTile, Player* pPlayer)
 
             if(cFastTravelTile == '1'){
                sArea.aBigArray[3][1] = 9;
-               int aPlayerLocation[14] = {1,0,0,0,0,0,0,0,0,0,0,0,0,0};
-               floorPass(pPlayer, &sArea, aPlayerLocation, &pPlayer->nShards.nLeyndell);
+               sArea.nFloorChoice = 1;
+               floorPass(pPlayer, &sArea, &pPlayer->nShards.nLeyndell);
             }
             else{
                sArea.aBigArray[76][2] = 11;
-               int aPlayerLocation[14] = {0,0,0,0,0,0,0,0,0,0,0,0,0,1};
-               floorPass(pPlayer, &sArea, aPlayerLocation, &pPlayer->nShards.nLeyndell);
+               sArea.nFloorChoice = 2;
+               floorPass(pPlayer, &sArea, &pPlayer->nShards.nLeyndell);
             }
 
             break;
@@ -714,14 +821,10 @@ void areaSelect(char cAreaIndex, char cFastTravelTile, Player* pPlayer)
 
             if(cFastTravelTile == '1'){
                sArea.aBigArray[8][1] = 9;
-               int aPlayerLocation[3] = {1,0,0};
-               floorPass(pPlayer, &sArea, aPlayerLocation, &pPlayer->nShards.nElden);
+               sArea.nFloorChoice = 1;
+               floorPass(pPlayer, &sArea, &pPlayer->nShards.nElden);
             }
-          //   else{
-          //      sArea.aBigArray[14][2] = 11;
-          //      int aPlayerLocation[3] = {0,0,1};
-          //      floorPass(pPlayer, &sArea, aPlayerLocation);
-          //   }
+          
             break;
 
     }
