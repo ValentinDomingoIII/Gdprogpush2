@@ -243,10 +243,10 @@ void buyWhips(Player* player)
 
     // Display available whips
     printf("\nAvailable Whips:\n");
-    printf("1. Whip - HP: 15, END: 60, \x1b[38;5;124m DEX:20 \x1b[0m, STR: 20, INT:0, FTH:0 Cost: 1500\n");
-    printf("2. Urumi - HP: 20, END: 70, DEX:25, STR: 40, INT:10, FTH:0 Cost: 3000\n");
-    printf("3. Thorned Whip - HP: 30, END: 80, DEX:30, STR: 50, INT:0, FTH:40  Cost: 5000\n");
-    printf("4. Hoslow's Petal Whip - HP: 35, END: 90, DEX: 35, STR:55, INT:20, FTH:20 Cost: 10000\n");
+    printf("1. Whip - HP: 15, \x1b[38;5;82m END: 60 \x1b[0m, \x1b[38;5;124m DEX: 20 \x1b[0m, STR: 20, INT: 0, FTH: 0 Cost: 1500\n");
+    printf("2. Urumi - HP: 20, \x1b[38;5;82m END: 70 \x1b[0m, \x1b[38;5;124m DEX: 25 \x1b[0m, STR: 40, INT: 10, FTH: 0 Cost: 3000\n");
+    printf("3. Thorned Whip - HP: 30, \x1b[38;5;82m END: 80 \x1b[0m, \x1b[38;5;124m DEX: 30 \x1b[0m, STR: 50, INT: 0, FTH: 40 Cost: 5000\n");
+    printf("4. Hoslow's Petal Whip - HP: 35, \x1b[38;5;82m END: 90 \x1b[0m, \x1b[38;5;124m DEX: 35 \x1b[0m, STR: 55, INT: 20, FTH: 20 Cost: 10000\n");
 
     printf("Enter the number of the whip you want to buy: ");
     scanf(" %c", &cChoice);
