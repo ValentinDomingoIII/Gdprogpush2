@@ -12,4 +12,5 @@ void floorPass(Player* pPlayer, Area* pArea, int* pShard);
 void findDoor(Player* pPlayer, Area* pArea, Array sCoordinate, int nValue);
 void initializeArea(int nRow, int nColumn, int nRowOffset, Area* pArea, int* pTemp);
 void areaSelect(char cAreaIndex, char cFastTravelTile, Player* pPlayer);
+void runCredits();
 

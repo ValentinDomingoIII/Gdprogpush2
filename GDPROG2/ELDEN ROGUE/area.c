@@ -29,15 +29,7 @@ void runArea(Area* pArea, Array sCoordinate, Player* pPlayer, int* pShard, int* 
      scanf(" %c", &cInput);
      printf("\n");
      processInput(cInput, pArea, sCoordinate, pPlayer, pShard, pMaxHealth); 
-
-     // for(int i = sCoordinate.nRowOffset; i < sCoordinate.nRowSize + sCoordinate.nRowOffset; i++){
-     //      printf("\n");
-     //      for(int j = 0; j < sCoordinate.nColumnSize; j++){
-     //           printf("%d, ", pArea->aBigArray[i][j]);
-     //      }
-     //      printf("\n");
-     // }
-
+     
      } while(pArea->nFlag2 != 1);
 
 }
@@ -318,15 +310,7 @@ void processInput(char cInput, Area* pArea, Array sCoordinate, Player* pPlayer, 
                                              pPlayer->sLocation.nCurrentColumn = j;
                                              pArea->nFlag2 = 1;
                                         }
-                                             else if(pArea->aBigArray[i][j] == 13){
-                                                  if(pPlayer->nShards.nElden != 1)
-                                                       printf("\nYou must defeat the boss of this area to unlock the credits tile!\n");
-                                                  // else 
-                                                       //runCredits();
-                                             }
-                                        
-                              
-
+                                             
                     }
                }
           }
@@ -834,5 +818,10 @@ void areaSelect(char cAreaIndex, char cFastTravelTile, Player* pPlayer)
             break;
 
     }
+
+}
+
+void runCredits()
+{
 
 }

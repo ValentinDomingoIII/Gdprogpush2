@@ -102,6 +102,7 @@ typedef struct player Player;
 struct enemy {
     char strEnemyName[MAX_NAME];
     int nHealth;
+    int nMaxHealth;
     int nAttackUpper;
     int nAttackLower;
     float fPhysDef;
