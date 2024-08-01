@@ -1,20 +1,13 @@
-Name: Nicolo
-Job Class: Vagabond
+Name: 
+Job Class: Samurai
 Level: 1
-Health: 15
-Endurance: 11
-Dexterity: 13
-Strength: 14
+Health: 12
+Endurance: 13
+Dexterity: 15
+Strength: 12
 Intelligence: 9
-Faith: 9
-Runes: 0
-Shards: 1,1,1,1,1,1
+Faith: 8
+Runes: 8000
+Shards: 0,0,0,0,0,0
 Inventory:
 Equipped Weapon: None
-,2097253,6488111,6488096,6488168,2097264,3473462,3145776
-,736,1085014352,736,6619251,6815843,7536751,3014772
-2,5439520,3276887,4653148,7340132,7274610,7340135,7536757
-Short Sword,0,13,15,15,15,15,100
-Equipped Weapon: Short Sword,0,13,15,15,15,15,100
-Equipped Weapon: Short Sword,0,13,15,15,15,15,100
-Equipped Weapon: Short Sword,0,13,15,15,15,15,100
