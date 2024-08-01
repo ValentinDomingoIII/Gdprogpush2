@@ -26,17 +26,18 @@ void runCharCreation(Player* player) {
         printCharCreationScreen();
         scanf(" %c", &cChoice);
         processCharInputs(cChoice, player);
-        if (cChoice == 3 && (strlen(player->name) == 0 || strlen(player->jobName) == 0)) {
+        if (cChoice == 3 && (strlen(player->name) == 0 || strlen(player->jobName) == 0))
+         {
             cChoice = -1; // Reset Choice to continue the loop
         }
-    } while (cChoice != 3 && cChoice != 0);
-    if (cChoice==3)
+    } while (cChoice != '3' && cChoice != '0');
+    if (cChoice=='3')
     {
     savePlayerData(player);
     runRoundTable(player);
     }
 
-    if (cChoice==0)
+    if (cChoice=='0')
     {
         runTitle(player);
     }
@@ -58,13 +59,13 @@ void printCharCreationScreen() {
 
 int processCharInputs(char cChoice, Player* player) {
     switch (cChoice) {
-        case 1:
+        case '1':
             runNameInput(player);
             break;
-        case 2:
+        case '2':
             runJobClassInput(player);
             break;
-        case 3:
+        case '3':
             if (strlen(player->name) == 0 || strlen(player->jobName) == 0) {
                 printf("\n\t\t\t\t\t\t\tError: Name and Job Class must be set before confirming.\n");
                 break;
@@ -82,10 +83,10 @@ int processCharInputs(char cChoice, Player* player) {
 
             
             break;
-        case 4:
+        case '4':
             displayCurrentCharacter(player);
             break;
-        case 0:
+        case '0':
             printf("Exiting Character Creation...\n");
             break;
         default:
