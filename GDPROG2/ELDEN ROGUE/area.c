@@ -29,7 +29,7 @@ void runArea(Area* pArea, Array sCoordinate, Player* pPlayer, int* pShard, int* 
      scanf(" %c", &cInput);
      printf("\n");
      processInput(cInput, pArea, sCoordinate, pPlayer, pShard, pMaxHealth); 
-
+     
      } while(pArea->nFlag2 != 1);
 
 }

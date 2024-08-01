@@ -71,6 +71,7 @@ void runCombat(Player* pPlayer, Area* pArea, int* pMaxHealth, int nFloorType, in
 void playerTurn(int* pTurn, int* pDodge, int* pPlayerMove, int* pMaxHealth, int nFloorType, Enemy* pEnemy, Area* pArea, Player* pPlayer)
 {
     char cInput;
+    char strHealthBar[21] = "";
     int nTemp, nRandom, nMaxHealthLower, nMaxHealthUpper;
     *pDodge = 0;
 
@@ -88,10 +89,12 @@ void playerTurn(int* pTurn, int* pDodge, int* pPlayerMove, int* pMaxHealth, int 
         printf("[%s]: %d\n", pPlayer->name, *pMaxHealth);
         printf("[POTIONS]: %d\n", pPlayer->nPotions);
         // printf("[%s]: %d\n", pEnemy->strEnemyName, pEnemy->nHealth);
-        char strHealthBar[21] = "";
         createHealthbar(pEnemy->nHealth, pEnemy->nMaxHealth, strHealthBar);
-        printf("[%s]: %d [%s]", pEnemy->strEnemyName, pEnemy->nHealth, strHealthBar);
-        printf("\n[INCOMING ENEMY DAMAGE]: %d", pEnemy->nDamage);
+        printf("[%s]: %d [", pEnemy->strEnemyName, pEnemy->nHealth);
+        redText();
+        printf("%s", strHealthBar);
+        resetText();
+        printf("]\n[INCOMING ENEMY DAMAGE]: %d", pEnemy->nDamage);
 
         do {
 
@@ -331,8 +334,14 @@ void createHealthbar(int nCurrentHealth, int nMaxHealth, char strHealthbar[21])
     float fMilestone = nMaxHealth / 20.0f;
     float fCounter = 0.0f;
 
-    while(fCounter < nCurrentHealth){
-        fCounter += fMilestone;
-        strcat(strHealthbar, "|");
+    for(int i = 0; i < 20; i++){
+        if(fCounter < nCurrentHealth){
+            fCounter += fMilestone;
+            strcat(strHealthbar, "█");
+        }
+
+        else{
+            strcat(strHealthbar, " ");
+        }
     }
 }
