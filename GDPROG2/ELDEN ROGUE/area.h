@@ -1,8 +1,9 @@
 #pragma once
 
 #include "structures.h"
-#include "character_creation.h"
-#include "title.h"
+#include "definitions.h"
+#include "combat.h"
+#include "color.h"
 
 void runArea(Area* pArea, Array sCoordinate, Player* pPlayer, int* pShard, int* pMaxHealth);
 void areaScreen(char* strAreaName);

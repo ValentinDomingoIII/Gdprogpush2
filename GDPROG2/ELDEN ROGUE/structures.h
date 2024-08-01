@@ -16,6 +16,8 @@ struct area {
     int nAreaIndex;
     int nFlag;
     int nFlag2;
+    int nValue;
+    char strAreaName[MAX_NAME];
     char strEnemy1[MAX_NAME];
     char strEnemy2[MAX_NAME];
     char strEnemy3[MAX_NAME];
@@ -75,8 +77,6 @@ typedef struct{
 }Inv;
 
 struct location {
-    int nCurrentRow;
-    int nCurrentColumn;
     int nPreviousFloor;
 };
 
