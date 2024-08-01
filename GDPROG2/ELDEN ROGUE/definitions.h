@@ -1,6 +1,6 @@
 #pragma once
 
-#define MAX_NAME 51
+#define MAX_NAME 26
 
 #define STORMVEIL_F1 { {0,52,0}, \
                        {2,0,2}, \

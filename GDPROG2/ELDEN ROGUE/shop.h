@@ -4,6 +4,7 @@
 #include "character_creation.h"
 #include "title.h"
 #include "structures.h"
+#include "files.h"
 
 void buySeals(Player* plyaer);
 void buyStaves(Player* player);

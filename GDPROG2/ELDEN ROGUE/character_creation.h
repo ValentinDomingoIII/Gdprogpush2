@@ -3,6 +3,7 @@
 #include "title.h"
 #include "round_table.h"
 #include "area.h"
+#include "files.h"
 // typedef struct {
 //     char weapon[MAX_NAME];
 // } Inv;
@@ -34,5 +35,4 @@ void runNameInput(Player* player);
 void runJobClassInput(Player* player);
 void displayCurrentCharacter(Player* player);
 void setJobClass(Player* player, int jobClass);
-void savePlayerData(Player* player);
-void readPlayerData(Player* player);
+
