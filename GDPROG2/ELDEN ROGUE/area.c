@@ -270,24 +270,30 @@ void processInput(char cInput, Area* pArea, Array sCoordinate, Player* pPlayer, 
                                    break;
                               else if(pArea->aBigArray[i][j] == 3){ //spawn tile
                                    nRandom = (rand() % 4) + 1;
-                                   // printf("[nRandom]: %d\n", nRandom);
-                                        if(nRandom == 1){
-                                             nRandom = rand() % (150 - 50) + 50; 
-                                             nRandom *= pArea->nAreaIndex;
-                                             pPlayer->runes = pPlayer->runes + nRandom;
+                                        if(pArea->nAreaIndex != 6){
+                                             if(nRandom == 1){
+                                                  nRandom = rand() % (150 - 50) + 50; 
+                                                  nRandom *= pArea->nAreaIndex;
+                                                  pPlayer->runes = pPlayer->runes + nRandom;
+                                                  printf("You obtained [%d] Runes!\n", nRandom);
+                                             } 
+                                             else
+                                                  runCombat(pPlayer, pArea, pMaxHealth, 0, pShard);
+                                        }
+                                        else{
+                                             nRandom = pArea->nAreaIndex * (rand() % (150 - 50) + 50); 
                                              printf("You obtained [%d] Runes!\n", nRandom);
-                                        } 
-                                        else
-                                             runCombat(pPlayer, pArea, pMaxHealth, 0, pShard);
+                                        }
                                    pArea->aBigArray[i][j] = 1;
                               }
                                    else if(pArea->aBigArray[i][j] == 5){
+                                        if(pArea->nAreaIndex == 6){
+                                             runCombat(pPlayer, pArea, pMaxHealth, 1, pShard);
+                                             runCombat(pPlayer, pArea, pMaxHealth, 2, pShard);
+                                        }
                                         runCombat(pPlayer, pArea, pMaxHealth, 1, pShard);
                                         pArea->aBigArray[i][j] = 1;
-                                        if(pArea->nAreaIndex == 6)
-                                             runCombat(pPlayer, pArea, pMaxHealth, 2, pShard);
-                                        pArea->aBigArray[i][j] = 1;
-
+                    
                                    }
                                    else if(pArea->aBigArray[i][j] == 9 || pArea->aBigArray[i][j] == 11){ 
                                              if(pArea->aBigArray[i][j] == 11 && *pShard != 1)
