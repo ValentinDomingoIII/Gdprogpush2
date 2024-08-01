@@ -13,4 +13,4 @@ void initializeEnemy(Enemy* pEnemy, Area* pArea, int nRandom);
 int processAttack(char cInput, Player* pPlayer, Enemy* pEnemy);
 void enemyTurn(int nDodge, int* pPlayerMove, int* pMaxHealth, Enemy sEnemy);
 void initializeBoss(Enemy* pEnemy, Area* pArea);
-void displayHealthbar(int nMaxHealth, int nCurrentHealth);
+

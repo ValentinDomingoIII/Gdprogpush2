@@ -1,8 +1,4 @@
 #include "area.h"
-#include "round_table.h"
-#include "color.h"
-#include "string.h"
-
 
 // NULL TILE = -1
 // EMPTY TILE = 0
@@ -11,17 +7,36 @@
 // BOSS TILE = 4
 // DOOR TILE = 6
 // FAST TRAVEL = 8 Starting Area | 10 Boss Area
-// CREDITS TILE = 12
+// CREDITS TILE = 12 ◉ ◊
 
 void runArea(Area* pArea, Array sCoordinate, Player* pPlayer, int* pShard, int* pMaxHealth)
 {
      char cInput; 
+     int nTempMaxHealth = 100 * ((pPlayer->stats.health + pPlayer->equippedWeapon->nHp) / 2);
 
      do{
      
-     // areaScreen(sArea->strAreaName);
+     areaScreen(pArea->strAreaName);
      printFloor(pArea, sCoordinate);
-     printf("\n[RUNES]: %d\t[INPUT]: ", pPlayer->runes);
+
+     printf("\n\t");
+     yellowText();
+     printf("[HEALTH] %d\t\t        [POTIONS]\t        [RUNES]\n\t", *pMaxHealth);
+     displayHealthbar(nTempMaxHealth, *pMaxHealth);
+     resetText();
+     yellowTextBG();
+     printf("\t ◉ ");
+     grayTextBG();
+     printf(" %d ", pPlayer->nPotions);
+     resetText();
+     printf("\t\t\t");
+     yellowTextBG();
+     printf(" ◊ ");
+     grayTextBG();
+     printf(" %d ", pPlayer->runes);
+     resetText();
+     printf("\t[INPUT]: ");
+
      scanf(" %c", &cInput);
      printf("\n");
      processInput(cInput, pArea, sCoordinate, pPlayer, pShard, pMaxHealth); 
@@ -32,27 +47,29 @@ void runArea(Area* pArea, Array sCoordinate, Player* pPlayer, int* pShard, int* 
 
 void areaScreen(char* strAreaName)
 {
-     printf("╔═");
-     for(int i = 0; i < strlen(strAreaName); i++)
+     line();
+     printf("\n");
+     printf("\t╔═");
+     for(int i = 0; i < strlen(strAreaName) + strlen("CURRENT AREA: "); i++)
           printf("═");
      printf("═╗");
-     printf("\n");
-     printf("║ ");
+     printf("\n\t");
+     printf("║ CURRENT AREA: ");
      printf("%s", strAreaName);
      printf(" ║");
-     printf("\n");
+     printf("\n\t");
      printf("╚═");
-     for(int i = 0; i < strlen(strAreaName); i++)
+     for(int i = 0; i < strlen(strAreaName) + strlen("CURRENT AREA: "); i++)
           printf("═");
      printf("═╝");
-     printf("\n");
+     printf("\n\n");
 }
 
 void printFloor(Area* pArea, Array sCoordinate) 
 {
 
      for (int i = sCoordinate.nRowOffset; i < sCoordinate.nRowSize + sCoordinate.nRowOffset; i++){
-          // tabRepeat(50);
+          printf("\t\t\t\t\t\t\t\t");
           
           for (int j = 0; j < sCoordinate.nColumnSize; j++){
                
@@ -72,7 +89,7 @@ void printFloor(Area* pArea, Array sCoordinate)
                          resetText();
                     }
                          else if(pArea->aBigArray[i][j] == 4){
-                              redText();
+                              redText(1);
                               printf("┌───┐");
                               resetText();
                          }
@@ -98,7 +115,7 @@ void printFloor(Area* pArea, Array sCoordinate)
           }
 
           printf("\n");
-          // tabRepeat(50);
+          printf("\t\t\t\t\t\t\t\t");
 
           for (int j = 0; j < sCoordinate.nColumnSize; j++){
                
@@ -109,27 +126,27 @@ void printFloor(Area* pArea, Array sCoordinate)
                }
                else if(pArea->aBigArray[i][j] % 2 == 1){
                     pinkText();
-                    printf("║   ║");
+                    printf("║ ◈ ║");
                     resetText();
                }
                     else if(pArea->aBigArray[i][j] == 2){
                          blueText();
-                         printf("│   │");
+                         printf("│ ? │");
                          resetText();
                     }
                          else if(pArea->aBigArray[i][j] == 4){
-                                   redText();
-                                   printf("│   │");
+                                   redText(1);
+                                   printf("│ ▼ │");
                                    resetText();
                          }
-                              else if(pArea->aBigArray[i][j] == 6 || pArea->aBigArray[i][j] >= 50){
+                              else if(pArea->aBigArray[i][j] >= 50){
                                    yellowText();
-                                   printf("│   │");
+                                   printf("│ ▩ │");
                                    resetText();
                               }
                                    else if(pArea->aBigArray[i][j] == 8 || pArea->aBigArray[i][j] == 10){
                                         greenText();
-                                        printf("│   │");
+                                        printf("│ ◎ │");
                                         resetText();
                                    }
                                         else if(pArea->aBigArray[i][j] == -1){
@@ -137,13 +154,13 @@ void printFloor(Area* pArea, Array sCoordinate)
                                         }
                                              else if(pArea->aBigArray[i][j] == 12){
                                                   purpleText();
-                                                  printf("│   │");
+                                                  printf("│ C │");
                                                   resetText();
                                              }
           }
 
           printf("\n");
-          // tabRepeat(50);
+          printf("\t\t\t\t\t\t\t\t");
 
           for (int j = 0; j < sCoordinate.nColumnSize; j++){
                
@@ -163,7 +180,7 @@ void printFloor(Area* pArea, Array sCoordinate)
                          resetText();
                     }
                          else if(pArea->aBigArray[i][j] == 4){
-                                   redText();
+                                   redText(1);
                                    printf("└───┘");
                                    resetText();
                          }
@@ -263,14 +280,15 @@ void processInput(char cInput, Area* pArea, Array sCoordinate, Player* pPlayer, 
                                                   nRandom = rand() % (150 - 50) + 50; 
                                                   nRandom *= pArea->nAreaIndex;
                                                   pPlayer->runes = pPlayer->runes + nRandom;
-                                                  printf("You obtained [%d] Runes!\n", nRandom);
+                                                  runesObtained(nRandom);
                                              } 
                                              else
                                                   runCombat(pPlayer, pArea, pMaxHealth, 0, pShard);
                                         }
                                         else{
                                              nRandom = pArea->nAreaIndex * (rand() % (150 - 50) + 50); 
-                                             printf("You obtained [%d] Runes!\n", nRandom);
+                                             runesObtained(nRandom);
+                                             pPlayer->runes = pPlayer->runes + nRandom;
                                         }
                                    pArea->aBigArray[i][j] = 1;
                               }
@@ -305,9 +323,12 @@ void processInput(char cInput, Area* pArea, Array sCoordinate, Player* pPlayer, 
                                              pArea->nFlag2 = 1;
                                              pArea->nValue = pArea->aBigArray[i][j];
                                         }
-                                             // else if(pArea->aBigArray[i][j] == 13 && pArea->nAreaIndex == 6){
-                                             //      if(pPlayer->nShards.nElden == 0)
-                                             // }
+                                             else if(pArea->aBigArray[i][j] == 13){
+                                                  if(pPlayer->nShards.nElden == 0)
+                                                       printf("\nYou must defeat the boss of this area to unlock this tile.\n");
+                                                  else
+                                                       runCredits();
+                                             }
 
                          break;
 
@@ -822,5 +843,20 @@ void areaSelect(char cAreaIndex, char cFastTravelTile, Player* pPlayer)
 
 void runCredits()
 {
-
+     char cInput;
+     credits();
+     printf("\n\t\t\t\t\t\t\t\t\t     [DEVELOPERS]\n");
+     printf("\t\t\t\t\t\t\t\t    ▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂\n");
+     printf("\n\t\t\t\t\t\t\t\t     DOMINGO III, VALENTIN CHUA\n");
+     printf("\n\t\t\t\t\t\t\t\t     PACANNUAYAN, NICOLO MIGUEL MANALO\n\n");
+     printf("\n\t\t\t\t\t\t\t\t\t   [SPECIAL THANKS]\n");
+     printf("\t\t\t\t\t\t\t\t    ▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂\n");
+     printf("\n\t\t\t\t\t\t\t\t\t        stdio\n");
+     printf("\n\t\t\t\t\t\t\t\t\t        stdlib\n");
+     printf("\n\t\t\t\t\t\t\t\t\t        stddef\n");
+     printf("\n\t\t\t\t\t\t\t\t\t        windows\n");
+     printf("\n\t\t\t\t\t\t\t\t\t        time\n");
+     printf("\n\t\t\t\t\t\t\t\t\t        string\n\n");
+     printf("\t\t\t\t\t\t\t\t    ▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂\n");
+     scanf(" %c", &cInput);
 }

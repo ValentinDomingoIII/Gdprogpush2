@@ -30,18 +30,6 @@ void runCombat(Player* pPlayer, Area* pArea, int* pMaxHealth, int nFloorType, in
     printf("BATTLING [%s]\n", sEnemy.strEnemyName);
     printf("\n");
 
-    /*
-                                                                                                                             
-▀███▀▀▀███▀███▄   ▀███▀███▀▀▀███▀████▄     ▄███▀███▀   ▀██▀   ▀███▀▀▀██████▀▀▀███▀████▀   ▀████▀   ▀███▀▀▀███▀███▀▀▀██▄  
-
-
-  ██     ▄█ █     ███   ██     ▄█ █  ▀██▀   ██      ██          ██       ██     ▄█ ██    ▄█ ██    ▄█ ██     ▄█ ██    ▄██▀
-▄█████████████▄    ██ ▄█████████████▄ ▀▀  ▄████▄  ▄████▄      ▄████▄   ▄██████████████████████████████████████████████▀  
-                                                                                                                         
-                                                                                                                         
-
-    */
-
     while(sEnemy.nHealth != 0 && *pMaxHealth != 0){
 
         if(nTurn % 2 == 0)
@@ -53,34 +41,24 @@ void runCombat(Player* pPlayer, Area* pArea, int* pMaxHealth, int nFloorType, in
             greenText();
 
             if(nFloorType == 0){
-                greenText();
-                printf("\n\t\t▀███▀▀▀███▀███▄   ▀███▀███▀▀▀███▀████▄     ▄███▀███▀   ▀██▀   ▀███▀▀▀██████▀▀▀███▀████▀   ▀████▀   ▀███▀▀▀███▀███▀▀▀██▄");
-                printf("\n\t\t  ██    ▀█  ███▄    █   ██    ▀█  ████    ████   ███   ▄█       ██    ▀█ ██    ▀█  ██       ██       ██    ▀█  ██    ▀██▄");
-                printf("\n\t\t  ██   █    █ ███   █   ██   █    █ ██   ▄█ ██    ███ ▄█        ██   █   ██   █    ██       ██       ██   █    ██     ▀██");
-                printf("\n\t\t  ██████    █  ▀██▄ █   ██████    █  ██  █▀ ██     ████         ██▀▀██   ██████    ██       ██       ██████    ██      ██");
-                printf("\n\t\t  ██   █  ▄ █   ▀██▄█   ██   █  ▄ █  ██▄█▀  ██      ██          ██   █   ██   █  ▄ ██     ▄ ██     ▄ ██   █  ▄ ██     ▄██");
-                printf("\n\t\t  ██     ▄█ █     ███   ██     ▄█ █  ▀██▀   ██      ██          ██       ██     ▄█ ██    ▄█ ██    ▄█ ██     ▄█ ██    ▄██▀");
-                printf("\n\t\t▄█████████████▄    ██ ▄█████████████▄ ▀▀  ▄████▄  ▄████▄      ▄████▄   ▄██████████████████████████████████████████████▀\n");
-                resetText();
+                enemyFelled();
             }
             else{
-                printf("\n[GREAT ENEMY FELLED]\n");
+                greatEnemyFelled();
                 *pShard = 1;
             }
 
             resetText();
             
-            printf("\n[RUNES EARNED]: %d\n", nReward);
+            printf("\n\t\t\t\t\t\t\t\t     [RUNES EARNED]: %d\n", nReward);
             pPlayer->runes += nReward;
-            printf("\n[PRESS ANY KEY TO CONTINUE]");
+            printf("\n\t\t\t\t\t\t\t\t[PRESS ANY KEY TO CONTINUE]");
             scanf(" %c", &cContinue);
 
         }
         else if(*pMaxHealth == 0){
-            redText();
-            printf("\n[YOU DIED]\n");
-            resetText();
-            printf("\n[PRESS ANY KEY TO CONTINUE]");
+            youDied();
+            printf("\n\t\t\t\t\t\t\t\t[PRESS ANY KEY TO CONTINUE]");
             scanf(" %c", &cContinue);
             pPlayer->runes = 0;
             pArea->nFlag = 1;
@@ -109,12 +87,12 @@ void playerTurn(int* pTurn, int* pDodge, int* pPlayerMove, int* pMaxHealth, int 
     do {
 
         printf("\nPlayer Turn\n");
-        printf("[%s]: %d [", pPlayer->name, *pMaxHealth);
+        printf("[%s]: %d ", pPlayer->name, *pMaxHealth);
         displayHealthbar(nTempMaxHealth, *pMaxHealth);
-        printf("]\n[POTIONS]: %d\n", pPlayer->nPotions);
-        printf("[%s]: %d [", pEnemy->strEnemyName, pEnemy->nHealth);
+        printf("\n[POTIONS]: %d\n", pPlayer->nPotions);
+        printf("[%s]: %d ", pEnemy->strEnemyName, pEnemy->nHealth);
         displayHealthbar(pEnemy->nMaxHealth, pEnemy->nHealth);
-        printf("]\n[INCOMING ENEMY DAMAGE]: %d", pEnemy->nDamage);
+        printf("\n[INCOMING ENEMY DAMAGE]: %d", pEnemy->nDamage);
 
         do {
 
@@ -350,21 +328,3 @@ void initializeBoss(Enemy* pEnemy, Area* pArea)
     }
 }
 
-void displayHealthbar(int nMaxHealth, int nCurrentHealth)
-{
-    float fMilestone = nMaxHealth / 20.0f;
-    float fCounter = 0.0f;
-    
-    for(int i = 0; i < 20; i++){
-        if(fCounter < nCurrentHealth){
-            fCounter += fMilestone;
-            redText();
-            printf("█");
-            resetText();
-        }
-
-        else{
-            printf(" ");
-        }
-    }
-}

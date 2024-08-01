@@ -1,9 +1,11 @@
 #pragma once
 
+#include "string.h"
 #include "structures.h"
 #include "definitions.h"
 #include "combat.h"
 #include "color.h"
+#include "round_table.h"
 
 void runArea(Area* pArea, Array sCoordinate, Player* pPlayer, int* pShard, int* pMaxHealth);
 void areaScreen(char* strAreaName);
