@@ -83,10 +83,14 @@ void playerTurn(int* pTurn, int* pDodge, int* pPlayerMove, int* pMaxHealth, int 
 
     do {
 
+            
         printf("\nPlayer Turn\n");
         printf("[%s]: %d\n", pPlayer->name, *pMaxHealth);
         printf("[POTIONS]: %d\n", pPlayer->nPotions);
-        printf("[%s]: %d", pEnemy->strEnemyName, pEnemy->nHealth);
+        // printf("[%s]: %d\n", pEnemy->strEnemyName, pEnemy->nHealth);
+        char strHealthBar[21] = "";
+        createHealthbar(pEnemy->nHealth, pEnemy->nMaxHealth, strHealthBar);
+        printf("[%s]: %d [%s]", pEnemy->strEnemyName, pEnemy->nHealth, strHealthBar);
         printf("\n[INCOMING ENEMY DAMAGE]: %d", pEnemy->nDamage);
 
         do {
@@ -197,6 +201,7 @@ void initializeEnemy(Enemy* pEnemy, Area* pArea, int nRandom)
     switch(nRandom){ //attack is randomized within the range every turn //might make it in another function
         case 1:
             pEnemy->nHealth = (rand() % (30 - 20) + 20) * pArea->nAreaIndex; //rand() % (upper bound - lower bound) + lower bound
+            pEnemy->nMaxHealth = pEnemy->nHealth;
             pEnemy->fPhysDef = 0.20;
             pEnemy->fSorcDef = 0.15;
             pEnemy->fIncantDef = 0.10;
@@ -206,6 +211,7 @@ void initializeEnemy(Enemy* pEnemy, Area* pArea, int nRandom)
             break;
         case 2:
             pEnemy->nHealth = (rand() % (35 - 25) + 25) * pArea->nAreaIndex;
+            pEnemy->nMaxHealth = pEnemy->nHealth;
             pEnemy->fPhysDef = 0.50;
             pEnemy->fSorcDef = 0.15;
             pEnemy->fIncantDef = 0.20;
@@ -215,6 +221,7 @@ void initializeEnemy(Enemy* pEnemy, Area* pArea, int nRandom)
             break;
         case 3:
             pEnemy->nHealth = (rand() % (80 - 70) + 70) * pArea->nAreaIndex;
+            pEnemy->nMaxHealth = pEnemy->nHealth;
             pEnemy->fPhysDef = 0.25;
             pEnemy->fSorcDef = 0.25;
             pEnemy->fIncantDef = 0.20;
@@ -248,6 +255,7 @@ void initializeBoss(Enemy* pEnemy, Area* pArea)
     switch(pArea->nAreaIndex){
         case 1: 
             pEnemy->nHealth = 200;
+            pEnemy->nMaxHealth = pEnemy->nHealth;
             pEnemy->fPhysDef = 0.35;
             pEnemy->fSorcDef = 0.20;
             pEnemy->fIncantDef = 0.15;
@@ -257,6 +265,7 @@ void initializeBoss(Enemy* pEnemy, Area* pArea)
             break;
         case 2:
             pEnemy->nHealth = 400;
+            pEnemy->nMaxHealth = pEnemy->nHealth;
             pEnemy->fPhysDef = 0.15;
             pEnemy->fSorcDef = 0.35;
             pEnemy->fIncantDef = 0.25;
@@ -266,6 +275,7 @@ void initializeBoss(Enemy* pEnemy, Area* pArea)
             break;
         case 3:
             pEnemy->nHealth = 600;
+            pEnemy->nMaxHealth = pEnemy->nHealth;
             pEnemy->fPhysDef = 0.30;
             pEnemy->fSorcDef = 0.20;
             pEnemy->fIncantDef = 0.20;
@@ -275,6 +285,7 @@ void initializeBoss(Enemy* pEnemy, Area* pArea)
             break;
         case 4:
             pEnemy->nHealth = 600;
+            pEnemy->nMaxHealth = pEnemy->nHealth;
             pEnemy->fPhysDef = 0.15;
             pEnemy->fSorcDef = 0.25;
             pEnemy->fIncantDef = 0.30;
@@ -284,6 +295,7 @@ void initializeBoss(Enemy* pEnemy, Area* pArea)
             break;
         case 5:
             pEnemy->nHealth = 800;
+            pEnemy->nMaxHealth = pEnemy->nHealth;
             pEnemy->fPhysDef = 0.35;
             pEnemy->fSorcDef = 0.30;
             pEnemy->fIncantDef = 0.20;
@@ -293,6 +305,7 @@ void initializeBoss(Enemy* pEnemy, Area* pArea)
             break;
         case 6:
             pEnemy->nHealth = 1000;
+            pEnemy->nMaxHealth = pEnemy->nHealth;
             pEnemy->fPhysDef = 0.35;
             pEnemy->fSorcDef = 0.25;
             pEnemy->fIncantDef = 0.40;
@@ -302,6 +315,7 @@ void initializeBoss(Enemy* pEnemy, Area* pArea)
             break;
         case 7:
             pEnemy->nHealth = 1250;
+            pEnemy->nMaxHealth = pEnemy->nHealth;
             pEnemy->fPhysDef = 0.25;
             pEnemy->fSorcDef = 0.50;
             pEnemy->fIncantDef = 0.40;
@@ -312,4 +326,13 @@ void initializeBoss(Enemy* pEnemy, Area* pArea)
     }
 }
 
+void createHealthbar(int nCurrentHealth, int nMaxHealth, char strHealthbar[21])
+{
+    float fMilestone = nMaxHealth / 20.0f;
+    float fCounter = 0.0f;
 
+    while(fCounter < nCurrentHealth){
+        fCounter += fMilestone;
+        strcat(strHealthbar, "|");
+    }
+}

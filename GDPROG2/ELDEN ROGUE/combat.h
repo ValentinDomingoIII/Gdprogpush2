@@ -2,6 +2,7 @@
 
 #include "color.h"
 #include "stddef.h"
+#include "string.h"
 
 #include "structures.h"
 #include "definitions.h"
@@ -12,6 +13,7 @@ void initializeEnemy(Enemy* pEnemy, Area* pArea, int nRandom);
 int processAttack(char cInput, Player* pPlayer, Enemy* pEnemy);
 void enemyTurn(int nDodge, int* pPlayerMove, int* pMaxHealth, Enemy sEnemy);
 void initializeBoss(Enemy* pEnemy, Area* pArea);
+void createHealthbar(int nCurrentHealth, int nMaxHealth, char strHealthbar[21]);
 
 
 
