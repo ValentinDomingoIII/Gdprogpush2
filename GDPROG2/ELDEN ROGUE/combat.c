@@ -13,10 +13,16 @@ void runCombat(Player* pPlayer, Area* pArea, int* pMaxHealth, int nFloorType, in
         initializeEnemy(&sEnemy, pArea, nRandom);
         nReward = sEnemy.nHealth * 2;
     }
-    else if(nFloorType == 1 || nFloorType == 2){
+    else if(nFloorType == 1){
         initializeBoss(&sEnemy, pArea);
         nReward = sEnemy.nHealth * 5;
     }
+        else if(nFloorType == 2){
+            pArea->nAreaIndex += 1;
+            initializeBoss(&sEnemy, pArea);
+            pArea->nAreaIndex -= 1;
+            nReward = sEnemy.nHealth * 5;
+        }
 
     printf("\n\n");
 
@@ -106,18 +112,17 @@ void playerTurn(int* pTurn, int* pDodge, int* pPlayerMove, int* pMaxHealth, int 
                 scanf(" %c", &cInput);
             } while(cInput != '0' && cInput != '1' && cInput != '2' && cInput != '3');
 
-            if(cInput == '0'){
-                *pTurn -= 1;
-                break;
+            if(cInput != '0'){
+
+                *pPlayerMove = processAttack(cInput, pPlayer, pEnemy);
+                pEnemy->nHealth -= *pPlayerMove;
+
+                if(pEnemy->nHealth < 0)
+                    pEnemy->nHealth = 0;
+
+                printf("\nYou dealt [%d] damage!\n", *pPlayerMove);
+
             }
-
-            *pPlayerMove = processAttack(cInput, pPlayer, pEnemy);
-            pEnemy->nHealth -= *pPlayerMove;
-
-            if(pEnemy->nHealth < 0)
-                pEnemy->nHealth = 0;
-
-            printf("\nYou dealt [%d] damage!\n", *pPlayerMove);
         }
 
         else if(cInput == '2'){
@@ -284,9 +289,26 @@ void initializeBoss(Enemy* pEnemy, Area* pArea)
             pEnemy->fIncantDef = 0.20;
             pEnemy->nAttackUpper = 500;
             pEnemy->nAttackLower = 250;
-            strcpy(pEnemy->strEnemyName, "RENNALA");
+            strcpy(pEnemy->strEnemyName, "MORGOTT");
             break;
-        // NO ELDEN THRONE YET SINCE THEY ARE TWO // I'm figuring it out
+        case 6:
+            pEnemy->nHealth = 1000;
+            pEnemy->fPhysDef = 0.35;
+            pEnemy->fSorcDef = 0.25;
+            pEnemy->fIncantDef = 0.40;
+            pEnemy->nAttackUpper = 600;
+            pEnemy->nAttackLower = 300;
+            strcpy(pEnemy->strEnemyName, "RADAGON");
+            break;
+        case 7:
+            pEnemy->nHealth = 1250;
+            pEnemy->fPhysDef = 0.25;
+            pEnemy->fSorcDef = 0.50;
+            pEnemy->fIncantDef = 0.40;
+            pEnemy->nAttackUpper = 900;
+            pEnemy->nAttackLower = 450;
+            strcpy(pEnemy->strEnemyName, "ELDEN BEAST");
+            break;
     }
 }
 

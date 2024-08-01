@@ -1,13 +1,16 @@
-Name: Velvet
-Job Class: Warrior
+Name: Nicolo
+Job Class: Vagabond
 Level: 1
-Health: 11
+Health: 15
 Endurance: 11
-Dexterity: 16
-Strength: 10
-Intelligence: 10
-Faith: 8
-Runes: 8000
+Dexterity: 13
+Strength: 14
+Intelligence: 9
+Faith: 9
+Runes: 7900
 Shards: 0,0,0,0,0,0
 Inventory:
 Equipped Weapon: None
+,0,0,0,0,0,0,0
+Short Sword,0,13,15,15,15,15,100
+Equipped Weapon: Short Sword,0,13,15,15,15,15,100
