@@ -402,7 +402,7 @@ void buySwords(Player* player)
     // Display available swords
     printf("\nAvailable Swords:\n");
     printf("1. Short Sword - HP: 0, END: 15, \x1b[38;5;124m DEX: 13 \x1b[0m, STR: 15, INT: 15, FTH: 15 Cost: 100\n");
-    printf("2. Roger's Raper - HP: 10, END: 25, \x1b[38;5;124m DEX: 18 \x1b[0m, STR: 35, INT: 35, FTH: 35 Cost: 2000\n");
+    printf("2. Roger's Rapier - HP: 10, END: 25, \x1b[38;5;124m DEX: 18 \x1b[0m, STR: 35, INT: 35, FTH: 35 Cost: 2000\n");
     printf("3. Coded Sword - HP: 20, END: 35, \x1b[38;5;124m DEX: 21 \x1b[0m, STR: 40, INT: 40, FTH: 40 Cost: 4000\n");
     printf("4. Sword of Night And Flame - HP: 30, END: 45, \x1b[38;5;124m DEX: 25 \x1b[0m, STR: 55, INT: 55, FTH: 55 Cost: 8000\n");
 
@@ -429,7 +429,7 @@ void buySwords(Player* player)
             weaponToBuy.nEnd = 25;
             weaponToBuy.nFth = 35;
             weaponToBuy.nCost = 2000;
-            strcpy(weaponToBuy.weapon, "Roger's Raper");
+            strcpy(weaponToBuy.weapon, "Roger's Rapier");
             cost = 2000;
             break;
         case '3':
