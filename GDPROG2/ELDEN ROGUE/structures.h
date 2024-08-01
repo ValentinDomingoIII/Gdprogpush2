@@ -12,6 +12,7 @@ typedef struct array Array;
 struct area {
     int aBigArray[100][21];
     int nFloorCount;
+    int nFloorChoice;
     int nAreaIndex;
     int nFlag;
     int nFlag2;
@@ -73,6 +74,13 @@ typedef struct{
     char cPotion;
 }Inv;
 
+struct location {
+    int nCurrentRow;
+    int nCurrentColumn;
+    int nPreviousFloor;
+};
+
+typedef struct location Location;
 
 struct player {
     char name[MAX_NAME];
@@ -86,7 +94,7 @@ struct player {
     Weapon *equippedWeapon; // Pointer to the currently equipped weapon
     Shards nShards;
     Stats stats;
-    
+    Location sLocation;
 };
 
 typedef struct player Player;

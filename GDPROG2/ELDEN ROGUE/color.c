@@ -34,3 +34,8 @@ void grayText()
 {
     printf("\x1b[38;5;8m");
 }
+
+void purpleText()
+{
+    printf("\x1b[38;5;55m");
+}
