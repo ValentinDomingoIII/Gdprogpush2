@@ -5,7 +5,7 @@
     player->inventoryCapacity = 1; // Reset to initial capacity
     player->inventory = realloc(player->inventory, player->inventoryCapacity * sizeof(Weapon));
     player->inventorySize = 0; // Reset inventory size to 0
-    printf("Inventory has been reset.\n");
+    //printf("Inventory has been reset.\n");
 }
  void initializePlayer()
   {
