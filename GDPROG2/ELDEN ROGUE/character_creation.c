@@ -48,13 +48,15 @@ void runCharCreation(Player* player) {
 
 void printCharCreationScreen() {
   //  displayCurrentCharacter(player);
+  printf("\n ════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════ \n");
     printf("\n\t\t\t\t\t\t\t[1] INPUT NAME\n");
     printf("\t\t\t\t\t\t\t[2] INPUT JOB CLASS\n");
     printf("\t\t\t\t\t\t\t[3] CONFIRM\n");
     printf("\t\t\t\t\t\t\t[4] VIEW CURRENT CHARACTER\n");
     printf("\t\t\t\t\t\t\t[0] BACK\n");
-
-    printf("\n\t\t\t\t\t\t\t[INPUT]:");
+   
+printf("\n ════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════ \n");
+ printf("\n\t\t\t\t\t\t\t[INPUT]:");
 }
 
 int processCharInputs(char cChoice, Player* player) {
