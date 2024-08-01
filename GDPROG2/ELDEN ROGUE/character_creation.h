@@ -30,7 +30,7 @@
 
 void runCharCreation(Player* player);
 void printCharCreationScreen();
-int processCharInputs(int choice, Player* player);
+int processCharInputs(char cChoice, Player* player);
 void runNameInput(Player* player);
 void runJobClassInput(Player* player);
 void displayCurrentCharacter(Player* player);
