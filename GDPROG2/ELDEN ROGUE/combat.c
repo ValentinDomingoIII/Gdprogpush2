@@ -27,8 +27,6 @@ void runCombat(Player* pPlayer, Area* pArea, int* pMaxHealth, int nFloorType, in
     printf("\n\n");
 
     printf("BATTLING [%s]\n", sEnemy.strEnemyName);
-    // printf("\n[ENEMY HEALTH]: %d", sEnemy.nHealth);
-    // printf("\n[PHYS RES]: %.2f\n[SORC DEF]: %.2f\n[INCANT DEF]: %.2f",sEnemy.fPhysDef, sEnemy.fSorcDef, sEnemy.fIncantDef);
     printf("\n");
 
     for(int nTurn = 0; sEnemy.nHealth != 0 && *pMaxHealth != 0; nTurn++){
@@ -84,7 +82,6 @@ void playerTurn(int* pTurn, int* pDodge, int* pPlayerMove, int* pMaxHealth, int 
 
     do {
 
-            
         printf("\nPlayer Turn\n");
         printf("[%s]: %d\n", pPlayer->name, *pMaxHealth);
         printf("[POTIONS]: %d\n", pPlayer->nPotions);
