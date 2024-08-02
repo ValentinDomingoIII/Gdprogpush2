@@ -146,6 +146,9 @@ void playerTurn(int* pTurn, int* pDodge, int* pPlayerMove, int* pMaxHealth, int 
                 printf(" %d\n\n", *pPlayerMove);
                 resetText();
 
+                if(cInput == '3')
+                    cInput = '1';
+
             }
         }
 
