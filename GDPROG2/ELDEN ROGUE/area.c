@@ -12,7 +12,7 @@
 void runArea(Area* pArea, Array sCoordinate, Player* pPlayer, int* pShard, int* pMaxHealth)
 {
      char cInput; 
-     int nTempMaxHealth = 100 * ((pPlayer->stats.health + pPlayer->equippedWeapon->nHp) / 2);
+     int nTempMaxHealth = 100 * ((pPlayer->sStats.nHealth + pPlayer->equippedWeapon->nHp) / 2);
 
      do{
      
@@ -33,7 +33,7 @@ void runArea(Area* pArea, Array sCoordinate, Player* pPlayer, int* pShard, int* 
      yellowTextBG();
      printf(" ◊ ");
      grayTextBG();
-     printf(" %d ", pPlayer->runes);
+     printf(" %d ", pPlayer->nRunes);
      resetText();
      printf("\t[INPUT]: ");
 
@@ -279,7 +279,7 @@ void processInput(char cInput, Area* pArea, Array sCoordinate, Player* pPlayer, 
                                              if(nRandom == 1){
                                                   nRandom = rand() % (150 - 50) + 50; 
                                                   nRandom *= pArea->nAreaIndex;
-                                                  pPlayer->runes = pPlayer->runes + nRandom;
+                                                  pPlayer->nRunes = pPlayer->nRunes + nRandom;
                                                   runesObtained(nRandom);
                                              } 
                                              else
@@ -288,7 +288,7 @@ void processInput(char cInput, Area* pArea, Array sCoordinate, Player* pPlayer, 
                                         else{
                                              nRandom = pArea->nAreaIndex * (rand() % (150 - 50) + 50); 
                                              runesObtained(nRandom);
-                                             pPlayer->runes = pPlayer->runes + nRandom;
+                                             pPlayer->nRunes = pPlayer->nRunes + nRandom;
                                         }
                                    pArea->aBigArray[i][j] = 1;
                               }
@@ -345,7 +345,7 @@ void processInput(char cInput, Area* pArea, Array sCoordinate, Player* pPlayer, 
 void floorPass(Player* pPlayer, Area* pArea, int* pShard)
 {
      int i = 0;
-     int nMaxHealth = 100 * ((pPlayer->stats.health + pPlayer->equippedWeapon->nHp) / 2);
+     int nMaxHealth = 100 * ((pPlayer->sStats.nHealth + pPlayer->equippedWeapon->nHp) / 2);
 
      switch(pArea->nFloorChoice){
           case 1:

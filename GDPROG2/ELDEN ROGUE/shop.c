@@ -4,11 +4,11 @@
 // Function to add a weapon to the player's inventory
 void addWeaponToInventory(Player* player, Weapon weaponToBuy) {
     // Check if inventory is full
-    if (player->inventorySize >= player->inventoryCapacity) {
+    if (player->nInventorySize >= player->nInventoryCapacity) {
         // Double the capacity
-        player->inventoryCapacity *= 2;
+        player->nInventoryCapacity *= 2;
         // Reallocate memory
-        player->inventory = realloc(player->inventory, player->inventoryCapacity * sizeof(Weapon));
+        player->inventory = realloc(player->inventory, player->nInventoryCapacity * sizeof(Weapon));
         if (player->inventory == NULL) {
             fprintf(stderr, "Failed to allocate memory for inventory\n");
             exit(1);
@@ -16,7 +16,7 @@ void addWeaponToInventory(Player* player, Weapon weaponToBuy) {
     }
 
     // Add the new weapon to the inventory
-    player->inventory[player->inventorySize++] = weaponToBuy;
+    player->inventory[player->nInventorySize++] = weaponToBuy;
 }
 
 void buySeals(Player* player)
@@ -32,7 +32,7 @@ void buySeals(Player* player)
     printf("3. Golden Order Seal - HP: 20, END: 55, \x1b[38;5;124m DEX: 14 \x1b[0m, STR: 0, INT: 65, \x1b[38;5;82m FTH: 65 \x1b[0m Cost: 10000\n");
     printf("4. Dragon Communion Seal - HP: 25, END: 60, \x1b[38;5;124m DEX: 18 \x1b[0m, STR: 0, INT: 75, \x1b[38;5;82m FTH: 80 \x1b[0m Cost: 24000\n");
 
-   printf("\n\x1b[38;5;11m Runes:%d\x1b[0m\n\n",player->runes);
+   printf("\n\x1b[38;5;11m Runes:%d\x1b[0m\n\n",player->nRunes);
   printf("Input '0' to go back\n");
     printf("Enter the number of the seal you want to buy: ");
     scanf(" %c", &cChoice);
@@ -87,12 +87,12 @@ void buySeals(Player* player)
             return;
     }
 
-    if (player->runes < cost) {
+    if (player->nRunes < cost) {
         printf("Not enough runes to buy this seal.\n");
         return;
     }
 
-    player->runes -= cost;
+    player->nRunes -= cost;
    addWeaponToInventory(player, weaponToBuy);
     printf("You have bought a %s\n", weaponToBuy.weapon);
 }
@@ -113,7 +113,7 @@ void buyStaves(Player* player)
     printf("3. Staff of the Guilty - HP: 15, END: 40, \x1b[38;5;124m DEX: 16 \x1b[0m, \x1b[38;5;82m INT: 60 \x1b[0m, STR: 15, FTH: 60 Cost: 8000\n");
     printf("4. Carian Regal Scepter - HP: 25, END: 50, \x1b[38;5;124m DEX: 18 \x1b[0m, \x1b[38;5;82m INT: 85 \x1b[0m, STR: 20, FTH: 75 Cost: 16000\n");
 
-      printf("\n\x1b[38;5;11m Runes:%d\x1b[0m\n\n",player->runes);
+      printf("\n\x1b[38;5;11m Runes:%d\x1b[0m\n\n",player->nRunes);
     printf("Input '0' to go back\n");
     printf("Enter the number of the staff you want to buy: ");
     scanf(" %c", &cChoice);
@@ -173,12 +173,12 @@ void buyStaves(Player* player)
             return;
     }
 
-    if (player->runes < cost) {
+    if (player->nRunes < cost) {
         printf("Not enough runes to buy this weapon.\n");
         return;
     }
 
-    player->runes -= cost;
+    player->nRunes -= cost;
     addWeaponToInventory(player, weaponToBuy);
     printf("You have bought a %s\n", weaponToBuy.weapon);
 }
@@ -201,7 +201,7 @@ void buyGreatSwords(Player* player)
     printf("3. Inseperable Swords - HP: 25, END: 20, \x1b[38;5;124m DEX: 19 \x1b[0m, \x1b[38;5;82m STR: 70 \x1b[0m, INT: 60, FTH: 60 Cost: 12000\n");
     printf("4. Maliketh's Black Blade - HP: 30, END: 25, \x1b[38;5;124m DEX: 24 \x1b[0m, \x1b[38;5;82m STR: 80 \x1b[0m, INT: 40, FTH: 60 Cost: 24000\n");
 
-   printf("\n\x1b[38;5;11m Runes:%d\x1b[0m\n\n",player->runes);
+   printf("\n\x1b[38;5;11m Runes:%d\x1b[0m\n\n",player->nRunes);
   printf("Input '0' to go back\n");
     printf("Enter the number of the great sword you want to buy: ");
     scanf(" %c", &cChoice);
@@ -260,12 +260,12 @@ void buyGreatSwords(Player* player)
             return;
     }
 
-    if (player->runes < cost) {
+    if (player->nRunes < cost) {
         printf("Not enough runes to buy this weapon.\n");
         return;
     }
 
-    player->runes -= cost;
+    player->nRunes -= cost;
     addWeaponToInventory(player, weaponToBuy);
     printf("You have bought a %s\n", weaponToBuy.weapon);
 }
@@ -283,7 +283,7 @@ void buyWhips(Player* player)
     printf("3. Thorned Whip - HP: 30, \x1b[38;5;82m END: 80 \x1b[0m, \x1b[38;5;124m DEX: 30 \x1b[0m, STR: 50, INT: 0, FTH: 40 Cost: 5000\n");
     printf("4. Hoslow's Petal Whip - HP: 35, \x1b[38;5;82m END: 90 \x1b[0m, \x1b[38;5;124m DEX: 35 \x1b[0m, STR: 55, INT: 20, FTH: 20 Cost: 10000\n");
 
-   printf("\n\x1b[38;5;11m Runes:%d\x1b[0m\n\n",player->runes);
+   printf("\n\x1b[38;5;11m Runes:%d\x1b[0m\n\n",player->nRunes);
   printf("Input '0' to go back\n");
     printf("Enter the number of the whip you want to buy: ");
     scanf(" %c", &cChoice);
@@ -342,12 +342,12 @@ void buyWhips(Player* player)
             return;
     }
 
-    if (player->runes < cost) {
+    if (player->nRunes < cost) {
         printf("Not enough runes to buy this weapon.\n");
         return;
     }
 
-    player->runes -= cost;
+    player->nRunes -= cost;
     addWeaponToInventory(player, weaponToBuy);
     printf("You have bought a %s\n", weaponToBuy.weapon);
 }
@@ -366,7 +366,7 @@ void buyKatanas(Player* player)
     printf("3. Rivers of Blood - \x1b[38;5;82m HP: 40 \x1b[0m, END: 45, \x1b[38;5;124m DEX: 25 \x1b[0m, STR: 60, INT: 0, FTH: 0 Cost: 7500\n");
     printf("4. Hand of Malenia- \x1b[38;5;82m HP: 50 \x1b[0m, END: 50, \x1b[38;5;124m DEX: 30 \x1b[0m, STR: 75, INT: 0, FTH: 0 Cost: 15000\n");
 
-      printf("\n\x1b[38;5;11m Runes:%d\x1b[0m\n\n",player->runes);
+      printf("\n\x1b[38;5;11m Runes:%d\x1b[0m\n\n",player->nRunes);
       printf("Input '0' to go back\n");
     printf("Enter the number of the katana you want to buy: ");
     scanf(" %c", &cChoice);
@@ -427,14 +427,14 @@ void buyKatanas(Player* player)
             return;
     }
 
-    if (player->runes < cost) {
+    if (player->nRunes < cost) {
         printf("Not enough runes to buy this weapon.\n");
         printf("Enter any key to continue: ");
         scanf(" %c", &trash);
         return;
     }
 
-    player->runes -= cost;
+    player->nRunes -= cost;
    addWeaponToInventory(player, weaponToBuy);
     printf("You have bought a %s\n", weaponToBuy.weapon);
 }
@@ -453,7 +453,7 @@ void buySwords(Player* player)
     printf("3. Coded Sword - HP: 20, END: 35, \x1b[38;5;124m DEX: 21 \x1b[0m, STR: 40, INT: 40, FTH: 40 Cost: 4000\n");
     printf("4. Sword of Night And Flame - HP: 30, END: 45, \x1b[38;5;124m DEX: 25 \x1b[0m, STR: 55, INT: 55, FTH: 55 Cost: 8000\n");
 
-     printf("\n\x1b[38;5;11m Runes:%d\x1b[0m\n\n",player->runes);
+     printf("\n\x1b[38;5;11m Runes:%d\x1b[0m\n\n",player->nRunes);
  printf("Input '0' to go back\n");
     printf("Enter the number of the sword you want to buy: ");
     scanf(" %c", &cChoice);
@@ -512,12 +512,12 @@ void buySwords(Player* player)
             return;
     }
 
-    if (player->runes < cost) {
+    if (player->nRunes < cost) {
         printf("Not enough runes to buy this weapon.\n");
         return;
     }
 
-    player->runes -= cost;
+    player->nRunes -= cost;
     addWeaponToInventory(player, weaponToBuy);
     printf("You have bought a %s\n", weaponToBuy.weapon);
 }
@@ -526,14 +526,14 @@ void sellEquipment(Player* player) {
     int i;
            printf("\nINVENTORY\n");
            printf("Note:You will only get half of the price when you bought it!\n\n");
-        for (i = 0; i < player->inventorySize; i++) {
+        for (i = 0; i < player->nInventorySize; i++) {
             printf("[%d] %s - HP: %d, STR: %d, DEX: %d, INT: %d, END: %d, FTH: %d\n",
                    i + 1, player->inventory[i].weapon, player->inventory[i].nHp,
                    player->inventory[i].nStr, player->inventory[i].nDex, player->inventory[i].nInt,
                    player->inventory[i].nEnd, player->inventory[i].nFth);
         }
 
-    printf("\nSelect item to sell (2-%d, 0 to cancel): ", player->inventorySize);
+    printf("\nSelect item to sell (2-%d, 0 to cancel): ", player->nInventorySize);
     int choice;
     scanf("%d", &choice);
     if (choice==1)
@@ -543,7 +543,7 @@ void sellEquipment(Player* player) {
     }
     
 
-    if (choice < 1 || choice > player->inventorySize) {
+    if (choice < 1 || choice > player->nInventorySize) {
         if (choice != 0) {
             printf("Invalid choice.\n");
         }
@@ -558,16 +558,16 @@ void sellEquipment(Player* player) {
     printf("Selling %s for %d.\n", w->weapon, sellPrice);
 
     // Increase player's currency
-    player->runes += sellPrice;
+    player->nRunes += sellPrice;
 
     // Remove item from inventory
-    for (int i = choice; i < player->inventorySize - 1; i++) {
+    for (int i = choice; i < player->nInventorySize - 1; i++) {
         player->inventory[i] = player->inventory[i + 1];
     }
-    player->inventorySize--;
+    player->nInventorySize--;
 
     // Optionally, you could shrink the inventory array if it's no longer needed
-    // player->inventory = realloc(player->inventory, player->inventorySize * sizeof(Weapon));
+    // player->inventory = realloc(player->inventory, player->nInventorySize * sizeof(Weapon));
 
     printf("Item sold.\n");
 }

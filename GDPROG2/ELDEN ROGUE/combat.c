@@ -63,7 +63,7 @@ void runCombat(Player* pPlayer, Area* pArea, int* pMaxHealth, int nFloorType, in
             resetText();
             
             printf("\n\t\t\t\t\t\t\t\t     [RUNES EARNED]: %d\n", nReward);
-            pPlayer->runes += nReward;
+            pPlayer->nRunes += nReward;
             printf("\n\t\t\t\t\t\t\t\t[PRESS ANY KEY TO CONTINUE]");
             scanf(" %c", &cContinue);
 
@@ -72,7 +72,7 @@ void runCombat(Player* pPlayer, Area* pArea, int* pMaxHealth, int nFloorType, in
             youDied();
             printf("\n\t\t\t\t\t\t\t\t[PRESS ANY KEY TO CONTINUE]");
             scanf(" %c", &cContinue);
-            pPlayer->runes = 0;
+            pPlayer->nRunes = 0;
             pArea->nFlag = 1;
             pArea->nFlag2 = 1;
         }
@@ -86,7 +86,7 @@ void playerTurn(int* pTurn, int* pDodge, int* pPlayerMove, int* pMaxHealth, int 
 {
     char cInput, cContinue;
     int nTemp, nRandom, nMaxHealthLower, nMaxHealthUpper;
-    int nTempMaxHealth = 100 * ((pPlayer->stats.health + pPlayer->equippedWeapon->nHp) / 2);
+    int nTempMaxHealth = 100 * ((pPlayer->sStats.nHealth + pPlayer->equippedWeapon->nHp) / 2);
     *pDodge = 0;
 
     srand(time(NULL));
@@ -154,7 +154,7 @@ void playerTurn(int* pTurn, int* pDodge, int* pPlayerMove, int* pMaxHealth, int 
 
         else if(cInput == '2'){
 
-            nTemp = pPlayer->stats.endurance + pPlayer->equippedWeapon->nEnd;
+            nTemp = pPlayer->sStats.nEndurance + pPlayer->equippedWeapon->nEnd;
             nTemp = (20 + (nTemp / 2));
             nRandom = (rand() % 100) + 1;
             if(nRandom <= nTemp)
@@ -165,7 +165,7 @@ void playerTurn(int* pTurn, int* pDodge, int* pPlayerMove, int* pMaxHealth, int 
             printf("\n");
             greenText();
             whiteTextBG();
-            printf("\t %s ", pPlayer->name);
+            printf("\t %s ", pPlayer->cName);
             resetText();
             whiteText();
             greenTextBG();
@@ -177,7 +177,7 @@ void playerTurn(int* pTurn, int* pDodge, int* pPlayerMove, int* pMaxHealth, int 
 
             else if(cInput == '3'){
 
-                nTemp = 100 * ((pPlayer->stats.health + pPlayer->equippedWeapon->nHp) / 2);
+                nTemp = 100 * ((pPlayer->sStats.nHealth + pPlayer->equippedWeapon->nHp) / 2);
 
                 if(pPlayer->nPotions == 0){
                     printf("\nNo potions left!\n");
@@ -193,7 +193,7 @@ void playerTurn(int* pTurn, int* pDodge, int* pPlayerMove, int* pMaxHealth, int 
                 printf("\n");
                 greenText();
                 whiteTextBG();
-                printf("\t %s ", pPlayer->name);
+                printf("\t %s ", pPlayer->cName);
                 resetText();
                 whiteText();
                 greenTextBG();
@@ -223,7 +223,7 @@ void playerTurn(int* pTurn, int* pDodge, int* pPlayerMove, int* pMaxHealth, int 
 
 void enemyTurn(int nDodge, int* pPlayerMove, int* pMaxHealth, Enemy sEnemy, Player* pPlayer)
 {
-    int nTempMaxHealth = 100 * ((pPlayer->stats.health + pPlayer->equippedWeapon->nHp) / 2);
+    int nTempMaxHealth = 100 * ((pPlayer->sStats.nHealth + pPlayer->equippedWeapon->nHp) / 2);
 
     line();
     if(nDodge == 1){
@@ -334,13 +334,13 @@ int processAttack(char cInput, Player* pPlayer, Enemy* pEnemy)
 {
     switch(cInput){
         case '1':
-            return (pPlayer->stats.strength + pPlayer->equippedWeapon->nStr) * (1 - pEnemy->fPhysDef);
+            return (pPlayer->sStats.nStrength + pPlayer->equippedWeapon->nStr) * (1 - pEnemy->fPhysDef);
             break;
         case '2':
-            return (pPlayer->stats.intelligence + pPlayer->equippedWeapon->nInt) * (1 - pEnemy->fSorcDef);
+            return (pPlayer->sStats.nIntelligence + pPlayer->equippedWeapon->nInt) * (1 - pEnemy->fSorcDef);
             break;
         case '3':
-            return (pPlayer->stats.faith + pPlayer->equippedWeapon->nFth) * (1 - pEnemy->fIncantDef);
+            return (pPlayer->sStats.nFaith + pPlayer->equippedWeapon->nFth) * (1 - pEnemy->fIncantDef);
             break;
         default:
             return 0;
@@ -462,7 +462,7 @@ void printTurn(int nTurnType, Enemy* pEnemy, Player *pPlayer, int nTempMaxHealth
     printf("\t│ \x1b[38;5;34m║\x1b[0m █\x1b[38;5;34m█\x1b[0m█\x1b[38;5;34m█\x1b[0m█ \x1b[38;5;34m║\x1b[0m │\n");
     printf("\t│ \x1b[38;5;34m║\x1b[0m  ▀▀▀  \x1b[38;5;34m║\x1b[0m │ ");
     yellowText();
-    printf("%s", pPlayer->name);
+    printf("%s", pPlayer->cName);
     resetText();
     printf("\n\t│ \x1b[38;5;34m╚═══════╝\x1b[0m │ ");
     displayHealthbar(nTempMaxHealth, nMaxHealth);

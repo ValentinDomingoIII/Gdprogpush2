@@ -63,12 +63,12 @@ typedef struct {
 } Weapon;
 
 typedef struct {
-    int health;
-    int endurance;
-    int dexterity;
-    int strength;
-    int intelligence;
-    int faith;
+    int nHealth;
+    int nEndurance;
+    int nDexterity;
+    int nStrength;
+    int nIntelligence;
+    int nFaith;
 } Stats;
 
 typedef struct{
@@ -83,17 +83,17 @@ struct location {
 typedef struct location Location;
 
 struct player {
-    char name[MAX_NAME];
-    char jobName[MAX_NAME];
-    int level; 
-    int runes;
+    char cName[MAX_NAME];
+    char cJobName[MAX_NAME];
+    int nLevel; 
+    int nRunes;
     int nPotions;
     Weapon *inventory;  // Dynamic array of weapons
-    int inventorySize;  // Current number of weapons
-    int inventoryCapacity;  // Capacity of the inventory
+    int nInventorySize;  // Current number of weapons
+    int nInventoryCapacity;  // Capacity of the inventory
     Weapon *equippedWeapon; // Pointer to the currently equipped weapon
     Shards nShards;
-    Stats stats;
+    Stats sStats;
     Location sLocation;
 };
 
