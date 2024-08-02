@@ -8,6 +8,8 @@
         "title.h": "c",
         "definitions.h": "c",
         "stddef.h": "c",
-        "stdio.h": "c"
+        "stdio.h": "c",
+        "text_encoding": "c",
+        "typeinfo": "c"
     }
 }

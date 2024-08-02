@@ -17,3 +17,4 @@ void youDied();
 void credits();
 void displayHealthbar(int nMaxHealth, int nCurrentHealth);
 void runesObtained(int nRandom);
+void enemySprite();

@@ -165,3 +165,27 @@ void runesObtained(int nRandom)
     printf("\t\t\t\t\t\t\t    [PRESS ANY KEY TO CONTINUE]");
     scanf(" %c", &cInput);
 }
+
+void enemySprite()
+{
+    printf("\t\t\t\t\t\t\t\t\t┌───────────┐\n");
+    printf("\t\t\t\t\t\t\t\t\t│ \x1b[38;5;9m╔═══════╗\x1b[0m │\n");
+    printf("\t\t\t\t\t\t\t\t\t│ \x1b[38;5;9m║\x1b[0m ▄███▄ \x1b[38;5;9m║\x1b[0m │\n");
+    printf("\t\t\t\t\t\t\t\t\t│ \x1b[38;5;9m║\x1b[0m █\x1b[38;5;9m█\x1b[0m█\x1b[38;5;9m█\x1b[0m█ \x1b[38;5;9m║\x1b[0m │\n");
+    printf("\t\t\t\t\t\t\t\t\t│ \x1b[38;5;9m║\x1b[0m █▀█▀█ \x1b[38;5;9m║\x1b[0m │\n");
+    printf("\t\t\t\t\t\t\t\t\t│ \x1b[38;5;9m╚═══════╝\x1b[0m │\n");
+    printf("\t\t\t\t\t\t\t\t\t└───────────┘");
+}
+
+/*
+
+▄███▄ 
+█ █ █ 
+█▀█▀█ 
+ 
+
+ ▄███▄
+ █ █ █ 
+ ▄▀▀▀▄ 
+
+*/

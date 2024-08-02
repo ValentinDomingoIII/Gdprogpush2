@@ -27,7 +27,8 @@ void runCombat(Player* pPlayer, Area* pArea, int* pMaxHealth, int nFloorType, in
 
     printf("\n\n");
 
-    printf("BATTLING [%s]\n", sEnemy.strEnemyName);
+    enemySprite();
+    printf("\n\t\t\t\t\t\t\t\t  BATTLING [%s]\n", sEnemy.strEnemyName);
     printf("\n");
 
     while(sEnemy.nHealth != 0 && *pMaxHealth != 0){
@@ -86,7 +87,13 @@ void playerTurn(int* pTurn, int* pDodge, int* pPlayerMove, int* pMaxHealth, int 
 
     do {
 
-        printf("\nPlayer Turn\n");
+        line();
+        greenText();
+        printf("\n\t╔════════╗\n"); //║ ╚ ╔ ╗ ╝
+        printf("\t║ PLAYER ║\n");
+        printf("\t╚════════╝\n");
+        resetText();
+
         printf("[%s]: %d ", pPlayer->name, *pMaxHealth);
         displayHealthbar(nTempMaxHealth, *pMaxHealth);
         printf("\n[POTIONS]: %d\n", pPlayer->nPotions);
@@ -179,6 +186,12 @@ void playerTurn(int* pTurn, int* pDodge, int* pPlayerMove, int* pMaxHealth, int 
 
 void enemyTurn(int nDodge, int* pPlayerMove, int* pMaxHealth, Enemy sEnemy)
 {
+    line();
+    redText(1);
+    printf("\n\t╔═══════╗\n");
+    printf("\t║ ENEMY ║\n");
+    printf("\t╚═══════╝\n");
+    resetText();
     if(nDodge == 1)
         printf("\n[%s] MISSED!\n", sEnemy.strEnemyName);
     else if(nDodge == 2){
