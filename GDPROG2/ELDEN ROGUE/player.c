@@ -20,13 +20,13 @@ void giveWeapon(Player* player)
 {
      // Add a weapon to the player's inventory
     Weapon starterWeapon;
-    strcpy(starterWeapon.weapon, "Short Sword");
+    strcpy(starterWeapon.weapon, "Starter Sword");
     starterWeapon.nHp = 10;
     starterWeapon.nStr = 5;
-    starterWeapon.nDex = 3;
-    starterWeapon.nInt = 0;
-    starterWeapon.nEnd = 2;
-    starterWeapon.nFth = 0;
+    starterWeapon.nDex = 5;
+    starterWeapon.nInt = 5;
+    starterWeapon.nEnd = 5;
+    starterWeapon.nFth = 5;
     
     // Assuming the inventory is dynamically allocated or has a fixed size and player->inventorySize keeps track of the number of items
     player->inventory[0] = starterWeapon;
@@ -52,7 +52,7 @@ void giveWeapon(Player* player)
             player.stats.intelligence = 0;
             player.stats.faith = 0;
             //test runes
-            player.runes = 8000;
+            player.runes = 0;
             player.nShards.nStormveil = 0;
             player.nShards.nRaya = 0;
             player.nShards.nRedmane = 0;
