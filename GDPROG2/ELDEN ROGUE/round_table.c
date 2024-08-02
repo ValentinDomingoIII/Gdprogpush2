@@ -37,9 +37,9 @@ void displayRoundTable(Player* player)
     printf("\t\t\t\t\t\t\t Level: %d\n", player->level);
     printf("\t\t\t\t\t\t\t Runes: %d\n", player->runes);
     printf("\t\t\t\t\t\t\t Stats:\n\n");
-    printf("\t\t\t\t\t\t\t Health: %d\t\t Strength: %d\n", player->stats.health,player->stats.strength);
-    printf("\t\t\t\t\t\t\t Endurance: %d\t\t Intelligence: %d\n", player->stats.endurance, player->stats.intelligence);
-    printf("\t\t\t\t\t\t\t Dexterity: %d\t\t Faith: %d\n", player->stats.dexterity,player->stats.faith);
+    printf("\t\t\t\t\t\t\tHealth: %d\t\tStrength: %d\n", player->stats.health,player->stats.strength);
+    printf("\t\t\t\t\t\t\tEndurance: %d\t\tIntelligence: %d\n", player->stats.endurance, player->stats.intelligence);
+    printf("\t\t\t\t\t\t\tDexterity: %d\t\tFaith: %d\n", player->stats.dexterity,player->stats.faith);
  
  
 

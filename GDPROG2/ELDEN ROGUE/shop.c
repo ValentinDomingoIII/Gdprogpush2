@@ -533,9 +533,15 @@ void sellEquipment(Player* player) {
                    player->inventory[i].nEnd, player->inventory[i].nFth);
         }
 
-    printf("\nSelect item to sell (1-%d, 0 to cancel): ", player->inventorySize);
+    printf("\nSelect item to sell (2-%d, 0 to cancel): ", player->inventorySize);
     int choice;
     scanf("%d", &choice);
+    if (choice==1)
+    {
+        printf("\nYou cannot sell this!\n");
+        return;
+    }
+    
 
     if (choice < 1 || choice > player->inventorySize) {
         if (choice != 0) {
