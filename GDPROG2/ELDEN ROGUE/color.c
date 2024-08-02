@@ -5,6 +5,11 @@ void greenText()
     printf("\x1b[38;5;34m");
 }
 
+void greenTextBG()
+{
+    printf("\x1b[48;5;34m");
+}
+
 void resetText()
 {
     printf("\x1b[0m");
@@ -53,9 +58,14 @@ void purpleText()
     printf("\x1b[38;5;55m");
 }
 
-void brownText()
+void whiteText()
 {
-    printf("\x1b[38;5;94m");
+    printf("\x1b[38;5;15m");    
+}
+
+void whiteTextBG()
+{
+    printf("\x1b[48;5;15m");
 }
 
 void line()
@@ -168,14 +178,16 @@ void runesObtained(int nRandom)
 
 void enemySprite()
 {
-    printf("\t\t\t\t\t\t\t\t\t┌───────────┐\n");
-    printf("\t\t\t\t\t\t\t\t\t│ \x1b[38;5;9m╔═══════╗\x1b[0m │\n");
-    printf("\t\t\t\t\t\t\t\t\t│ \x1b[38;5;9m║\x1b[0m ▄███▄ \x1b[38;5;9m║\x1b[0m │\n");
-    printf("\t\t\t\t\t\t\t\t\t│ \x1b[38;5;9m║\x1b[0m █\x1b[38;5;9m█\x1b[0m█\x1b[38;5;9m█\x1b[0m█ \x1b[38;5;9m║\x1b[0m │\n");
-    printf("\t\t\t\t\t\t\t\t\t│ \x1b[38;5;9m║\x1b[0m █▀█▀█ \x1b[38;5;9m║\x1b[0m │\n");
-    printf("\t\t\t\t\t\t\t\t\t│ \x1b[38;5;9m╚═══════╝\x1b[0m │\n");
-    printf("\t\t\t\t\t\t\t\t\t└───────────┘");
+        printf("\t\t\t\t\t\t\t\t\t┌───────────┐\n");
+        printf("\t\t\t\t\t\t\t\t\t│ \x1b[38;5;9m╔═══════╗\x1b[0m │\n");
+        printf("\t\t\t\t\t\t\t\t\t│ \x1b[38;5;9m║\x1b[0m ▄███▄ \x1b[38;5;9m║\x1b[0m │\n");
+        printf("\t\t\t\t\t\t\t\t\t│ \x1b[38;5;9m║\x1b[0m █\x1b[38;5;9m█\x1b[0m█\x1b[38;5;9m█\x1b[0m█ \x1b[38;5;9m║\x1b[0m │\n");
+        printf("\t\t\t\t\t\t\t\t\t│ \x1b[38;5;9m║\x1b[0m █▀█▀█ \x1b[38;5;9m║\x1b[0m │\n");
+        printf("\t\t\t\t\t\t\t\t\t│ \x1b[38;5;9m╚═══════╝\x1b[0m │\n");
+        printf("\t\t\t\t\t\t\t\t\t└───────────┘");
 }
+
+
 
 /*
 
@@ -183,9 +195,16 @@ void enemySprite()
 █ █ █ 
 █▀█▀█ 
  
+    printf("\t┌───────────┐\n");
+    printf("\t│ \x1b[38;5;33m╔═══════╗\x1b[0m │\n");
+    printf("\t│ \x1b[38;5;33m║\x1b[0m ▄███▄ \x1b[38;5;33m║\x1b[0m │\n");
+    printf("\t│ \x1b[38;5;33m║\x1b[0m █\x1b[38;5;33m█\x1b[0m█\x1b[38;5;33m█\x1b[0m█ \x1b[38;5;33m║\x1b[0m │\n");
+    printf("\t│ \x1b[38;5;33m║\x1b[0m  ▀▀▀ \x1b[38;5;33m║\x1b[0m │\n");
+    printf("\t│ \x1b[38;5;33m╚═══════╝\x1b[0m │\n");
+    printf("\t└───────────┘");
 
  ▄███▄
  █ █ █ 
- ▄▀▀▀▄ 
+  ▀▀▀
 
 */

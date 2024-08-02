@@ -1,6 +1,7 @@
 #pragma once
 
 void greenText();
+void greenTextBG();
 void resetText();
 void redText();
 void blueText();
@@ -10,6 +11,8 @@ void pinkText();
 void grayText();
 void grayTextBG();
 void purpleText();
+void whiteText();
+void whiteTextBG();
 void line();
 void enemyFelled();
 void greatEnemyFelled();
