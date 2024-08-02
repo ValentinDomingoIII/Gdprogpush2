@@ -2,6 +2,7 @@
 #include "character_creation.h"
 
 void runTitle(Player* player) {
+   // initializePlayer();
     int nInput = 0;
 
     do {

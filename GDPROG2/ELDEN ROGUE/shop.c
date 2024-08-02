@@ -472,6 +472,7 @@ void buySwords(Player* player)
 void sellEquipment(Player* player) {
     int i;
            printf("\nINVENTORY\n");
+           printf("Note:You will only get half of the price when you bought it!");
         for (i = 0; i < player->inventorySize; i++) {
             printf("[%d] %s - HP: %d, STR: %d, DEX: %d, INT: %d, END: %d, FTH: %d\n",
                    i + 1, player->inventory[i].weapon, player->inventory[i].nHp,
@@ -517,17 +518,23 @@ void processShop(Player* player)
     char cChoice;
     printf("\n\tSHOP\n");
 
-    printf("Category:\n");
-    printf("[1]Swords\n");
-    printf("[2]Katanas\n");
-    printf("[3]Whips\n");
-    printf("[4]GreatSwords\n");
-    printf("[5]Staves\n");
-    printf("[6]Seals\n");
-    printf("[7]Sell\n");
-    printf("[0]Back\n");
+    printf("\t\t\t\t\t\t\tCategory:\n");
 
-    printf("INPUT:");
+
+    printf("         />_________________________________\n");
+    printf("[########[]_________________________________>\n");
+    printf("         \\>\n");
+         
+    printf("\t\t\t\t\t\t\t[1]Swords\n");
+    printf("\t\t\t\t\t\t\t[2]Katanas\n");
+    printf("\t\t\t\t\t\t\t[3]Whips\n");
+    printf("\t\t\t\t\t\t\t[4]GreatSwords\n");
+    printf("\t\t\t\t\t\t\t[5]Staves\n");
+    printf("\t\t\t\t\t\t\t[6]Seals\n");
+    printf("\t\t\t\t\t\t\t[7]Sell\n");
+    printf("\t\t\t\t\t\t\t[0]Back\n");
+
+    printf("\t\t\t\t\t\t\tINPUT:");
     scanf(" %c",&cChoice);
 
     switch (cChoice)

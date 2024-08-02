@@ -1,13 +1,13 @@
-Name: nigah
-Job Class: Warrior
+Name: qwerty
+Job Class: Samurai
 Level: 1
-Health: 11
-Endurance: 11
-Dexterity: 16
-Strength: 10
-Intelligence: 10
+Health: 12
+Endurance: 13
+Dexterity: 15
+Strength: 12
+Intelligence: 9
 Faith: 8
-Runes: 8000
+Runes: 0
 Shards: 0,0,0,0,0,0
 Inventory:
 Equipped Weapon: None
