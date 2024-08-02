@@ -1,14 +1,14 @@
-Name: NICOLO
-Job Class: Astrologer
-Level: 6
-Health: 999
-Endurance: 9
-Dexterity: 12
-Strength: 8
-Intelligence: 999
-Faith: 7
-Runes: 2000
-Shards: 1,1,1,1,1,1
+Name: TURTLE POPE
+Job Class: Samurai
+Level: 1
+Health: 12
+Endurance: 13
+Dexterity: 15
+Strength: 12
+Intelligence: 9
+Faith: 8
+Runes: 0
+Shards: 0,0,0,0,0,0
 Equipped Weapon: Starter Sword,10,5,5,5,5,5,100
 Inventory:
 Starter Sword,10,5,5,5,5,5,100
