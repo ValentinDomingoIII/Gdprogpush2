@@ -5,6 +5,8 @@ void runRoundTable(Player* player)
 {
     char cInput;
    // printf("\nWELCOME\n");
+
+   giveWeapon(player);
   do
   {
     player->nPotions = 8;
@@ -17,7 +19,8 @@ void runRoundTable(Player* player)
 
 void displayRoundTable(Player* player)
 {
-    printf("\n\x1b[48;5;242m ╔════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╗\x1b[0m \n");
+    printf("\n");
+    printf(" \x1b[48;5;242m╔════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╗\x1b[0m \n");
     printf(" \x1b[48;5;242m║   ▀██▀▀█▄    ▄▄█▀▀██   ▀██▀  ▀█▀ ▀█▄   ▀█▀ ▀██▀▀█▄   █▀▀██▀▀█     █     ▀██▀▀█▄   ▀██▀      ▀██▀▀▀▀█     ▀██▀  ▀██▀  ▄▄█▀▀██   ▀██▀      ▀██▀▀█▄   ║\x1b[0m \n");
     printf(" \x1b[48;5;242m║    ██   ██  ▄█▀    ██   ██    █   █▀█   █   ██   ██     ██       ███     ██   ██   ██        ██  ▄        ██    ██  ▄█▀    ██   ██        ██   ██  ║\x1b[0m \n");
     printf(" \x1b[48;5;242m║    ██▀▀█▀   ██      ██  ██    █   █ ▀█▄ █   ██    ██    ██      █  ██    ██▀▀▀█▄   ██        ██▀▀█        ██▀▀▀▀██  ██      ██  ██        ██    ██ ║\x1b[0m \n");
@@ -42,17 +45,18 @@ void displayRoundTable(Player* player)
  
     
      if (player->equippedWeapon == NULL)  {
-        printf("\nNo weapon equipped.\n");
+        printf("\n\t\t\t\t\t\t\tNo weapon equipped.\n");
     }
     else
     {
-        printf("\nEquipped Weapon: %s\n", player->equippedWeapon->weapon);
+        printf("\n\t\t\t\t\t\t\tEquipped Weapon: %s\n", player->equippedWeapon->weapon);
         printf("  HP: %d\n", player->equippedWeapon->nHp);
         printf("  STR: %d\n", player->equippedWeapon->nStr);
         printf("  DEX: %d\n", player->equippedWeapon->nDex);
         printf("  INT: %d\n", player->equippedWeapon->nInt);
         printf("  END: %d\n", player->equippedWeapon->nEnd);
         printf("  FTH: %d\n", player->equippedWeapon->nFth);
+
     }
 
 
