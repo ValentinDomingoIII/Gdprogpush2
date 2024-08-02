@@ -4,7 +4,7 @@
 #include "structures.h"
 #include "definitions.h"
 #include "combat.h"
-#include "color.h"
+#include "utility.h"
 #include "round_table.h"
 
 void runArea(Area* pArea, Array sCoordinate, Player* pPlayer, int* pShard, int* pMaxHealth);

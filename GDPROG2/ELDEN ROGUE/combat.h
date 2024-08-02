@@ -1,6 +1,6 @@
 #pragma once
 
-#include "color.h"
+#include "utility.h"
 #include "stddef.h"
 #include "string.h"
 
