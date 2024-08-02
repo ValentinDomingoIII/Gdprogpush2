@@ -104,69 +104,93 @@ void processlevelup(Player* player) {
         printf("\t\t\t\t\t\t\t[3] Level up DEXTERITY\t[6] Level up FAITH\n");
 
         printf("\t\t\t\t\t\t\t\t\t[0] BACK\n");
-        printf("\t\t\t\t\t\t\tRunes: %d",player->runes);
+        printf("\t\t\t\t\t\t\tRunes: %d", player->runes);
         printf("\n\t\t\t\t\t\t\tLevel up cost: %d\n", nRune);
         printf("\n\t\t\t\t\t\t\tINPUT: ");
         scanf(" %c", &cChoice);
 
         switch (cChoice) {
             case '1':
-                printf("\nLevel up Health?\n");
-                printf("[1] Yes [2] No: ");
-                scanf(" %c", &cChoice2);
-                if (cChoice2 == '1' && runemath(player)) {
-                    player->stats.health++;
-                    printf("\nHealth increased to %d", player->stats.health);
+                if (player->stats.health >= 50) {
+                    printf("\nHealth is maxed out at %d", player->stats.health);
+                } else {
+                    printf("\nLevel up Health?\n");
+                    printf("[1] Yes [2] No: ");
+                    scanf(" %c", &cChoice2);
+                    if (cChoice2 == '1' && runemath(player)) {
+                        player->stats.health++;
+                        printf("\nHealth increased to %d", player->stats.health);
+                    }
                 }
                 break;
 
             case '2':
-                printf("\nLevel up Endurance?\n");
-                printf("[1] Yes [2] No: ");
-                scanf(" %c", &cChoice2);
-                if (cChoice2 == '1' && runemath(player)) {
-                    player->stats.endurance++;
-                    printf("\nEndurance increased to %d", player->stats.endurance);
+                if (player->stats.endurance >= 50) {
+                    printf("\nEndurance is maxed out at %d", player->stats.endurance);
+                } else {
+                    printf("\nLevel up Endurance?\n");
+                    printf("[1] Yes [2] No: ");
+                    scanf(" %c", &cChoice2);
+                    if (cChoice2 == '1' && runemath(player)) {
+                        player->stats.endurance++;
+                        printf("\nEndurance increased to %d", player->stats.endurance);
+                    }
                 }
                 break;
 
             case '3':
-                printf("\nLevel up Dexterity?\n");
-                printf("[1] Yes [2] No: ");
-                scanf(" %c", &cChoice2);
-                if (cChoice2 == '1' && runemath(player)) {
-                    player->stats.dexterity++;
-                    printf("\nDexterity increased to %d", player->stats.dexterity);
+                if (player->stats.dexterity >= 50) {
+                    printf("\nDexterity is maxed out at %d", player->stats.dexterity);
+                } else {
+                    printf("\nLevel up Dexterity?\n");
+                    printf("[1] Yes [2] No: ");
+                    scanf(" %c", &cChoice2);
+                    if (cChoice2 == '1' && runemath(player)) {
+                        player->stats.dexterity++;
+                        printf("\nDexterity increased to %d", player->stats.dexterity);
+                    }
                 }
                 break;
 
             case '4':
-                printf("\nLevel up Strength?\n");
-                printf("[1] Yes [2] No: ");
-                scanf(" %c", &cChoice2);
-                if (cChoice2 == '1' && runemath(player)) {
-                    player->stats.strength++;
-                    printf("\nStrength increased to %d", player->stats.strength);
+                if (player->stats.strength >= 50) {
+                    printf("\nStrength is maxed out at %d", player->stats.strength);
+                } else {
+                    printf("\nLevel up Strength?\n");
+                    printf("[1] Yes [2] No: ");
+                    scanf(" %c", &cChoice2);
+                    if (cChoice2 == '1' && runemath(player)) {
+                        player->stats.strength++;
+                        printf("\nStrength increased to %d", player->stats.strength);
+                    }
                 }
                 break;
 
             case '5':
-                printf("\nLevel up Intelligence?\n");
-                printf("[1] Yes [2] No: ");
-                scanf(" %c", &cChoice2);
-                if (cChoice2 == '1' && runemath(player)) {
-                    player->stats.intelligence++;
-                    printf("\nIntelligence increased to %d", player->stats.intelligence);
+                if (player->stats.intelligence >= 50) {
+                    printf("\nIntelligence is maxed out at %d", player->stats.intelligence);
+                } else {
+                    printf("\nLevel up Intelligence?\n");
+                    printf("[1] Yes [2] No: ");
+                    scanf(" %c", &cChoice2);
+                    if (cChoice2 == '1' && runemath(player)) {
+                        player->stats.intelligence++;
+                        printf("\nIntelligence increased to %d", player->stats.intelligence);
+                    }
                 }
                 break;
 
             case '6':
-                printf("\nLevel up Faith?\n");
-                printf("[1] Yes [2] No: ");
-                scanf(" %c", &cChoice2);
-                if (cChoice2 == '1' && runemath(player)) {
-                    player->stats.faith++;
-                    printf("\nFaith increased to %d", player->stats.faith);
+                if (player->stats.faith >= 50) {
+                    printf("\nFaith is maxed out at %d", player->stats.faith);
+                } else {
+                    printf("\nLevel up Faith?\n");
+                    printf("[1] Yes [2] No: ");
+                    scanf(" %c", &cChoice2);
+                    if (cChoice2 == '1' && runemath(player)) {
+                        player->stats.faith++;
+                        printf("\nFaith increased to %d", player->stats.faith);
+                    }
                 }
                 break;
 
@@ -174,10 +198,12 @@ void processlevelup(Player* player) {
                 break;
 
             default:
+                printf("\nInvalid choice. Please select a valid option.\n");
                 break;
         }
     } while (cChoice != '0');
 }
+
 
 
 void processInventory(Player* player) {

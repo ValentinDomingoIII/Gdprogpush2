@@ -139,6 +139,10 @@ void buyStaves(Player* player)
             strcpy(weaponToBuy.weapon, "Carian Regal Scepter");
             cost = 16000;
             break;
+
+            case '0':
+            return;
+                break;
         default:
             printf("Invalid choice\n");
             return;
@@ -220,6 +224,9 @@ void buyGreatSwords(Player* player)
             strcpy(weaponToBuy.weapon, "Maliketh's Black Blade");
             cost = 24000;
             break;
+        case '0':
+        return;
+            break;
         default:
             printf("Invalid choice\n");
             return;
@@ -296,6 +303,9 @@ void buyWhips(Player* player)
             strcpy(weaponToBuy.weapon, "Hoslow's Petal Whip");
             cost = 10000;
             break;
+          case '0':
+          return;
+         break;
         default:
             printf("Invalid choice\n");
             return;
@@ -323,7 +333,7 @@ void buyKatanas(Player* player)
     printf("1. Uchigatana - \x1b[38;5;82m HP: 20 \x1b[0m, END: 35, \x1b[38;5;124m DEX: 15 \x1b[0m, STR: 30, INT: 0, FTH: 0 Cost: 1875\n");
     printf("2. Moonveil - \x1b[38;5;82m HP: 30 \x1b[0m, END: 40, \x1b[38;5;124m DEX: 20 \x1b[0m, STR: 45, INT: 0, FTH: 0 Cost: 3750\n");
     printf("3. Rivers of Blood - \x1b[38;5;82m HP: 40 \x1b[0m, END: 45, \x1b[38;5;124m DEX: 25 \x1b[0m, STR: 60, INT: 0, FTH: 0 Cost: 7500\n");
-    printf("4. Sword of Night And Flame - \x1b[38;5;82m HP: 50 \x1b[0m, END: 50, \x1b[38;5;124m DEX: 30 \x1b[0m, STR: 75, INT: 0, FTH: 0 Cost: 15000\n");
+    printf("4. Hand of Malenia- \x1b[38;5;82m HP: 50 \x1b[0m, END: 50, \x1b[38;5;124m DEX: 30 \x1b[0m, STR: 75, INT: 0, FTH: 0 Cost: 15000\n");
 
     printf("Enter the number of the katana you want to buy: ");
     scanf(" %c", &cChoice);
@@ -370,8 +380,11 @@ void buyKatanas(Player* player)
             weaponToBuy.nEnd = 50;
             weaponToBuy.nFth = 0;
             weaponToBuy.nCost = 15000;
-            strcpy(weaponToBuy.weapon, "Sword of Night and Flame");
+            strcpy(weaponToBuy.weapon, "Hand of Malenia");
             cost = 15000;
+            break;
+        case '0':
+        return;
             break;
         default:
             printf("Invalid choice\n");
@@ -454,6 +467,9 @@ void buySwords(Player* player)
             strcpy(weaponToBuy.weapon, "Sword of Night And Flame");
             cost = 8000;
             break;
+        case '0':
+            return;
+            break;
         default:
             printf("Invalid choice\n");
             return;
@@ -516,14 +532,24 @@ void sellEquipment(Player* player) {
 void processShop(Player* player)
 {
     char cChoice;
-    printf("\n\tSHOP\n");
+    printf("\n\t\t\t\t\t\t\x1b[48;5;34m╔══════════════════════════════════════════╗\x1b[0m");
+    printf("\n\t\t\t\t\t\t\x1b[48;5;34m║  ▄█▀▀▀▄█  ▀██▀  ▀██▀  ▄▄█▀▀██   ▀██▀▀█▄  ║\x1b[0m");
+    printf("\n\t\t\t\t\t\t\x1b[48;5;34m║  ██▄▄  ▀   ██    ██  ▄█▀    ██   ██   ██ ║\x1b[0m");
+    printf("\n\t\t\t\t\t\t\x1b[48;5;34m║   ▀▀███▄   ██▀▀▀▀██  ██      ██  ██▄▄▄█▀ ║\x1b[0m");
+    printf("\n\t\t\t\t\t\t\x1b[48;5;34m║ ▄     ▀██  ██    ██  ▀█▄     ██  ██      ║\x1b[0m");
+    printf("\n\t\t\t\t\t\t\x1b[48;5;34m║ █▀▄▄▄▄█▀  ▄██▄  ▄██▄  ▀▀█▄▄▄█▀  ▄██▄     ║\x1b[0m");
+    printf("\n\t\t\t\t\t\t\x1b[48;5;34m╚══════════════════════════════════════════╝\x1b[0m\n");
+
+
+    
+
+                                         
+                                         
 
     printf("\t\t\t\t\t\t\tCategory:\n");
 
 
-    printf("         />_________________________________\n");
-    printf("[########[]_________________________________>\n");
-    printf("         \\>\n");
+
          
     printf("\t\t\t\t\t\t\t[1]Swords\n");
     printf("\t\t\t\t\t\t\t[2]Katanas\n");
