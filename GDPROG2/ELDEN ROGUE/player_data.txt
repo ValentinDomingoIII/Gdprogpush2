@@ -1,14 +1,14 @@
-Name: oke
-Job Class: Samurai
-Level: 1
-Health: 12
-Endurance: 13
-Dexterity: 15
-Strength: 12
-Intelligence: 9
-Faith: 8
-Runes: 0
-Shards: 0,0,0,0,0,0
+Name: NICOLO
+Job Class: Astrologer
+Level: 6
+Health: 9
+Endurance: 9
+Dexterity: 12
+Strength: 8
+Intelligence: 21
+Faith: 7
+Runes: 1849
+Shards: 1,0,0,0,0,0
 Equipped Weapon: Starter Sword,10,5,5,5,5,5,100
 Inventory:
 Starter Sword,10,5,5,5,5,5,100

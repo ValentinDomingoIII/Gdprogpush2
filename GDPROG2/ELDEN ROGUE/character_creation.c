@@ -6,16 +6,7 @@ void runCharCreation(Player* player) {
     char cChoice = 0;
     int isConfirmed = 0; // Flag to check if character is confirmed
     int exitCreation = 0; // Flag to check if we should exit the creation loop
-    /*
-
-
-
-
-                        BEEEG SPPAAACCCEE FOOORR NOOOO RREEEAAAASSOOOONN
-                                                                                                                                    
-                                                                                                                                    
-
-    */
+    
     printf("\n\t  ▄▄█▀▀▀▄█ ▀██                                ▄                        ▄▄█▀▀▀▄█                           ▄    ██                   \n");
     printf("\t▄█▀     ▀   ██ ▄▄    ▄▄▄▄   ▄▄▄ ▄▄   ▄▄▄▄   ▄██▄    ▄▄▄▄  ▄▄▄ ▄▄     ▄█▀     ▀  ▄▄▄ ▄▄    ▄▄▄▄   ▄▄▄▄   ▄██▄  ▄▄▄    ▄▄▄   ▄▄ ▄▄▄   \n");
     printf("\t██          ██▀ ██  ▀▀ ▄██   ██▀ ▀▀ ▀▀ ▄██   ██   ▄█▄▄▄██  ██▀ ▀▀    ██          ██▀ ▀▀ ▄█▄▄▄██ ▀▀ ▄██   ██    ██  ▄█  ▀█▄  ██  ██  \n");
@@ -51,7 +42,7 @@ void runCharCreation(Player* player) {
 void printCharCreationScreen() {
   //  displayCurrentCharacter(player);
   printf("\n ════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════ \n");
-    printf("\n\t\t\t\t\t\t\t[1] INPUT cName\n");
+    printf("\n\t\t\t\t\t\t\t[1] INPUT NAME\n");
     printf("\t\t\t\t\t\t\t[2] INPUT JOB CLASS\n");
     printf("\t\t\t\t\t\t\t[3] CONFIRM\n");
     printf("\t\t\t\t\t\t\t[4] VIEW CURRENT CHARACTER\n");

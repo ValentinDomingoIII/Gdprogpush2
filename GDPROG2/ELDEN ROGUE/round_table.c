@@ -36,7 +36,7 @@ void displayRoundTable(Player* player)
         printf(" ◇ ");
     }
     else{
-        printf("x1b[38;5;14m◇ \x1b[0m");
+        printf("\x1b[38;5;14m◇ \x1b[0m");
     }
 
 
@@ -48,7 +48,7 @@ void displayRoundTable(Player* player)
 
 
     else{
-        printf("x1b[38;5;4m◇ \x1b[0m");
+        printf("\x1b[38;5;4m◇ \x1b[0m");
     }
 
 
@@ -58,7 +58,7 @@ void displayRoundTable(Player* player)
         printf("◇ ");
     }
     else{
-        printf("x1b[38;5;9m◇\x1b[0m");
+        printf("\x1b[38;5;9m◇\x1b[0m");
     }
 
         if (player->nShards.nLeyndell==0)
@@ -66,7 +66,7 @@ void displayRoundTable(Player* player)
         printf("◇ ");
     }
     else{
-        printf("x1b[38;5;11m◇ \x1b[0m");
+        printf("\x1b[38;5;11m◇ \x1b[0m");
     }
 
         if (player->nShards.nVolcano==0)
@@ -74,7 +74,7 @@ void displayRoundTable(Player* player)
         printf("◇ \n");
     }
     else{
-        printf("x1b[38;5;1m◇ \x1b[0m\n");
+        printf("\x1b[38;5;1m◇ \x1b[0m\n");
     }
    
     printf("\t\t\t\t\t\t\t Stats:\n\n");
@@ -93,7 +93,7 @@ void displayRoundTable(Player* player)
         printf("\t\t\t\t\t\t\t  DEX: %d\t FTH: %d\n", player->equippedWeapon->nDex, player->equippedWeapon->nFth);
     }
 
-    printf("=============================================================================================================================================\n");
+    printf("\n=============================================================================================================================================\n\n");
     printf("\t\t\t\t\t\t\t[1] Fast travel\n");
     printf("\t\t\t\t\t\t\t[2] Level Up\n");
     printf("\t\t\t\t\t\t\t[3] Inventory\n");
