@@ -585,25 +585,23 @@ void processShop(Player* player)
 
 
     
+                           
 
-                                         
-                                         
-
-    printf("\t\t\t\t\t\t\tCategory:\n");
+    printf("\t\t\t\t\t\t\tCategory:\n\n");
 
 
 
          
-    printf("\t\t\t\t\t\t\t[1]Swords\n");
-    printf("\t\t\t\t\t\t\t[2]Katanas\n");
-    printf("\t\t\t\t\t\t\t[3]Whips\n");
-    printf("\t\t\t\t\t\t\t[4]GreatSwords\n");
-    printf("\t\t\t\t\t\t\t[5]Staves\n");
-    printf("\t\t\t\t\t\t\t[6]Seals\n");
-    printf("\t\t\t\t\t\t\t[7]Sell\n");
-    printf("\t\t\t\t\t\t\t[0]Back\n");
+    printf("\t\t\t\t\t\t\t[1] Swords\n");
+    printf("\t\t\t\t\t\t\t[2] Katanas\n");
+    printf("\t\t\t\t\t\t\t[3] Whips\n");
+    printf("\t\t\t\t\t\t\t[4] GreatSwords\n");
+    printf("\t\t\t\t\t\t\t[5] Staves\n");
+    printf("\t\t\t\t\t\t\t[6] Seals\n");
+    printf("\t\t\t\t\t\t\t[7] Sell\n");
+    printf("\t\t\t\t\t\t\t[0] Back\n");
 
-    printf("\t\t\t\t\t\t\tINPUT:");
+    printf("\n\t\t\t\t\t\t\tINPUT: ");
     scanf(" %c",&cChoice);
 
     switch (cChoice)
