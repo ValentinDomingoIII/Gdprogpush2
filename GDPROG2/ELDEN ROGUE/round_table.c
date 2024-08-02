@@ -28,7 +28,55 @@ void displayRoundTable(Player* player)
     printf("\n\t\t\t\t\t\t\t Player: %s | %s\n", player->cName, player->cJobName);
     printf("\t\t\t\t\t\t\t Level: %d\n", player->nLevel);
     printf("\t\t\t\t\t\t\t Runes: %d\n", player->nRunes);
-    printf("\t\t\t\t\t\t\t Shards: 0\n");
+    printf("\t\t\t\t\t\t\t Shards:");
+
+
+    if (player->nShards.nStormveil==0)
+    {
+        printf(" ◇ ");
+    }
+    else{
+        printf("x1b[38;5;14m◇ \x1b[0m");
+    }
+
+
+
+      if (player->nShards.nRaya==0)
+    {
+        printf(" ◇ ");
+    }
+
+
+    else{
+        printf("x1b[38;5;4m◇ \x1b[0m");
+    }
+
+
+
+          if (player->nShards.nRedmane==0)
+    {
+        printf("◇ ");
+    }
+    else{
+        printf("x1b[38;5;9m◇\x1b[0m");
+    }
+
+        if (player->nShards.nLeyndell==0)
+    {
+        printf("◇ ");
+    }
+    else{
+        printf("x1b[38;5;11m◇ \x1b[0m");
+    }
+
+        if (player->nShards.nVolcano==0)
+    {
+        printf("◇ \n");
+    }
+    else{
+        printf("x1b[38;5;1m◇ \x1b[0m\n");
+    }
+   
     printf("\t\t\t\t\t\t\t Stats:\n\n");
     printf("\t\t\t\t\t\t\t Health: %d\t\t Strength: %d\n", player->sStats.nHealth, player->sStats.nStrength);
     printf("\t\t\t\t\t\t\t Endurance: %d\t\t Intelligence: %d\n", player->sStats.nEndurance, player->sStats.nIntelligence);
