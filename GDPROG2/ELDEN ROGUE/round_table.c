@@ -5,6 +5,8 @@ void runRoundTable(Player* player)
 {
     char cInput;
    // printf("\nWELCOME\n");
+
+   giveWeapon(player);
   do
   {
     player->nPotions = 8;
@@ -12,18 +14,21 @@ void runRoundTable(Player* player)
     scanf(" %c",&cInput);
     processInputs(player,cInput);
   } while (cInput!='0');
+
+  initializePlayer();
      
 }
 
 void displayRoundTable(Player* player)
 {
-    printf("\n\x1b[48;5;242m ╔════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╗\x1b[0m \n");
-    printf(" \x1b[48;5;242m║   ▀██▀▀█▄    ▄▄█▀▀██   ▀██▀  ▀█▀ ▀█▄   ▀█▀ ▀██▀▀█▄   █▀▀██▀▀█     █     ▀██▀▀█▄   ▀██▀      ▀██▀▀▀▀█     ▀██▀  ▀██▀  ▄▄█▀▀██   ▀██▀      ▀██▀▀█▄   ║\x1b[0m \n");
-    printf(" \x1b[48;5;242m║    ██   ██  ▄█▀    ██   ██    █   █▀█   █   ██   ██     ██       ███     ██   ██   ██        ██  ▄        ██    ██  ▄█▀    ██   ██        ██   ██  ║\x1b[0m \n");
-    printf(" \x1b[48;5;242m║    ██▀▀█▀   ██      ██  ██    █   █ ▀█▄ █   ██    ██    ██      █  ██    ██▀▀▀█▄   ██        ██▀▀█        ██▀▀▀▀██  ██      ██  ██        ██    ██ ║\x1b[0m \n");
-    printf(" \x1b[48;5;242m║    ██   █▄  ▀█▄     ██  ██    █   █   ███   ██    ██    ██     ▄▀▀▀▀█▄   ██    ██  ██        ██           ██    ██  ▀█▄     ██  ██        ██    ██ ║\x1b[0m \n");
-    printf(" \x1b[48;5;242m║   ▄██▄  ▀█▀  ▀▀█▄▄▄█▀    ▀█▄▄▀   ▄█▄   ▀█  ▄██▄▄▄█▀    ▄██▄   ▄█▄  ▄██▄ ▄██▄▄▄█▀  ▄██▄▄▄▄▄█ ▄██▄▄▄▄▄█    ▄██▄  ▄██▄  ▀▀█▄▄▄█▀  ▄██▄▄▄▄▄█ ▄██▄▄▄█▀  ║\x1b[0m \n");
-    printf(" \x1b[48;5;242m╚════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╝\x1b[0m \n");
+    printf("\n");
+    printf("\x1b[48;5;242m╔════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╗\x1b[0m\n");
+    printf("\x1b[48;5;242m║   ▀██▀▀█▄    ▄▄█▀▀██   ▀██▀  ▀█▀ ▀█▄   ▀█▀ ▀██▀▀█▄   █▀▀██▀▀█     █     ▀██▀▀█▄   ▀██▀      ▀██▀▀▀▀█     ▀██▀  ▀██▀  ▄▄█▀▀██   ▀██▀      ▀██▀▀█▄   ║\x1b[0m\n");
+    printf("\x1b[48;5;242m║    ██   ██  ▄█▀    ██   ██    █   █▀█   █   ██   ██     ██       ███     ██   ██   ██        ██  ▄        ██    ██  ▄█▀    ██   ██        ██   ██  ║\x1b[0m\n");
+    printf("\x1b[48;5;242m║    ██▀▀█▀   ██      ██  ██    █   █ ▀█▄ █   ██    ██    ██      █  ██    ██▀▀▀█▄   ██        ██▀▀█        ██▀▀▀▀██  ██      ██  ██        ██    ██ ║\x1b[0m\n");
+    printf("\x1b[48;5;242m║    ██   █▄  ▀█▄     ██  ██    █   █   ███   ██    ██    ██     ▄▀▀▀▀█▄   ██    ██  ██        ██           ██    ██  ▀█▄     ██  ██        ██    ██ ║\x1b[0m\n");
+    printf("\x1b[48;5;242m║   ▄██▄  ▀█▀  ▀▀█▄▄▄█▀    ▀█▄▄▀   ▄█▄   ▀█  ▄██▄▄▄█▀    ▄██▄   ▄█▄  ▄██▄ ▄██▄▄▄█▀  ▄██▄▄▄▄▄█ ▄██▄▄▄▄▄█    ▄██▄  ▄██▄  ▀▀█▄▄▄█▀  ▄██▄▄▄▄▄█ ▄██▄▄▄█▀  ║\x1b[0m\n");
+    printf("\x1b[48;5;242m╚════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╝\x1b[0m\n");
 
                                                                                                                                   
 
@@ -32,9 +37,9 @@ void displayRoundTable(Player* player)
     printf("\t\t\t\t\t\t\t Level: %d\n", player->level);
     printf("\t\t\t\t\t\t\t Runes: %d\n", player->runes);
     printf("\t\t\t\t\t\t\t Stats:\n\n");
-    printf("\t\t\t\t\t Health: %d\t\t Strength: %d\n", player->stats.health,player->stats.strength);
-    printf("\t\t\t\t\t Endurance: %d\t\t Intelligence: %d\n", player->stats.endurance, player->stats.intelligence);
-    printf("\t\t\t\t\t Dexterity: %d\t\t Faith: %d\n", player->stats.dexterity,player->stats.faith);
+    printf("\t\t\t\t\t\t\t Health: %d\t\t Strength: %d\n", player->stats.health,player->stats.strength);
+    printf("\t\t\t\t\t\t\t Endurance: %d\t\t Intelligence: %d\n", player->stats.endurance, player->stats.intelligence);
+    printf("\t\t\t\t\t\t\t Dexterity: %d\t\t Faith: %d\n", player->stats.dexterity,player->stats.faith);
  
  
 
@@ -42,29 +47,30 @@ void displayRoundTable(Player* player)
  
     
      if (player->equippedWeapon == NULL)  {
-        printf("\nNo weapon equipped.\n");
+        printf("\n\t\t\t\t\t\t\t No weapon equipped.\n");
     }
     else
     {
-        printf("\nEquipped Weapon: %s\n", player->equippedWeapon->weapon);
-        printf("  HP: %d\n", player->equippedWeapon->nHp);
-        printf("  STR: %d\n", player->equippedWeapon->nStr);
-        printf("  DEX: %d\n", player->equippedWeapon->nDex);
-        printf("  INT: %d\n", player->equippedWeapon->nInt);
-        printf("  END: %d\n", player->equippedWeapon->nEnd);
-        printf("  FTH: %d\n", player->equippedWeapon->nFth);
+        printf("\n\t\t\t\t\t\t\t Equipped Weapon: %s\n", player->equippedWeapon->weapon);
+        printf("\t\t\t\t\t\t\t  HP: %d\t INT: %d\n", player->equippedWeapon->nHp, player->equippedWeapon->nInt);
+        printf("\t\t\t\t\t\t\t  STR: %d\t END: %d\n", player->equippedWeapon->nStr, player->equippedWeapon->nEnd);
+        printf("\t\t\t\t\t\t\t  DEX: %d\t FTH: %d\n", player->equippedWeapon->nDex, player->equippedWeapon->nFth);
+       
+        
+  
+
     }
 
 
- printf("===========================\n");
-    printf("[1] Fast travel\n");
-    printf("[2] Level Up\n");
-    printf("[3] Inventory\n");
-    printf("[4] Shop\n");
-    printf("[5] Save\n");
-    printf("[0] Quit Game\n");
+ printf("=============================================================================================================================================\n");
+    printf("\t\t\t\t\t\t\t[1] Fast travel\n");
+    printf("\t\t\t\t\t\t\t[2] Level Up\n");
+    printf("\t\t\t\t\t\t\t[3] Inventory\n");
+    printf("\t\t\t\t\t\t\t[4] Shop\n");
+    printf("\t\t\t\t\t\t\t[5] Save\n");
+    printf("\t\t\t\t\t\t\t[0] Quit Game\n");
 
-    printf("INPUT:");
+    printf("\t\t\t\t\t\t\tINPUT:");
 }
 
 
@@ -80,6 +86,7 @@ int runemath(Player* player) {
         return 1;
     } else {
         printf("\nInsufficient Runes\n");
+        printf("\nEnter any input to continue:");
         scanf(" %c", &trash);  // This can be removed if not needed
         return 0;
     }
@@ -91,56 +98,79 @@ void processlevelup(Player* player) {
 
     do {
         nRune = (player->level * 100) / 2;
-        printf("\nLEVEL UP\n\n");
-        printf("[1] Level up DEXTERITY\n");
-        printf("[2] Level up STRENGTH\n");
-        printf("[3] Level up INTELLIGENCE\n");
-        printf("[4] Level up FAITH\n");
-        printf("[0] BACK\n");
+        printf("\n\t\t\t\t\t\t\tLEVEL UP\n\n");
+        printf("\t\t\t\t\t\t\t[1] Level up HEALTH\t[4] Level up STRENGTH\n");
+        printf("\t\t\t\t\t\t\t[2] Level up ENDURANCE\t[5] Level up INTELLIGENCE\n");
+        printf("\t\t\t\t\t\t\t[3] Level up DEXTERITY\t[6] Level up FAITH\n");
 
-        printf("\nLevel up cost: %d\n", nRune);
-        printf("\nINPUT: ");
+        printf("\t\t\t\t\t\t\t\t\t[0] BACK\n");
+        printf("\t\t\t\t\t\t\tRunes: %d",player->runes);
+        printf("\n\t\t\t\t\t\t\tLevel up cost: %d\n", nRune);
+        printf("\n\t\t\t\t\t\t\tINPUT: ");
         scanf(" %c", &cChoice);
 
         switch (cChoice) {
             case '1':
-                printf("\nLevel up Dexterity?\n");
+                printf("\nLevel up Health?\n");
                 printf("[1] Yes [2] No: ");
                 scanf(" %c", &cChoice2);
                 if (cChoice2 == '1' && runemath(player)) {
-                    player->stats.dexterity ++;  
-                    printf("\nDexterity increased to %d", player->stats.dexterity);
+                    player->stats.health++;
+                    printf("\nHealth increased to %d", player->stats.health);
                 }
                 break;
 
             case '2':
-                printf("\nLevel up Strength?\n");
+                printf("\nLevel up Endurance?\n");
                 printf("[1] Yes [2] No: ");
                 scanf(" %c", &cChoice2);
                 if (cChoice2 == '1' && runemath(player)) {
-                    player->stats.strength ++;  
-                    printf("\nStrength increased to %d", player->stats.strength);
+                    player->stats.endurance++;
+                    printf("\nEndurance increased to %d", player->stats.endurance);
                 }
                 break;
 
             case '3':
-                printf("\nLevel up Intelligence?\n");
+                printf("\nLevel up Dexterity?\n");
                 printf("[1] Yes [2] No: ");
                 scanf(" %c", &cChoice2);
                 if (cChoice2 == '1' && runemath(player)) {
-                    player->stats.intelligence ++;  
-                    printf("\nIntelligence increased to %d", player->stats.intelligence);
+                    player->stats.dexterity++;
+                    printf("\nDexterity increased to %d", player->stats.dexterity);
                 }
                 break;
 
             case '4':
+                printf("\nLevel up Strength?\n");
+                printf("[1] Yes [2] No: ");
+                scanf(" %c", &cChoice2);
+                if (cChoice2 == '1' && runemath(player)) {
+                    player->stats.strength++;
+                    printf("\nStrength increased to %d", player->stats.strength);
+                }
+                break;
+
+            case '5':
+                printf("\nLevel up Intelligence?\n");
+                printf("[1] Yes [2] No: ");
+                scanf(" %c", &cChoice2);
+                if (cChoice2 == '1' && runemath(player)) {
+                    player->stats.intelligence++;
+                    printf("\nIntelligence increased to %d", player->stats.intelligence);
+                }
+                break;
+
+            case '6':
                 printf("\nLevel up Faith?\n");
                 printf("[1] Yes [2] No: ");
                 scanf(" %c", &cChoice2);
                 if (cChoice2 == '1' && runemath(player)) {
-                    player->stats.faith ++;  
+                    player->stats.faith++;
                     printf("\nFaith increased to %d", player->stats.faith);
                 }
+                break;
+
+            case '0':
                 break;
 
             default:

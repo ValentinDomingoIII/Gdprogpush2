@@ -6,4 +6,5 @@
 #include "shop.h"
 
 void resetInventory(Player* player);
+void giveWeapon(Player* player);
  void initializePlayer();
