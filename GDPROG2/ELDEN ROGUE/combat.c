@@ -28,15 +28,26 @@ void runCombat(Player* pPlayer, Area* pArea, int* pMaxHealth, int nFloorType, in
     printf("\n\n");
 
     enemySprite();
-    printf("\n\t\t\t\t\t\t\t\t  BATTLING [%s]\n", sEnemy.strEnemyName);
-    printf("\n");
+    // printf("\n\t\t\t\t\t\t\t\t  BATTLING [%s]\n", sEnemy.strEnemyName);
+    redText(1);
+    printf("\n\t\t\t\t\t\t\t\t  BATTLING ");
+    whiteText();
+    redText(0);
+    printf(" %s ", sEnemy.strEnemyName);
+    resetText();
+    printf("\n\n\t\t\t\t\t\t\t\t [PRESS ANY KEY TO CONTINUE]");
+    scanf(" %c", &cContinue);
 
     while(sEnemy.nHealth != 0 && *pMaxHealth != 0){
 
-        if(nTurn % 2 == 0)
+        if(nTurn % 2 == 0){
             playerTurn(&nTurn, &nDodge, &nPlayerMove, pMaxHealth, nFloorType, &sEnemy, pArea, pPlayer); 
-        else 
-            enemyTurn(nDodge, &nPlayerMove, pMaxHealth, sEnemy);
+            scanf(" %c", &cContinue);
+        }
+        else{
+            enemyTurn(nDodge, &nPlayerMove, pMaxHealth, sEnemy, pPlayer);
+            scanf(" %c", &cContinue);
+        }
         
         if(sEnemy.nHealth == 0){
             greenText();
@@ -73,7 +84,7 @@ void runCombat(Player* pPlayer, Area* pArea, int* pMaxHealth, int nFloorType, in
 
 void playerTurn(int* pTurn, int* pDodge, int* pPlayerMove, int* pMaxHealth, int nFloorType, Enemy* pEnemy, Area* pArea, Player* pPlayer)
 {
-    char cInput;
+    char cInput, cContinue;
     int nTemp, nRandom, nMaxHealthLower, nMaxHealthUpper;
     int nTempMaxHealth = 100 * ((pPlayer->stats.health + pPlayer->equippedWeapon->nHp) / 2);
     *pDodge = 0;
@@ -87,26 +98,15 @@ void playerTurn(int* pTurn, int* pDodge, int* pPlayerMove, int* pMaxHealth, int 
 
     do {
 
-        line();
-        greenText();
-        printf("\n\t╔════════╗\n"); //║ ╚ ╔ ╗ ╝
-        printf("\t║ PLAYER ║\n");
-        printf("\t╚════════╝\n");
-        resetText();
-
-        printf("[%s]: %d ", pPlayer->name, *pMaxHealth);
-        displayHealthbar(nTempMaxHealth, *pMaxHealth);
-        printf("\n[POTIONS]: %d\n", pPlayer->nPotions);
-        printf("[%s]: %d ", pEnemy->strEnemyName, pEnemy->nHealth);
-        displayHealthbar(pEnemy->nMaxHealth, pEnemy->nHealth);
-        printf("\n[INCOMING ENEMY DAMAGE]: %d", pEnemy->nDamage);
+        // printf("\n[INCOMING ENEMY DAMAGE]: %d", pEnemy->nDamage);
 
         do {
-
-            printf("\n[1]: ATTACK\n");
-            printf("[2]: DODGE\n");
-            printf("[3]: POTION\n");
-            printf("\n[INPUT]: ");
+            line();
+            printTurn(0, pEnemy, pPlayer, nTempMaxHealth, *pMaxHealth);
+            printf("\t[1]: ATTACK\n");
+            printf("\t[2]: DODGE\n");
+            printf("\t[3]: POTION\n");
+            printf("\n\t[INPUT]: ");
 
             scanf(" %c", &cInput);
 
@@ -115,11 +115,13 @@ void playerTurn(int* pTurn, int* pDodge, int* pPlayerMove, int* pMaxHealth, int 
         if(cInput == '1'){
 
             do {
-                printf("\n[1]: PHYSICAL\n");
-                printf("[2]: SORCERY\n");
-                printf("[3]: INCANTATION\n");
-                printf("[0]: BACK\n");
-                printf("\n[INPUT]: ");
+                line();
+                printTurn(0, pEnemy, pPlayer, nTempMaxHealth, *pMaxHealth);
+                printf("\t[1]: PHYSICAL\n");
+                printf("\t[2]: SORCERY\n");
+                printf("\t[3]: INCANTATION\n");
+                printf("\t[0]: BACK\n");
+                printf("\n\t[INPUT]: ");
 
                 scanf(" %c", &cInput);
             } while(cInput != '0' && cInput != '1' && cInput != '2' && cInput != '3');
@@ -132,7 +134,17 @@ void playerTurn(int* pTurn, int* pDodge, int* pPlayerMove, int* pMaxHealth, int 
                 if(pEnemy->nHealth < 0)
                     pEnemy->nHealth = 0;
 
-                printf("\nYou dealt [%d] damage!\n", *pPlayerMove);
+                printf("\n\t");
+                greenTextBG();
+                whiteText();
+                printf(" ◍ ");
+                whiteTextBG();
+                greenText();
+                printf(" DAMAGE ");
+                resetText();
+                greenText();
+                printf(" %d\n\n", *pPlayerMove);
+                resetText();
 
             }
         }
@@ -146,9 +158,17 @@ void playerTurn(int* pTurn, int* pDodge, int* pPlayerMove, int* pMaxHealth, int 
                 *pDodge = 1;
             else
                 *pDodge = 2;
-            
-            // printf("nRandom: [%d]\nnTemp: [%d]", nRandom, nTemp);
-            printf("\n[%s] DODGED!\n", pPlayer->name);
+
+            printf("\n");
+            greenText();
+            whiteTextBG();
+            printf("\t %s ", pPlayer->name);
+            resetText();
+            whiteText();
+            greenTextBG();
+            printf(" DODGED ");
+            resetText();
+            printf("\n");
             
         }
 
@@ -167,16 +187,30 @@ void playerTurn(int* pTurn, int* pDodge, int* pPlayerMove, int* pMaxHealth, int 
                 nRandom = (rand() % (nMaxHealthUpper - nMaxHealthLower) + nMaxHealthLower);
                 *pMaxHealth += nRandom;   
 
-                printf("\n[%s] HEALED FOR %d\n", pPlayer->name, nRandom);
+                printf("\n");
+                greenText();
+                whiteTextBG();
+                printf("\t %s ", pPlayer->name);
+                resetText();
+                whiteText();
+                greenTextBG();
+                printf(" HEALED ");
+                resetText();
+                greenText();
+                printf(" %d", nRandom);
+                printf("\n");
+                resetText();
 
                 if(*pMaxHealth > nTemp)
                     *pMaxHealth = nTemp;
                 
                 pPlayer->nPotions--;
 
+                scanf(" %c", &cContinue);
+
                 }
                     else
-                        printf("\n[YOU ARE ALREADY AT MAXIMUM HEALTH]\n"); // 80 max 100 heal for 40 real heal 20
+                        printf("\n[YOU ARE ALREADY AT MAXIMUM HEALTH]\n");
 
             }
 
@@ -184,27 +218,73 @@ void playerTurn(int* pTurn, int* pDodge, int* pPlayerMove, int* pMaxHealth, int 
     
 }
 
-void enemyTurn(int nDodge, int* pPlayerMove, int* pMaxHealth, Enemy sEnemy)
+void enemyTurn(int nDodge, int* pPlayerMove, int* pMaxHealth, Enemy sEnemy, Player* pPlayer)
 {
+    int nTempMaxHealth = 100 * ((pPlayer->stats.health + pPlayer->equippedWeapon->nHp) / 2);
+
     line();
-    redText(1);
-    printf("\n\t╔═══════╗\n");
-    printf("\t║ ENEMY ║\n");
-    printf("\t╚═══════╝\n");
-    resetText();
-    if(nDodge == 1)
-        printf("\n[%s] MISSED!\n", sEnemy.strEnemyName);
+    if(nDodge == 1){
+        printTurn(1, &sEnemy, pPlayer, nTempMaxHealth, *pMaxHealth);
+        printf("\t");
+        greenTextBG();
+        whiteText();
+        printf(" DODGE SUCCESSFUL ");
+        resetText();
+        printf("\n\n");
+
+        printf("\n");
+        redText(1);
+        whiteTextBG();
+        printf("\t %s ", sEnemy.strEnemyName);
+        resetText();
+        whiteText();
+        redText(0);
+        printf(" MISSED ");
+        resetText();
+    
+    }
     else if(nDodge == 2){
-        printf("DODGE FAILED\n\n[%s] DEALT\n[DAMAGE]: %d\n", sEnemy.strEnemyName, sEnemy.nDamage);
         *pMaxHealth -= sEnemy.nDamage; 
+        if(*pMaxHealth < 0)
+            *pMaxHealth = 0;
+        printTurn(1, &sEnemy, pPlayer, nTempMaxHealth, *pMaxHealth);
+        printf("\t");
+        redText(0);
+        whiteText();
+        printf(" DODGE FAILED ");
+        resetText();
+        printf("\n\n");
+
+        printf("\t");
+        redText(0);
+        whiteText();
+        printf(" ◍ ");
+        whiteTextBG();
+        redText(1);
+        printf(" DAMAGE ");
+        resetText();
+        redText(1);
+        printf(" %d\n\n", sEnemy.nDamage);
+        resetText();
+
     }
         else if(nDodge == 0){
-            printf("\n[%s] DEALT\n[DAMAGE]: %d\n", sEnemy.strEnemyName, sEnemy.nDamage);
             *pMaxHealth -= sEnemy.nDamage; 
-        }
-    
-    if(*pMaxHealth < 0)
-            *pMaxHealth = 0;
+            if(*pMaxHealth < 0)
+                *pMaxHealth = 0;
+            printTurn(1, &sEnemy, pPlayer, nTempMaxHealth, *pMaxHealth);
+            printf("\t");
+            redText(0);
+            whiteText();
+            printf(" ◍ ");
+            whiteTextBG();
+            redText(1);
+            printf(" DAMAGE ");
+            resetText();
+            redText(1);
+            printf(" %d\n\n", sEnemy.nDamage);
+            resetText();
+        }    
     
 }
 
@@ -341,3 +421,78 @@ void initializeBoss(Enemy* pEnemy, Area* pArea)
     }
 }
 
+void printTurn(int nTurnType, Enemy* pEnemy, Player *pPlayer, int nTempMaxHealth, int nMaxHealth)
+{
+    if(nTurnType == 0){
+        greenText();
+        printf("\n\t╔════════╗\n");
+        printf("\t║ PLAYER ║\n");
+        printf("\t╚════════╝\n\n");
+        resetText();
+    }
+    else {
+        redText(1);
+        printf("\n\t╔═══════╗\n");
+        printf("\t║ ENEMY ║\n");
+        printf("\t╚═══════╝\n");
+        resetText();
+    }
+
+    printf("\t┌───────────┐\n");
+    printf("\t│ \x1b[38;5;9m╔═══════╗\x1b[0m │");
+    printf("\n\t│ \x1b[38;5;9m║\x1b[0m ▄███▄ \x1b[38;5;9m║\x1b[0m │\n");
+    printf("\t│ \x1b[38;5;9m║\x1b[0m █\x1b[38;5;9m█\x1b[0m█\x1b[38;5;9m█\x1b[0m█ \x1b[38;5;9m║\x1b[0m │\n");
+    printf("\t│ \x1b[38;5;9m║\x1b[0m █▀█▀█ \x1b[38;5;9m║\x1b[0m │ ");
+    yellowText();
+    printf("%s", pEnemy->strEnemyName);
+    resetText();
+    printf("\n\t│ \x1b[38;5;9m╚═══════╝\x1b[0m │ ");
+    displayHealthbar(pEnemy->nMaxHealth, pEnemy->nHealth);
+    printf("\n\t└───────────┘");
+    yellowText();
+    printf(" %d\n\n", pEnemy->nHealth);
+    resetText();
+
+    printf("\t┌───────────┐\n");
+    printf("\t│ \x1b[38;5;34m╔═══════╗\x1b[0m │");
+    printf("\n\t│ \x1b[38;5;34m║\x1b[0m ▄███▄ \x1b[38;5;34m║\x1b[0m │\n");
+    printf("\t│ \x1b[38;5;34m║\x1b[0m █\x1b[38;5;34m█\x1b[0m█\x1b[38;5;34m█\x1b[0m█ \x1b[38;5;34m║\x1b[0m │\n");
+    printf("\t│ \x1b[38;5;34m║\x1b[0m  ▀▀▀  \x1b[38;5;34m║\x1b[0m │ ");
+    yellowText();
+    printf("%s", pPlayer->name);
+    resetText();
+    printf("\n\t│ \x1b[38;5;34m╚═══════╝\x1b[0m │ ");
+    displayHealthbar(nTempMaxHealth, nMaxHealth);
+    resetText();
+    printf("\n\t└───────────┘");
+    yellowText();
+    printf(" %d\n", nMaxHealth);
+    resetText();
+
+    if(nTurnType == 0){
+        printf("\n\t");
+        redText(0);
+        whiteText();
+        printf(" ◍ ");
+        whiteTextBG();
+        redText(1);
+        printf(" INCOMING ");
+        resetText();
+        redText(1);
+        printf(" %d\n", pEnemy->nDamage);
+        resetText();
+    }
+
+    printf("\n\t");
+    greenTextBG();
+    whiteText();
+    printf(" ◉ ");
+    whiteTextBG();
+    greenText();
+    printf(" POTIONS ");
+    resetText();
+    greenText();
+    printf(" %d\n\n", pPlayer->nPotions);
+    resetText();
+
+}
