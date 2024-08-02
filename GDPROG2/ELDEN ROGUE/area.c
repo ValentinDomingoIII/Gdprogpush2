@@ -297,7 +297,10 @@ void processInput(char cInput, Area* pArea, Array sCoordinate, Player* pPlayer, 
                                              runCombat(pPlayer, pArea, pMaxHealth, 1, pShard);
                                              runCombat(pPlayer, pArea, pMaxHealth, 2, pShard);
                                         }
-                                        runCombat(pPlayer, pArea, pMaxHealth, 1, pShard);
+                                        else {
+                                             runCombat(pPlayer, pArea, pMaxHealth, 1, pShard);
+                                        }
+                                        
                                         pArea->aBigArray[i][j] = 1;
                     
                                    }
