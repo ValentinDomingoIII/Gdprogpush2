@@ -12,7 +12,7 @@
 #include "continue.c"
 #include "round_table.c"
 #include "combat.c"
-#include "utility.c"
+#include "color.c"
 #include "shop.c"
 #include "files.c"
 #include "level.c"

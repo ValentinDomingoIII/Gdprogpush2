@@ -7,7 +7,7 @@
 // BOSS TILE = 4
 // DOOR TILE = 6
 // FAST TRAVEL = 8 Starting Area | 10 Boss Area
-// CREDITS TILE = 12
+// CREDITS TILE = 12 ◉ ◊
 
 void runArea(Area* pArea, Array sCoordinate, Player* pPlayer, int* pShard, int* pMaxHealth)
 {
