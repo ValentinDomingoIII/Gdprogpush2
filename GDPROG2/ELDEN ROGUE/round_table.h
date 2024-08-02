@@ -9,9 +9,9 @@
 #include "level.h"
 #include "inventory.h"
 
-void runRoundTable(Player* player);
-void displayRoundTable(Player* player);
-int runemath(Player* player);
+void runRoundTable(Player* pPlayer);
+void displayRoundTable(Player* pPlayer);
+int runemath(Player* pPlayer);
 
-void processInputs(Player* player, char cInput);
+void processInputs(Player* pPlayer, char cInput);
 void processFastTravel(Player* pPlayer);

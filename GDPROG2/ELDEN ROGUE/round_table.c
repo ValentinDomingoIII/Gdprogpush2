@@ -1,20 +1,20 @@
 #include "round_table.h"
 
-void runRoundTable(Player* player)
+void runRoundTable(Player* pPlayer)
 {
     char cInput;
    // printf("\nWELCOME\n");
 
     do
     {
-        player->nPotions = 8;
-        displayRoundTable(player);
+        pPlayer->nPotions = 8;
+        displayRoundTable(pPlayer);
         scanf(" %c", &cInput);
-        processInputs(player, cInput);
+        processInputs(pPlayer, cInput);
     } while (cInput != '0');
 }
 
-void displayRoundTable(Player* player)
+void displayRoundTable(Player* pPlayer)
 {
     printf("\n");
     printf("\x1b[48;5;242m╔════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╗\x1b[0m\n");
@@ -25,13 +25,13 @@ void displayRoundTable(Player* player)
     printf("\x1b[48;5;242m║   ▄██▄  ▀█▀  ▀▀█▄▄▄█▀    ▀█▄▄▀   ▄█▄   ▀█  ▄██▄▄▄█▀    ▄██▄   ▄█▄  ▄██▄ ▄██▄▄▄█▀  ▄██▄▄▄▄▄█ ▄██▄▄▄▄▄█    ▄██▄  ▄██▄  ▀▀█▄▄▄█▀  ▄██▄▄▄▄▄█ ▄██▄▄▄█▀  ║\x1b[0m\n");
     printf("\x1b[48;5;242m╚════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╝\x1b[0m\n");
 
-    printf("\n\t\t\t\t\t\t\t Player: %s | %s\n", player->cName, player->cJobName);
-    printf("\t\t\t\t\t\t\t Level: %d\n", player->nLevel);
-    printf("\t\t\t\t\t\t\t Runes: %d\n", player->nRunes);
+    printf("\n\t\t\t\t\t\t\t Player: %s | %s\n", pPlayer->cName, pPlayer->cJobName);
+    printf("\t\t\t\t\t\t\t Level: %d\n", pPlayer->nLevel);
+    printf("\t\t\t\t\t\t\t Runes: %d\n", pPlayer->nRunes);
     printf("\t\t\t\t\t\t\t Shards:");
 
 
-    if (player->nShards.nStormveil==0)
+    if (pPlayer->sShards.nStormveil==0)
     {
         printf(" ◇ ");
     }
@@ -41,7 +41,7 @@ void displayRoundTable(Player* player)
 
 
 
-      if (player->nShards.nRaya==0)
+      if (pPlayer->sShards.nRaya==0)
     {
         printf(" ◇ ");
     }
@@ -53,7 +53,7 @@ void displayRoundTable(Player* player)
 
 
 
-          if (player->nShards.nRedmane==0)
+          if (pPlayer->sShards.nRedmane==0)
     {
         printf(" ◇ ");
     }
@@ -61,7 +61,7 @@ void displayRoundTable(Player* player)
         printf("\x1b[38;5;9m ◇ \x1b[0m");
     }
 
-        if (player->nShards.nLeyndell==0)
+        if (pPlayer->sShards.nLeyndell==0)
     {
         printf(" ◇ ");
     }
@@ -69,7 +69,7 @@ void displayRoundTable(Player* player)
         printf("\x1b[38;5;11m ◇ \x1b[0m");
     }
 
-        if (player->nShards.nVolcano==0)
+        if (pPlayer->sShards.nVolcano==0)
     {
         printf(" ◇ \n");
     }
@@ -78,19 +78,19 @@ void displayRoundTable(Player* player)
     }
    
     printf("\t\t\t\t\t\t\t Stats:\n\n");
-    printf("\t\t\t\t\t\t\t Health: %d\t\t Strength: %d\n", player->sStats.nHealth, player->sStats.nStrength);
-    printf("\t\t\t\t\t\t\t Endurance: %d\t\t Intelligence: %d\n", player->sStats.nEndurance, player->sStats.nIntelligence);
-    printf("\t\t\t\t\t\t\t Dexterity: %d\t\t Faith: %d\n", player->sStats.nDexterity, player->sStats.nFaith);
+    printf("\t\t\t\t\t\t\t Health: %d\t\t Strength: %d\n", pPlayer->sStats.nHealth, pPlayer->sStats.nStrength);
+    printf("\t\t\t\t\t\t\t Endurance: %d\t\t Intelligence: %d\n", pPlayer->sStats.nEndurance, pPlayer->sStats.nIntelligence);
+    printf("\t\t\t\t\t\t\t Dexterity: %d\t\t Faith: %d\n", pPlayer->sStats.nDexterity, pPlayer->sStats.nFaith);
  
-    if (player->equippedWeapon == NULL)  {
+    if (pPlayer->equippedWeapon == NULL)  {
         printf("\n\t\t\t\t\t\t\t No weapon equipped.\n");
     }
     else
     {
-        printf("\n\t\t\t\t\t\t\t Equipped Weapon: %s\n", player->equippedWeapon->weapon);
-        printf("\t\t\t\t\t\t\t  HP: %d\t INT: %d\n", player->equippedWeapon->nHp, player->equippedWeapon->nInt);
-        printf("\t\t\t\t\t\t\t  STR: %d\t END: %d\n", player->equippedWeapon->nStr, player->equippedWeapon->nEnd);
-        printf("\t\t\t\t\t\t\t  DEX: %d\t FTH: %d\n", player->equippedWeapon->nDex, player->equippedWeapon->nFth);
+        printf("\n\t\t\t\t\t\t\t Equipped Weapon: %s\n", pPlayer->equippedWeapon->weapon);
+        printf("\t\t\t\t\t\t\t  HP: %d\t INT: %d\n", pPlayer->equippedWeapon->nHp, pPlayer->equippedWeapon->nInt);
+        printf("\t\t\t\t\t\t\t  STR: %d\t END: %d\n", pPlayer->equippedWeapon->nStr, pPlayer->equippedWeapon->nEnd);
+        printf("\t\t\t\t\t\t\t  DEX: %d\t FTH: %d\n", pPlayer->equippedWeapon->nDex, pPlayer->equippedWeapon->nFth);
     }
 
     printf("\n=============================================================================================================================================\n\n");
@@ -104,14 +104,14 @@ void displayRoundTable(Player* player)
     printf("\n\t\t\t\t\t\t\tINPUT:");
 }
 
-int runemath(Player* player) {
-    int nRunecost = (player->nLevel * 100) / 2;
+int runemath(Player* pPlayer) {
+    int nRunecost = (pPlayer->nLevel * 100) / 2;
     char trash;
 
-    if (player->nRunes >= nRunecost) {
+    if (pPlayer->nRunes >= nRunecost) {
         printf("Leveled UP!\n");
-        player->nRunes -= nRunecost;
-        player->nLevel++;
+        pPlayer->nRunes -= nRunecost;
+        pPlayer->nLevel++;
         scanf(" %c", &trash);  // This can be removed if not needed
         return 1;
     } else {
@@ -122,29 +122,31 @@ int runemath(Player* player) {
     }
 } 
 
-void processInputs(Player* player, char cInput)
+void processInputs(Player* pPlayer, char cInput)
 {
     switch (cInput)
     {
     case '1':
         clear();
-        processFastTravel(player);
+        processFastTravel(pPlayer);
         break;
     case '2':
         clear();
-        processlevelup(player);
+        processlevelup(pPlayer);
         break;
     case '3':
         clear();
-        processInventory(player);
+        processInventory(pPlayer);
         break;
     case '4':
         clear();
-        processShop(player);
+        processShop(pPlayer);
         break;
     case '5':
         clear();
-        savePlayerData(player);
+        savePlayerData(pPlayer);
+        break;
+    case '0':
         break;
     default:
         break;
@@ -159,7 +161,7 @@ void processFastTravel(Player* pPlayer)
     int nFlag1 = 0;
     int nFlag2, nFlag3;
 
-    nTotalShards = pPlayer->nShards.nStormveil + pPlayer->nShards.nRaya + pPlayer->nShards.nVolcano + pPlayer->nShards.nRedmane;
+    nTotalShards = pPlayer->sShards.nStormveil + pPlayer->sShards.nRaya + pPlayer->sShards.nVolcano + pPlayer->sShards.nRedmane;
 
     do {
         do {
@@ -176,7 +178,7 @@ void processFastTravel(Player* pPlayer)
             else
                 printf("[5]: [LEYNDELL ROYAL CAPITAL]\n");
     
-            if (pPlayer->nShards.nLeyndell == 0)
+            if (pPlayer->sShards.nLeyndell == 0)
                 printf("[LOCKED]: [ELDEN THRONE]\n");
             else
                 printf("[6]: [ELDEN THRONE]\n");
@@ -189,7 +191,7 @@ void processFastTravel(Player* pPlayer)
             if (cAreaIndex == '5' && nTotalShards < 2)
                 cAreaIndex = '7';
     
-            if (cAreaIndex == '6' && pPlayer->nShards.nLeyndell == 0)
+            if (cAreaIndex == '6' && pPlayer->sShards.nLeyndell == 0)
                 cAreaIndex = '7';
 
             if (cAreaIndex == '0')
@@ -203,7 +205,7 @@ void processFastTravel(Player* pPlayer)
 
             switch (cAreaIndex) {
                 case '1':
-                    if (pPlayer->nShards.nStormveil == 1)
+                    if (pPlayer->sShards.nStormveil == 1)
                         printf("[2]: Boss Area\n");
                     else {
                         printf("[LOCKED]: Boss Area\n");
@@ -211,7 +213,7 @@ void processFastTravel(Player* pPlayer)
                     }
                     break;
                 case '2':
-                    if (pPlayer->nShards.nRaya == 1)
+                    if (pPlayer->sShards.nRaya == 1)
                         printf("[2]: Boss Area\n");
                     else {
                         printf("[LOCKED]: Boss Area\n");
@@ -219,7 +221,7 @@ void processFastTravel(Player* pPlayer)
                     }
                     break;
                 case '3':
-                    if (pPlayer->nShards.nRedmane == 1)
+                    if (pPlayer->sShards.nRedmane == 1)
                         printf("[2]: Boss Area\n");
                     else {
                         printf("[LOCKED]: Boss Area\n");
@@ -227,7 +229,7 @@ void processFastTravel(Player* pPlayer)
                     }
                     break;
                 case '4':
-                    if (pPlayer->nShards.nVolcano == 1)
+                    if (pPlayer->sShards.nVolcano == 1)
                         printf("[2]: Boss Area\n");
                     else {
                         printf("[LOCKED]: Boss Area\n");
@@ -235,7 +237,7 @@ void processFastTravel(Player* pPlayer)
                     }
                     break;
                 case '5':
-                    if (nTotalShards > 1 && pPlayer->nShards.nLeyndell == 1)
+                    if (nTotalShards > 1 && pPlayer->sShards.nLeyndell == 1)
                         printf("[2]: Boss Area\n");
                     else {
                         printf("[LOCKED]: Boss Area\n");

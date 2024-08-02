@@ -5,11 +5,11 @@
 #include "area.h"
 #include "files.h"
 
-void runCharCreation(Player* player);
+void runCharCreation(Player* pPlayer);
 void printCharCreationScreen();
-int processCharInputs(char cChoice, Player* player);
-void runNameInput(Player* player);
-void runJobClassInput(Player* player);
-void displayCurrentCharacter(Player* player);
-void setJobClass(Player* player, int jobClass);
+int processCharInputs(char cChoice, Player* pPlayer);
+void runNameInput(Player* pPlayer);
+void runJobClassInput(Player* pPlayer);
+void displayCurrentCharacter(Player* pPlayer);
+void setJobClass(Player* pPlayer, int jobClass);
 

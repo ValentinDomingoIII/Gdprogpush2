@@ -1,16 +1,16 @@
 #include "title.h"
 #include "character_creation.h"
 
-void runTitle(Player* player) {
+void runTitle(Player* pPlayer) {
    // initializePlayer();
-    int nInput = 0;
+    char cInput = 'a';
 
-    do {
+    while (cInput != '0') {
         printf("\n");
         displayTitle();
-        scanf("%d", &nInput);
-        processTitle(&nInput, player);
-    } while (nInput != 0);
+        scanf(" %c", &cInput);
+        processTitle(&cInput, pPlayer);
+    }
 }
 
 void displayTitle() {
@@ -43,21 +43,18 @@ printf("\t\x1b[48;5;0m                                                          
     */
 }
 
-void processTitle(int* nInput, Player* player) {
-    switch (*nInput) {
-        case 1:
-            runCharCreation(player);
+void processTitle(char* cInput, Player* pPlayer) {
+    switch (*cInput) {
+        case '1':
+            runCharCreation(pPlayer);
             break;
-        case 2:
-            readPlayerData(player);
-            displayCurrentCharacter(player);
-            runRoundTable(player);
+        case '2':
+            readPlayerData(pPlayer);
+            displayCurrentCharacter(pPlayer);
+            runRoundTable(pPlayer);
             break;
-            
-            break;
-        case 0:
+        case '0':
             printf("Exiting...\n");
-            *nInput = 0;
             break;
         default:
             printf("Invalid choice. Please try again.\n");

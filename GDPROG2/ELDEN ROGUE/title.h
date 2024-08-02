@@ -5,6 +5,6 @@
 #include "area.h"
 #include "shop.h"
 
-void runTitle(Player* player);
+void runTitle(Player* pPlayer);
 void displayTitle();
-void processTitle(int* nInput, Player* player);
+void processTitle(char* cInput, Player* pPlayer);

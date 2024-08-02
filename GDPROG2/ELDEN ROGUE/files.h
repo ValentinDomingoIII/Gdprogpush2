@@ -6,5 +6,5 @@
 #include "area.h"
 #include "character_creation.h"
 
-void savePlayerData(Player* player);
-void readPlayerData(Player* player);
+void savePlayerData(Player* pPlayer);
+void readPlayerData(Player* pPlayer);

@@ -50,7 +50,7 @@ struct shards {
 
 typedef struct shards Shards;
 
-typedef struct {
+struct weapon{
     char weapon[MAX_NAME];
     int nHp;
     int nDex;
@@ -60,21 +60,21 @@ typedef struct {
     int nFth;
     int nCost;
 
-} Weapon;
+};
 
-typedef struct {
+typedef struct weapon Weapon;
+
+struct stats{
     int nHealth;
     int nEndurance;
     int nDexterity;
     int nStrength;
     int nIntelligence;
     int nFaith;
-} Stats;
+};
 
-typedef struct{
-   // weapon weapon[];
-    char cPotion;
-}Inv;
+typedef struct stats Stats;
+
 
 struct location {
     int nPreviousFloor;
@@ -92,7 +92,7 @@ struct player {
     int nInventorySize;  // Current number of weapons
     int nInventoryCapacity;  // Capacity of the inventory
     Weapon *equippedWeapon; // Pointer to the currently equipped weapon
-    Shards nShards;
+    Shards sShards;
     Stats sStats;
     Location sLocation;
 };

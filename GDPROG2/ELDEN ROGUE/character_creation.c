@@ -1,11 +1,9 @@
 #include "character_creation.h"
-//annoying just to remove the error message
-//#include "stdio.h"
 
-void runCharCreation(Player* player) {
+void runCharCreation(Player* pPlayer) {
     char cChoice = 0;
-    int isConfirmed = 0; // Flag to check if character is confirmed
-    int exitCreation = 0; // Flag to check if we should exit the creation loop
+    int nIsConfirmed = 0; // Flag to check if character is confirmed
+    int nExitCreation = 0; // Flag to check if we should exit the creation loop
     
     printf("\n\t  ▄▄█▀▀▀▄█ ▀██                                ▄                        ▄▄█▀▀▀▄█                           ▄    ██                   \n");
     printf("\t▄█▀     ▀   ██ ▄▄    ▄▄▄▄   ▄▄▄ ▄▄   ▄▄▄▄   ▄██▄    ▄▄▄▄  ▄▄▄ ▄▄     ▄█▀     ▀  ▄▄▄ ▄▄    ▄▄▄▄   ▄▄▄▄   ▄██▄  ▄▄▄    ▄▄▄   ▄▄ ▄▄▄   \n");
@@ -15,32 +13,32 @@ void runCharCreation(Player* player) {
     printf("\t\n");
  
 
-     while (!isConfirmed && !exitCreation) {
+     while (!nIsConfirmed && !nExitCreation) {
         printCharCreationScreen();
         scanf(" %c", &cChoice);
-        processCharInputs(cChoice, player);
+        processCharInputs(cChoice, pPlayer);
 
         if (cChoice == '3') {
-            if (strlen(player->cName) == 0 || strlen(player->cJobName) == 0) {
+            if (strlen(pPlayer->cName) == 0 || strlen(pPlayer->cJobName) == 0) {
                 printf("\n\t\t\t\t\t\t\tError: cName and Job Class must be set before confirming.\n");
             } else {
-                isConfirmed = 1;
+                nIsConfirmed = 1;
             }
         } else if (cChoice == '0') {
-            exitCreation = 1;
+            nExitCreation = 1;
         }
     }
 
-    if (isConfirmed) {
-        savePlayerData(player);
-        runRoundTable(player);
-    } else if (exitCreation) {
-        runTitle(player);
+    if (nIsConfirmed) {
+        savePlayerData(pPlayer);
+        runRoundTable(pPlayer);
+    } else if (nExitCreation) {
+        runTitle(pPlayer);
     }
 }
 
 void printCharCreationScreen() {
-  //  displayCurrentCharacter(player);
+  //  displayCurrentCharacter(pPlayer);
   printf("\n ════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════ \n");
     printf("\n\t\t\t\t\t\t\t[1] INPUT NAME\n");
     printf("\t\t\t\t\t\t\t[2] INPUT JOB CLASS\n");
@@ -52,43 +50,43 @@ printf("\n ═══════════════════════
  printf("\n\t\t\t\t\t\t\t[INPUT]:");
 }
 
-int processCharInputs(char cChoice, Player* player) {
+int processCharInputs(char cChoice, Player* pPlayer) {
     switch (cChoice) {
         case '1':
-            runNameInput(player);
+            runNameInput(pPlayer);
             break;
         case '2':
-            runJobClassInput(player);
+            runJobClassInput(pPlayer);
             break;
         case '3':
-            if (strlen(player->cName) == 0 || strlen(player->cJobName) == 0) {
+            if (strlen(pPlayer->cName) == 0 || strlen(pPlayer->cJobName) == 0) {
               
                 break;
             }
             printf("Character Created!\n");
-            printf("cName: %s\n", player->cName);
-            printf("Job Class: %s\n", player->cJobName);
-            printf("Level: %d\n", player->nLevel);
-            printf("Health: %d\n", player->sStats.nHealth);
-            printf("Endurance: %d\n", player->sStats.nEndurance);
-            printf("Dexterity: %d\n", player->sStats.nDexterity);
-            printf("Strength: %d\n", player->sStats.nStrength);
-            printf("Intelligence: %d\n", player->sStats.nIntelligence);
-            printf("Faith: %d\n", player->sStats.nFaith);
-            player->nRunes=0;
-            player->nShards.nElden=0;
-            player->nShards.nLeyndell=0;
-            player->nShards.nRaya=0;
-            player->nShards.nRedmane=0;
-            player->nShards.nStormveil=0;
-            player->nShards.nVolcano=0;
-            giveWeapon(player);
+            printf("cName: %s\n", pPlayer->cName);
+            printf("Job Class: %s\n", pPlayer->cJobName);
+            printf("Level: %d\n", pPlayer->nLevel);
+            printf("Health: %d\n", pPlayer->sStats.nHealth);
+            printf("Endurance: %d\n", pPlayer->sStats.nEndurance);
+            printf("Dexterity: %d\n", pPlayer->sStats.nDexterity);
+            printf("Strength: %d\n", pPlayer->sStats.nStrength);
+            printf("Intelligence: %d\n", pPlayer->sStats.nIntelligence);
+            printf("Faith: %d\n", pPlayer->sStats.nFaith);
+            pPlayer->nRunes=0;
+            pPlayer->sShards.nElden=0;
+            pPlayer->sShards.nLeyndell=0;
+            pPlayer->sShards.nRaya=0;
+            pPlayer->sShards.nRedmane=0;
+            pPlayer->sShards.nStormveil=0;
+            pPlayer->sShards.nVolcano=0;
+            giveWeapon(pPlayer);
 
             clear();
             break;
         case '4':
         
-            displayCurrentCharacter(player);
+            displayCurrentCharacter(pPlayer);
             break;
         case '0':
             printf("Exiting Character Creation...\n");
@@ -100,7 +98,7 @@ int processCharInputs(char cChoice, Player* player) {
     return 0;
 }
 
-void runNameInput(Player* player) {
+void runNameInput(Player* pPlayer) {
     char cTempName[100]; // Temporary buffer to read input
 
     printf("\t\t\t\t\t\t\tName (max 25 characters): ");
@@ -109,14 +107,14 @@ void runNameInput(Player* player) {
     // Manually copy up to 25 characters
     int i;
     for (i = 0; i < 25 && cTempName[i] != '\0'; i++) {
-        player->cName[i] = cTempName[i];
+        pPlayer->cName[i] = cTempName[i];
     }
-    player->cName[i] = '\0'; // null byte at the end
+    pPlayer->cName[i] = '\0'; // null byte at the end
 
-    printf("\n\t\t\t\t\t\t\t cName: %s\n", player->cName);
+    printf("\n\t\t\t\t\t\t\t cName: %s\n", pPlayer->cName);
 }
 
-void runJobClassInput(Player* player) {
+void runJobClassInput(Player* pPlayer) {
     int jobClass;
     printf("\n\t\t\t\t\t\t\t Select Job Class:\n");
     printf("\t\t\t\t\t\t [1] Vagabond\t\t[4] Hero\n");
@@ -125,70 +123,70 @@ void runJobClassInput(Player* player) {
   
     printf("\t\t\t\t\t\t\tEnter Choice: ");
     scanf("%d", &jobClass);
-    setJobClass(player, jobClass);
+    setJobClass(pPlayer, jobClass);
 }
 
-void setJobClass(Player* player, int jobClass) {
+void setJobClass(Player* pPlayer, int jobClass) {
     switch (jobClass) {
         case 1:
-            strcpy(player->cJobName, "Vagabond");
-            player->nLevel = 1;
-            player->sStats.nHealth = 15;
-            player->sStats.nEndurance = 11;
-            player->sStats.nDexterity = 13;
-            player->sStats.nStrength = 14;
-            player->sStats.nIntelligence = 9;
-            player->sStats.nFaith = 9;
+            strcpy(pPlayer->cJobName, "Vagabond");
+            pPlayer->nLevel = 1;
+            pPlayer->sStats.nHealth = 15;
+            pPlayer->sStats.nEndurance = 11;
+            pPlayer->sStats.nDexterity = 13;
+            pPlayer->sStats.nStrength = 14;
+            pPlayer->sStats.nIntelligence = 9;
+            pPlayer->sStats.nFaith = 9;
             break;
         case 2:
-            strcpy(player->cJobName, "Samurai");
-            player->nLevel = 1;
-            player->sStats.nHealth = 12;
-            player->sStats.nEndurance = 13;
-            player->sStats.nDexterity = 15;
-            player->sStats.nStrength = 12;
-            player->sStats.nIntelligence = 9;
-            player->sStats.nFaith = 8;
+            strcpy(pPlayer->cJobName, "Samurai");
+            pPlayer->nLevel = 1;
+            pPlayer->sStats.nHealth = 12;
+            pPlayer->sStats.nEndurance = 13;
+            pPlayer->sStats.nDexterity = 15;
+            pPlayer->sStats.nStrength = 12;
+            pPlayer->sStats.nIntelligence = 9;
+            pPlayer->sStats.nFaith = 8;
             break;
         case 3:
-            strcpy(player->cJobName, "Warrior");
-            player->nLevel = 1;
-            player->sStats.nHealth = 11;
-            player->sStats.nEndurance = 11;
-            player->sStats.nDexterity = 16;
-            player->sStats.nStrength = 10;
-            player->sStats.nIntelligence = 10;
-            player->sStats.nFaith = 8;
+            strcpy(pPlayer->cJobName, "Warrior");
+            pPlayer->nLevel = 1;
+            pPlayer->sStats.nHealth = 11;
+            pPlayer->sStats.nEndurance = 11;
+            pPlayer->sStats.nDexterity = 16;
+            pPlayer->sStats.nStrength = 10;
+            pPlayer->sStats.nIntelligence = 10;
+            pPlayer->sStats.nFaith = 8;
             break;
         case 4:
-            strcpy(player->cJobName, "Hero");
-            player->nLevel = 1;
-            player->sStats.nHealth = 14;
-            player->sStats.nEndurance = 12;
-            player->sStats.nDexterity = 9;
-            player->sStats.nStrength = 16;
-            player->sStats.nIntelligence = 7;
-            player->sStats.nFaith = 8;
+            strcpy(pPlayer->cJobName, "Hero");
+            pPlayer->nLevel = 1;
+            pPlayer->sStats.nHealth = 14;
+            pPlayer->sStats.nEndurance = 12;
+            pPlayer->sStats.nDexterity = 9;
+            pPlayer->sStats.nStrength = 16;
+            pPlayer->sStats.nIntelligence = 7;
+            pPlayer->sStats.nFaith = 8;
             break;
         case 5:
-            strcpy(player->cJobName, "Astrologer");
-            player->nLevel = 1;
-            player->sStats.nHealth = 9;
-            player->sStats.nEndurance = 9;
-            player->sStats.nDexterity = 12;
-            player->sStats.nStrength = 8;
-            player->sStats.nIntelligence = 16;
-            player->sStats.nFaith = 7;
+            strcpy(pPlayer->cJobName, "Astrologer");
+            pPlayer->nLevel = 1;
+            pPlayer->sStats.nHealth = 9;
+            pPlayer->sStats.nEndurance = 9;
+            pPlayer->sStats.nDexterity = 12;
+            pPlayer->sStats.nStrength = 8;
+            pPlayer->sStats.nIntelligence = 16;
+            pPlayer->sStats.nFaith = 7;
             break;
         case 6:
-            strcpy(player->cJobName, "Prophet");
-            player->nLevel = 1;
-            player->sStats.nHealth = 10;
-            player->sStats.nEndurance = 8;
-            player->sStats.nDexterity = 10;
-            player->sStats.nStrength = 11;
-            player->sStats.nIntelligence = 7;
-            player->sStats.nFaith = 16;
+            strcpy(pPlayer->cJobName, "Prophet");
+            pPlayer->nLevel = 1;
+            pPlayer->sStats.nHealth = 10;
+            pPlayer->sStats.nEndurance = 8;
+            pPlayer->sStats.nDexterity = 10;
+            pPlayer->sStats.nStrength = 11;
+            pPlayer->sStats.nIntelligence = 7;
+            pPlayer->sStats.nFaith = 16;
             break;
         default:
             printf("Invalid job class. Please try again.\n");
@@ -196,22 +194,22 @@ void setJobClass(Player* player, int jobClass) {
     }
 }
 
-void displayCurrentCharacter(Player* player) {
+void displayCurrentCharacter(Player* pPlayer) {
     printf("\t\t\t\t\t\t\t Current Character Details:\n");
-    if (strlen(player->cName) == 0) {
+    if (strlen(pPlayer->cName) == 0) {
         printf("\t\t\t\t\t\t\t Name: Not Set\n");
     } else {
-        printf("\t\t\t\t\t\t\t Name: %s\n", player->cName);
+        printf("\t\t\t\t\t\t\t Name: %s\n", pPlayer->cName);
     }
-    if (strlen(player->cJobName) == 0) {
+    if (strlen(pPlayer->cJobName) == 0) {
         printf("\t\t\t\t\t\t\t Job Class: Not Set\n");
     } else {
-        printf("\t\t\t\t\t\t\t Job Class: %s\n", player->cJobName);
+        printf("\t\t\t\t\t\t\t Job Class: %s\n", pPlayer->cJobName);
     }
-    printf("\t\t\t\t\t\t\t Level: %d\t Strength: %d\n", player->nLevel, player->sStats.nStrength);
-    printf("\t\t\t\t\t\t\t Health: %d\t Intelligence: %d\n", player->sStats.nHealth,player->sStats.nIntelligence);
-    printf("\t\t\t\t\t\t\t Endurance: %d\t Faith: %d\n", player->sStats.nEndurance,player->sStats.nFaith);
-    printf("\t\t\t\t\t\t\t Dexterity: %d\n", player->sStats.nDexterity);
+    printf("\t\t\t\t\t\t\t Level: %d\t Strength: %d\n", pPlayer->nLevel, pPlayer->sStats.nStrength);
+    printf("\t\t\t\t\t\t\t Health: %d\t Intelligence: %d\n", pPlayer->sStats.nHealth,pPlayer->sStats.nIntelligence);
+    printf("\t\t\t\t\t\t\t Endurance: %d\t Faith: %d\n", pPlayer->sStats.nEndurance,pPlayer->sStats.nFaith);
+    printf("\t\t\t\t\t\t\t Dexterity: %d\n", pPlayer->sStats.nDexterity);
 
     printf("\n");
 }

@@ -300,7 +300,7 @@ void processInput(char cInput, Area* pArea, Array sCoordinate, Player* pPlayer, 
                                         else {
                                              runCombat(pPlayer, pArea, pMaxHealth, 1, pShard);
                                         }
-                                        
+
                                         pArea->aBigArray[i][j] = 1;
                     
                                    }
@@ -327,7 +327,7 @@ void processInput(char cInput, Area* pArea, Array sCoordinate, Player* pPlayer, 
                                              pArea->nValue = pArea->aBigArray[i][j];
                                         }
                                              else if(pArea->aBigArray[i][j] == 13){
-                                                  if(pPlayer->nShards.nElden == 0)
+                                                  if(pPlayer->sShards.nElden == 0)
                                                        printf("\nYou must defeat the boss of this area to unlock this tile.\n");
                                                   else
                                                        runCredits();
@@ -512,12 +512,12 @@ void areaSelect(char cAreaIndex, char cFastTravelTile, Player* pPlayer)
             if(cFastTravelTile == '1'){
                sArea.aBigArray[6][1] = 9; 
                sArea.nFloorChoice = 1;
-               floorPass(pPlayer, &sArea, &pPlayer->nShards.nStormveil);
+               floorPass(pPlayer, &sArea, &pPlayer->sShards.nStormveil);
             }
             else{
                sArea.aBigArray[14][2] = 11;
                sArea.nFloorChoice = 2;
-               floorPass(pPlayer, &sArea, &pPlayer->nShards.nStormveil);
+               floorPass(pPlayer, &sArea, &pPlayer->sShards.nStormveil);
             }
 
             break;
@@ -564,12 +564,12 @@ void areaSelect(char cAreaIndex, char cFastTravelTile, Player* pPlayer)
             if(cFastTravelTile == '1'){
                sArea.aBigArray[0][2] = 9;
                sArea.nFloorChoice = 1;
-               floorPass(pPlayer, &sArea, &pPlayer->nShards.nRaya);
+               floorPass(pPlayer, &sArea, &pPlayer->sShards.nRaya);
             }
             else{
                sArea.aBigArray[24][3] = 11;
                sArea.nFloorChoice = 2;
-               floorPass(pPlayer, &sArea, &pPlayer->nShards.nRaya);
+               floorPass(pPlayer, &sArea, &pPlayer->sShards.nRaya);
             }
 
             break;
@@ -628,12 +628,12 @@ void areaSelect(char cAreaIndex, char cFastTravelTile, Player* pPlayer)
             if(cFastTravelTile == '1'){
                sArea.aBigArray[1][0] = 9;
                sArea.nFloorChoice = 1;
-               floorPass(pPlayer, &sArea, &pPlayer->nShards.nRedmane);
+               floorPass(pPlayer, &sArea, &pPlayer->sShards.nRedmane);
             }
             else{
                sArea.aBigArray[30][6] = 11;
                sArea.nFloorChoice = 2;
-               floorPass(pPlayer, &sArea, &pPlayer->nShards.nRedmane);
+               floorPass(pPlayer, &sArea, &pPlayer->sShards.nRedmane);
             }
           
             break;
@@ -692,12 +692,12 @@ void areaSelect(char cAreaIndex, char cFastTravelTile, Player* pPlayer)
             if(cFastTravelTile == '1'){
                sArea.aBigArray[4][2] = 9;
                sArea.nFloorChoice = 1;
-               floorPass(pPlayer, &sArea, &pPlayer->nShards.nVolcano);
+               floorPass(pPlayer, &sArea, &pPlayer->sShards.nVolcano);
             }
             else{
                sArea.aBigArray[34][2] = 11;
                sArea.nFloorChoice = 2;
-               floorPass(pPlayer, &sArea, &pPlayer->nShards.nVolcano);
+               floorPass(pPlayer, &sArea, &pPlayer->sShards.nVolcano);
             }
 
             break;
@@ -798,12 +798,12 @@ void areaSelect(char cAreaIndex, char cFastTravelTile, Player* pPlayer)
             if(cFastTravelTile == '1'){
                sArea.aBigArray[3][1] = 9;
                sArea.nFloorChoice = 1;
-               floorPass(pPlayer, &sArea, &pPlayer->nShards.nLeyndell);
+               floorPass(pPlayer, &sArea, &pPlayer->sShards.nLeyndell);
             }
             else{
                sArea.aBigArray[76][2] = 11;
                sArea.nFloorChoice = 2;
-               floorPass(pPlayer, &sArea, &pPlayer->nShards.nLeyndell);
+               floorPass(pPlayer, &sArea, &pPlayer->sShards.nLeyndell);
             }
 
             break;
@@ -835,7 +835,7 @@ void areaSelect(char cAreaIndex, char cFastTravelTile, Player* pPlayer)
             if(cFastTravelTile == '1'){
                sArea.aBigArray[8][1] = 9;
                sArea.nFloorChoice = 1;
-               floorPass(pPlayer, &sArea, &pPlayer->nShards.nElden);
+               floorPass(pPlayer, &sArea, &pPlayer->sShards.nElden);
             }
           
             break;
