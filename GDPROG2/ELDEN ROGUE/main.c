@@ -15,6 +15,10 @@
 #include "color.c"
 #include "shop.c"
 #include "files.c"
+#include "level.c"
+#include "inventory.c"
+
+
 
 //commenty
 int main() {

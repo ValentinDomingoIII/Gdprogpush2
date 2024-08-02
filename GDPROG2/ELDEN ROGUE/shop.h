@@ -5,7 +5,7 @@
 #include "title.h"
 #include "structures.h"
 #include "files.h"
-
+void addWeaponToInventory(Player* player, Weapon weaponToBuy);
 void buySeals(Player* plyaer);
 void buyStaves(Player* player);
 void buyGreatSwords(Player* player);

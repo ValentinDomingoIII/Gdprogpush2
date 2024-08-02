@@ -52,7 +52,7 @@ void giveWeapon(Player* player)
             player.stats.intelligence = 0;
             player.stats.faith = 0;
             //test runes
-            player.runes = 0;
+            player.runes = 500000;
             player.nShards.nStormveil = 0;
             player.nShards.nRaya = 0;
             player.nShards.nRedmane = 0;
@@ -64,7 +64,11 @@ void giveWeapon(Player* player)
              int initialCapacity = 1;  // initial capacity
              player.inventory = malloc(initialCapacity * sizeof(Weapon));
              resetInventory(&player);
-
+              giveWeapon(&player);
              runTitle(&player);
-             free(player.inventory);
+                // Free allocated memory
+    for (int i = 0; i < player.inventorySize; i++) {
+        free(player.inventory[i].weapon); // Free each weapon name
+    }
+    free(player.inventory);
   }

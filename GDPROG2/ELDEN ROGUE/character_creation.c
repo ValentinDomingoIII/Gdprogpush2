@@ -84,10 +84,19 @@ int processCharInputs(char cChoice, Player* player) {
             printf("Strength: %d\n", player->stats.strength);
             printf("Intelligence: %d\n", player->stats.intelligence);
             printf("Faith: %d\n", player->stats.faith);
+            player->runes=500000;
+            player->nShards.nElden=0;
+            player->nShards.nLeyndell=0;
+            player->nShards.nRaya=0;
+            player->nShards.nRedmane=0;
+            player->nShards.nStormveil=0;
+            player->nShards.nVolcano=0;
+            giveWeapon(player);
 
-            
+            clear();
             break;
         case '4':
+        
             displayCurrentCharacter(player);
             break;
         case '0':

@@ -1,4 +1,4 @@
-Name: qwerty
+Name: 12
 Job Class: Samurai
 Level: 1
 Health: 12
@@ -7,7 +7,11 @@ Dexterity: 15
 Strength: 12
 Intelligence: 9
 Faith: 8
-Runes: 0
+Runes: 499700
 Shards: 0,0,0,0,0,0
+Equipped Weapon: êuòŸ,0,0,0,33554434,47980,-1737157232,473
 Inventory:
-Equipped Weapon: None
+Starter Sword,10,5,5,5,5,5,55
+Short Sword,0,13,15,15,15,15,100
+Short Sword,0,13,15,15,15,15,100
+Short Sword,0,13,15,15,15,15,100

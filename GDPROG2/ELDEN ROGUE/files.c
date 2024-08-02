@@ -23,21 +23,6 @@ void savePlayerData(Player* player) {
                 player->nShards.nLeyndell,
                 player->nShards.nElden);
 
-        // Save inventory
-        fprintf(file, "Inventory:\n");
-        for (int i = 0; i < player->inventorySize; i++) {
-            Weapon* w = &player->inventory[i];
-            fprintf(file, "%s,%d,%d,%d,%d,%d,%d,%d\n",
-                    w->weapon,
-                    w->nHp,
-                    w->nDex,
-                    w->nInt,
-                    w->nEnd,
-                    w->nStr,
-                    w->nFth,
-                    w->nCost);
-        }
-
         // Save equipped weapon
         if (player->equippedWeapon) {
             fprintf(file, "Equipped Weapon: %s,%d,%d,%d,%d,%d,%d,%d\n",
@@ -53,7 +38,20 @@ void savePlayerData(Player* player) {
             fprintf(file, "Equipped Weapon: None\n");
         }
 
-
+        // Save inventory
+        fprintf(file, "Inventory:\n");
+        for (int i = 0; i < player->inventorySize; i++) {
+            Weapon* w = &player->inventory[i];
+            fprintf(file, "%s,%d,%d,%d,%d,%d,%d,%d\n",
+                    w->weapon,
+                    w->nHp,
+                    w->nDex,
+                    w->nInt,
+                    w->nEnd,
+                    w->nStr,
+                    w->nFth,
+                    w->nCost);
+        }
 
         fclose(file);
         printf("Player data saved to player_data.txt.\n");
@@ -61,6 +59,7 @@ void savePlayerData(Player* player) {
         printf("Error: Could not open file for writing.\n");
     }
 }
+
 
 void readPlayerData(Player* player) {
     FILE *file = fopen("player_data.txt", "r");
@@ -85,8 +84,25 @@ void readPlayerData(Player* player) {
                &player->nShards.nLeyndell,
                &player->nShards.nElden);
 
-        // Load inventory
+        // Load equipped weapon
         char line[256];
+        fgets(line, sizeof(line), file);
+        if (strncmp(line, "Equipped Weapon: None", 21) != 0) {
+            player->equippedWeapon = malloc(sizeof(Weapon));
+            sscanf(line, "Equipped Weapon: %[^,],%d,%d,%d,%d,%d,%d,%d\n",
+                   player->equippedWeapon->weapon,
+                   &player->equippedWeapon->nHp,
+                   &player->equippedWeapon->nDex,
+                   &player->equippedWeapon->nInt,
+                   &player->equippedWeapon->nEnd,
+                   &player->equippedWeapon->nStr,
+                   &player->equippedWeapon->nFth,
+                   &player->equippedWeapon->nCost);
+        } else {
+            player->equippedWeapon = NULL;
+        }
+
+        // Load inventory
         fgets(line, sizeof(line), file); // Skip "Inventory:" line
         player->inventorySize = 0; // Reset inventory size
 
@@ -117,25 +133,6 @@ void readPlayerData(Player* player) {
 
             player->inventorySize++;
         }
-
-        // Load equipped weapon
-        fgets(line, sizeof(line), file);
-        if (strncmp(line, "Equipped Weapon: None", 21) != 0) {
-            player->equippedWeapon = malloc(sizeof(Weapon));
-            sscanf(line, "Equipped Weapon: %[^,],%d,%d,%d,%d,%d,%d,%d\n",
-                   player->equippedWeapon->weapon,
-                   &player->equippedWeapon->nHp,
-                   &player->equippedWeapon->nDex,
-                   &player->equippedWeapon->nInt,
-                   &player->equippedWeapon->nEnd,
-                   &player->equippedWeapon->nStr,
-                   &player->equippedWeapon->nFth,
-                   &player->equippedWeapon->nCost);
-        } else {
-            player->equippedWeapon = NULL;
-        }
-
-  
 
         fclose(file);
         printf("Player data loaded from player_data.txt.\n");

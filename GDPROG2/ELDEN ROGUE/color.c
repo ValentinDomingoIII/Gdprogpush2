@@ -187,7 +187,10 @@ void enemySprite()
         printf("\t\t\t\t\t\t\t\t\t└───────────┘");
 }
 
-
+void clear()
+{
+    system("clear || cls");
+}
 
 /*
 

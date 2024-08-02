@@ -6,7 +6,7 @@ void runRoundTable(Player* player)
     char cInput;
    // printf("\nWELCOME\n");
 
-   giveWeapon(player);
+   
   do
   {
     player->nPotions = 8;
@@ -15,7 +15,7 @@ void runRoundTable(Player* player)
     processInputs(player,cInput);
   } while (cInput!='0');
 
-  initializePlayer();
+ // initializePlayer();
      
 }
 
@@ -33,7 +33,7 @@ void displayRoundTable(Player* player)
                                                                                                                                   
 
 // printf("\n\n\t\t\t\t\t\t\t======= ROUND TABLE =======\n");
-    printf("\t\t\t\t\t\t\t Player: %s | %s\n", player->name,player->jobName);
+    printf("\n\t\t\t\t\t\t\t Player: %s | %s\n", player->name,player->jobName);
     printf("\t\t\t\t\t\t\t Level: %d\n", player->level);
     printf("\t\t\t\t\t\t\t Runes: %d\n", player->runes);
     printf("\t\t\t\t\t\t\t Stats:\n\n");
@@ -52,13 +52,9 @@ void displayRoundTable(Player* player)
     else
     {
         printf("\n\t\t\t\t\t\t\t Equipped Weapon: %s\n", player->equippedWeapon->weapon);
-        printf("\t\t\t\t\t\t\t  HP: %d\t INT: %d\n", player->equippedWeapon->nHp, player->equippedWeapon->nInt);
+        printf("\t\t\t\t\t\t\t  HP: %d\t  INT: %d\n", player->equippedWeapon->nHp, player->equippedWeapon->nInt);
         printf("\t\t\t\t\t\t\t  STR: %d\t END: %d\n", player->equippedWeapon->nStr, player->equippedWeapon->nEnd);
         printf("\t\t\t\t\t\t\t  DEX: %d\t FTH: %d\n", player->equippedWeapon->nDex, player->equippedWeapon->nFth);
-       
-        
-  
-
     }
 
 
@@ -70,7 +66,7 @@ void displayRoundTable(Player* player)
     printf("\t\t\t\t\t\t\t[5] Save\n");
     printf("\t\t\t\t\t\t\t[0] Quit Game\n");
 
-    printf("\t\t\t\t\t\t\tINPUT:");
+    printf("\n\t\t\t\t\t\t\tINPUT:");
 }
 
 
@@ -90,176 +86,35 @@ int runemath(Player* player) {
         scanf(" %c", &trash);  // This can be removed if not needed
         return 0;
     }
-}
-
-void processlevelup(Player* player) {
-    char cChoice, cChoice2;
-    int nRune = (player->level * 100) / 2;
-
-    do {
-        nRune = (player->level * 100) / 2;
-        printf("\n\t\t\t\t\t\t\tLEVEL UP\n\n");
-        printf("\t\t\t\t\t\t\t[1] Level up HEALTH\t[4] Level up STRENGTH\n");
-        printf("\t\t\t\t\t\t\t[2] Level up ENDURANCE\t[5] Level up INTELLIGENCE\n");
-        printf("\t\t\t\t\t\t\t[3] Level up DEXTERITY\t[6] Level up FAITH\n");
-
-        printf("\t\t\t\t\t\t\t\t\t[0] BACK\n");
-        printf("\t\t\t\t\t\t\tRunes: %d", player->runes);
-        printf("\n\t\t\t\t\t\t\tLevel up cost: %d\n", nRune);
-        printf("\n\t\t\t\t\t\t\tINPUT: ");
-        scanf(" %c", &cChoice);
-
-        switch (cChoice) {
-            case '1':
-                if (player->stats.health >= 50) {
-                    printf("\nHealth is maxed out at %d", player->stats.health);
-                } else {
-                    printf("\nLevel up Health?\n");
-                    printf("[1] Yes [2] No: ");
-                    scanf(" %c", &cChoice2);
-                    if (cChoice2 == '1' && runemath(player)) {
-                        player->stats.health++;
-                        printf("\nHealth increased to %d", player->stats.health);
-                    }
-                }
-                break;
-
-            case '2':
-                if (player->stats.endurance >= 50) {
-                    printf("\nEndurance is maxed out at %d", player->stats.endurance);
-                } else {
-                    printf("\nLevel up Endurance?\n");
-                    printf("[1] Yes [2] No: ");
-                    scanf(" %c", &cChoice2);
-                    if (cChoice2 == '1' && runemath(player)) {
-                        player->stats.endurance++;
-                        printf("\nEndurance increased to %d", player->stats.endurance);
-                    }
-                }
-                break;
-
-            case '3':
-                if (player->stats.dexterity >= 50) {
-                    printf("\nDexterity is maxed out at %d", player->stats.dexterity);
-                } else {
-                    printf("\nLevel up Dexterity?\n");
-                    printf("[1] Yes [2] No: ");
-                    scanf(" %c", &cChoice2);
-                    if (cChoice2 == '1' && runemath(player)) {
-                        player->stats.dexterity++;
-                        printf("\nDexterity increased to %d", player->stats.dexterity);
-                    }
-                }
-                break;
-
-            case '4':
-                if (player->stats.strength >= 50) {
-                    printf("\nStrength is maxed out at %d", player->stats.strength);
-                } else {
-                    printf("\nLevel up Strength?\n");
-                    printf("[1] Yes [2] No: ");
-                    scanf(" %c", &cChoice2);
-                    if (cChoice2 == '1' && runemath(player)) {
-                        player->stats.strength++;
-                        printf("\nStrength increased to %d", player->stats.strength);
-                    }
-                }
-                break;
-
-            case '5':
-                if (player->stats.intelligence >= 50) {
-                    printf("\nIntelligence is maxed out at %d", player->stats.intelligence);
-                } else {
-                    printf("\nLevel up Intelligence?\n");
-                    printf("[1] Yes [2] No: ");
-                    scanf(" %c", &cChoice2);
-                    if (cChoice2 == '1' && runemath(player)) {
-                        player->stats.intelligence++;
-                        printf("\nIntelligence increased to %d", player->stats.intelligence);
-                    }
-                }
-                break;
-
-            case '6':
-                if (player->stats.faith >= 50) {
-                    printf("\nFaith is maxed out at %d", player->stats.faith);
-                } else {
-                    printf("\nLevel up Faith?\n");
-                    printf("[1] Yes [2] No: ");
-                    scanf(" %c", &cChoice2);
-                    if (cChoice2 == '1' && runemath(player)) {
-                        player->stats.faith++;
-                        printf("\nFaith increased to %d", player->stats.faith);
-                    }
-                }
-                break;
-
-            case '0':
-                break;
-
-            default:
-                printf("\nInvalid choice. Please select a valid option.\n");
-                break;
-        }
-    } while (cChoice != '0');
-}
+} 
 
 
 
-void processInventory(Player* player) {
-    char cChoice;
-    int i;
-
-    do {
-        printf("\nINVENTORY\n");
-        for (i = 0; i < player->inventorySize; i++) {
-            printf("[%d] %s - HP: %d, STR: %d, DEX: %d, INT: %d, END: %d, FTH: %d\n",
-                   i + 1, player->inventory[i].weapon, player->inventory[i].nHp,
-                   player->inventory[i].nStr, player->inventory[i].nDex, player->inventory[i].nInt,
-                   player->inventory[i].nEnd, player->inventory[i].nFth);
-        }
-        printf("[0] Back\n");
-
-        printf("Choose a weapon or press '0' to go back: ");
-        scanf(" %c", &cChoice);
-
-        if (cChoice == '0') {
-            return;
-        }
-
-        int index = cChoice - '1';
-        if (index >= 0 && index < player->inventorySize) {
-            if (player->stats.dexterity >= player->inventory[index].nDex) {
-                player->equippedWeapon = &player->inventory[index];
-                printf("You have equipped %s\n", player->equippedWeapon->weapon);
-            } else {
-                printf("You do not have enough dexterity to equip %s\n", player->inventory[index].weapon);
-            }
-        } else {
-            printf("Invalid choice\n");
-        }
-    } while (1);
-}
 
 void processInputs(Player* player, char cInput)
 {
     switch (cInput)
     {
     case '1':
+        clear();
         processFastTravel(player);
         break;
     break;
     case '2':
+        clear();
         processlevelup(player);
         break;
     case '3':
+        clear();
         processInventory(player);
     break;
     case '4':
+        clear();
         processShop(player);
     break;
     case '5':
-        savePlayerData(player);
+    clear();
+         savePlayerData(player);
         break;
     default:
         break;
